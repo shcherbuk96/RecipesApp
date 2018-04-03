@@ -12,4 +12,5 @@ import dagger.Component;
 @Component(modules = Api.class)
 public interface AppComponent {//main component dagger
     void inject (SearchPresenter searchPresenter);
+    void inject (MainActivity mainActivity);
 }

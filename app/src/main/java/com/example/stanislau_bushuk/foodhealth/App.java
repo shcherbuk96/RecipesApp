@@ -8,6 +8,7 @@ import com.example.stanislau_bushuk.foodhealth.Modul.Api;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import timber.log.Timber;
 
 public class App extends Application {
 
@@ -22,6 +23,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         setRealm();
+        Timber.plant(new Timber.DebugTree());
         appComponent=buildComponent();
     }
 

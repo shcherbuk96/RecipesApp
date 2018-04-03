@@ -17,9 +17,8 @@ public class Api {
     @Singleton
     public IAPI getIAPI() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.edamam.com/search?q=")
+                .baseUrl("https://api.edamam.com/")
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
         IAPI iapi = retrofit.create(IAPI.class);
         return iapi;
