@@ -26,6 +26,7 @@ public class App extends Application {
     }
 
     public void setRealm() {
+        Realm.init(this);
         RealmConfiguration realmConfig = new RealmConfiguration.Builder()
                 .deleteRealmIfMigrationNeeded()
                 .name("realm.realm")
