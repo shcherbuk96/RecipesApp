@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">FoodHealth</string>
+
+    <string name="menu_search">Search</string>
+    <string name="menu_deep_search">Deep Search</string>
+    <string name="menu_featured">Featured</string>
 </resources>
