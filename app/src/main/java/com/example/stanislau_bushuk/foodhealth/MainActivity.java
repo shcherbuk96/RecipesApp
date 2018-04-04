@@ -1,39 +1,40 @@
 package com.example.stanislau_bushuk.foodhealth;
 
-import android.support.annotation.BinderThread;
 import android.support.annotation.NonNull;
-import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-import android.widget.Toolbar;
+
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.example.stanislau_bushuk.foodhealth.API.IAPI;
+import com.example.stanislau_bushuk.foodhealth.Presenters.SearchPresenter;
+import com.example.stanislau_bushuk.foodhealth.View.ViewSearch;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.OnItemClick;
-import butterknife.OnItemSelected;
-import butterknife.OnTouch;
 
 import javax.inject.Inject;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends MvpAppCompatActivity implements ViewSearch {
 
     @BindView(R.id.navigation)
     BottomNavigationView bottomNavigationView;
+
+    @Inject
+    IAPI iapi;
+
+    @InjectPresenter
+    SearchPresenter searchPresenter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         ButterKnife.bind(this);
+        App.getAppComponent().inject(this);
 
         //Menu-------------------
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -42,6 +43,25 @@ public class MainActivity extends AppCompatActivity {
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.search:
+
+
+                       /* Request request=new Request();
+                        request.getJson();
+                        Request.getIapi().getJson().enqueue(new Callback<Recipes>() {
+                            @Override
+                            public void onResponse(Call<Recipes> call, Response<Recipes> response) {
+                                Timber.e("true");
+                                Timber.e(String.valueOf(response.body().getHits().size()));
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<Recipes> call, Throwable t) {
+                                Timber.e("fail");
+                                t.printStackTrace();
+
+                            }
+                        });*/
                         //selectedFragment = ItemOneFragment.newInstance();
                         break;
                     case R.id.search_deep:
