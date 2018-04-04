@@ -28,6 +28,9 @@ public class MainActivity extends MvpAppCompatActivity  {
     IAPI iapi;
 
 
+    public MainActivity(){
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
