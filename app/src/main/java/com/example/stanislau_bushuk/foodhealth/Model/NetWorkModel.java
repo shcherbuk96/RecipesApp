@@ -9,6 +9,9 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
+import static com.example.stanislau_bushuk.foodhealth.Constats.APP_ID;
+import static com.example.stanislau_bushuk.foodhealth.Constats.APP_KEY;
+
 public class NetWorkModel {
 
     @Inject
@@ -25,7 +28,7 @@ public class NetWorkModel {
     }
 
     public void getResponse(String recipeName, int from){
-        Observable<Recipes> observable = iapi.getJson("search?q="+recipeName+"&app_id=8fe07cd3&app_key=d0f2fdfa54e4a68a2f8d96a0e34a7658&from="+from+"&to="+from+10);
+        Observable<Recipes> observable = iapi.getJson("search?q="+recipeName+"&app_id="+APP_ID+"&app_key="+APP_KEY+"&from="+from+"&to="+from+10);
         callBackSearchPresenter.call(observable);
     }
 }

@@ -1,8 +1,16 @@
 package com.example.stanislau_bushuk.foodhealth.Model.Pojo;
 
-import java.util.ArrayList;
+import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Lists.Cautions;
+import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Lists.DietLabels;
+import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Lists.Digets;
+import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Lists.HealhLabels;
+import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Lists.IngridientLines;
+import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Lists.Ingridients;
 
-public class Recipe {
+import io.realm.RealmList;
+import io.realm.RealmObject;
+
+public class Recipe extends RealmObject {
 
     private String uri;
     private String label;
@@ -11,18 +19,18 @@ public class Recipe {
     private String url;
     private String shareAs;
     private int yield;
-    private ArrayList dietLabels;
-    private ArrayList healthLabels;
+    private RealmList<DietLabels> dietLabels;
+    private RealmList<HealhLabels> healthLabels;
 
-    private ArrayList cautions;
-    private ArrayList ingredientLines;
-    private ArrayList ingredients;
+    private RealmList<Cautions> cautions;
+    private RealmList<IngridientLines> ingredientLines;
+    private RealmList<Ingridients> ingredients;
     private float calories;
     private float totalWeight;
     private int totalTime;
     //totalNutrients	{…}
     //totalDaily	{…}
-    private ArrayList digest;
+    private RealmList<Digets> digest;
     private boolean bookmarked;
     private boolean bought;
 
@@ -54,23 +62,23 @@ public class Recipe {
         return yield;
     }
 
-    public ArrayList getDietLabels() {
+    public RealmList getDietLabels() {
         return dietLabels;
     }
 
-    public ArrayList getHealthLabels() {
+    public RealmList getHealthLabels() {
         return healthLabels;
     }
 
-    public ArrayList getCautions() {
+    public RealmList getCautions() {
         return cautions;
     }
 
-    public ArrayList getIngredientLines() {
+    public RealmList getIngredientLines() {
         return ingredientLines;
     }
 
-    public ArrayList getIngredients() {
+    public RealmList getIngredients() {
         return ingredients;
     }
 
@@ -86,7 +94,7 @@ public class Recipe {
         return totalTime;
     }
 
-    public ArrayList getDigest() {
+    public RealmList getDigest() {
         return digest;
     }
 
