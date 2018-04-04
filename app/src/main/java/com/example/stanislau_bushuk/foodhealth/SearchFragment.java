@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -26,6 +27,9 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     @BindView(R.id.list_search)
     RecyclerView recyclerView;
 
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
+
     @InjectPresenter
     SearchPresenter presenter;
     RecyclerAdapter recyclerAdapter;
@@ -44,11 +48,14 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
+
         hitsList = new ArrayList<>();
         recyclerAdapter = new RecyclerAdapter(hitsList, getContext());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(recyclerAdapter);
+
     }
 
     @Override
@@ -68,4 +75,16 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
             recyclerAdapter.notifyDataSetChanged();
         }
     }
+
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void closeProgressBar() {
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+
 }

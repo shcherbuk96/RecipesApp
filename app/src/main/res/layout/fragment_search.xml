@@ -4,15 +4,21 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
 
     <EditText
-        android:id="@+id/editText"
-        android:layout_width="298dp"
+        android:id="@+id/edt_search"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/margin_top_bot"
         android:layout_marginStart="@dimen/margin_start_end"
-        android:layout_marginTop="@dimen/margin_top"
+        android:layout_toStartOf="@+id/imageView"
         android:hint="@string/hint_search"
         android:inputType="textPersonName" />
 
@@ -21,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignTop="@+id/editText"
+        android:layout_alignTop="@+id/edt_search"
         android:layout_marginEnd="@dimen/margin_start_end"
         app:srcCompat="@android:drawable/ic_search_category_default" />
 
@@ -31,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/margin_top"
+        android:layout_marginTop="@dimen/margin_top_bot"
         android:textColor="@color/black"
         android:textSize="@dimen/text_random"
         android:text="@string/text_random" />
@@ -44,5 +50,5 @@
         android:layout_marginEnd="@dimen/margin_start_end"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView"
-        android:layout_marginTop="@dimen/margin_top" />
+        android:layout_marginTop="@dimen/margin_top_bot" />
 </RelativeLayout>
