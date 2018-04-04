@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/ic_background"
     tools:context=".MainActivity">
 
 
@@ -16,5 +17,13 @@
         app:itemIconTint="@color/nav_color_list"
         app:itemTextColor="@color/nav_color_list"
         app:menu="@menu/menu"/>
+
+    <FrameLayout
+        android:id="@+id/contener"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/navigation"
+     />
+
 
 </RelativeLayout>

@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
@@ -17,7 +19,7 @@ import butterknife.ButterKnife;
 
 import javax.inject.Inject;
 
-public class MainActivity extends MvpAppCompatActivity implements ViewSearch {
+public class MainActivity extends MvpAppCompatActivity  {
 
     @BindView(R.id.navigation)
     BottomNavigationView bottomNavigationView;
@@ -25,8 +27,6 @@ public class MainActivity extends MvpAppCompatActivity implements ViewSearch {
     @Inject
     IAPI iapi;
 
-    @InjectPresenter
-    SearchPresenter searchPresenter;
 
 
     @Override
@@ -36,6 +36,8 @@ public class MainActivity extends MvpAppCompatActivity implements ViewSearch {
         ButterKnife.bind(this);
         App.getAppComponent().inject(this);
 
+        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction().replace(R.id.contener,new SearchFragment());
+        fragmentTransaction.commit();
         //Menu-------------------
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

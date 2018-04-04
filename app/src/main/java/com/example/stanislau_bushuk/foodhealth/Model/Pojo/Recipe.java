@@ -7,10 +7,12 @@ import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Lists.HealhLabels;
 import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Lists.IngridientLines;
 import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Lists.Ingridients;
 
+import java.util.ArrayList;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 
-public class Recipe extends RealmObject {
+public class Recipe {
 
     private String uri;
     private String label;
@@ -19,18 +21,18 @@ public class Recipe extends RealmObject {
     private String url;
     private String shareAs;
     private int yield;
-    private RealmList<DietLabels> dietLabels;
-    private RealmList<HealhLabels> healthLabels;
+    private ArrayList dietLabels;
+    private ArrayList healthLabels;
 
-    private RealmList<Cautions> cautions;
-    private RealmList<IngridientLines> ingredientLines;
-    private RealmList<Ingridients> ingredients;
+    private ArrayList cautions;
+    private ArrayList ingredientLines;
+    private ArrayList ingredients;
     private float calories;
     private float totalWeight;
     private int totalTime;
     //totalNutrients	{…}
     //totalDaily	{…}
-    private RealmList<Digets> digest;
+    private ArrayList<Digets> digest;
     private boolean bookmarked;
     private boolean bought;
 
@@ -62,23 +64,23 @@ public class Recipe extends RealmObject {
         return yield;
     }
 
-    public RealmList getDietLabels() {
+    public ArrayList getDietLabels() {
         return dietLabels;
     }
 
-    public RealmList getHealthLabels() {
+    public ArrayList getHealthLabels() {
         return healthLabels;
     }
 
-    public RealmList getCautions() {
+    public ArrayList getCautions() {
         return cautions;
     }
 
-    public RealmList getIngredientLines() {
+    public ArrayList getIngredientLines() {
         return ingredientLines;
     }
 
-    public RealmList getIngredients() {
+    public ArrayList getIngredients() {
         return ingredients;
     }
 
@@ -94,7 +96,7 @@ public class Recipe extends RealmObject {
         return totalTime;
     }
 
-    public RealmList getDigest() {
+    public ArrayList getDigest() {
         return digest;
     }
 
