@@ -1,16 +1,8 @@
 package com.example.stanislau_bushuk.foodhealth.Model.Pojo;
 
-import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Lists.Cautions;
-import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Lists.DietLabels;
 import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Lists.Digets;
-import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Lists.HealhLabels;
-import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Lists.IngridientLines;
-import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Lists.Ingridients;
 
 import java.util.ArrayList;
-
-import io.realm.RealmList;
-import io.realm.RealmObject;
 
 public class Recipe {
 

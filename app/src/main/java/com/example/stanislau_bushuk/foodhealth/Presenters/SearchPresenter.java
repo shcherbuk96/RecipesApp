@@ -20,7 +20,7 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 @InjectViewState
-public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBackSearchPresenter{
+public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBackSearchPresenter {
 
     @Inject
     IAPI api;
@@ -43,6 +43,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                 .subscribe(new Observer<Recipes>() {
                     @Override
                     public void onSubscribe(Disposable d) {
+                        getViewState().showProgressBar();
                         Timber.e("subscribe");
                     }
 
@@ -63,6 +64,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
                     @Override
                     public void onComplete() {
+                        getViewState().closeProgressBar();
                         Timber.e("Complete");
                     }
                 });
