@@ -24,6 +24,12 @@ import butterknife.OnClick;
 import butterknife.OnItemClick;
 import butterknife.OnItemSelected;
 import butterknife.OnTouch;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,8 +60,31 @@ public class MainActivity extends AppCompatActivity {
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.search:
-                      //iapi.getJson();
-                        Request request=new Request();
+                      Observable<Recipes> observable = iapi.getJson();
+                      observable.subscribeOn(Schedulers.io())
+                              .observeOn(AndroidSchedulers.mainThread())
+                              .subscribe(new Observer<Recipes>() {
+                          @Override
+                          public void onSubscribe(Disposable d) {
+
+                          }
+
+                          @Override
+                          public void onNext(Recipes recipes) {
+                              Timber.e(String.valueOf(recipes.getCount()));
+                          }
+
+                          @Override
+                          public void onError(Throwable e) {
+
+                          }
+
+                          @Override
+                          public void onComplete() {
+
+                          }
+                      });
+                       /* Request request=new Request();
                         request.getJson();
                         Request.getIapi().getJson().enqueue(new Callback<Recipes>() {
                             @Override
@@ -71,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                                 t.printStackTrace();
 
                             }
-                        });
+                        });*/
                         //selectedFragment = ItemOneFragment.newInstance();
                         break;
                     case R.id.search_deep:

@@ -18,6 +18,7 @@ public class Api {
     public IAPI getIAPI() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://api.edamam.com/")
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         IAPI iapi = retrofit.create(IAPI.class);
