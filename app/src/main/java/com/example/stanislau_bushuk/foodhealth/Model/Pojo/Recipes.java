@@ -69,7 +69,7 @@ public class Recipes {
     }
 
 
-    public void setHits(ArrayList hits) {
+    public void setHits(ArrayList<Hits> hits) {
         this.hits = hits;
     }
 

@@ -2,7 +2,9 @@ package com.example.stanislau_bushuk.foodhealth;
 
 import android.app.Application;
 
+
 import com.example.stanislau_bushuk.foodhealth.Component.AppComponent;
+
 import com.example.stanislau_bushuk.foodhealth.Component.DaggerAppComponent;
 import com.example.stanislau_bushuk.foodhealth.Model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.Modul.Api;

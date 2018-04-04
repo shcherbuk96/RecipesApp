@@ -4,11 +4,12 @@ import com.example.stanislau_bushuk.foodhealth.MainActivity;
 import com.example.stanislau_bushuk.foodhealth.Model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.Modul.Api;
 import com.example.stanislau_bushuk.foodhealth.Modul.NetWorkModul;
-import com.example.stanislau_bushuk.foodhealth.Presenters.SearchPresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.Presenters.SearchPresenter;
 
 import javax.inject.Singleton;
 
 import dagger.Component;
+
 
 @Singleton
 @Component(modules = {Api.class, NetWorkModul.class})

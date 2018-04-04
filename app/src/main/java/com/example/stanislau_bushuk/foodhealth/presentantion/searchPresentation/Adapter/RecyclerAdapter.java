@@ -1,4 +1,4 @@
-package com.example.stanislau_bushuk.foodhealth.Adapter;
+package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

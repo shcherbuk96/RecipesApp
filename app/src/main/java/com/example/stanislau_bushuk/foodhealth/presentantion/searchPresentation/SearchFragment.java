@@ -1,4 +1,4 @@
-package com.example.stanislau_bushuk.foodhealth;
+package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,10 +11,11 @@ import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.example.stanislau_bushuk.foodhealth.Adapter.RecyclerAdapter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.Adapter.RecyclerAdapter;
 import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Hits;
-import com.example.stanislau_bushuk.foodhealth.Presenters.SearchPresenter;
-import com.example.stanislau_bushuk.foodhealth.View.ViewSearch;
+import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.Presenters.SearchPresenter;
+import com.example.stanislau_bushuk.foodhealth.R;
+import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.View.ViewSearch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +70,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     @Override
     public void showList(List<Hits> hitsList) {
         if (hitsList != null) {
-
             this.hitsList.clear();
             this.hitsList.addAll(hitsList);
             recyclerAdapter.notifyDataSetChanged();
