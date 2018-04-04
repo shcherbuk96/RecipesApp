@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.example.stanislau_bushuk.foodhealth.Adapter.RecyclerAdapter;
 
 import butterknife.BindView;
 
@@ -16,7 +17,7 @@ public class SearchFragment extends MvpAppCompatFragment {
     @BindView(R.id.list_search)
     RecyclerView recyclerView;
 
-    //RecyclerAdapter recyclerAdapter;
+    RecyclerAdapter recyclerAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,17 +31,15 @@ public class SearchFragment extends MvpAppCompatFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.fragment_search2, container, false);
-
+        View view=inflater.inflate(R.layout.fragment_search, container, false);
+        setAdapter();
         return view;
     }
 
     public void setAdapter(){
-       /* recyclerAdapter = new RecyclerAdapter(list, getContext());
+       // recyclerAdapter = new RecyclerAdapter(list, getContext());
 
-*//*        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 3);
-        recyclerView.setLayoutManager(mLayoutManager);*//*
-        recyclerView.setAdapter(recyclerAdapter);*/
+        recyclerView.setAdapter(recyclerAdapter);
     }
 
 
