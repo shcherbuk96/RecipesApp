@@ -11,7 +11,7 @@ import dagger.Provides;
 public class NetWorkModul {
     @Provides
     @Singleton
-    public NetWorkModel netWorkModel(){
+    public NetWorkModel netWorkModel() {
         return new NetWorkModel();
     }
 }

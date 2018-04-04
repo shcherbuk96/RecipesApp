@@ -13,7 +13,6 @@ import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.Modul.GlideApp;
 import com.example.stanislau_bushuk.foodhealth.R;
 
-
 import java.util.List;
 
 import butterknife.BindView;
@@ -22,11 +21,11 @@ import butterknife.ButterKnife;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
     private Context context;
-    private List <Hits> hits;
+    private List<Hits> hits;
 
 
     public RecyclerAdapter(List<Hits> hits, Context context) {
-        this.hits= hits;
+        this.hits = hits;
         this.context = context;
     }
 
