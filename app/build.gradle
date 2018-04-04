@@ -70,11 +70,14 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
     ///
 
-
     /////ButterKnife/////
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     ///
+
+    ///Circle Image View/////
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+    //////
 
     ///////Moxy/////
     compile 'com.arello-mobile:moxy:1.5.3'
