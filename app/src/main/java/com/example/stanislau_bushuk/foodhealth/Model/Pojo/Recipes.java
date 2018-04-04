@@ -1,4 +1,4 @@
-package com.example.stanislau_bushuk.foodhealth.Model;
+package com.example.stanislau_bushuk.foodhealth.Model.Pojo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ public class Recipes {
     private Object params;
     private boolean more;
     private int count;
-    private ArrayList hits;
+    private ArrayList<Hits> hits;
 
 
     public String getQ() {
@@ -64,7 +64,7 @@ public class Recipes {
         this.count = count;
     }
 
-    public ArrayList getHits() {
+    public ArrayList<Hits> getHits() {
         return hits;
     }
 

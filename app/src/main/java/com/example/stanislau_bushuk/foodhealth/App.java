@@ -4,7 +4,9 @@ import android.app.Application;
 
 import com.example.stanislau_bushuk.foodhealth.Component.AppComponent;
 import com.example.stanislau_bushuk.foodhealth.Component.DaggerAppComponent;
+import com.example.stanislau_bushuk.foodhealth.Model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.Modul.Api;
+import com.example.stanislau_bushuk.foodhealth.Modul.NetWorkModul;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -37,6 +39,7 @@ public class App extends Application {
     }
     public AppComponent buildComponent() {
         return DaggerAppComponent.builder()
+                .netWorkModul(new NetWorkModul())
                 .api(new Api())
                 .build();
     }
