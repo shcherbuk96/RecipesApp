@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 
 import javax.inject.Inject;
 
-public class MainActivity extends MvpAppCompatActivity implements ViewSearch {
+public class MainActivity extends MvpAppCompatActivity  {
 
     @BindView(R.id.navigation)
     BottomNavigationView bottomNavigationView;
@@ -27,8 +27,6 @@ public class MainActivity extends MvpAppCompatActivity implements ViewSearch {
     @Inject
     IAPI iapi;
 
-    @InjectPresenter
-    SearchPresenter searchPresenter;
 
 
     @Override

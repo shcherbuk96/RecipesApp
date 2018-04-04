@@ -20,12 +20,13 @@ import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 @InjectViewState
-public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBackSearchPresenter {
+public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBackSearchPresenter{
 
     @Inject
     IAPI api;
     @Inject
     NetWorkModel netWorkModel;
+
 
     public SearchPresenter() {
         App.getAppComponent().inject(this);
@@ -50,10 +51,13 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                         Timber.e("next");
                         Timber.e(String.valueOf(recipes.getHits().get(0).getRecipe().getLabel()));
                         Timber.e(String.valueOf(recipes.getTo()));
+                        getViewState().showList(recipes.getHits());
+
                     }
 
                     @Override
                     public void onError(Throwable e) {
+                        e.printStackTrace();
                         Timber.e("Error");
                     }
 
@@ -68,4 +72,5 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     public void call(Observable<Recipes> observable) {
         searchRecipes(observable);
     }
+
 }

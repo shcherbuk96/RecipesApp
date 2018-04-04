@@ -2,19 +2,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/ic_background">
+    android:layout_height="match_parent">
 
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="269dp"
+        android:layout_width="298dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="35dp"
-        android:ems="10"
+        android:layout_marginStart="@dimen/margin_start_end"
+        android:layout_marginTop="@dimen/margin_top"
         android:hint="@string/hint_search"
         android:inputType="textPersonName" />
 
@@ -22,17 +20,18 @@
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/editText"
-        android:layout_toEndOf="@+id/editText"
+        android:layout_marginEnd="@dimen/margin_start_end"
         app:srcCompat="@android:drawable/ic_search_category_default" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/imageView"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="122dp"
+        android:layout_marginTop="@dimen/margin_top"
         android:textColor="@color/black"
         android:textSize="@dimen/text_random"
         android:text="@string/text_random" />
@@ -40,7 +39,10 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/list_search"
         android:layout_width="match_parent"
-        android:layout_height="399dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"/>
+        android:layout_height="524dp"
+        android:layout_marginStart="@dimen/margin_start_end"
+        android:layout_marginEnd="@dimen/margin_start_end"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="@dimen/margin_top" />
 </RelativeLayout>

@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="text_random">20sp</dimen>
+
+    /**Fragment Search**/
+    <dimen name="margin_start_end">32dp</dimen>
+    <dimen name="margin_top">20dp</dimen>
+
+    /**Item Recycler View**/
+    <dimen name="image_size">65dp</dimen>
+    <dimen name="main_text_size">20sp</dimen>
 </resources>
