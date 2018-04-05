@@ -45,6 +45,7 @@ public class MainActivity extends MvpAppCompatActivity {
                 Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.search:
+
                         //selectedFragment = ItemOneFragment.newInstance();
                         break;
                     case R.id.search_deep:
