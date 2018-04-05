@@ -28,6 +28,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    compile project (':circleimageview')
     ////Design////
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support:support-v4:27.1.0'
@@ -74,10 +75,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     ///
-
-    ///Circle Image View/////
-    implementation 'de.hdodenhof:circleimageview:2.2.0'
-    //////
 
     ///////Moxy/////
     compile 'com.arello-mobile:moxy:1.5.3'
