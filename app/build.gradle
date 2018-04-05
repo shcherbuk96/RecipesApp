@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
+apply from: "$rootProject.projectDir/buildsystem/library.gradle"
 
 android {
     compileSdkVersion 27
@@ -24,66 +25,62 @@ android {
         }
     }
 }
-
+def library=ext.library;
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     compile project (':uimodul')
     ////Design////
-    implementation 'com.android.support:appcompat-v7:27.1.0'
-    implementation 'com.android.support:support-v4:27.1.0'
-    implementation 'com.android.support:design:27.1.0'
-    implementation "com.android.support:support-fragment:27.1.0"
-    implementation 'com.android.support:recyclerview-v7:27.1.0'
+    implementation "${library.supportAppcompat}"
+    implementation "${library.support}"
+    implementation "${library.supportDesign}"
+    implementation "${library.supportFragment}"
+    implementation "${library.recyclerview}"
     ////
 
     ///Realm////
-    compile 'io.realm:realm-annotations-processor:4.3.3'
+    compile "${library.realm}"
     ////
 
     /////Timber//////
-    implementation 'com.jakewharton.timber:timber:4.6.1'
+    implementation "${library.timber}"
     ///
 
     /////RXJAVA+RXANDROID//////
-    compile "io.reactivex.rxjava2:rxjava:2.1.9"
-    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    compile "${library.rxjava}"
+    compile "${library.retrofit2Rxjava2Adapter}"
+    compile "${library.rxandroid}"
     ///
 
     /////RETROFIT/////
-    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation "${library.retrofit}"
+    implementation "${library.converterGson}"
     ///
 
     /////GLIDE/////
-    implementation("com.github.bumptech.glide:glide:4.6.1") {
-        exclude group: "com.android.support"
-    }
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
+    implementation "${library.glide}"
+    annotationProcessor "${library.glideCompiler}"
     ////
 
     ////dagger////
-    implementation 'com.google.dagger:dagger:2.11'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
-    implementation 'com.google.dagger:dagger-android:2.11'
-    implementation 'com.google.dagger:dagger-android-support:2.11'
-    annotationProcessor 'com.google.dagger:dagger-android-processor:2.11'
+    implementation "${library.dagger}"
+    annotationProcessor "${library.daggerCompiler}"
+    implementation "${library.daggerAndroid}"
+    implementation "${library.daggerAndroidSupport}"
+    annotationProcessor "${library.daggerAndroidProcessor}"
     ///
 
     /////ButterKnife/////
-    compile 'com.jakewharton:butterknife:8.8.1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile "${library.butterknife}"
+    annotationProcessor "${library.butterknifeCompiler}"
     ///
 
-    ///Circle Image View/////
-    implementation 'de.hdodenhof:circleimageview:2.2.0'
-    //////
+    implementation "${library.circle}"
 
     ///////Moxy/////
-    compile 'com.arello-mobile:moxy:1.5.3'
-    compile 'com.arello-mobile:moxy-app-compat:1.5.3'
-    annotationProcessor 'com.arello-mobile:moxy-compiler:1.5.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    compile "${library.moxy}"
+    compile "${library.moxyAppCompat}"
+    annotationProcessor "${library.moxyCompiler}"
+    testImplementation "${library.junit}"
+    androidTestImplementation"${library.testRunner}"
+    androidTestImplementation "${library.espressoCore}"
 }
