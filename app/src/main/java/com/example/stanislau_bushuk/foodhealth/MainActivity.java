@@ -8,10 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
-import com.example.stanislau_bushuk.foodhealth.API.IAPI;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,13 +44,9 @@ public class MainActivity extends MvpAppCompatActivity {
                         //selectedFragment = ItemThreeFragment.newInstance();
                         break;
                 }
-/*                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, selectedFragment);
-                transaction.commit();*/
+
                 return true;
             }
         });
-
-        //-------------------
-    }
+        }
 }

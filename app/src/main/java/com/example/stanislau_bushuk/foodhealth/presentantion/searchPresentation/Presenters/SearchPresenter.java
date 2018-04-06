@@ -33,11 +33,11 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
         setCallBack();
     }
 
-    public void setCallBack() {
+    private void setCallBack() {
         netWorkModel.setCallBack(this);
     }
 
-    public void searchRecipes(Observable<Recipes> observable) {
+    private void searchRecipes(Observable<Recipes> observable) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Recipes>() {
