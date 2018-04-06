@@ -1,4 +1,4 @@
-package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.Adapter;
+package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Hits;
-import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Recipe;
-import com.example.stanislau_bushuk.foodhealth.Modul.GlideApp;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
+import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 import com.example.stanislau_bushuk.foodhealth.R;
 
 import java.util.List;
@@ -40,12 +40,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
         Recipe recipe = hits.get(position).getRecipe();
-        holder.title.setText(recipe.getLabel());
+        holder.titleTextView.setText(recipe.getLabel());
         GlideApp
                 .with(context)
                 .load(recipe.getImage())
                 .centerCrop()
-                .into(holder.image);
+                .into(holder.photoImageView);
 
     }
 
@@ -56,10 +56,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.item_title)
-        TextView title;
-        @BindView(R.id.item_image)
-        ImageView image;
+        @BindView(R.id.item_title_text_view)
+        TextView titleTextView;
+        @BindView(R.id.item_photo_image_view)
+        ImageView photoImageView;
         //RelativeLayout relative;
 
         MyViewHolder(View view) {

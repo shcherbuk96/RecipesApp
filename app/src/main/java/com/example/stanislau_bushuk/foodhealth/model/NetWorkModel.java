@@ -1,9 +1,9 @@
-package com.example.stanislau_bushuk.foodhealth.Model;
+package com.example.stanislau_bushuk.foodhealth.model;
 
-import com.example.stanislau_bushuk.foodhealth.API.IAPI;
+import com.example.stanislau_bushuk.foodhealth.api.IAPI;
 import com.example.stanislau_bushuk.foodhealth.App;
-import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Recipes;
-import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.Presenters.SearchPresenter;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
+import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
 
 import javax.inject.Inject;
 

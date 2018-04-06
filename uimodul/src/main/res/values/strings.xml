@@ -5,11 +5,9 @@
     <string name="menu_deep_search">Deep Search</string>
     <string name="menu_featured">Featured</string>
 
-    <string name="hint_search">Enter the name of the recipe</string>
-    <string name="text_random">Random 10 recipes</string>
+    <string name="search_edt">Enter the name of the recipe</string>
+    <string name="search_random">Random 10 recipes</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!---Item Recycler View-->
 
