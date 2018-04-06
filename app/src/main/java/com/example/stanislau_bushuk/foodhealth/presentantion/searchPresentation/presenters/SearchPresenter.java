@@ -1,14 +1,14 @@
-package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.Presenters;
+package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters;
 
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.example.stanislau_bushuk.foodhealth.API.IAPI;
+import com.example.stanislau_bushuk.foodhealth.api.IAPI;
 import com.example.stanislau_bushuk.foodhealth.App;
-import com.example.stanislau_bushuk.foodhealth.Model.CallBackSearchPresenter;
-import com.example.stanislau_bushuk.foodhealth.Model.NetWorkModel;
-import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Recipes;
-import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.View.ViewSearch;
+import com.example.stanislau_bushuk.foodhealth.model.CallBackSearchPresenter;
+import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
+import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.view.ViewSearch;
 
 import javax.inject.Inject;
 

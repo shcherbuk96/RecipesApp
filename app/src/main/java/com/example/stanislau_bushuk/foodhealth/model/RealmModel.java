@@ -1,6 +1,6 @@
-package com.example.stanislau_bushuk.foodhealth.Model;
+package com.example.stanislau_bushuk.foodhealth.model;
 
-import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Recipe;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 
 import io.realm.Realm;
 

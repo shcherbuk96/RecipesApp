@@ -8,17 +8,14 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
-import com.example.stanislau_bushuk.foodhealth.API.IAPI;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends MvpAppCompatActivity {
 
-    @BindView(R.id.navigation)
+    @BindView(R.id.main_navigation_bottom_navigation_view)
     BottomNavigationView bottomNavigationView;
 
     @Override
@@ -28,7 +25,7 @@ public class MainActivity extends MvpAppCompatActivity {
         ButterKnife.bind(this);
         App.getAppComponent().inject(this);
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.contener, new SearchFragment());
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new SearchFragment());
         fragmentTransaction.commit();
         //Menu-------------------
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

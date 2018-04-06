@@ -1,7 +1,7 @@
-package com.example.stanislau_bushuk.foodhealth.API;
+package com.example.stanislau_bushuk.foodhealth.api;
 
 
-import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Recipes;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

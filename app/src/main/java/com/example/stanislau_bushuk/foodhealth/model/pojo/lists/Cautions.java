@@ -1,4 +1,4 @@
-package com.example.stanislau_bushuk.foodhealth.Model.Pojo.Lists;
+package com.example.stanislau_bushuk.foodhealth.model.pojo.lists;
 
 import io.realm.RealmObject;
 

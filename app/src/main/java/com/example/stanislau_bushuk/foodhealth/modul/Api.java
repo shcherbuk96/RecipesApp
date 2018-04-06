@@ -1,6 +1,7 @@
-package com.example.stanislau_bushuk.foodhealth.Modul;
+package com.example.stanislau_bushuk.foodhealth.modul;
 
-import com.example.stanislau_bushuk.foodhealth.API.IAPI;
+import com.example.stanislau_bushuk.foodhealth.Constats;
+import com.example.stanislau_bushuk.foodhealth.api.IAPI;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 import javax.inject.Singleton;
@@ -17,7 +18,7 @@ public class Api {
     @Singleton
     public IAPI getIAPI() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.edamam.com/")
+                .baseUrl(Constats.BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();

@@ -2,10 +2,10 @@ package com.example.stanislau_bushuk.foodhealth;
 
 import android.app.Application;
 
-import com.example.stanislau_bushuk.foodhealth.Component.AppComponent;
-import com.example.stanislau_bushuk.foodhealth.Component.DaggerAppComponent;
-import com.example.stanislau_bushuk.foodhealth.Modul.Api;
-import com.example.stanislau_bushuk.foodhealth.Modul.NetWorkModul;
+import com.example.stanislau_bushuk.foodhealth.component.AppComponent;
+import com.example.stanislau_bushuk.foodhealth.component.DaggerAppComponent;
+import com.example.stanislau_bushuk.foodhealth.modul.Api;
+import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
