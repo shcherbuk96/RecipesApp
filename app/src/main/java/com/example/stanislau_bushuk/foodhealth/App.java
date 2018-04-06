@@ -2,11 +2,8 @@ package com.example.stanislau_bushuk.foodhealth;
 
 import android.app.Application;
 
-
 import com.example.stanislau_bushuk.foodhealth.Component.AppComponent;
-
 import com.example.stanislau_bushuk.foodhealth.Component.DaggerAppComponent;
-import com.example.stanislau_bushuk.foodhealth.Model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.Modul.Api;
 import com.example.stanislau_bushuk.foodhealth.Modul.NetWorkModul;
 
@@ -28,7 +25,7 @@ public class App extends Application {
         super.onCreate();
         setRealm();
         Timber.plant(new Timber.DebugTree());
-        appComponent=buildComponent();
+        appComponent = buildComponent();
     }
 
     public void setRealm() {
@@ -39,6 +36,7 @@ public class App extends Application {
                 .build();
         Realm.setDefaultConfiguration(realmConfig);
     }
+
     public AppComponent buildComponent() {
         return DaggerAppComponent.builder()
                 .netWorkModul(new NetWorkModul())

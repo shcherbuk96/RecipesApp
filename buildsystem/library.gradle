@@ -47,7 +47,7 @@ ext.version = [
         cicrleImageViewVersion : "2.2.0"
 ]
 
-def version = ext.version;
+def version = ext.version
 
 ext.library = [
         supportAppcompat: "com.android.support:appcompat-v7:$version.supportAppcompat",

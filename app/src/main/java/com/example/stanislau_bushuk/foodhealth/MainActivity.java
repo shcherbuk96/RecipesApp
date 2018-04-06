@@ -21,14 +21,6 @@ public class MainActivity extends MvpAppCompatActivity {
     @BindView(R.id.navigation)
     BottomNavigationView bottomNavigationView;
 
-    @Inject
-    IAPI iapi;
-
-
-    public MainActivity(){
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
