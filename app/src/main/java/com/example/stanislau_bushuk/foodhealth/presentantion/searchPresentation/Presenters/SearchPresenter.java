@@ -1,14 +1,14 @@
-package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.Presenters;
+package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters;
 
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.example.stanislau_bushuk.foodhealth.API.IAPI;
 import com.example.stanislau_bushuk.foodhealth.App;
-import com.example.stanislau_bushuk.foodhealth.Model.CallBackSearchPresenter;
-import com.example.stanislau_bushuk.foodhealth.Model.NetWorkModel;
-import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Recipes;
-import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.View.ViewSearch;
+import com.example.stanislau_bushuk.foodhealth.api.IAPI;
+import com.example.stanislau_bushuk.foodhealth.model.CallBackSearchPresenter;
+import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
+import com.example.stanislau_bushuk.foodhealth.model.Pojo.Recipes;
+import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.view.ViewSearch;
 
 import javax.inject.Inject;
 
@@ -37,18 +37,19 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
         netWorkModel.setCallBack(this);
     }
 
-    private void searchRecipes(Observable<Recipes> observable) {
+
+    public void searchRecipes(final Observable<Recipes> observable) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Recipes>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
+                    public void onSubscribe(final Disposable d) {
                         getViewState().showProgressBar();
                         Timber.e("subscribe");
                     }
 
                     @Override
-                    public void onNext(Recipes recipes) {
+                    public void onNext(final Recipes recipes) {
                         Timber.e("next");
                         Timber.e(String.valueOf(recipes.getHits().get(0).getRecipe().getLabel()));
                         Timber.e(String.valueOf(recipes.getTo()));
@@ -57,7 +58,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(final Throwable e) {
                         e.printStackTrace();
                         Timber.e("Error");
                     }
@@ -71,7 +72,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     }
 
     @Override
-    public void call(Observable<Recipes> observable) {
+    public void call(final Observable<Recipes> observable) {
         searchRecipes(observable);
     }
 

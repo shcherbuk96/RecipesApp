@@ -8,7 +8,7 @@ import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 
 public class SplashActivity extends AppCompatActivity {
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityManager.startMainActivity(this);
         finish();

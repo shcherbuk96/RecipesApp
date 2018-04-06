@@ -1,6 +1,6 @@
-package com.example.stanislau_bushuk.foodhealth.Model.Pojo;
+package com.example.stanislau_bushuk.foodhealth.model.Pojo;
 
-import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Lists.Digets;
+import com.example.stanislau_bushuk.foodhealth.model.Pojo.Lists.Digets;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.Adapter;
+package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Hits;
-import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Recipe;
-import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 import com.example.stanislau_bushuk.foodhealth.R;
+import com.example.stanislau_bushuk.foodhealth.model.Pojo.Hits;
+import com.example.stanislau_bushuk.foodhealth.model.Pojo.Recipe;
+import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 
 import java.util.List;
 
@@ -24,14 +24,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     private List<Hits> hits;
 
 
-    public RecyclerAdapter(List<Hits> hits, Context context) {
+    public RecyclerAdapter(final List<Hits> hits, final Context context) {
         this.hits = hits;
         this.context = context;
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler, parent, false);
+    public MyViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+        final View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -41,6 +41,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         Recipe recipe = hits.get(position).getRecipe();
         holder.title.setText(recipe.getLabel());
+        recipe = hits.get(position).getRecipe();
+        holder.titleTextView.setText(recipe.getLabel());
         GlideApp
                 .with(context)
                 .load(recipe.getImage())
@@ -55,6 +57,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     }
 
+    public void updateAdapter(final List<Hits> hits) {
+        if (hits.size() != 0) {
+            this.hits.clear();
+            this.hits.addAll(hits);
+            notifyDataSetChanged();
+        }
+
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_title)
         TextView title;
@@ -62,7 +73,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         ImageView image;
         //RelativeLayout relative;
 
-        MyViewHolder(View view) {
+        MyViewHolder(final View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

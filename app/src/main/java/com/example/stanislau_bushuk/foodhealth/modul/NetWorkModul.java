@@ -1,6 +1,6 @@
 package com.example.stanislau_bushuk.foodhealth.modul;
 
-import com.example.stanislau_bushuk.foodhealth.Model.NetWorkModel;
+import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 
 import javax.inject.Singleton;
 
