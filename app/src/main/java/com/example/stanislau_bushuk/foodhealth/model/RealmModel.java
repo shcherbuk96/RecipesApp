@@ -11,5 +11,5 @@ public class RealmModel {
         realm=Realm.getDefaultInstance();
     }
 
-    private void setRealmObject(Recipe recipe){}
+    private void setRealmObject(final Recipe recipe){}
 }

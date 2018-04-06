@@ -41,39 +41,34 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
 
 
         hitsList = new ArrayList<>();
         recyclerAdapter = new RecyclerAdapter(hitsList, getContext());
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         listRecyclerView.setLayoutManager(mLayoutManager);
         listRecyclerView.setAdapter(recyclerAdapter);
 
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search, container, false);
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
 
-        return view;
+        return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
 
     @Override
-    public void showList(List<Hits> hitsList) {
-        if (hitsList != null) {
-            this.hitsList.clear();
-            this.hitsList.addAll(hitsList);
-            recyclerAdapter.notifyDataSetChanged();
-        }
+    public void showList(final List<Hits> hitsList) {
+        recyclerAdapter.updateAdapter(hitsList);
     }
 
     @Override

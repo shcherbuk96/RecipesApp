@@ -37,18 +37,18 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
         netWorkModel.setCallBack(this);
     }
 
-    public void searchRecipes(Observable<Recipes> observable) {
+    public void searchRecipes(final Observable<Recipes> observable) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Recipes>() {
                     @Override
-                    public void onSubscribe(Disposable d) {
+                    public void onSubscribe(final Disposable d) {
                         getViewState().showProgressBar();
                         Timber.e("subscribe");
                     }
 
                     @Override
-                    public void onNext(Recipes recipes) {
+                    public void onNext(final Recipes recipes) {
                         Timber.e("next");
                         Timber.e(String.valueOf(recipes.getHits().get(0).getRecipe().getLabel()));
                         Timber.e(String.valueOf(recipes.getTo()));
@@ -57,7 +57,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(final Throwable e) {
                         e.printStackTrace();
                         Timber.e("Error");
                     }
@@ -71,7 +71,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     }
 
     @Override
-    public void call(Observable<Recipes> observable) {
+    public void call(final Observable<Recipes> observable) {
         searchRecipes(observable);
     }
 

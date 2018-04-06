@@ -17,12 +17,12 @@ public class Api {
     @Provides
     @Singleton
     public IAPI getIAPI() {
-        Retrofit retrofit = new Retrofit.Builder()
+        final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constats.BASE_URL)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        IAPI iapi = retrofit.create(IAPI.class);
+        final IAPI iapi = retrofit.create(IAPI.class);
         return iapi;
     }
 }

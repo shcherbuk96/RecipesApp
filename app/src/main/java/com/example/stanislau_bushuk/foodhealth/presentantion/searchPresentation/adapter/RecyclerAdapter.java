@@ -24,14 +24,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     private List<Hits> hits;
 
 
-    public RecyclerAdapter(List<Hits> hits, Context context) {
+    public RecyclerAdapter(final List<Hits> hits, final Context context) {
         this.hits = hits;
         this.context = context;
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler, parent, false);
+    public MyViewHolder onCreateViewHolder(final ViewGroup parent, final int viewType) {
+        final View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -39,7 +39,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        Recipe recipe = hits.get(position).getRecipe();
+        final Recipe recipe = hits.get(position).getRecipe();
         holder.titleTextView.setText(recipe.getLabel());
         GlideApp
                 .with(context)
@@ -55,6 +55,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     }
 
+    public void updateAdapter(final List<Hits> hits){
+        if(hits.size()!=0){
+            this.hits.clear();
+            this.hits.addAll(hits);
+            notifyDataSetChanged();
+        }
+
+    }
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_title_text_view)
         TextView titleTextView;
@@ -62,7 +70,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         ImageView photoImageView;
         //RelativeLayout relative;
 
-        MyViewHolder(View view) {
+        MyViewHolder(final View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

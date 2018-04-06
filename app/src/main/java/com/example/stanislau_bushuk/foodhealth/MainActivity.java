@@ -19,19 +19,18 @@ public class MainActivity extends MvpAppCompatActivity {
     BottomNavigationView bottomNavigationView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        App.getAppComponent().inject(this);
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new SearchFragment());
+        final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new SearchFragment());
         fragmentTransaction.commit();
         //Menu-------------------
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment selectedFragment = null;
+            public boolean onNavigationItemSelected(@NonNull final MenuItem item) {
+                final Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.search:
 

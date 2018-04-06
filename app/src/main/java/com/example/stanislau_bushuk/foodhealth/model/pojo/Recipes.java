@@ -17,7 +17,7 @@ public class Recipes {
         return q;
     }
 
-    public void setQ(String q) {
+    public void setQ(final String q) {
         this.q = q;
     }
 
@@ -25,7 +25,7 @@ public class Recipes {
         return from;
     }
 
-    public void setFrom(Integer from) {
+    public void setFrom(final Integer from) {
         this.from = from;
     }
 
@@ -34,7 +34,7 @@ public class Recipes {
     }
 
 
-    public void setTo(Integer to) {
+    public void setTo(final Integer to) {
         this.to = to;
     }
 
@@ -42,7 +42,7 @@ public class Recipes {
 
 
 
-    public void setParams(ArrayList params) {
+    public void setParams(final ArrayList params) {
         this.params = params;
     }
 
@@ -50,7 +50,7 @@ public class Recipes {
         return more;
     }
 
-    public void setMore(Boolean more) {
+    public void setMore(final Boolean more) {
         this.more = more;
     }
 
@@ -58,7 +58,7 @@ public class Recipes {
         return count;
     }
 
-    public void setCount(Integer count) {
+    public void setCount(final Integer count) {
         this.count = count;
     }
 
@@ -67,7 +67,7 @@ public class Recipes {
     }
 
 
-    public void setHits(ArrayList<Hits> hits) {
+    public void setHits(final ArrayList<Hits> hits) {
         this.hits = hits;
     }
 
