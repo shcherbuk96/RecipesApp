@@ -40,14 +40,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
         Recipe recipe = hits.get(position).getRecipe();
-        holder.title.setText(recipe.getLabel());
-        recipe = hits.get(position).getRecipe();
         holder.titleTextView.setText(recipe.getLabel());
         GlideApp
                 .with(context)
                 .load(recipe.getImage())
                 .centerCrop()
-                .into(holder.image);
+                .into(holder.photoImageView);
 
     }
 
@@ -67,10 +65,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.item_title)
-        TextView title;
-        @BindView(R.id.item_image)
-        ImageView image;
+        @BindView(R.id.item_title_text_view)
+        TextView titleTextView;
+        @BindView(R.id.item_photo_image_view)
+        ImageView photoImageView;
         //RelativeLayout relative;
 
         MyViewHolder(final View view) {

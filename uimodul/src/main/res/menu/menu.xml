@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/search"
-        android:icon="@drawable/search"
+        android:icon="@drawable/icon_search"
         android:title="@string/menu_search" />
 
     <item
         android:id="@+id/search_deep"
-        android:icon="@drawable/search_deep"
+        android:icon="@drawable/icon_search_deep"
         android:title="@string/menu_deep_search" />
 
     <item
         android:id="@+id/featured"
-        android:icon="@drawable/books"
+        android:icon="@drawable/icon_featured"
         android:title="@string/menu_featured" />
 
 </menu>
