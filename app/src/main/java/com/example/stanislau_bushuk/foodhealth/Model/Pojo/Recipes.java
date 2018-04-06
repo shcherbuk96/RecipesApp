@@ -1,8 +1,6 @@
-package com.example.stanislau_bushuk.foodhealth.model.Pojo;
+package com.example.stanislau_bushuk.foodhealth.model.pojo;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 public class Recipes {
 

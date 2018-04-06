@@ -1,6 +1,5 @@
-package com.example.stanislau_bushuk.foodhealth.model.Pojo.Lists;
+package com.example.stanislau_bushuk.foodhealth.model.pojo.lists;
 
-import io.realm.RealmModel;
 import io.realm.RealmObject;
 
 public class Digets extends RealmObject {

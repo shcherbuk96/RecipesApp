@@ -1,7 +1,7 @@
 package com.example.stanislau_bushuk.foodhealth.model;
 
 
-import com.example.stanislau_bushuk.foodhealth.model.Pojo.Recipes;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
 
 import io.reactivex.Observable;
 

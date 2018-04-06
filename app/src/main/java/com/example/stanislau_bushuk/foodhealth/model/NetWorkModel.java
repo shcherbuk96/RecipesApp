@@ -4,15 +4,12 @@ package com.example.stanislau_bushuk.foodhealth.model;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constats;
 import com.example.stanislau_bushuk.foodhealth.api.IAPI;
-import com.example.stanislau_bushuk.foodhealth.model.Pojo.Recipes;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-
-import static com.example.stanislau_bushuk.foodhealth.Constats.APP_ID;
-import static com.example.stanislau_bushuk.foodhealth.Constats.APP_KEY;
 
 public class NetWorkModel {
 
