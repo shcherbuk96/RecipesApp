@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/icon_search"
+        android:title="@string/menu_search" />
+
+    <item
+        android:id="@+id/search_deep"
+        android:icon="@drawable/icon_search_deep"
+        android:title="@string/menu_deep_search" />
+
+    <item
+        android:id="@+id/featured"
+        android:icon="@drawable/icon_featured"
+        android:title="@string/menu_featured" />
+
+</menu>

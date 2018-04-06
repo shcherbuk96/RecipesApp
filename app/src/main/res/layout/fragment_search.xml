@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ProgressBar
+        android:id="@+id/search_progressbar_progressbar"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
+
+    <EditText
+        android:id="@+id/search_search_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/view_search_top_bot_spacing"
+        android:layout_marginStart="@dimen/view_search_start_end_spacing"
+        android:layout_toStartOf="@+id/search_search_image_view"
+        android:hint="@string/search_edt"
+        android:inputType="textPersonName" />
+
+    <ImageView
+        android:id="@+id/search_search_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/search_search_edit_text"
+        android:layout_marginEnd="@dimen/view_search_start_end_spacing"
+        app:srcCompat="@android:drawable/ic_search_category_default" />
+
+    <TextView
+        android:id="@+id/search_random_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/search_search_image_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/view_search_top_bot_spacing"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_search_random_size"
+        android:text="@string/search_random" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_list_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/view_search_start_end_spacing"
+        android:layout_marginEnd="@dimen/view_search_start_end_spacing"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/search_random_text_view"
+        android:layout_marginTop="@dimen/view_search_top_bot_spacing" />
+</RelativeLayout>
