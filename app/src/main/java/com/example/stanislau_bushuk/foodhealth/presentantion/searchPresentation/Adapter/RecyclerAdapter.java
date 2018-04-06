@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.Model.Pojo.Recipe;
-import com.example.stanislau_bushuk.foodhealth.Modul.GlideApp;
+import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 import com.example.stanislau_bushuk.foodhealth.R;
 
 import java.util.List;

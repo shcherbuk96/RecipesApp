@@ -1,4 +1,4 @@
-package com.example.stanislau_bushuk.foodhealth.Modul;
+package com.example.stanislau_bushuk.foodhealth.modul;
 
 import com.example.stanislau_bushuk.foodhealth.API.IAPI;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;

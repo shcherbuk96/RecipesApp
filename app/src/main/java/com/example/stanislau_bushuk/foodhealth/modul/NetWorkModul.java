@@ -1,4 +1,4 @@
-package com.example.stanislau_bushuk.foodhealth.Modul;
+package com.example.stanislau_bushuk.foodhealth.modul;
 
 import com.example.stanislau_bushuk.foodhealth.Model.NetWorkModel;
 

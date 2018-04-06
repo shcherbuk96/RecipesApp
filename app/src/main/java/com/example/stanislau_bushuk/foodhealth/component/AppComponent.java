@@ -1,9 +1,9 @@
-package com.example.stanislau_bushuk.foodhealth.Component;
+package com.example.stanislau_bushuk.foodhealth.component;
 
 import com.example.stanislau_bushuk.foodhealth.MainActivity;
 import com.example.stanislau_bushuk.foodhealth.Model.NetWorkModel;
-import com.example.stanislau_bushuk.foodhealth.Modul.Api;
-import com.example.stanislau_bushuk.foodhealth.Modul.NetWorkModul;
+import com.example.stanislau_bushuk.foodhealth.modul.Api;
+import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.Presenters.SearchPresenter;
 
 import javax.inject.Singleton;
