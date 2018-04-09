@@ -26,16 +26,15 @@ import butterknife.ButterKnife;
 public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
 
     @BindView(R.id.search_progressbar_progressbar)
-    private ProgressBar searchProgressBar;
+    ProgressBar searchProgressBar;
 
     @InjectPresenter
     SearchPresenter presenter;
 
     @BindView(R.id.search_list_recycler_view)
-    private RecyclerView listRecyclerView;
+    RecyclerView listRecyclerView;
 
     private RecyclerAdapter recyclerAdapter;
-
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -52,7 +51,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
         listRecyclerView.setLayoutManager(mLayoutManager);
         listRecyclerView.setAdapter(recyclerAdapter);
     }
-
 
     @Override
     public void showList(final List<Hits> hitsList) {

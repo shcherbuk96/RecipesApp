@@ -33,14 +33,9 @@ public class Recipes {
         return to;
     }
 
-
     public void setTo(final int to) {
         this.to = to;
     }
-
-
-
-
 
     public void setParams(final ArrayList params) {
         this.params = params;
@@ -65,7 +60,6 @@ public class Recipes {
     public ArrayList<Hits> getHits() {
         return hits;
     }
-
 
     public void setHits(final ArrayList<Hits> hits) {
         this.hits = hits;

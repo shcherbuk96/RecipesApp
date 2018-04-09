@@ -42,9 +42,4 @@ public class MainActivity extends MvpAppCompatActivity {
             }
         });
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 }
