@@ -47,14 +47,11 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         ButterKnife.bind(this, view);
-
         final List<Hits> hitsList = new ArrayList<>();
-
         recyclerAdapter = new RecyclerAdapter(hitsList, getContext());
-
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-
         listRecyclerView.setLayoutManager(mLayoutManager);
         listRecyclerView.setAdapter(recyclerAdapter);
     }

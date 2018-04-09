@@ -21,9 +21,9 @@ public class MainActivity extends MvpAppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new SearchFragment());
         fragmentTransaction.commit();
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
