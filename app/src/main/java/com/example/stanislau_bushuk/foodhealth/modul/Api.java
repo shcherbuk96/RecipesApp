@@ -1,6 +1,5 @@
 package com.example.stanislau_bushuk.foodhealth.modul;
 
-import com.example.stanislau_bushuk.foodhealth.Constats;
 import com.example.stanislau_bushuk.foodhealth.api.IAPI;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -23,6 +22,7 @@ public class Api {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         final IAPI iapi = retrofit.create(IAPI.class);
+
         return iapi;
     }
 }

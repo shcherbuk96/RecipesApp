@@ -26,26 +26,25 @@ public class MainActivity extends MvpAppCompatActivity {
 
         final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new SearchFragment());
         fragmentTransaction.commit();
-        //Menu-------------------
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull final MenuItem item) {
-                final Fragment selectedFragment = null;
                 switch (item.getItemId()) {
                     case R.id.search:
-
-                        //selectedFragment = ItemOneFragment.newInstance();
                         break;
                     case R.id.search_deep:
-                        //selectedFragment = ItemTwoFragment.newInstance();
                         break;
                     case R.id.featured:
-                        //selectedFragment = ItemThreeFragment.newInstance();
                         break;
                 }
 
                 return true;
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

@@ -1,9 +1,6 @@
 package com.example.stanislau_bushuk.foodhealth.component;
 
 
-
-
-import com.example.stanislau_bushuk.foodhealth.MainActivity;
 import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.modul.Api;
 import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
@@ -19,8 +16,6 @@ import dagger.Component;
 public interface AppComponent {//main component dagger
 
     void inject(SearchPresenter searchPresenter);
-
-    void inject(MainActivity mainActivity);
 
     void inject(NetWorkModel netWorkModel);
 }

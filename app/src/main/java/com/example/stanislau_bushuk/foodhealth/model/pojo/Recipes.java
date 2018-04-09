@@ -21,20 +21,20 @@ public class Recipes {
         this.q = q;
     }
 
-    public Integer getFrom() {
+    public int getFrom() {
         return from;
     }
 
-    public void setFrom(final Integer from) {
+    public void setFrom(final int from) {
         this.from = from;
     }
 
-    public Integer getTo() {
+    public int getTo() {
         return to;
     }
 
 
-    public void setTo(final Integer to) {
+    public void setTo(final int to) {
         this.to = to;
     }
 
@@ -54,11 +54,11 @@ public class Recipes {
         this.more = more;
     }
 
-    public Integer getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(final Integer count) {
+    public void setCount(final int count) {
         this.count = count;
     }
 

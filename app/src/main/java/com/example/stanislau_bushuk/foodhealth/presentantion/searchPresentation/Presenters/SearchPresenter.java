@@ -4,7 +4,6 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
-import com.example.stanislau_bushuk.foodhealth.api.IAPI;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackSearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
@@ -23,10 +22,7 @@ import timber.log.Timber;
 public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBackSearchPresenter {
 
     @Inject
-    IAPI api;
-    @Inject
     NetWorkModel netWorkModel;
-
 
     public SearchPresenter() {
         App.getAppComponent().inject(this);
@@ -38,7 +34,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     }
 
 
-    public void searchRecipes(final Observable<Recipes> observable) {
+    private void searchRecipes(final Observable<Recipes> observable) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Recipes>() {
@@ -54,7 +50,6 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                         Timber.e(String.valueOf(recipes.getHits().get(0).getRecipe().getLabel()));
                         Timber.e(String.valueOf(recipes.getTo()));
                         getViewState().showList(recipes.getHits());
-
                     }
 
                     @Override
@@ -75,5 +70,4 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     public void call(final Observable<Recipes> observable) {
         searchRecipes(observable);
     }
-
 }

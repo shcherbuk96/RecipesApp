@@ -1,12 +1,11 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
@@ -25,20 +24,18 @@ import butterknife.ButterKnife;
 
 
 public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
-    @BindView(R.id.search_list_recycler_view)
-    RecyclerView listRecyclerView;
 
     @BindView(R.id.search_progressbar_progressbar)
-    ProgressBar searchProgressBar;
+    private ProgressBar searchProgressBar;
 
     @InjectPresenter
     SearchPresenter presenter;
-    RecyclerAdapter recyclerAdapter;
-    private ArrayList<Hits> hitsList;
 
-    public SearchFragment() {
+    @BindView(R.id.search_list_recycler_view)
+    private RecyclerView listRecyclerView;
 
-    }
+    private RecyclerAdapter recyclerAdapter;
+
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -46,23 +43,14 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     }
 
     @Override
-    public void onViewCreated(final View view, @Nullable final Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-
-
-        hitsList = new ArrayList<>();
+        final List<Hits> hitsList = new ArrayList<>();
         recyclerAdapter = new RecyclerAdapter(hitsList, getContext());
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         listRecyclerView.setLayoutManager(mLayoutManager);
         listRecyclerView.setAdapter(recyclerAdapter);
-
-    }
-
-    @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
 
@@ -80,6 +68,4 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     public void closeProgressBar() {
         searchProgressBar.setVisibility(View.INVISIBLE);
     }
-
-
 }
