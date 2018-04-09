@@ -29,6 +29,7 @@ public class MainActivity extends MvpAppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull final MenuItem item) {
+
                 switch (item.getItemId()) {
                     case R.id.search:
                         break;
