@@ -13,7 +13,7 @@ import dagger.Component;
 
 @Singleton
 @Component(modules = {Api.class, NetWorkModul.class})
-public interface AppComponent {//main component dagger
+public interface AppComponent {
 
     void inject(SearchPresenter searchPresenter);
 

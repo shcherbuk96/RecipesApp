@@ -21,6 +21,7 @@ import butterknife.ButterKnife;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
+
     private Context context;
     private List<Hits> hits;
 
