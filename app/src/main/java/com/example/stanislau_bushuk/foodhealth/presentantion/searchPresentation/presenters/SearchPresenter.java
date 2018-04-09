@@ -1,6 +1,8 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters;
 
 
+import android.view.View;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
@@ -39,7 +41,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                 .subscribe(new Observer<Recipes>() {
                     @Override
                     public void onSubscribe(final Disposable d) {
-                        getViewState().showProgressBar();
+                        getViewState().progresBarVisible(View.VISIBLE);
                         Timber.e("subscribe");
                     }
 
@@ -59,7 +61,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
                     @Override
                     public void onComplete() {
-                        getViewState().closeProgressBar();
+                        getViewState().progresBarVisible(View.INVISIBLE);
                         Timber.e("Complete");
                     }
                 });

@@ -57,22 +57,13 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
         listRecyclerView.setAdapter(recyclerAdapter);
     }
 
-
-
     @Override
     public void showList(final List<Hits> hitsList) {
         recyclerAdapter.updateAdapter(hitsList);
     }
 
     @Override
-    public void showProgressBar() {
-        searchProgressBar.setVisibility(View.VISIBLE);
+    public void progresBarVisible(int visible) {
+        searchProgressBar.setVisibility(visible);
     }
-
-    @Override
-    public void closeProgressBar() {
-        searchProgressBar.setVisibility(View.INVISIBLE);
-    }
-
-
 }
