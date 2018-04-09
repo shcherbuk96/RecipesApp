@@ -41,11 +41,11 @@ public class Recipes {
         this.params = params;
     }
 
-    public Boolean getMore() {
+    public boolean getMore() {
         return more;
     }
 
-    public void setMore(final Boolean more) {
+    public void setMore(final boolean more) {
         this.more = more;
     }
 

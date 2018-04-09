@@ -1,5 +1,7 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.view;
 
+import android.view.View;
+
 import com.arellomobile.mvp.MvpView;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 
@@ -9,7 +11,6 @@ public interface ViewSearch extends MvpView {
 
     void showList(List<Hits> hitsList);
 
-    void showProgressBar();
+    void progressBarVisible(int visible);
 
-    void closeProgressBar();
 }
