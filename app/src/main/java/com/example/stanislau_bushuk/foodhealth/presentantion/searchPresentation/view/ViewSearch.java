@@ -11,6 +11,6 @@ public interface ViewSearch extends MvpView {
 
     void showList(List<Hits> hitsList);
 
-    void progresBarVisible(int visible);
+    void progressBarVisible(int visible);
 
 }

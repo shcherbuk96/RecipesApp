@@ -41,7 +41,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                 .subscribe(new Observer<Recipes>() {
                     @Override
                     public void onSubscribe(final Disposable d) {
-                        getViewState().progresBarVisible(View.VISIBLE);
+                        getViewState().progressBarVisible(View.VISIBLE);
                         Timber.e("subscribe");
                     }
 
@@ -61,7 +61,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
                     @Override
                     public void onComplete() {
-                        getViewState().progresBarVisible(View.INVISIBLE);
+                        getViewState().progressBarVisible(View.INVISIBLE);
                         Timber.e("Complete");
                     }
                 });

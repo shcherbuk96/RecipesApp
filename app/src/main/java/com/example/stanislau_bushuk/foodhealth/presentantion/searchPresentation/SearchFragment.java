@@ -65,7 +65,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     }
 
     @Override
-    public void progresBarVisible(int visible) {
+    public void progressBarVisible(int visible) {
         searchProgressBar.setVisibility(visible);
     }
 }
