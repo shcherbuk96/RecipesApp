@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="horizontal" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/view_item_top_bot_spacing"
     android:layout_marginBottom="@dimen/view_item_top_bot_spacing"
@@ -18,10 +18,9 @@
         android:id="@+id/item_title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="4dp"
-        android:layout_toEndOf="@+id/item_photo_image_view"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/text_item_start_end_spacing"
         android:textColor="@color/black"
         android:textSize="@dimen/text_item_title_size" />
 
-</RelativeLayout>
+</LinearLayout>
