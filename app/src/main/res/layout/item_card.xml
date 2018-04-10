@@ -1,27 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/item_linear_layout"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:gravity="center"
     android:layout_marginTop="@dimen/view_item_top_bot_spacing"
     android:layout_marginBottom="@dimen/view_item_top_bot_spacing"
     android:background="@drawable/item">
 
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/item_photo_image_view"
-        android:layout_width="@dimen/image_item_photo_size"
-        android:layout_height="@dimen/image_item_photo_size"
-        android:layout_marginStart="@dimen/view_item_start_end_spacing" />
-
     <TextView
-        android:id="@+id/item_title_text_view"
+        android:id="@+id/item_card_title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="@dimen/text_item_start_end_spacing"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_item_title_size" />
+        android:textSize="@dimen/text_item_title_size"
+        tools:text="qweqweqwe"/>
 
 </LinearLayout>

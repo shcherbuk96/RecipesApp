@@ -4,6 +4,7 @@ package com.example.stanislau_bushuk.foodhealth.component;
 import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.modul.Api;
 import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
+import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
 
 import javax.inject.Singleton;
@@ -18,4 +19,6 @@ public interface AppComponent {
     void inject(SearchPresenter searchPresenter);
 
     void inject(NetWorkModel netWorkModel);
+
+    void inject(CardActivity cardActivity);
 }

@@ -2,61 +2,68 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
     <ImageView
+        android:id="@+id/card_photo_image_view"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:paddingStart="@dimen/image_card_start_end_spacing"
+        android:paddingEnd="@dimen/image_card_start_end_spacing"
+        android:paddingTop="@dimen/image_card_top_bottom_spacing"
+        android:paddingBottom="@dimen/image_card_top_bottom_spacing"
         android:src="@color/black"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/relative_card_bottom_spacing">
 
         <TextView
-            android:id="@+id/line1"
+            android:id="@+id/card_calories_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toStartOf="@id/line2"
-            android:paddingEnd="50dp"
-            android:textSize="18dp"
+            android:layout_toStartOf="@id/card_dayly_text_view"
+            android:paddingEnd="@dimen/text_card_start_end_spacing"
+            android:textSize="@dimen/text_card_size"
             android:textColor="@color/black"
-            android:text="665"/>
+            tools:text="665"/>
 
         <TextView
-            android:id="@+id/line2"
+            android:id="@+id/card_dayly_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:textColor="@color/black"
-            android:textSize="18dp"
-            android:text="33%"/>
+            android:textSize="@dimen/text_card_size"
+            tools:text="33%"/>
 
         <EditText
-            android:id="@+id/line3"
+            android:id="@+id/card_servings_edit_text"
             android:gravity="center"
-            android:layout_toEndOf="@id/line2"
-            android:paddingStart="50dp"
-            android:textSize="18dp"
+            android:layout_toEndOf="@id/card_dayly_text_view"
+            android:paddingStart="@dimen/text_card_start_end_spacing"
+            android:textSize="@dimen/text_card_size"
             android:background="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4"/>
+            tools:text="4"/>
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp">
 
         <TextView
             android:id="@+id/line4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toStartOf="@id/line5"
-            android:paddingEnd="16dp"
-            android:textSize="10dp"
+            android:paddingEnd="@dimen/text_card_title_start_end_spacing"
+            android:textSize="@dimen/text_card_title_size"
             android:textColor="@color/black"
             android:text="@string/card_calories"/>
         <TextView
@@ -64,15 +71,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
             android:textColor="@color/black"
-            android:textSize="10dp"
+            android:textSize="@dimen/text_card_title_size"
             android:text="@string/card_daily_value"/>
         <TextView
             android:id="@+id/line6"
-            android:textSize="10dp"
+            android:textSize="@dimen/text_card_title_size"
             android:layout_toEndOf="@id/line5"
-            android:paddingStart="16dp"
+            android:paddingStart="@dimen/text_card_title_start_end_spacing"
             android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,4 +86,44 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:id="@+id/card_fat_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/card_carbs_text_view"
+            android:paddingEnd="@dimen/text_card_title_start_end_spacing"
+            android:textSize="@dimen/text_card_calories_size"
+            android:textColor="@color/black"
+            android:text="Fat-79%"/>
+        <TextView
+            android:id="@+id/card_carbs_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_card_calories_size"
+            android:text="Carbs-1%"/>
+        <TextView
+            android:id="@+id/card_protein_text_view"
+            android:textSize="@dimen/text_card_calories_size"
+            android:layout_toEndOf="@id/card_carbs_text_view"
+            android:paddingStart="@dimen/text_card_title_start_end_spacing"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Protein-92%"/>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/card_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/recycler_card_start_end_spacing"
+        android:paddingEnd="@dimen/recycler_card_start_end_spacing"/>
 </LinearLayout>

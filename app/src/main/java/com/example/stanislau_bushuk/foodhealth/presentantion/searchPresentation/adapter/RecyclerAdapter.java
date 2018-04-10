@@ -7,8 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
@@ -25,7 +27,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     private Context context;
     private List<Hits> hits;
 
-
     public RecyclerAdapter(final List<Hits> hits, final Context context) {
         this.hits = hits;
         this.context = context;
@@ -41,13 +42,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        Recipe recipe = hits.get(position).getRecipe();
+        final Recipe recipe = hits.get(position).getRecipe();
         holder.titleTextView.setText(recipe.getLabel());
         GlideApp
                 .with(context)
                 .load(recipe.getImage())
                 .centerCrop()
                 .into(holder.photoImageView);
+
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                ActivityManager.startCardActivity(context,recipe.getUri());
+            }
+        });
     }
 
     @Override
@@ -71,6 +79,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         @BindView(R.id.item_photo_image_view)
         ImageView photoImageView;
+
+        @BindView(R.id.item_linear_layout)
+        LinearLayout linearLayout;
 
         MyViewHolder(final View view) {
             super(view);
