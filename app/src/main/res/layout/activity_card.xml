@@ -99,7 +99,7 @@
             android:paddingEnd="@dimen/text_card_title_start_end_spacing"
             android:textSize="@dimen/text_card_calories_size"
             android:textColor="@color/black"
-            android:text="Fat-79%"/>
+            tools:text="Fat-79%"/>
         <TextView
             android:id="@+id/card_carbs_text_view"
             android:layout_width="wrap_content"
@@ -107,7 +107,7 @@
             android:layout_centerHorizontal="true"
             android:textColor="@color/black"
             android:textSize="@dimen/text_card_calories_size"
-            android:text="Carbs-1%"/>
+            tools:text="Carbs-1%"/>
         <TextView
             android:id="@+id/card_protein_text_view"
             android:textSize="@dimen/text_card_calories_size"
@@ -116,7 +116,7 @@
             android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Protein-92%"/>
+            tools:text="Protein-92%"/>
 
     </RelativeLayout>
 

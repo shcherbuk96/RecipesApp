@@ -31,4 +31,6 @@ public class NetWorkModel {
         final Observable<Recipes> observable = iapi.getJson(recipeName, Constants.APP_ID, Constants.APP_KEY, String.valueOf(from), String.valueOf(from+10));
         callBackSearchPresenter.call(observable);
     }
+
+
 }
