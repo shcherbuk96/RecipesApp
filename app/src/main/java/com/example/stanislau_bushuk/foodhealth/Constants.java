@@ -6,4 +6,6 @@ public class Constants {
 
     public static final String APP_ID = "8fe07cd3";
 
+    public static final int WAIT = 2000;
+
 }
