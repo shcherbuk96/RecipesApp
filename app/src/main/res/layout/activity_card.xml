@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@color/black"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/line1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/line2"
+            android:paddingEnd="50dp"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:text="665"/>
+
+        <TextView
+            android:id="@+id/line2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:textSize="18dp"
+            android:text="33%"/>
+
+        <EditText
+            android:id="@+id/line3"
+            android:gravity="center"
+            android:layout_toEndOf="@id/line2"
+            android:paddingStart="50dp"
+            android:textSize="18dp"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/line4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/line5"
+            android:paddingEnd="16dp"
+            android:textSize="10dp"
+            android:textColor="@color/black"
+            android:text="@string/card_calories"/>
+        <TextView
+            android:id="@+id/line5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/black"
+            android:textSize="10dp"
+            android:text="@string/card_daily_value"/>
+        <TextView
+            android:id="@+id/line6"
+            android:textSize="10dp"
+            android:layout_toEndOf="@id/line5"
+            android:paddingStart="16dp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/card_servings"/>
+
+    </RelativeLayout>
+
+</LinearLayout>

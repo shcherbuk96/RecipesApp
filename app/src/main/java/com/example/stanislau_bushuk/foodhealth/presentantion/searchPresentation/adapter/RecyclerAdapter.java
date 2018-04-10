@@ -74,6 +74,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         MyViewHolder(final View view) {
             super(view);
+
             ButterKnife.bind(this, view);
         }
     }

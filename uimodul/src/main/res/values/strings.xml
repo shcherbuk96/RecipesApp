@@ -7,9 +7,9 @@
 
     <string name="search_edt">Enter the name of the recipe</string>
     <string name="search_random">Random 10 recipes</string>
-
-
-    <!---Item Recycler View-->
-
+    
+    <string name="card_calories">CALORIES / SERVING</string>
+    <string name="card_daily_value">DAILY VALUE</string>
+    <string name="card_servings">SERVINGS</string>
 
 </resources>
