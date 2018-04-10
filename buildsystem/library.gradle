@@ -12,6 +12,7 @@ ext.version = [
         rxjava:"2.1.9",
         retrofit2Rxjava2Adapter:"1.0.0",
         rxandroid:"2.0.2",
+        rxbinding: "2.1.1",
 
         /////RETROFIT/////
         retrofit:"2.3.0",
@@ -58,7 +59,7 @@ ext.library = [
         rxjava: "io.reactivex.rxjava2:rxjava:"+                                                     "$version.rxjava",
         retrofit2Rxjava2Adapter: "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:"+             "$version.retrofit2Rxjava2Adapter",
         rxandroid: "io.reactivex.rxjava2:rxandroid:"+                                               "$version.rxandroid",
-
+        rxbinding:"com.jakewharton.rxbinding2:rxbinding:"+                                          "$version.rxbinding",
         /////RETROFIT/////
         retrofit: "com.squareup.retrofit2:retrofit:"+                                               "$version.retrofit",
         converterGson: "com.squareup.retrofit2:converter-gson:"+                                    "$version.retrofit",

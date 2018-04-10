@@ -41,7 +41,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        Recipe recipe = hits.get(position).getRecipe();
+        final Recipe recipe = hits.get(position).getRecipe();
         holder.titleTextView.setText(recipe.getLabel());
         GlideApp
                 .with(context)

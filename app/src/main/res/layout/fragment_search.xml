@@ -5,13 +5,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ProgressBar
-        android:id="@+id/search_progressbar_progressbar"
-        android:visibility="visible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+
 
     <SearchView
         android:id="@+id/search_search_view"
@@ -43,4 +37,12 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/search_random_text_view"
         android:layout_marginTop="@dimen/view_search_top_bot_spacing" />
+
+    <ProgressBar
+        android:id="@+id/search_progressbar_progressbar"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"/>
 </RelativeLayout>

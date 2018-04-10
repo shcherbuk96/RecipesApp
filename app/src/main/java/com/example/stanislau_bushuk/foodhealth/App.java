@@ -22,6 +22,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
         setRealm();
         Timber.plant(new Timber.DebugTree());
         appComponent = buildComponent();
@@ -38,8 +39,6 @@ public class App extends Application {
 
     public AppComponent buildComponent() {
         return DaggerAppComponent.builder()
-                .netWorkModul(new NetWorkModul())
-                .api(new Api())
                 .build();
     }
 }

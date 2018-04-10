@@ -41,6 +41,7 @@ dependencies {
     compile "${library.rxjava}"
     compile "${library.retrofit2Rxjava2Adapter}"
     compile "${library.rxandroid}"
+    compile "${library.rxbinding}"
     ///
 
     /////RETROFIT/////

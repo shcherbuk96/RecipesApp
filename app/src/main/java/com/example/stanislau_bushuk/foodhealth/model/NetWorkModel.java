@@ -28,7 +28,7 @@ public class NetWorkModel {
     }
 
     public void getResponse(final String recipeName, final int from) {
-        final Observable<Recipes> observable = iapi.getJson("chiken", Constants.APP_ID, Constants.APP_KEY, "0", "10");
+        final Observable<Recipes> observable = iapi.getJson(recipeName, Constants.APP_ID, Constants.APP_KEY, String.valueOf(from), String.valueOf(from+10));
         callBackSearchPresenter.call(observable);
     }
 }
