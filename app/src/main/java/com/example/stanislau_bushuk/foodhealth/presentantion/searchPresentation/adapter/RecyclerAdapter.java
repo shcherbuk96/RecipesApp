@@ -20,6 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
@@ -53,6 +54,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                Timber.e(recipe.getUri());
                 ActivityManager.startCardActivity(context,recipe.getUri());
             }
         });

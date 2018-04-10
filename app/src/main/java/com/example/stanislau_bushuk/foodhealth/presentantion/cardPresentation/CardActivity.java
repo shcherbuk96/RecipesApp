@@ -29,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
-public class CardActivity extends MvpAppCompatActivity implements ViewSearch{
+public class CardActivity extends MvpAppCompatActivity implements CardView{
 
     @BindView(R.id.card_recycler_view)
     RecyclerView recyclerView;
@@ -56,7 +56,7 @@ public class CardActivity extends MvpAppCompatActivity implements ViewSearch{
     TextView proteinView;
 
     @InjectPresenter
-    SearchPresenter presenter;
+    CardPresenter presenter;
 
     private RecyclerAdapter recyclerAdapter;
 
@@ -70,8 +70,7 @@ public class CardActivity extends MvpAppCompatActivity implements ViewSearch{
 
         Intent i=getIntent();
 
-        String uri=i.getStringExtra("uri");
-        Timber.e("uri");
+        String uri=i.getStringExtra("recipe");
         Timber.e(uri);
         presenter.getRecipeFromUri(uri);
 
@@ -85,18 +84,17 @@ public class CardActivity extends MvpAppCompatActivity implements ViewSearch{
 
     }
 
+
     @Override
-    public void showList(final List<Hits> hitsList) {
-//        recyclerAdapter.updateAdapter(hitsList);
-        Recipe recipe=hitsList.get(0).getRecipe();
+    public void showList(final Recipe recipe) {
+       /* Recipe recipe=hitsList.get(0).getRecipe();
         GlideApp
                 .with(this)
                 .load(recipe.getImage())
                 .centerCrop()
                 .into(photoView);
 
-        caloriesView.setText(String.valueOf(recipe.getCalories()));
-        //daylyView.setText(recipe.get);
+        caloriesView.setText(String.valueOf(recipe.getCalories()));*/
     }
 
     @Override

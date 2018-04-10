@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -35,11 +36,14 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     @BindView(R.id.search_search_view)
     SearchView searchView;
 
-    @InjectPresenter
-    SearchPresenter presenter;
-
     @BindView(R.id.search_list_recycler_view)
     RecyclerView listRecyclerView;
+
+    @BindView(R.id.search_random_text_view)
+    TextView searchText;
+
+    @InjectPresenter
+    SearchPresenter presenter;
 
     private RecyclerAdapter recyclerAdapter;
 
@@ -53,7 +57,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        presenter.getRandomRecipe();
         ButterKnife.bind(this, view);
         final List<Hits> hitsList = new ArrayList<>();
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
@@ -71,5 +74,10 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     @Override
     public void progressBarVisible(final int visible) {
         searchProgressBar.setVisibility(visible);
+    }
+
+    @Override
+    public void setSearchText(final String text) {
+        searchText.setText(text);
     }
 }

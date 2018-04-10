@@ -33,16 +33,13 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
     public SearchPresenter() {
         App.getAppComponent().inject(this);
-        netWorkModel.setCallBack(this);
+        netWorkModel.setCallBackSearch(this);
     }
-
     public void getRandomRecipe() {
         netWorkModel.getRandomRecipe();
     }
 
-    public void getRecipeFromUri(String uri) {
-        netWorkModel.getRecipeFromUri(uri);
-    }
+
 
     @Override
     public void call(final Observable<Recipes> observable) {
@@ -94,8 +91,13 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
                     @Override
                     public void onNext(final String s) {
-                        if (!s.isEmpty())
+                        if (!s.isEmpty()) {
                             netWorkModel.getResponse(s, 0);
+                            getViewState().setSearchText(s);
+                        } else {
+                            netWorkModel.getRandomRecipe();
+                            getViewState().setSearchText("Random 10 recipes");
+                        }
                     }
 
                     @Override

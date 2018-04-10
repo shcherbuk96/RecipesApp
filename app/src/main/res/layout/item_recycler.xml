@@ -6,6 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/view_item_top_bot_spacing"
     android:layout_marginBottom="@dimen/view_item_top_bot_spacing"
+    android:paddingStart="@dimen/item_padding_start_end"
+    android:paddingEnd="@dimen/item_padding_start_end"
     android:background="@drawable/item">
 
 
@@ -20,7 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="@dimen/text_item_start_end_spacing"
+
+        android:layout_marginStart="@dimen/padding_text_item_start"
         android:textColor="@color/black"
         android:textSize="@dimen/text_item_title_size" />
 
