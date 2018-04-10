@@ -24,10 +24,10 @@ public class NetWorkModel {
 
     public void setCallBack(final SearchPresenter presenter) {
         callBackSearchPresenter = presenter;
-        getResponse("chiken", 0);
+
     }
 
-    private void getResponse(final String recipeName, final int from) {
+    public void getResponse(final String recipeName, final int from) {
         final Observable<Recipes> observable = iapi.getJson("chiken", Constants.APP_ID, Constants.APP_KEY, "0", "10");
         callBackSearchPresenter.call(observable);
     }

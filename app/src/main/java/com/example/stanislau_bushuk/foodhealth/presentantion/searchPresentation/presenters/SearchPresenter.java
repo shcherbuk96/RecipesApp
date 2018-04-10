@@ -33,9 +33,11 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
     private void setCallBack() {
         netWorkModel.setCallBack(this);
+        netWorkModel.getResponse("chiken", 0);
     }
 
-    private void searchRecipes(final Observable<Recipes> observable) {
+    @Override
+    public void call(final Observable<Recipes> observable) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Recipes>() {
@@ -65,10 +67,5 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                         Timber.e("Complete");
                     }
                 });
-    }
-
-    @Override
-    public void call(final Observable<Recipes> observable) {
-        searchRecipes(observable);
     }
 }

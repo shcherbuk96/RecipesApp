@@ -50,8 +50,8 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
 
         ButterKnife.bind(this, view);
         final List<Hits> hitsList = new ArrayList<>();
-        recyclerAdapter = new RecyclerAdapter(hitsList, getContext());
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerAdapter = new RecyclerAdapter(hitsList, getContext());
         listRecyclerView.setLayoutManager(mLayoutManager);
         listRecyclerView.setAdapter(recyclerAdapter);
     }
@@ -62,7 +62,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     }
 
     @Override
-    public void progressBarVisible(int visible) {
+    public void progressBarVisible(final int visible) {
         searchProgressBar.setVisibility(visible);
     }
 }

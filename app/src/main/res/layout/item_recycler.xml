@@ -12,8 +12,7 @@
         android:id="@+id/item_photo_image_view"
         android:layout_width="@dimen/image_item_photo_size"
         android:layout_height="@dimen/image_item_photo_size"
-        android:layout_marginStart="@dimen/view_item_start_end_spacing"
-        android:src="@drawable/icon_search" />
+        android:layout_marginStart="@dimen/view_item_start_end_spacing" />
 
     <TextView
         android:id="@+id/item_title_text_view"
