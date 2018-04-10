@@ -4,6 +4,7 @@ package com.example.stanislau_bushuk.foodhealth.model;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.api.IAPI;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
 
@@ -40,6 +41,6 @@ public class NetWorkModel {
     }
 
     public void getRecipeFromUri(){
-        final Observable<Recipes> observable = iapi.getRecipeWithUri(" ", Constants.APP_ID, Constants.APP_KEY);
+        final Observable<Recipe> observable = iapi.getRecipeWithUri(" ", Constants.APP_ID, Constants.APP_KEY);
     }
 }
