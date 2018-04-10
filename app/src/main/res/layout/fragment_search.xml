@@ -15,6 +15,7 @@
         android:layout_marginStart="@dimen/view_search_start_end_spacing"
         android:layout_marginEnd="@dimen/view_search_start_end_spacing"
         android:hint="@string/search_edt"
+        android:background="@color/white"
         android:inputType="textPersonName" />
 
     <TextView

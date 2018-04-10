@@ -11,4 +11,6 @@ public interface ViewSearch extends MvpView {
 
     void progressBarVisible(final int visible);
 
+    void setSearchText(String text);
+
 }

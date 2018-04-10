@@ -21,7 +21,7 @@ public class Recipe {
     private ArrayList ingredients;
     private float calories;
     private float totalWeight;
-    private int totalTime;
+    private float totalTime;
     //totalNutrients	{…}
     //totalDaily	{…}
     private ArrayList<Digets> digest;
@@ -84,7 +84,7 @@ public class Recipe {
         return totalWeight;
     }
 
-    public int getTotalTime() {
+    public float getTotalTime() {
         return totalTime;
     }
 

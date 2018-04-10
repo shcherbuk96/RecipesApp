@@ -36,10 +36,6 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
         netWorkModel.setCallBack(this);
     }
 
-    public void getRandomRecipe() {
-        netWorkModel.getRandomRecipe();
-    }
-
     @Override
     public void call(final Observable<Recipes> observable) {
         observable.subscribeOn(Schedulers.io())
@@ -90,8 +86,13 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
                     @Override
                     public void onNext(final String s) {
-                        if (!s.isEmpty())
+                        if (!s.isEmpty()) {
                             netWorkModel.getResponse(s, 0);
+                            getViewState().setSearchText(s);
+                        } else {
+                            netWorkModel.getRandomRecipe();
+                            getViewState().setSearchText("Random 10 recipes");
+                        }
                     }
 
                     @Override
