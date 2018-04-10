@@ -35,8 +35,11 @@ public class NetWorkModel {
     public void getRandomRecipe(){
         int random = (int) (Math.random() * 90);
         Timber.e("random "+random);
-
         final Observable<Recipes> observable = iapi.getRandomRecipe(" ", Constants.APP_ID, Constants.APP_KEY, String.valueOf(random), String.valueOf(random+10),"0-30000");
         callBackSearchPresenter.call(observable);
+    }
+
+    public void getRecipeFromUri(){
+        final Observable<Recipes> observable = iapi.getRecipeWithUri(" ", Constants.APP_ID, Constants.APP_KEY);
     }
 }
