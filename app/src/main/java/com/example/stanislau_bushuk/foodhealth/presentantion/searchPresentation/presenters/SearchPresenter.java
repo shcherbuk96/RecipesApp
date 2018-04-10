@@ -37,7 +37,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     }
 
     public void getRandomRecipe() {
-        netWorkModel.getResponse("chiken", 0);
+        netWorkModel.getRandomRecipe();
     }
 
     @Override

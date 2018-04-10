@@ -10,6 +10,7 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import timber.log.Timber;
 
 public class NetWorkModel {
 
@@ -24,11 +25,18 @@ public class NetWorkModel {
 
     public void setCallBack(final SearchPresenter presenter) {
         callBackSearchPresenter = presenter;
-
     }
 
     public void getResponse(final String recipeName, final int from) {
-        final Observable<Recipes> observable = iapi.getJson(recipeName, Constants.APP_ID, Constants.APP_KEY, String.valueOf(from), String.valueOf(from+10));
+        final Observable<Recipes> observable = iapi.getRecipeWithName(recipeName, Constants.APP_ID, Constants.APP_KEY, String.valueOf(from), String.valueOf(from+10));
+        callBackSearchPresenter.call(observable);
+    }
+
+    public void getRandomRecipe(){
+        int random = (int) (Math.random() * 90);
+        Timber.e("random "+random);
+
+        final Observable<Recipes> observable = iapi.getRandomRecipe(" ", Constants.APP_ID, Constants.APP_KEY, String.valueOf(random), String.valueOf(random+10),"0-30000");
         callBackSearchPresenter.call(observable);
     }
 }
