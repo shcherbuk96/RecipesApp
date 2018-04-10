@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_main"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
@@ -12,29 +13,30 @@
         android:paddingStart="@dimen/image_card_start_end_spacing"
         android:paddingEnd="@dimen/image_card_start_end_spacing"
         android:paddingTop="@dimen/image_card_top_bottom_spacing"
-        android:paddingBottom="@dimen/image_card_top_bottom_spacing"
-        android:src="@color/black"/>
+        android:paddingBottom="@dimen/image_card_top_bottom_spacing"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:paddingBottom="@dimen/relative_card_bottom_spacing">
 
         <TextView
+            android:layout_weight="1"
             android:id="@+id/card_calories_text_view"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toStartOf="@id/card_dayly_text_view"
-            android:paddingEnd="@dimen/text_card_start_end_spacing"
             android:textSize="@dimen/text_card_size"
             android:textColor="@color/black"
             tools:text="665"/>
 
         <TextView
             android:id="@+id/card_dayly_text_view"
+            android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_weight="1"
             android:textColor="@color/black"
             android:textSize="@dimen/text_card_size"
             tools:text="33%"/>
@@ -42,83 +44,86 @@
         <EditText
             android:id="@+id/card_servings_edit_text"
             android:gravity="center"
-            android:layout_toEndOf="@id/card_dayly_text_view"
-            android:paddingStart="@dimen/text_card_start_end_spacing"
+            android:layout_weight="1"
             android:textSize="@dimen/text_card_size"
             android:background="@android:color/transparent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="4"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="16dp">
 
         <TextView
+            android:layout_weight="0.5"
             android:id="@+id/line4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toStartOf="@id/line5"
-            android:paddingEnd="@dimen/text_card_title_start_end_spacing"
+            android:gravity="center"
             android:textSize="@dimen/text_card_title_size"
             android:textColor="@color/black"
             android:text="@string/card_calories"/>
         <TextView
+            android:layout_weight="1"
             android:id="@+id/line5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:gravity="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_card_title_size"
             android:text="@string/card_daily_value"/>
         <TextView
+            android:layout_weight="1"
             android:id="@+id/line6"
             android:textSize="@dimen/text_card_title_size"
-            android:layout_toEndOf="@id/line5"
-            android:paddingStart="@dimen/text_card_title_start_end_spacing"
+            android:gravity="center"
             android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/card_servings"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="16dp">
 
         <TextView
+            android:layout_weight="1"
             android:id="@+id/card_fat_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toStartOf="@id/card_carbs_text_view"
-            android:paddingEnd="@dimen/text_card_title_start_end_spacing"
+            android:gravity="center"
             android:textSize="@dimen/text_card_calories_size"
             android:textColor="@color/black"
             tools:text="Fat-79%"/>
         <TextView
+            android:layout_weight="1"
             android:id="@+id/card_carbs_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:gravity="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_card_calories_size"
             tools:text="Carbs-1%"/>
         <TextView
+            android:layout_weight="1"
             android:id="@+id/card_protein_text_view"
             android:textSize="@dimen/text_card_calories_size"
-            android:layout_toEndOf="@id/card_carbs_text_view"
-            android:paddingStart="@dimen/text_card_title_start_end_spacing"
+            android:gravity="center"
             android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Protein-92%"/>
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/card_recycler_view"

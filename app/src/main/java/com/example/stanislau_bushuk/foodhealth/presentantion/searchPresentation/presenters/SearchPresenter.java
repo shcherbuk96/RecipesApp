@@ -40,6 +40,10 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
         netWorkModel.getRandomRecipe();
     }
 
+    public void getRecipeFromUri(String uri) {
+        netWorkModel.getRecipeFromUri(uri);
+    }
+
     @Override
     public void call(final Observable<Recipes> observable) {
         observable.subscribeOn(Schedulers.io())

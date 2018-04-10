@@ -25,7 +25,11 @@
             android:name=".MainActivity"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name=".presentantion.cardPresentation.CardActivity"></activity>
+        <activity
+            android:name=".presentantion.cardPresentation.CardActivity"
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustPan"/>
+
     </application>
 
 </manifest>
