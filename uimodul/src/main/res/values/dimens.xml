@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="text_search_random_size">20sp</dimen>
+
+    <dimen name="image_item_photo_size">65dp</dimen>
+
+    <dimen name="text_item_title_size">20sp</dimen>
+
+    <dimen name="view_search_start_end_spacing">16dp</dimen>
+    <dimen name="view_search_top_bot_spacing">8dp</dimen>
+    <dimen name="view_item_top_bot_spacing">1dp</dimen>
+    <dimen name="view_item_start_end_spacing">16dp</dimen>
+    <dimen name="text_item_start_end_spacing">4dp</dimen>
+
+    <dimen name="list_featured_start_end_spacing">16dp</dimen>
+    <dimen name="list_featured_top_bot_spacing">8dp</dimen>
+
+</resources>

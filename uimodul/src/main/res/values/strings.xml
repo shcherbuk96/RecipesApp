@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">FoodHealth</string>
+
+    <string name="menu_search">Search</string>
+    <string name="menu_deep_search">Deep Search</string>
+    <string name="menu_featured">Featured</string>
+
+    <string name="search_edt">Enter the name of the recipe</string>
+    <string name="search_random">Random 10 recipes</string>
+
+
+    <!---Item Recycler View-->
+
+
+</resources>
