@@ -1,5 +1,6 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.splashPresentatiom;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -16,11 +17,12 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        final Context context = this;
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                ActivityManager.startMainActivity(getApplicationContext());
+                ActivityManager.startMainActivity(context);
                 finish();
             }
         }, Constants.WAIT);
