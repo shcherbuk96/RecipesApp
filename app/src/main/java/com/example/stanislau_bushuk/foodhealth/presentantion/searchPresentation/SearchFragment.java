@@ -3,7 +3,6 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,9 +23,15 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import timber.log.Timber;
 
 
@@ -67,6 +72,47 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
         recyclerAdapter = new RecyclerAdapter(hitsList, getContext());
         listRecyclerView.setAdapter(recyclerAdapter);
         presenter.searchObservable(searchView);
+        final Observable<Integer> observable = Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(final ObservableEmitter emitter) throws Exception {
+                final RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrolled(final RecyclerView recyclerView, final int dx, final int dy) {
+                        super.onScrolled(recyclerView, dx, dy);
+
+                        if(((LinearLayoutManager)recyclerView.getLayoutManager()).findLastVisibleItemPosition()+1==recyclerView.getAdapter().getItemCount())
+                            emitter.onNext(recyclerView.getAdapter().getItemCount());
+                    }
+
+                };
+                listRecyclerView.addOnScrollListener(scrollListener);
+            }
+        });
+        observable.debounce(500, TimeUnit.MILLISECONDS)
+                .subscribe(new Observer<Integer>() {
+            @Override
+            public void onSubscribe(final Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(final Integer integer) {
+                Timber.e("pos "+integer);
+            }
+
+            @Override
+            public void onError(final Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+
+
+
         listRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(final RecyclerView recyclerView, final int dx, final int dy) {
@@ -107,6 +153,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
 
     @Override
     public void setSnackBar() {
-        Toast.makeText(getActivity(),getResources().getText(R.string.error_connection_api),Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity(), getResources().getText(R.string.error_connection_api), Toast.LENGTH_LONG).show();
     }
 }
