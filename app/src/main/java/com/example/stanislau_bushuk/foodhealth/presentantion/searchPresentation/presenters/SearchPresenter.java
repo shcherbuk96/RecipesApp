@@ -62,6 +62,8 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                     public void onError(final Throwable e) {
                         e.printStackTrace();
                         Timber.e("Error");
+                        getViewState().progressBarVisible(View.INVISIBLE);
+                        getViewState().setSnackBar();
                     }
 
                     @Override
