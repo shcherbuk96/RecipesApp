@@ -27,4 +27,5 @@
     <dimen name="recycler_card_start_end_spacing">16dp</dimen>
     <dimen name="relative_card_bottom_spacing">4dp</dimen>
 
+    <dimen name="text_item_card_start_end_spacing">16dp</dimen>
 </resources>

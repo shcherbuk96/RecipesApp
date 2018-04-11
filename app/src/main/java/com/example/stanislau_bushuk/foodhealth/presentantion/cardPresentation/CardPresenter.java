@@ -9,7 +9,6 @@ import com.example.stanislau_bushuk.foodhealth.model.CallBackCardPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -27,7 +26,7 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
     @Inject
     NetWorkModel netWorkModel;
 
-    public CardPresenter() {
+    CardPresenter() {
         App.getAppComponent().inject(this);
         netWorkModel.setCallBackCard(this);
     }
@@ -37,21 +36,21 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
     }
 
     @Override
-    public void call(final Observable<Recipe> observable) {
+    public void call(final Observable<List<Recipe>> observable) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Recipe>() {
+                .subscribe(new Observer<List<Recipe>>() {
                     @Override
                     public void onSubscribe(final Disposable d) {
-                        getViewState().progressBarVisible(View.VISIBLE);
                         Timber.e("onSubscribe");
                     }
 
                     @Override
-                    public void onNext(final Recipe recipe) {
+                    public void onNext(final List<Recipe> recipe) {
                         Timber.e("onNext");
-                        if (recipe!=null);
-                           // getViewState().showList(recipe);
+                        if (recipe!=null){
+                            getViewState().showList(recipe);
+                        }
                     }
 
                     @Override
@@ -62,7 +61,6 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
                     @Override
                     public void onComplete() {
                         Timber.e("onComplete");
-                        getViewState().progressBarVisible(View.INVISIBLE);
                     }
                 });
     }

@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/card_photo_image_view"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="220dp"
         android:paddingStart="@dimen/image_card_start_end_spacing"
         android:paddingEnd="@dimen/image_card_start_end_spacing"
         android:paddingTop="@dimen/image_card_top_bottom_spacing"
@@ -131,4 +131,6 @@
         android:layout_height="match_parent"
         android:paddingStart="@dimen/recycler_card_start_end_spacing"
         android:paddingEnd="@dimen/recycler_card_start_end_spacing"/>
+
+
 </LinearLayout>
