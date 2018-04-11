@@ -57,11 +57,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     public void updateAdapter(final List<Hits> hits) {
 
-        if (hits != null && hits.size()!=0) {
+        if (hits != null && hits.size() != 0) {
             this.hits.clear();
             this.hits.addAll(hits);
             notifyDataSetChanged();
         }
+
+    }
+
+    public void updateList(final List<Hits> hits) {
+        this.hits.addAll(hits);
+        notifyDataSetChanged();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -73,7 +79,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         MyViewHolder(final View view) {
             super(view);
-
             ButterKnife.bind(this, view);
         }
     }

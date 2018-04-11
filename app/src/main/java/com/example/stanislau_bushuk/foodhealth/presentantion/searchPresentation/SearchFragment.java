@@ -19,7 +19,6 @@ import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.view.ViewSearch;
-import com.jakewharton.rxbinding2.widget.RxSearchView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,11 +45,12 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     SearchPresenter presenter;
 
     private RecyclerAdapter recyclerAdapter;
+    private boolean readyScroll = true;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_search,container,false);
+        return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
     @Override
@@ -60,15 +60,31 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
         ButterKnife.bind(this, view);
         final List<Hits> hitsList = new ArrayList<>();
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerAdapter = new RecyclerAdapter(hitsList, getContext());
         listRecyclerView.setLayoutManager(mLayoutManager);
+        recyclerAdapter = new RecyclerAdapter(hitsList, getContext());
         listRecyclerView.setAdapter(recyclerAdapter);
         presenter.searchObservable(searchView);
+        listRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(final RecyclerView recyclerView, final int dx, final int dy) {
+                if (readyScroll) {
+                    presenter.checkUpdate((recyclerView.getLayoutManager()).getItemCount(),
+                            (((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition()), String.valueOf(searchText.getText()));
+                }
+            }
+        });
     }
+
 
     @Override
     public void showList(final List<Hits> hitsList) {
         recyclerAdapter.updateAdapter(hitsList);
+    }
+
+    @Override
+    public void updateList(final List<Hits> hitsList) {
+        recyclerAdapter.updateList(hitsList);
+        readyScroll = true;
     }
 
     @Override
@@ -79,5 +95,10 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     @Override
     public void setSearchText(final String text) {
         searchText.setText(text);
+    }
+
+    @Override
+    public void setReadyScroll() {
+        readyScroll = false;
     }
 }

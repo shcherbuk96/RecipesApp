@@ -37,7 +37,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     }
 
     @Override
-    public void call(final Observable<Recipes> observable) {
+    public void call(final Observable<Recipes> observable, final boolean update) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Recipes>() {
@@ -49,8 +49,13 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
                     @Override
                     public void onNext(final Recipes recipes) {
-                        if (recipes.getCount() != 0)
-                            getViewState().showList(recipes.getHits());
+
+                        if (recipes.getCount() != 0) {
+                            if (!update) {
+                                getViewState().showList(recipes.getHits());
+                            } else getViewState().updateList(recipes.getHits());
+                        }
+
                     }
 
                     @Override
@@ -87,10 +92,10 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                     @Override
                     public void onNext(final String s) {
                         if (!s.isEmpty()) {
-                            netWorkModel.getResponse(s, 0);
+                            netWorkModel.getResponse(s, 0, false);
                             getViewState().setSearchText(s);
                         } else {
-                            netWorkModel.getRandomRecipe();
+                            netWorkModel.getRandomRecipe(false);
                             getViewState().setSearchText("Random 10 recipes");
                         }
                     }
@@ -105,5 +110,15 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                         Timber.e("complete");
                     }
                 });
+    }
+
+    public void checkUpdate(int itemCout, int lastItem, String nameRecipe) {
+        Timber.e("count " + itemCout + " lastItem " + lastItem);
+
+        if (itemCout == lastItem + 1) {
+            getViewState().setReadyScroll();
+            netWorkModel.getResponse(nameRecipe, lastItem + 1, true);
+        }
+
     }
 }
