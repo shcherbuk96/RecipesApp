@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
@@ -78,32 +77,25 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
                 .centerCrop()
                 .into(photoView);
 
-
-        String caloriesQuantity = String.format("%.1f", r.getCalories());
-        caloriesView.setText(caloriesQuantity);
-
-        String dailyQuantity = String.format("%.1f", r.getTotalDaily().getENERC_KCAL().getQuantity());
-        daylyView.setText(dailyQuantity + "%");
+        caloriesView.setText(getString(R.string.card_number_calories, r.getCalories()));
+        daylyView.setText(getString(R.string.card_number_daily, r.getTotalDaily().getENERC_KCAL().getQuantity()));
 
         servingsEditText.setText(String.valueOf(r.getYield()));
 
         if (r.getTotalNutrients().getFAT() != null) {
-            String fatQuantity = String.format("%.1f", r.getTotalNutrients().getFAT().getQuantity());
-            fatView.setText("FAT - " + fatQuantity + " g");
+            fatView.setText(getString(R.string.card_number_fat, r.getTotalNutrients().getFAT().getQuantity()));
         } else
-            fatView.setText("FAT - " + "0" + " g");
+            fatView.setText(getString(R.string.card_number_fat, 0));
 
         if (r.getTotalNutrients().getPROCNT() != null) {
-            String prcntQuantity = String.format("%.1f", r.getTotalNutrients().getPROCNT().getQuantity());
-            proteinView.setText("Protein - " + prcntQuantity + " g");
+            proteinView.setText(getString(R.string.card_number_protein, r.getTotalNutrients().getPROCNT().getQuantity()));
         } else
-            proteinView.setText("Protein - " + "0" + " g");
+            proteinView.setText(getString(R.string.card_number_protein, 0));
 
         if (r.getTotalNutrients().getCHOCDF() != null) {
-            String chocdfQuantity = String.format("%.1f", r.getTotalNutrients().getCHOCDF().getQuantity());
-            carbsView.setText("Carbs - " + chocdfQuantity + " g");
+            carbsView.setText(getString(R.string.card_number_carbs, r.getTotalNutrients().getCHOCDF().getQuantity()));
         } else
-            carbsView.setText("Carbs - " + "0" + " g");
+            carbsView.setText(getString(R.string.card_number_carbs, 0));
 
 
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);

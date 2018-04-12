@@ -39,17 +39,19 @@
             android:layout_gravity="center"
             android:textSize="@dimen/text_card_size"
             tools:text="33%"/>
+
         <EditText
             android:id="@+id/card_servings_edit_text"
             android:textSize="@dimen/text_card_size"
             android:background="@drawable/item"
-            android:layout_width="48dp"
+            android:layout_width="@dimen/grid_card_width"
             android:gravity="center"
             android:layout_gravity="center"
             android:maxLength="3"
             android:inputType="number"
             android:layout_height="wrap_content"
             tools:text="4"/>
+
         <TextView
             android:id="@+id/line4"
             android:layout_width="wrap_content"
@@ -89,7 +91,7 @@
             android:layout_gravity="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_card_calories_size"
-            tools:text="Carbs-1%"/>
+            tools:text="Carbs-100%"/>
         <TextView
             android:id="@+id/card_protein_text_view"
             android:textSize="@dimen/text_card_calories_size"
