@@ -126,7 +126,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     public void callRandomUpdate(final int from, final String recipeName) {
         if (recipeName.equals(resourceManager.getString(R.string.search_random))) {
             netWorkModel.getRandomRecipe(true);
-        } else{
+        } else {
             netWorkModel.getResponse(recipeName, from, true);
         }
     }

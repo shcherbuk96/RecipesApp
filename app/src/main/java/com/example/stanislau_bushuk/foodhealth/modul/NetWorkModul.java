@@ -9,7 +9,7 @@ import dagger.Provides;
 
 @Module
 public class NetWorkModul {
-    
+
     @Provides
     @Singleton
     public NetWorkModel netWorkModel() {

@@ -11,7 +11,7 @@ import com.example.stanislau_bushuk.foodhealth.Constants;
 
 import java.util.Timer;
 
-@SuppressWarnings("LocalCanBeFinal")
+
 public class SplashActivity extends AppCompatActivity {
 
     @Override
@@ -19,7 +19,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         final Context context = this;
-        Handler handler = new Handler();
+        final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
