@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
 
 
     <SearchView
         android:id="@+id/search_search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/view_search_top_bot_spacing"
-        android:layout_marginStart="@dimen/view_search_start_end_spacing"
         android:layout_marginEnd="@dimen/view_search_start_end_spacing"
-        android:queryHint="@string/search_edt"
-        android:iconifiedByDefault="false"
+        android:layout_marginStart="@dimen/view_search_start_end_spacing"
+        android:layout_marginTop="@dimen/view_search_top_bot_spacing"
+        android:background="@drawable/item"
         android:focusable="false"
-        android:background="@drawable/item" />
+        android:iconifiedByDefault="false"
+        android:queryHint="@string/search_edt" />
 
     <TextView
         android:id="@+id/search_random_text_view"
@@ -25,9 +24,9 @@
         android:layout_below="@+id/search_search_view"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/view_search_top_bot_spacing"
+        android:text="@string/search_random"
         android:textColor="@color/black"
-        android:textSize="@dimen/text_search_random_size"
-        android:text="@string/search_random" />
+        android:textSize="@dimen/text_search_random_size" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_list_recycler_view"
@@ -35,21 +34,22 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/add_progressbar"
         android:layout_alignParentStart="true"
+        android:layout_marginTop="@dimen/view_search_top_bot_spacing"
         android:layout_below="@+id/search_random_text_view" />
 
     <ProgressBar
         android:id="@+id/search_progressbar_progressbar"
-        android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:visibility="visible" />
 
     <ProgressBar
         android:id="@+id/add_progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" />
 </RelativeLayout>
