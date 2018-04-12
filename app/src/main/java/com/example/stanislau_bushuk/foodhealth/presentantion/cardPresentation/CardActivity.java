@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
@@ -50,23 +51,23 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
     CardPresenter presenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setTitle("");
         setContentView(R.layout.activity_card);
         ButterKnife.bind(this);
 
-        Intent i = getIntent();
+        final Intent i = getIntent();
 
-        String uri = i.getStringExtra("recipe");
+        final String uri = i.getStringExtra(Constants.RECIPE_INTENT_KEY);
         Timber.e(uri);
         presenter.getRecipeFromUri(uri);
     }
 
     @Override
     public void showList(final List<Recipe> recipe) {
-        Recipe r = recipe.get(0);
+        final Recipe r = recipe.get(0);
         Timber.e(String.valueOf(r));
 
         setTitle(r.getLabel());

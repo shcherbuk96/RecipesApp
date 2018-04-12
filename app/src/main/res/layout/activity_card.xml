@@ -53,7 +53,6 @@
             tools:text="4"/>
 
         <TextView
-            android:id="@+id/line4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -61,7 +60,6 @@
             android:textColor="@color/black"
             android:text="@string/card_calories"/>
         <TextView
-            android:id="@+id/line5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -69,7 +67,6 @@
             android:textSize="@dimen/text_card_title_size"
             android:text="@string/card_daily_value"/>
         <TextView
-            android:id="@+id/line6"
             android:textSize="@dimen/text_card_title_size"
             android:layout_gravity="center"
             android:textColor="@color/black"

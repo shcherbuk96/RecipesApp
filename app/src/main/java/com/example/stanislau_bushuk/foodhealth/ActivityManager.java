@@ -15,7 +15,7 @@ public class ActivityManager {
 
     public static void startCardActivity(final Context context, String uri) {
         final Intent intent = new Intent(context, CardActivity.class);
-        intent.putExtra("recipe",uri);
+        intent.putExtra(Constants.RECIPE_INTENT_KEY,uri);
         context.startActivity(intent);
     }
 

@@ -8,4 +8,6 @@ public class Constants {
 
     public static final int WAIT = 2000;
 
+    public static final String RECIPE_INTENT_KEY="recipe";
+
 }

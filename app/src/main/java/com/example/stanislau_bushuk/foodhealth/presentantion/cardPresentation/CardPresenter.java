@@ -30,7 +30,7 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
         netWorkModel.setCallBackCard(this);
     }
 
-    public void getRecipeFromUri(String uri) {
+    public void getRecipeFromUri(final String uri) {
         netWorkModel.getRecipeFromUri(uri);
     }
 
