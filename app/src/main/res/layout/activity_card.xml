@@ -42,8 +42,9 @@
         <EditText
             android:id="@+id/card_servings_edit_text"
             android:textSize="@dimen/text_card_size"
-            android:background="@android:color/transparent"
-            android:layout_width="wrap_content"
+            android:background="@drawable/item"
+            android:layout_width="48dp"
+            android:gravity="center"
             android:layout_gravity="center"
             android:maxLength="3"
             android:inputType="number"

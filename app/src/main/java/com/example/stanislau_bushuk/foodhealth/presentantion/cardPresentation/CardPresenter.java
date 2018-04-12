@@ -1,7 +1,5 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation;
 
-import android.view.View;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
@@ -22,7 +20,8 @@ import timber.log.Timber;
 
 
 @InjectViewState
-public class CardPresenter extends MvpPresenter<CardView> implements CallBackCardPresenter{
+public class CardPresenter extends MvpPresenter<CardView> implements CallBackCardPresenter {
+
     @Inject
     NetWorkModel netWorkModel;
 
@@ -48,9 +47,11 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
                     @Override
                     public void onNext(final List<Recipe> recipe) {
                         Timber.e("onNext");
-                        if (recipe!=null){
+
+                        if (recipe != null) {
                             getViewState().showList(recipe);
                         }
+
                     }
 
                     @Override

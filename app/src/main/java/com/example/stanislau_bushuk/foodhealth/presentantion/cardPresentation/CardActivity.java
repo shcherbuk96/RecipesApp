@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
@@ -76,6 +77,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
                 .load(r.getImage())
                 .centerCrop()
                 .into(photoView);
+
 
         String caloriesQuantity = String.format("%.1f", r.getCalories());
         caloriesView.setText(caloriesQuantity);

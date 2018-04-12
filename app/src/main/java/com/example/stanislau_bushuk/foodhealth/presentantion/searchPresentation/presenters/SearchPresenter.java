@@ -40,7 +40,6 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     }
 
 
-
     @Override
     public void call(final Observable<Recipes> observable) {
         observable.subscribeOn(Schedulers.io())
@@ -68,46 +67,6 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                     public void onComplete() {
                         getViewState().progressBarVisible(View.INVISIBLE);
                         Timber.e("Complete");
-                    }
-                });
-    }
-
-    public void searchObservable(final SearchView searchView) {
-        RxSearchView.queryTextChanges(searchView)
-                .map(new Function<CharSequence, String>() {
-                    @Override
-                    public String apply(final CharSequence charSequence) throws Exception {
-                        return charSequence.toString().trim();
-                    }
-                })
-                .debounce(500, TimeUnit.MILLISECONDS)
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<String>() {
-                    @Override
-                    public void onSubscribe(final Disposable d) {
-                        Timber.e("subsctibe");
-                    }
-
-                    @Override
-                    public void onNext(final String s) {
-                        if (!s.isEmpty()) {
-                            netWorkModel.getResponse(s, 0);
-                            getViewState().setSearchText(s);
-                        } else {
-                            netWorkModel.getRandomRecipe();
-                            getViewState().setSearchText("Random 10 recipes");
-                        }
-                    }
-
-                    @Override
-                    public void onError(final Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Timber.e("complete");
                     }
                 });
     }
