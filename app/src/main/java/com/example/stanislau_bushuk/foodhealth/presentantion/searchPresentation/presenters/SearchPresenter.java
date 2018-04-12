@@ -7,6 +7,8 @@ import android.widget.SearchView;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
+import com.example.stanislau_bushuk.foodhealth.R;
+import com.example.stanislau_bushuk.foodhealth.ResourceManager;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackSearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
@@ -25,14 +27,14 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-@SuppressWarnings("LocalCanBeFinal")
 @InjectViewState
 public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBackSearchPresenter {
 
     @Inject
     NetWorkModel netWorkModel;
 
-    private int random;
+    @Inject
+    ResourceManager resourceManager;
 
     public SearchPresenter() {
         App.getAppComponent().inject(this);
@@ -40,8 +42,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     }
 
     @Override
-    public void call(final Observable<Recipes> observable, final boolean update, int random) {
-        this.random = random;
+    public void call(final Observable<Recipes> observable, final boolean update, final int random) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Recipes>() {
@@ -106,7 +107,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                             getViewState().setSearchText(s);
                         } else {
                             netWorkModel.getRandomRecipe(false);
-                            getViewState().setSearchText("Random recipes");
+                            getViewState().setSearchText(resourceManager.getString(R.string.search_random));
                         }
                     }
 
@@ -123,9 +124,9 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     }
 
     public void callRandomUpdate(final int from, final String recipeName) {
-        if (recipeName.equals("Random recipes")) {
+        if (recipeName.equals(resourceManager.getString(R.string.search_random))) {
             netWorkModel.getRandomRecipe(true);
-        } else {
+        } else{
             netWorkModel.getResponse(recipeName, from, true);
         }
     }

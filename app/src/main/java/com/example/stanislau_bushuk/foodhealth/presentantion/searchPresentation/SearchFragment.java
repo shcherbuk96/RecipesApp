@@ -28,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, OnLoadMoreListener {
+public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
 
     @BindView(R.id.search_progressbar_progressbar)
     ProgressBar searchProgressBar;
@@ -67,7 +67,12 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         recyclerAdapter = new RecyclerAdapter(hitsList, getContext());
         listRecyclerView.setAdapter(recyclerAdapter);
         presenter.searchObservable(searchView);
-        listRecyclerView.addOnScrollListener(new RecyclerViewMoreListener((LinearLayoutManager) listRecyclerView.getLayoutManager(), this, String.valueOf(searchText.getText())));
+        listRecyclerView.addOnScrollListener(new RecyclerViewMoreListener((LinearLayoutManager) listRecyclerView.getLayoutManager(), String.valueOf(searchText.getText())) {
+            @Override
+            public void onScroll(final int totalItemCount, final String nameRecipe) {
+                presenter.callRandomUpdate(totalItemCount, nameRecipe);
+            }
+        });
     }
 
 
@@ -96,13 +101,9 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         Toast.makeText(getActivity(), getResources().getText(R.string.error_connection_api), Toast.LENGTH_LONG).show();
     }
 
+
     @Override
     public void addProgressBarVisible(final int visible) {
         addProgressBar.setVisibility(visible);
-    }
-
-    @Override
-    public void onLoadMore(final int count, final String nameRecipe) {
-        presenter.callRandomUpdate(count,nameRecipe);
     }
 }

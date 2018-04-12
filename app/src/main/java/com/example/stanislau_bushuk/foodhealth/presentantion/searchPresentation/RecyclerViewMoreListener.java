@@ -5,19 +5,16 @@ import android.support.v7.widget.RecyclerView;
 
 import timber.log.Timber;
 
+ abstract class RecyclerViewMoreListener extends RecyclerView.OnScrollListener {
 
-class RecyclerViewMoreListener extends RecyclerView.OnScrollListener {
-
-    private OnLoadMoreListener loadMoreListener;
     private RecyclerView.LayoutManager layoutManager;
 
     private int previousTotalItemCount = 0;
     private boolean loading = true;
     private String nameRecipe;
 
-    RecyclerViewMoreListener(final LinearLayoutManager layoutManager, final OnLoadMoreListener loadMoreListener, final String nameRecipe) {
+    RecyclerViewMoreListener(final LinearLayoutManager layoutManager, final String nameRecipe) {
         this.layoutManager = layoutManager;
-        this.loadMoreListener = loadMoreListener;
         this.nameRecipe = nameRecipe;
     }
 
@@ -25,7 +22,6 @@ class RecyclerViewMoreListener extends RecyclerView.OnScrollListener {
     @Override
     public void onScrolled(final RecyclerView view, final int dx, final int dy) {
 
-        if (loadMoreListener != null) {
 
             final int totalItemCount = layoutManager.getItemCount();
             final int lastVisibleItemPosition = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
@@ -44,10 +40,12 @@ class RecyclerViewMoreListener extends RecyclerView.OnScrollListener {
 
             Timber.e("last" + lastVisibleItemPosition + "total " + totalItemCount);
             if (!loading && (lastVisibleItemPosition + 1) == totalItemCount) {
-                loadMoreListener.onLoadMore(totalItemCount, nameRecipe);
+                onScroll(totalItemCount,nameRecipe);
                 loading = true;
             }
         }
-    }
-}
+
+     public abstract void onScroll(int totalItemCount,String nameRecipe);
+
+ }
 
