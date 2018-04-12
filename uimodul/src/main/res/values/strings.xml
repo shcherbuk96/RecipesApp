@@ -6,7 +6,7 @@
     <string name="menu_featured">Featured</string>
 
     <string name="search_edt">Enter the name of the recipe</string>
-    <string name="search_random">Random 10 recipes</string>
+    <string name="search_random">Random recipes</string>
 
     <string name="error_connection_api">Check internet connection or sorry for ending requests Api</string>
     <!---Item Recycler View-->

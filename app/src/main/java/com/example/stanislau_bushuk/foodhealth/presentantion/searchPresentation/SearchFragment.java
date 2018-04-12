@@ -67,20 +67,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
         recyclerAdapter = new RecyclerAdapter(hitsList, getContext());
         listRecyclerView.setAdapter(recyclerAdapter);
         presenter.searchObservable(searchView);
-        listRecyclerView.addOnScrollListener(new RecyclerViewMoreListener((LinearLayoutManager) listRecyclerView.getLayoutManager(), presenter, searchText.getText().toString()));
-
-        /*listRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(final RecyclerView recyclerView, final int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-
-                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                    presenter.checkUpdate(recyclerView.getAdapter().getItemCount(),
-                            ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition(), String.valueOf(searchText.getText()));
-                }
-
-            }
-        });*/
+        listRecyclerView.addOnScrollListener(new RecyclerViewMoreListener((LinearLayoutManager) listRecyclerView.getLayoutManager(), presenter, String.valueOf(searchText.getText())));
     }
 
 

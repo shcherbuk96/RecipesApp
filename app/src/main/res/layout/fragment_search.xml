@@ -13,9 +13,10 @@
         android:layout_marginTop="@dimen/view_search_top_bot_spacing"
         android:layout_marginStart="@dimen/view_search_start_end_spacing"
         android:layout_marginEnd="@dimen/view_search_start_end_spacing"
-        android:hint="@string/search_edt"
-        android:background="@color/white"
-        android:inputType="textPersonName" />
+        android:queryHint="@string/search_edt"
+        android:iconifiedByDefault="false"
+        android:focusable="false"
+        android:background="@drawable/item" />
 
     <TextView
         android:id="@+id/search_random_text_view"
@@ -32,11 +33,9 @@
         android:id="@+id/search_list_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingStart="@dimen/view_search_start_end_spacing"
-        android:paddingEnd="@dimen/view_search_start_end_spacing"
+        android:layout_above="@+id/add_progressbar"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/search_random_text_view"
-        android:layout_marginTop="@dimen/view_search_top_bot_spacing" />
+        android:layout_below="@+id/search_random_text_view" />
 
     <ProgressBar
         android:id="@+id/search_progressbar_progressbar"
@@ -50,7 +49,7 @@
         android:id="@+id/add_progressbar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

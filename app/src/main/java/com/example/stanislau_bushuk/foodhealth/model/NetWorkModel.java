@@ -13,6 +13,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import timber.log.Timber;
 
+@SuppressWarnings("LocalCanBeFinal")
 public class NetWorkModel {
 
     @Inject
@@ -30,14 +31,14 @@ public class NetWorkModel {
 
     public void getResponse(final String recipeName, final int from, boolean update) {
         final Observable<Recipes> observable = iapi.getRecipeWithName(recipeName, Constants.APP_ID, Constants.APP_KEY, String.valueOf(from), String.valueOf(from+10));
-        callBackSearchPresenter.call(observable,update);
+        callBackSearchPresenter.call(observable,update,from);
     }
 
     public void getRandomRecipe(boolean update){
         int random = (int) (Math.random() * 90);
         Timber.e("random "+random);
         final Observable<Recipes> observable = iapi.getRandomRecipe(" ", Constants.APP_ID, Constants.APP_KEY, String.valueOf(random), String.valueOf(random+10),"0-30000");
-        callBackSearchPresenter.call(observable,update);
+        callBackSearchPresenter.call(observable,update, random);
     }
 
     public void getRecipeFromUri(){

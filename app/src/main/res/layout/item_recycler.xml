@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/view_item_top_bot_spacing"
     android:layout_marginBottom="@dimen/view_item_top_bot_spacing"
-    android:paddingStart="@dimen/item_padding_start_end"
-    android:paddingEnd="@dimen/item_padding_start_end"
+    android:layout_marginEnd="@dimen/view_item_start_end_spacing"
+    android:layout_marginStart="@dimen/view_item_start_end_spacing"
     android:background="@drawable/item">
 
 

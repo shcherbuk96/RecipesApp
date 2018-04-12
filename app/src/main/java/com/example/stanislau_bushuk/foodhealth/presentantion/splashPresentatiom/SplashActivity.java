@@ -11,6 +11,7 @@ import com.example.stanislau_bushuk.foodhealth.Constants;
 
 import java.util.Timer;
 
+@SuppressWarnings("LocalCanBeFinal")
 public class SplashActivity extends AppCompatActivity {
 
     @Override

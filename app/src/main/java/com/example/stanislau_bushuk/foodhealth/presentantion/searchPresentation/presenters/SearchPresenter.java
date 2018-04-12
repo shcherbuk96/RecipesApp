@@ -10,6 +10,7 @@ import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackSearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
+import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.OnLoadMoreListener;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.RecyclerViewMoreListener;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.view.ViewSearch;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
@@ -26,11 +27,14 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
+@SuppressWarnings("LocalCanBeFinal")
 @InjectViewState
-public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBackSearchPresenter, RecyclerViewMoreListener.OnLoadMoreListener {
+public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBackSearchPresenter, OnLoadMoreListener {
 
     @Inject
     NetWorkModel netWorkModel;
+
+    private int random;
 
     public SearchPresenter() {
         App.getAppComponent().inject(this);
@@ -38,7 +42,8 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     }
 
     @Override
-    public void call(final Observable<Recipes> observable, final boolean update) {
+    public void call(final Observable<Recipes> observable, final boolean update, int random) {
+        this.random = random;
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<Recipes>() {
@@ -65,15 +70,15 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                     public void onError(final Throwable e) {
                         e.printStackTrace();
                         Timber.e("Error");
-                        getViewState().progressBarVisible(View.INVISIBLE);
+                        getViewState().progressBarVisible(View.GONE);
                         getViewState().setSnackBar();
+                        getViewState().addProgressBarVisible(View.GONE);
                     }
 
                     @Override
                     public void onComplete() {
-                        if (!update)
-                            getViewState().progressBarVisible(View.INVISIBLE);
-                        else getViewState().addProgressBarVisible(View.INVISIBLE);
+                        getViewState().progressBarVisible(View.GONE);
+                        getViewState().addProgressBarVisible(View.GONE);
                         Timber.e("Complete");
                     }
                 });
@@ -93,7 +98,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(final Disposable d) {
-                        Timber.e("subscribe text");
+
                     }
 
                     @Override
@@ -102,7 +107,6 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                             netWorkModel.getResponse(s, 0, false);
                             getViewState().setSearchText(s);
                         } else {
-                            Timber.e("random recipes next");
                             netWorkModel.getRandomRecipe(false);
                             getViewState().setSearchText("Random recipes");
                         }
@@ -115,15 +119,18 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
                     @Override
                     public void onComplete() {
-                        Timber.e("complete");
+
                     }
                 });
     }
 
     @Override
     public void onLoadMore(final int count, String nameRecipe) {
+
         if (nameRecipe.equals("Random recipes")) {
             netWorkModel.getRandomRecipe(true);
-        }else netWorkModel.getResponse(nameRecipe,count,true);
+        } else {
+            netWorkModel.getResponse(nameRecipe, count, true);
+        }
     }
 }
