@@ -5,8 +5,8 @@ import android.support.v7.widget.RecyclerView;
 
 import timber.log.Timber;
 
-@SuppressWarnings("LocalCanBeFinal")
-public class RecyclerViewMoreListener extends RecyclerView.OnScrollListener {
+
+class RecyclerViewMoreListener extends RecyclerView.OnScrollListener {
 
     private OnLoadMoreListener loadMoreListener;
     private RecyclerView.LayoutManager layoutManager;
@@ -15,7 +15,7 @@ public class RecyclerViewMoreListener extends RecyclerView.OnScrollListener {
     private boolean loading = true;
     private String nameRecipe;
 
-    RecyclerViewMoreListener(final LinearLayoutManager layoutManager, OnLoadMoreListener loadMoreListener, String nameRecipe) {
+    RecyclerViewMoreListener(final LinearLayoutManager layoutManager, final OnLoadMoreListener loadMoreListener, final String nameRecipe) {
         this.layoutManager = layoutManager;
         this.loadMoreListener = loadMoreListener;
         this.nameRecipe = nameRecipe;
@@ -23,7 +23,7 @@ public class RecyclerViewMoreListener extends RecyclerView.OnScrollListener {
 
 
     @Override
-    public void onScrolled(RecyclerView view, int dx, int dy) {
+    public void onScrolled(final RecyclerView view, final int dx, final int dy) {
 
         if (loadMoreListener != null) {
 

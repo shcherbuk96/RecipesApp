@@ -10,7 +10,6 @@ import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackSearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
-import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.OnLoadMoreListener;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.view.ViewSearch;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
 
@@ -28,7 +27,7 @@ import timber.log.Timber;
 
 @SuppressWarnings("LocalCanBeFinal")
 @InjectViewState
-public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBackSearchPresenter, OnLoadMoreListener {
+public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBackSearchPresenter {
 
     @Inject
     NetWorkModel netWorkModel;
@@ -123,13 +122,11 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                 });
     }
 
-    @Override
-    public void onLoadMore(final int count, String nameRecipe) {
-
-        if (nameRecipe.equals("Random recipes")) {
+    public void callRandomUpdate(final int from, final String recipeName) {
+        if (recipeName.equals("Random recipes")) {
             netWorkModel.getRandomRecipe(true);
         } else {
-            netWorkModel.getResponse(nameRecipe, count, true);
+            netWorkModel.getResponse(recipeName, from, true);
         }
     }
 }

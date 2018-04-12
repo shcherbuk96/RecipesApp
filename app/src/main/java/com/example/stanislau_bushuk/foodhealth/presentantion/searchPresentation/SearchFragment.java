@@ -28,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
+public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, OnLoadMoreListener {
 
     @BindView(R.id.search_progressbar_progressbar)
     ProgressBar searchProgressBar;
@@ -67,7 +67,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
         recyclerAdapter = new RecyclerAdapter(hitsList, getContext());
         listRecyclerView.setAdapter(recyclerAdapter);
         presenter.searchObservable(searchView);
-        listRecyclerView.addOnScrollListener(new RecyclerViewMoreListener((LinearLayoutManager) listRecyclerView.getLayoutManager(), presenter, String.valueOf(searchText.getText())));
+        listRecyclerView.addOnScrollListener(new RecyclerViewMoreListener((LinearLayoutManager) listRecyclerView.getLayoutManager(), this, String.valueOf(searchText.getText())));
     }
 
 
@@ -101,4 +101,8 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
         addProgressBar.setVisibility(visible);
     }
 
+    @Override
+    public void onLoadMore(final int count, final String nameRecipe) {
+        presenter.callRandomUpdate(count,nameRecipe);
+    }
 }

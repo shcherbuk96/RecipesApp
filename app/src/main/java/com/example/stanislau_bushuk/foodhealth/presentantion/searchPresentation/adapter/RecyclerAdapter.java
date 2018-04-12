@@ -13,13 +13,11 @@ import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
-import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.RecyclerViewMoreListener;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
@@ -72,8 +70,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
 
-
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_title_text_view)
         TextView titleTextView;
@@ -87,8 +83,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
             ButterKnife.bind(this, view);
         }
-
-
     }
 }
 
