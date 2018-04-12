@@ -5,6 +5,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackCardPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.CardNetWorkModel;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.ItemTotal;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 
 import java.util.List;
@@ -49,17 +50,19 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
                         Timber.e("onNext");
 
                         if (recipeList != null) {
+
                             final Recipe recipe = recipeList.get(0);
+
                             if (recipe.getTotalNutrients().getFAT() == null) {
-                                recipe.getTotalNutrients().getFAT().setQuantity(0);
+                                recipe.getTotalNutrients().setFAT(new ItemTotal.Builder(0).buidl());
                             }
 
                             if (recipe.getTotalNutrients().getPROCNT() == null) {
-                                recipe.getTotalNutrients().getPROCNT().setQuantity(0);
+                                recipe.getTotalNutrients().setPROCNT(new ItemTotal.Builder(0).buidl());
                             }
 
                             if (recipe.getTotalNutrients().getCHOCDF() == null) {
-                                recipe.getTotalNutrients().getCHOCDF().setQuantity(0);
+                                recipe.getTotalNutrients().setCHOCDF(new ItemTotal.Builder(0).buidl());
                             }
 
                             getViewState().showList(recipe);

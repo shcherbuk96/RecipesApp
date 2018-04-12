@@ -15,6 +15,8 @@ import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
@@ -48,12 +50,15 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
     @InjectPresenter
     CardPresenter presenter;
 
+    private CardAdapter cardAdapter;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_card);
         ButterKnife.bind(this);
+
+        initAdapter(new ArrayList<>());
 
         final Intent i = getIntent();
 
@@ -81,12 +86,13 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         proteinView.setText(getString(R.string.card_number_protein, recipe.getTotalNutrients().getPROCNT().getQuantity()));
         carbsView.setText(getString(R.string.card_number_carbs, recipe.getTotalNutrients().getCHOCDF().getQuantity()));
 
-        initAdapter(recipe);
+        initAdapter(recipe.getIngredientLines());
+        cardAdapter.notifyDataSetChanged();
     }
 
-    private void initAdapter(final Recipe recipe) {
+    private void initAdapter(final ArrayList recipe) {
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        final CardAdapter cardAdapter = new CardAdapter(recipe.getIngredientLines(), this);
+        cardAdapter = new CardAdapter(recipe, this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(cardAdapter);
     }

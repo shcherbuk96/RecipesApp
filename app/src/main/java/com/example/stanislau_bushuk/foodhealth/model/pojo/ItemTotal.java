@@ -5,27 +5,47 @@ public class ItemTotal {
     private float quantity;
     private String unit;
 
-    public String getLabel() {
-        return label;
+    public static class Builder{
+        private float quantity;
+        private String unit="g";
+        private String label="name";
+
+        public Builder(final float quantity){
+            this.quantity=quantity;
+        }
+
+        public Builder unit(final String val){
+            unit=val;
+            return this;
+        }
+
+        public Builder label(final String val){
+            label=val;
+            return this;
+        }
+
+        public ItemTotal buidl(){
+            return new ItemTotal(this);
+        }
     }
 
-    public void setLabel(final String label) {
-        this.label = label;
+    public ItemTotal(final Builder builder){
+        label=builder.label;
+        quantity=builder.quantity;
+        unit=builder.unit;
+    }
+
+    public String getLabel() {
+        return label;
     }
 
     public float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(final float quantity) {
-        this.quantity = quantity;
-    }
-
     public String getUnit() {
         return unit;
     }
 
-    public void setUnit(final String unit) {
-        this.unit = unit;
-    }
+
 }
