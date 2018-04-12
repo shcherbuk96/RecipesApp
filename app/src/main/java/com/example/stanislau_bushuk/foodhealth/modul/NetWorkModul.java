@@ -1,9 +1,5 @@
 package com.example.stanislau_bushuk.foodhealth.modul;
 
-import android.app.Activity;
-import android.app.Application;
-import android.content.Context;
-
 import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 
 import javax.inject.Singleton;

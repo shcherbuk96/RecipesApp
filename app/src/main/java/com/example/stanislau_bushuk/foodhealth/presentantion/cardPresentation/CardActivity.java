@@ -15,8 +15,6 @@ import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
@@ -54,7 +52,6 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setTitle("");
         setContentView(R.layout.activity_card);
         ButterKnife.bind(this);
 
@@ -66,41 +63,30 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
     }
 
     @Override
-    public void showList(final List<Recipe> recipe) {
-        final Recipe r = recipe.get(0);
-        Timber.e(String.valueOf(r));
+    public void showList(final Recipe recipe) {
+        Timber.e(String.valueOf(recipe));
 
-        setTitle(r.getLabel());
+        setTitle(recipe.getLabel());
 
         GlideApp
                 .with(this)
-                .load(r.getImage())
+                .load(recipe.getImage())
                 .centerCrop()
                 .into(photoView);
 
-        caloriesView.setText(getString(R.string.card_number_calories, r.getCalories()));
-        daylyView.setText(getString(R.string.card_number_daily, r.getTotalDaily().getENERC_KCAL().getQuantity()));
+        caloriesView.setText(getString(R.string.card_number_calories, recipe.getCalories()));
+        daylyView.setText(getString(R.string.card_number_daily, recipe.getTotalDaily().getENERC_KCAL().getQuantity()));
+        servingsEditText.setText(String.valueOf(recipe.getYield()));
+        fatView.setText(getString(R.string.card_number_fat, recipe.getTotalNutrients().getFAT().getQuantity()));
+        proteinView.setText(getString(R.string.card_number_protein, recipe.getTotalNutrients().getPROCNT().getQuantity()));
+        carbsView.setText(getString(R.string.card_number_carbs, recipe.getTotalNutrients().getCHOCDF().getQuantity()));
 
-        servingsEditText.setText(String.valueOf(r.getYield()));
+        initAdapter(recipe);
+    }
 
-        if (r.getTotalNutrients().getFAT() != null) {
-            fatView.setText(getString(R.string.card_number_fat, r.getTotalNutrients().getFAT().getQuantity()));
-        } else
-            fatView.setText(getString(R.string.card_number_fat, 0));
-
-        if (r.getTotalNutrients().getPROCNT() != null) {
-            proteinView.setText(getString(R.string.card_number_protein, r.getTotalNutrients().getPROCNT().getQuantity()));
-        } else
-            proteinView.setText(getString(R.string.card_number_protein, 0));
-
-        if (r.getTotalNutrients().getCHOCDF() != null) {
-            carbsView.setText(getString(R.string.card_number_carbs, r.getTotalNutrients().getCHOCDF().getQuantity()));
-        } else
-            carbsView.setText(getString(R.string.card_number_carbs, 0));
-
-
+    private void initAdapter(final Recipe recipe) {
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        final CardAdapter cardAdapter = new CardAdapter(r.getIngredientLines(), this);
+        final CardAdapter cardAdapter = new CardAdapter(recipe.getIngredientLines(), this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(cardAdapter);
     }

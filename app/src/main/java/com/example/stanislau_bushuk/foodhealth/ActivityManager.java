@@ -3,7 +3,6 @@ package com.example.stanislau_bushuk.foodhealth;
 import android.content.Context;
 import android.content.Intent;
 
-import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardActivity;
 
 public class ActivityManager {
@@ -13,9 +12,9 @@ public class ActivityManager {
         context.startActivity(intent);
     }
 
-    public static void startCardActivity(final Context context, String uri) {
+    public static void startCardActivity(final Context context, final String uri) {
         final Intent intent = new Intent(context, CardActivity.class);
-        intent.putExtra(Constants.RECIPE_INTENT_KEY,uri);
+        intent.putExtra(Constants.RECIPE_INTENT_KEY, uri);
         context.startActivity(intent);
     }
 

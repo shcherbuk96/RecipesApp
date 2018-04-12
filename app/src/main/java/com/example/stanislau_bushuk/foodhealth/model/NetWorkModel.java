@@ -22,7 +22,6 @@ public class NetWorkModel {
     IAPI iapi;
 
     private CallBackSearchPresenter callBackSearchPresenter;
-    private CallBackCardPresenter callBackCardPresenter;
 
     public NetWorkModel() {
         App.getAppComponent().inject(this);
@@ -32,10 +31,6 @@ public class NetWorkModel {
         callBackSearchPresenter = presenter;
     }
 
-    public void setCallBackCard(final CardPresenter cardPresenter) {
-        callBackCardPresenter = cardPresenter;
-    }
-
     public void getRandomRecipe() {
         int random = (int) (Math.random() * 90);
         Timber.e("random " + random);
@@ -43,8 +38,4 @@ public class NetWorkModel {
         callBackSearchPresenter.call(observable);
     }
 
-    public void getRecipeFromUri(String uri) {
-        final Observable<List<Recipe>> observable = iapi.getRecipeWithUri(uri, Constants.APP_ID, Constants.APP_KEY);
-        callBackCardPresenter.call(observable);
-    }
 }

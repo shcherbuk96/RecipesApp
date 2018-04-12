@@ -4,7 +4,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackCardPresenter;
-import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
+import com.example.stanislau_bushuk.foodhealth.model.CardNetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 
 import java.util.List;
@@ -23,7 +23,7 @@ import timber.log.Timber;
 public class CardPresenter extends MvpPresenter<CardView> implements CallBackCardPresenter {
 
     @Inject
-    NetWorkModel netWorkModel;
+    CardNetWorkModel netWorkModel;
 
     CardPresenter() {
         App.getAppComponent().inject(this);
@@ -45,10 +45,23 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
                     }
 
                     @Override
-                    public void onNext(final List<Recipe> recipe) {
+                    public void onNext(final List<Recipe> recipeList) {
                         Timber.e("onNext");
 
-                        if (recipe != null) {
+                        if (recipeList != null) {
+                            final Recipe recipe = recipeList.get(0);
+                            if (recipe.getTotalNutrients().getFAT() == null) {
+                                recipe.getTotalNutrients().getFAT().setQuantity(0);
+                            }
+
+                            if (recipe.getTotalNutrients().getPROCNT() == null) {
+                                recipe.getTotalNutrients().getPROCNT().setQuantity(0);
+                            }
+
+                            if (recipe.getTotalNutrients().getCHOCDF() == null) {
+                                recipe.getTotalNutrients().getCHOCDF().setQuantity(0);
+                            }
+
                             getViewState().showList(recipe);
                         }
 
