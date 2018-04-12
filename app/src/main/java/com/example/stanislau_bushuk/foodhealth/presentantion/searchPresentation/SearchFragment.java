@@ -23,22 +23,18 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
-import io.reactivex.disposables.Disposable;
-import timber.log.Timber;
 
 
 public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
 
     @BindView(R.id.search_progressbar_progressbar)
     ProgressBar searchProgressBar;
+
+    @BindView(R.id.add_progressbar)
+    ProgressBar addProgressBar;
 
     @BindView(R.id.search_search_view)
     SearchView searchView;
@@ -53,7 +49,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     SearchPresenter presenter;
 
     private RecyclerAdapter recyclerAdapter;
-    private boolean readyScroll = true;
 
     @Nullable
     @Override
@@ -72,56 +67,20 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
         recyclerAdapter = new RecyclerAdapter(hitsList, getContext());
         listRecyclerView.setAdapter(recyclerAdapter);
         presenter.searchObservable(searchView);
-        final Observable<Integer> observable = Observable.create(new ObservableOnSubscribe<Integer>() {
+        listRecyclerView.addOnScrollListener(new RecyclerViewMoreListener((LinearLayoutManager) listRecyclerView.getLayoutManager(), presenter, searchText.getText().toString()));
+
+        /*listRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void subscribe(final ObservableEmitter emitter) throws Exception {
-                final RecyclerView.OnScrollListener scrollListener = new RecyclerView.OnScrollListener() {
-                    @Override
-                    public void onScrolled(final RecyclerView recyclerView, final int dx, final int dy) {
-                        super.onScrolled(recyclerView, dx, dy);
+            public void onScrollStateChanged(final RecyclerView recyclerView, final int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
 
-                        if(((LinearLayoutManager)recyclerView.getLayoutManager()).findLastVisibleItemPosition()+1==recyclerView.getAdapter().getItemCount())
-                            emitter.onNext(recyclerView.getAdapter().getItemCount());
-                    }
-
-                };
-                listRecyclerView.addOnScrollListener(scrollListener);
-            }
-        });
-        observable.debounce(500, TimeUnit.MILLISECONDS)
-                .subscribe(new Observer<Integer>() {
-            @Override
-            public void onSubscribe(final Disposable d) {
-
-            }
-
-            @Override
-            public void onNext(final Integer integer) {
-                Timber.e("pos "+integer);
-            }
-
-            @Override
-            public void onError(final Throwable e) {
-
-            }
-
-            @Override
-            public void onComplete() {
-
-            }
-        });
-
-
-
-        listRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(final RecyclerView recyclerView, final int dx, final int dy) {
-                if (readyScroll) {
-                    presenter.checkUpdate((recyclerView.getLayoutManager()).getItemCount(),
-                            (((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition()), String.valueOf(searchText.getText()));
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    presenter.checkUpdate(recyclerView.getAdapter().getItemCount(),
+                            ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition(), String.valueOf(searchText.getText()));
                 }
+
             }
-        });
+        });*/
     }
 
 
@@ -133,7 +92,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     @Override
     public void updateList(final List<Hits> hitsList) {
         recyclerAdapter.updateList(hitsList);
-        readyScroll = true;
     }
 
     @Override
@@ -147,12 +105,13 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     }
 
     @Override
-    public void setReadyScroll() {
-        readyScroll = false;
-    }
-
-    @Override
     public void setSnackBar() {
         Toast.makeText(getActivity(), getResources().getText(R.string.error_connection_api), Toast.LENGTH_LONG).show();
     }
+
+    @Override
+    public void addProgressBarVisible(final int visible) {
+        addProgressBar.setVisibility(visible);
+    }
+
 }
