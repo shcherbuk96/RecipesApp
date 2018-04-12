@@ -2,7 +2,7 @@ package com.example.stanislau_bushuk.foodhealth.model.pojo;
 
 public class ItemTotal {
     private String label;
-    private Float quantity;
+    private float quantity;
     private String unit;
 
     public String getLabel() {
@@ -13,11 +13,11 @@ public class ItemTotal {
         this.label = label;
     }
 
-    public Float getQuantity() {
+    public float getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(final Float quantity) {
+    public void setQuantity(final float quantity) {
         this.quantity = quantity;
     }
 
