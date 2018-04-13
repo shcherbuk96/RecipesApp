@@ -9,11 +9,9 @@ abstract class RecyclerViewMoreListener extends RecyclerView.OnScrollListener {
 
     private int previousTotalItemCount = 0;
     private boolean loading = true;
-    private String nameRecipe;
 
-    RecyclerViewMoreListener(final LinearLayoutManager layoutManager, final String nameRecipe) {
+    RecyclerViewMoreListener(final RecyclerView.LayoutManager layoutManager) {
         this.layoutManager = layoutManager;
-        this.nameRecipe = nameRecipe;
     }
 
 
@@ -39,13 +37,13 @@ abstract class RecyclerViewMoreListener extends RecyclerView.OnScrollListener {
         }
 
         if (!loading && (lastVisibleItemPosition + 1) == totalItemCount) {
-            onScroll(totalItemCount, nameRecipe);
+            onScroll(totalItemCount);
             loading = true;
         }
 
     }
 
-    public abstract void onScroll(int totalItemCount, String nameRecipe);
+    public abstract void onScroll(int totalItemCount);
 
 }
 
