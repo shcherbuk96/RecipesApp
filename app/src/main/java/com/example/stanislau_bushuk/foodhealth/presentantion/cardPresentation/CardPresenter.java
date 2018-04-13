@@ -16,6 +16,7 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -38,20 +39,12 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
     @Override
     public void call(final Observable<List<Recipe>> observable) {
         observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Recipe>>() {
+                .map(new Function<List<Recipe>, Recipe>() {
                     @Override
-                    public void onSubscribe(final Disposable d) {
-                        Timber.e("onSubscribe");
-                    }
+                    public Recipe apply(final List<Recipe> recipeList) throws Exception {
+                        final Recipe recipe = recipeList.get(0);
 
-                    @Override
-                    public void onNext(final List<Recipe> recipeList) {
-                        Timber.e("onNext");
-
-                        if (recipeList != null) {
-
-                            final Recipe recipe = recipeList.get(0);
+                        if (recipe != null) {
 
                             if (recipe.getTotalNutrients().getFAT() == null) {
                                 recipe.getTotalNutrients().setFAT(new ItemTotal.Builder(0).buidl());
@@ -64,10 +57,22 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
                             if (recipe.getTotalNutrients().getCHOCDF() == null) {
                                 recipe.getTotalNutrients().setCHOCDF(new ItemTotal.Builder(0).buidl());
                             }
-
-                            getViewState().showList(recipe);
                         }
 
+                        return recipe;
+                    }
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<Recipe>() {
+                    @Override
+                    public void onSubscribe(final Disposable d) {
+                        Timber.e("onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(final Recipe recipe) {
+                        Timber.e("onNext");
+                        getViewState().showList(recipe);
                     }
 
                     @Override

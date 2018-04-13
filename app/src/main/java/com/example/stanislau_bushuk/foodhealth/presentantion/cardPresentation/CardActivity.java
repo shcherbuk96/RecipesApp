@@ -51,6 +51,8 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
     CardPresenter presenter;
 
     private CardAdapter cardAdapter;
+    private ArrayList<String> recipe;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +60,9 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         setContentView(R.layout.activity_card);
         ButterKnife.bind(this);
 
-        initAdapter(new ArrayList<>());
+        recipe=new ArrayList<>();
+
+        initAdapter(recipe);
 
         final Intent i = getIntent();
 
@@ -86,11 +90,12 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         proteinView.setText(getString(R.string.card_number_protein, recipe.getTotalNutrients().getPROCNT().getQuantity()));
         carbsView.setText(getString(R.string.card_number_carbs, recipe.getTotalNutrients().getCHOCDF().getQuantity()));
 
-        initAdapter(recipe.getIngredientLines());
+        this.recipe.clear();
+        this.recipe.addAll(recipe.getIngredientLines());
         cardAdapter.notifyDataSetChanged();
     }
 
-    private void initAdapter(final ArrayList recipe) {
+    private void initAdapter(final ArrayList<String> recipe) {
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         cardAdapter = new CardAdapter(recipe, this);
         recyclerView.setLayoutManager(mLayoutManager);
