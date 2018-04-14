@@ -4,5 +4,5 @@ import com.arellomobile.mvp.MvpView;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 
 public interface CardView extends MvpView {
-    void showList(Recipe recipe);
+    void showList(Recipe recipe, Data data);
 }

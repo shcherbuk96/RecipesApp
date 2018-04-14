@@ -44,6 +44,12 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
         return list.size();
     }
 
+    public void updateData(final ArrayList ingridients) {
+        list.clear();
+        list.addAll(ingridients);
+        notifyDataSetChanged();
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_card_title_text_view)
         TextView titleTextView;

@@ -7,6 +7,7 @@ import com.example.stanislau_bushuk.foodhealth.model.CallBackCardPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.CardNetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.ItemTotal;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.TotalNutrients;
 
 import java.util.List;
 
@@ -41,25 +42,8 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
         observable.subscribeOn(Schedulers.io())
                 .map(new Function<List<Recipe>, Recipe>() {
                     @Override
-                    public Recipe apply(final List<Recipe> recipeList) throws Exception {
-                        final Recipe recipe = recipeList.get(0);
-
-                        if (recipe != null) {
-
-                            if (recipe.getTotalNutrients().getFAT() == null) {
-                                recipe.getTotalNutrients().setFAT(new ItemTotal.Builder(0).buidl());
-                            }
-
-                            if (recipe.getTotalNutrients().getPROCNT() == null) {
-                                recipe.getTotalNutrients().setPROCNT(new ItemTotal.Builder(0).buidl());
-                            }
-
-                            if (recipe.getTotalNutrients().getCHOCDF() == null) {
-                                recipe.getTotalNutrients().setCHOCDF(new ItemTotal.Builder(0).buidl());
-                            }
-                        }
-
-                        return recipe;
+                    public Recipe apply(final List<Recipe> recipeList) {
+                        return recipeList.get(0);
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
@@ -72,7 +56,12 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
                     @Override
                     public void onNext(final Recipe recipe) {
                         Timber.e("onNext");
-                        getViewState().showList(recipe);
+                        final Data data=Data.newBuilder()
+                                .setFat(recipe.getTotalNutrients())
+                                .setProt(recipe.getTotalNutrients())
+                                .setChocdf(recipe.getTotalNutrients())
+                                .build();
+                        getViewState().showList(recipe,data);
                     }
 
                     @Override

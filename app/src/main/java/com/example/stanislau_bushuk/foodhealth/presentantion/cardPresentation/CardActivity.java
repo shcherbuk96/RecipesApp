@@ -69,10 +69,11 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         final String uri = i.getStringExtra(Constants.RECIPE_INTENT_KEY);
         Timber.e(uri);
         presenter.getRecipeFromUri(uri);
+        //http://www.edamam.com/ontologies/edamam.owl#recipe_aac66f3688a63daa664b2ac0adff1c11
     }
 
     @Override
-    public void showList(final Recipe recipe) {
+    public void showList(final Recipe recipe,Data data) {
         Timber.e(String.valueOf(recipe));
 
         setTitle(recipe.getLabel());
@@ -86,18 +87,22 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         caloriesView.setText(getString(R.string.card_number_calories, recipe.getCalories()));
         daylyView.setText(getString(R.string.card_number_daily, recipe.getTotalDaily().getENERC_KCAL().getQuantity()));
         servingsEditText.setText(String.valueOf(recipe.getYield()));
-        fatView.setText(getString(R.string.card_number_fat, recipe.getTotalNutrients().getFAT().getQuantity()));
-        proteinView.setText(getString(R.string.card_number_protein, recipe.getTotalNutrients().getPROCNT().getQuantity()));
-        carbsView.setText(getString(R.string.card_number_carbs, recipe.getTotalNutrients().getCHOCDF().getQuantity()));
+        fatView.setText(getString(R.string.card_number_fat, data.getFat().getQuantity()));
+        proteinView.setText(getString(R.string.card_number_protein, data.getProt().getQuantity()));
+        carbsView.setText(getString(R.string.card_number_carbs, data.getChocdf().getQuantity()));
 
-        this.recipe.clear();
-        this.recipe.addAll(recipe.getIngredientLines());
-        cardAdapter.notifyDataSetChanged();
     }
 
     private void initAdapter(final ArrayList<String> recipe) {
+
+        if (cardAdapter == null) {
+            cardAdapter = new CardAdapter(recipe, this);
+
+        } else {
+            cardAdapter.updateData(recipe);
+        }
+
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        cardAdapter = new CardAdapter(recipe, this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(cardAdapter);
     }

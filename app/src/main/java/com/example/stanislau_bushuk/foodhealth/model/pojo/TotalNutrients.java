@@ -5,6 +5,7 @@ public class TotalNutrients {
     private ItemTotal CHOCDF;
     private ItemTotal PROCNT;
 
+
     public ItemTotal getFAT() {
         return FAT;
     }
