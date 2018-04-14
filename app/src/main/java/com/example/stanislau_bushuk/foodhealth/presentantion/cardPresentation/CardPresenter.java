@@ -51,6 +51,8 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
                                 .setYield(recipe)
                                 .setENERC_KCAL(recipe.getTotalDaily())
                                 .setLabel(recipe)
+                                .setImage(recipe)
+                                .setIngridients(recipe)
                                 .build();
                     }
                 })

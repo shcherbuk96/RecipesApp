@@ -86,7 +86,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         fatView.setText(getString(R.string.card_number_fat, data.getFat().getQuantity()));
         proteinView.setText(getString(R.string.card_number_protein, data.getProt().getQuantity()));
         carbsView.setText(getString(R.string.card_number_carbs, data.getChocdf().getQuantity()));
-
+        initAdapter(data.getIngredientLines());
     }
 
     private void initAdapter(final ArrayList<String> recipe) {

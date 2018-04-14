@@ -5,6 +5,8 @@ import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.TotalDaily;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.TotalNutrients;
 
+import java.util.ArrayList;
+
 public class Data {
     private ItemTotal fat;
     private ItemTotal prot;
@@ -14,10 +16,14 @@ public class Data {
     private float calories;
     private String label;
     private String image;
-
+    private ArrayList<String> ingredientLines;
 
     public static Builder newBuilder() {
         return new Data().new Builder();
+    }
+
+    public ArrayList<String> getIngredientLines() {
+        return ingredientLines;
     }
 
     public String getImage() {
@@ -58,7 +64,6 @@ public class Data {
 
         }
 
-
         public Builder setENERC_KCAL(final TotalDaily totalDaily) {
             ENERC_KCAL = totalDaily.getENERC_KCAL() == null ? new ItemTotal() : totalDaily.getENERC_KCAL();
 
@@ -71,6 +76,11 @@ public class Data {
             return this;
         }
 
+        public Builder setIngridients(final Recipe recipe) {
+            ingredientLines = recipe.getIngredientLines();
+
+            return this;
+        }
         public Builder setImage(final Recipe recipe) {
             image = recipe.getImage();
 

@@ -16,7 +16,7 @@ public class Recipe {
     private ArrayList healthLabels;
 
     private ArrayList cautions;
-    private ArrayList ingredientLines;
+    private ArrayList<String> ingredientLines;
     private List<Ingridients> ingredients;
     private float calories;
     private float totalWeight;
@@ -67,7 +67,7 @@ public class Recipe {
         return cautions;
     }
 
-    public ArrayList getIngredientLines() {
+    public ArrayList<String> getIngredientLines() {
         return ingredientLines;
     }
 
@@ -114,4 +114,5 @@ public class Recipe {
     public void setTotalDaily(final TotalDaily totalDaily) {
         this.totalDaily = totalDaily;
     }
+
 }
