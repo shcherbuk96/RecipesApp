@@ -12,7 +12,6 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.R;
-import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 
 import java.util.ArrayList;
@@ -51,7 +50,6 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
     CardPresenter presenter;
 
     private CardAdapter cardAdapter;
-    private ArrayList<String> recipe;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -60,12 +58,11 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         setContentView(R.layout.activity_card);
         ButterKnife.bind(this);
 
-        recipe=new ArrayList<>();
+        final ArrayList<String> recipe = new ArrayList<>();
 
         initAdapter(recipe);
 
         final Intent i = getIntent();
-
         final String uri = i.getStringExtra(Constants.RECIPE_INTENT_KEY);
         Timber.e(uri);
         presenter.getRecipeFromUri(uri);
@@ -73,20 +70,19 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
     }
 
     @Override
-    public void showList(final Recipe recipe,Data data) {
-        Timber.e(String.valueOf(recipe));
-
-        setTitle(recipe.getLabel());
+    public void showList(final Data data) {
+        Timber.e(String.valueOf(data));
+        setTitle(data.getLabel());
 
         GlideApp
                 .with(this)
-                .load(recipe.getImage())
+                .load(data.getImage())
                 .centerCrop()
                 .into(photoView);
 
-        caloriesView.setText(getString(R.string.card_number_calories, recipe.getCalories()));
-        daylyView.setText(getString(R.string.card_number_daily, recipe.getTotalDaily().getENERC_KCAL().getQuantity()));
-        servingsEditText.setText(String.valueOf(recipe.getYield()));
+        caloriesView.setText(getString(R.string.card_number_calories, data.getCalories()));
+        daylyView.setText(getString(R.string.card_number_daily, data.getENERC_KCAL().getQuantity()));
+        servingsEditText.setText(String.valueOf(data.getYield()));
         fatView.setText(getString(R.string.card_number_fat, data.getFat().getQuantity()));
         proteinView.setText(getString(R.string.card_number_protein, data.getProt().getQuantity()));
         carbsView.setText(getString(R.string.card_number_carbs, data.getChocdf().getQuantity()));

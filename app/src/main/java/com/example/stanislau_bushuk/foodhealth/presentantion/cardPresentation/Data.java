@@ -1,15 +1,43 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation;
 
 import com.example.stanislau_bushuk.foodhealth.model.pojo.ItemTotal;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.TotalDaily;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.TotalNutrients;
 
 public class Data {
     private ItemTotal fat;
     private ItemTotal prot;
     private ItemTotal chocdf;
+    private ItemTotal ENERC_KCAL;
+    private int yield;
+    private float calories;
+    private String label;
+    private String image;
+
 
     public static Builder newBuilder() {
         return new Data().new Builder();
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public ItemTotal getENERC_KCAL() {
+        return ENERC_KCAL;
+    }
+
+    public int getYield() {
+        return yield;
+    }
+
+    public float getCalories() {
+        return calories;
     }
 
     public ItemTotal getFat() {
@@ -30,32 +58,51 @@ public class Data {
 
         }
 
+
+        public Builder setENERC_KCAL(final TotalDaily totalDaily) {
+            ENERC_KCAL = totalDaily.getENERC_KCAL() == null ? new ItemTotal() : totalDaily.getENERC_KCAL();
+
+            return this;
+        }
+
+        public Builder setLabel(final Recipe recipe) {
+            label = recipe.getLabel() == null ? "empty" : recipe.getLabel();
+
+            return this;
+        }
+
+        public Builder setImage(final Recipe recipe) {
+            image = recipe.getImage();
+
+            return this;
+        }
+
+        public Builder setCalories(final Recipe recipe) {
+            calories = recipe.getCalories();
+
+            return this;
+        }
+
+        public Builder setYield(final Recipe recipe) {
+            yield = recipe.getYield();
+
+            return this;
+        }
+
         public Builder setFat(final TotalNutrients totalNutrients) {
-            if (totalNutrients.getFAT() == null) {
-                fat = new ItemTotal();
-            } else {
-                fat = totalNutrients.getFAT();
-            }
+            fat = totalNutrients.getFAT() == null ? new ItemTotal() : totalNutrients.getFAT();
 
             return this;
         }
 
         public Builder setProt(final TotalNutrients totalNutrients) {
-            if (totalNutrients.getPROCNT() == null) {
-                prot = new ItemTotal();
-            } else {
-                prot = totalNutrients.getPROCNT();
-            }
+            prot = totalNutrients.getPROCNT() == null ? new ItemTotal() : totalNutrients.getPROCNT();
 
             return this;
         }
 
         public Builder setChocdf(final TotalNutrients totalNutrients) {
-            if (totalNutrients.getCHOCDF() == null) {
-                chocdf = new ItemTotal();
-            } else {
-                chocdf = totalNutrients.getCHOCDF();
-            }
+            chocdf = totalNutrients.getCHOCDF() == null ? new ItemTotal() : totalNutrients.getCHOCDF();
 
             return this;
         }

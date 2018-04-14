@@ -5,9 +5,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackCardPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.CardNetWorkModel;
-import com.example.stanislau_bushuk.foodhealth.model.pojo.ItemTotal;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
-import com.example.stanislau_bushuk.foodhealth.model.pojo.TotalNutrients;
 
 import java.util.List;
 
@@ -40,28 +38,33 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
     @Override
     public void call(final Observable<List<Recipe>> observable) {
         observable.subscribeOn(Schedulers.io())
-                .map(new Function<List<Recipe>, Recipe>() {
+                .map(new Function<List<Recipe>, Data>() {
                     @Override
-                    public Recipe apply(final List<Recipe> recipeList) {
-                        return recipeList.get(0);
+                    public Data apply(final List<Recipe> recipeList) {
+                        final Recipe recipe = recipeList.get(0);
+
+                        return Data.newBuilder()
+                                .setFat(recipe.getTotalNutrients())
+                                .setProt(recipe.getTotalNutrients())
+                                .setChocdf(recipe.getTotalNutrients())
+                                .setCalories(recipe)
+                                .setYield(recipe)
+                                .setENERC_KCAL(recipe.getTotalDaily())
+                                .setLabel(recipe)
+                                .build();
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Recipe>() {
+                .subscribe(new Observer<Data>() {
                     @Override
                     public void onSubscribe(final Disposable d) {
                         Timber.e("onSubscribe");
                     }
 
                     @Override
-                    public void onNext(final Recipe recipe) {
+                    public void onNext(final Data data) {
                         Timber.e("onNext");
-                        final Data data=Data.newBuilder()
-                                .setFat(recipe.getTotalNutrients())
-                                .setProt(recipe.getTotalNutrients())
-                                .setChocdf(recipe.getTotalNutrients())
-                                .build();
-                        getViewState().showList(recipe,data);
+                        getViewState().showList(data);
                     }
 
                     @Override
