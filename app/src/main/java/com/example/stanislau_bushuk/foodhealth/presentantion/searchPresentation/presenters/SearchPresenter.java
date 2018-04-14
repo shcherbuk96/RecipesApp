@@ -7,6 +7,7 @@ import android.widget.SearchView;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
+import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.ResourceManager;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackSearchPresenter;
@@ -91,7 +92,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                         return charSequence.toString().trim();
                     }
                 })
-                .debounce(500, TimeUnit.MILLISECONDS)
+                .debounce(Constants.TEXT_DEBOUNCE, TimeUnit.MILLISECONDS)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
