@@ -8,4 +8,8 @@ public class Constants {
 
     public static final int WAIT = 2000;
 
+    public static final int ITEMSINPAGE=10;
+
+    public static final String COLLORIES = "0-300000";
+
 }

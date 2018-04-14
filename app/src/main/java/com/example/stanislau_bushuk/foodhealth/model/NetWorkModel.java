@@ -37,7 +37,7 @@ public class NetWorkModel {
     public void getRandomRecipe(final boolean update) {
         final int random = (int) (Math.random() * 90);
         Timber.e("random " + random);
-        final Observable<Recipes> observable = iapi.getRandomRecipe(" ", Constants.APP_ID, Constants.APP_KEY, String.valueOf(random), String.valueOf(random + 10), "0-30000");
+        final Observable<Recipes> observable = iapi.getRandomRecipe(" ", Constants.APP_ID, Constants.APP_KEY, String.valueOf(random), String.valueOf(random + Constants.ITEMSINPAGE), Constants.COLLORIES);
         callBackSearchPresenter.call(observable, update, random);
     }
 
