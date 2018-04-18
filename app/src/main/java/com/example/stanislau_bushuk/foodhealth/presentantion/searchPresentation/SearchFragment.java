@@ -101,9 +101,4 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
         Toast.makeText(getActivity(), getResources().getText(R.string.error_connection_api), Toast.LENGTH_LONG).show();
     }
 
-
-    @Override
-    public void addProgressBarVisible(final int visible) {
-        addProgressBar.setVisibility(visible);
-    }
 }
