@@ -19,14 +19,13 @@
 
     <TextView
         android:id="@+id/search_random_text_view"
+        style="@style/ItemTextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/search_search_view"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/view_search_top_bot_spacing"
-        android:text="@string/search_random"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_search_random_size" />
+        android:text="@string/search_random" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_list_recycler_view"
@@ -34,8 +33,8 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/add_progressbar"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="@dimen/view_search_top_bot_spacing"
-        android:layout_below="@+id/search_random_text_view" />
+        android:layout_below="@+id/search_random_text_view"
+        android:layout_marginTop="@dimen/view_search_top_bot_spacing" />
 
     <ProgressBar
         android:id="@+id/search_progressbar_progressbar"
