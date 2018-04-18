@@ -1,7 +1,9 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
@@ -10,10 +12,16 @@ import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 
+import java.security.MessageDigest;
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -56,16 +64,17 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_card);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         ButterKnife.bind(this);
 
         final ArrayList<String> recipe = new ArrayList<>();
 
         initAdapter(recipe);
 
-        final Intent i = getIntent();
-        final String uri = i.getStringExtra(Constants.RECIPE_INTENT_KEY);
-        Timber.e(uri);
-        presenter.getRecipeFromUri(uri);
+        presenter.getRecipeFromUri(getIntent().getStringExtra(Constants.RECIPE_INTENT_KEY));
         //http://www.edamam.com/ontologies/edamam.owl#recipe_aac66f3688a63daa664b2ac0adff1c11
     }
 
@@ -74,10 +83,12 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         Timber.e(String.valueOf(data));
         setTitle(data.getLabel());
 
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(30));
         GlideApp
                 .with(this)
                 .load(data.getImage())
-                .centerCrop()
+                .apply(requestOptions)
                 .into(photoView);
 
         caloriesView.setText(getString(R.string.card_number_calories, data.getCalories()));
@@ -100,5 +111,11 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(cardAdapter);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

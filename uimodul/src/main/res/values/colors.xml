@@ -6,6 +6,11 @@
 
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+
+    <color name="blue">#5bc6d6fb</color>
+    <color name="fat">#ED7433</color>
+    <color name="carbs">#277BAB</color>
+    <color name="prot">#82CC1C</color>
 </resources>
 
 

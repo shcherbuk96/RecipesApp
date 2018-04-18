@@ -79,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="@color/black"
+            android:textColor="@color/fat"
             android:textSize="@dimen/text_card_calories_size" />
 
         <TextView
@@ -87,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="@color/black"
+            android:textColor="@color/carbs"
             android:textSize="@dimen/text_card_calories_size" />
 
         <TextView
@@ -95,16 +95,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="@color/black"
+            android:textColor="@color/prot"
             android:textSize="@dimen/text_card_calories_size" />
     </GridLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/card_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingEnd="@dimen/recycler_card_start_end_spacing"
-        android:paddingStart="@dimen/recycler_card_start_end_spacing" />
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

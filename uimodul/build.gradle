@@ -26,6 +26,8 @@ dependencies {
     api "${library.supportDesign}"
     api "${library.supportFragment}"
     implementation "${library.recyclerview}"
+    api "${library.cardview}"
+    api "${library.shineButton}"
     ////
 
     implementation "${library.circle}"
