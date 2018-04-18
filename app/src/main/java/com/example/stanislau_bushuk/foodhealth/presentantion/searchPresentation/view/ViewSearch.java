@@ -9,7 +9,13 @@ public interface ViewSearch extends MvpView {
 
     void showList(List<Hits> hitsList);
 
-    void showProgressBar();
+    void updateList(List<Hits> hitsList);
 
-    void closeProgressBar();
+    void progressBarVisible(final int visible);
+
+    void setSearchText(String text);
+
+    void setSnackBar();
+
+    void addProgressBarVisible(final int visible);
 }

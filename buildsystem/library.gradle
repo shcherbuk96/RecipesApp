@@ -1,83 +1,95 @@
 ext.version = [
-        ////Design////
-        supportAppcompat : "27.1.0",
+        ////Design///
         support : "27.1.0",
-        supportDesign : "27.1.0",
-        supportFragment : "27.1.0",
-        recyclerview : "27.1.0",
+
         ///Realm////
         realm:"4.3.3",
+
         /////Timber//////
         timber:"4.6.1",
+
         /////RXJAVA+RXANDROID//////
         rxjava:"2.1.9",
         retrofit2Rxjava2Adapter:"1.0.0",
         rxandroid:"2.0.2",
+        rxbinding: "2.1.1",
 
         /////RETROFIT/////
         retrofit:"2.3.0",
-        converterGson:"2.3.0",
 
         /////GLIDE/////
         glide:"4.6.1",
-        glideCompiler:"4.6.1",
 
-        ////dagger////
+        ////Dagger////
         dagger:"2.11",
-        daggerCompiler:"2.11",
-        daggerAndroid:"2.11",
-        daggerAndroidSupport:"2.11",
-        daggerAndroidProcessor:"2.11",
 
         /////ButterKnife/////
         butterknife:"8.8.1",
-        butterknifeCompiler:"8.8.1",
-
 
         ///////Moxy/////
         moxy:"1.5.3",
-        moxyAppCompat:"1.5.3",
-        moxyCompiler:"1.5.3",
+
+        /////CircleImageView///
+        cicrleImageViewVersion : "2.2.0",
+
         junit:"4.12",
         testRunner:"1.0.1",
-        espressoCore:"3.0.1",
+        espressoCore:"3.0.1"
 
 
-
-        cicrleImageViewVersion : "2.2.0"
 ]
 
 def version = ext.version
 
 ext.library = [
-        supportAppcompat: "com.android.support:appcompat-v7:$version.supportAppcompat",
-        support: "com.android.support:support-v4:$version.support",
-        supportDesign: "com.android.support:design:$version.supportDesign",
-        supportFragment: "com.android.support:support-fragment:$version.supportFragment",
-        recyclerview: "com.android.support:recyclerview-v7:$version.recyclerview",
-        realm: "io.realm:realm-annotations-processor:$version.realm",
-        timber: "com.jakewharton.timber:timber:$version.timber",
-        rxjava: "io.reactivex.rxjava2:rxjava:$version.rxjava",
-        retrofit2Rxjava2Adapter: "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:$version.retrofit2Rxjava2Adapter",
-        circle: "de.hdodenhof:circleimageview:$version.cicrleImageViewVersion",
-        rxandroid: "io.reactivex.rxjava2:rxandroid:$version.rxandroid",
-        retrofit: "com.squareup.retrofit2:retrofit:$version.retrofit",
-        converterGson: "com.squareup.retrofit2:converter-gson:$version.converterGson",
-        glide: "com.github.bumptech.glide:glide:$version.glide",
-        glideCompiler: "com.github.bumptech.glide:compiler:$version.glideCompiler",
-        dagger: "com.google.dagger:dagger:$version.dagger",
-        daggerCompiler: "com.google.dagger:dagger-compiler:$version.daggerCompiler",
-        daggerAndroid: "com.google.dagger:dagger-android:$version.daggerAndroid",
-        daggerAndroidSupport: "com.google.dagger:dagger-android-support:$version.daggerAndroidSupport",
-        daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:$version.daggerAndroidProcessor",
-        butterknife: "com.jakewharton:butterknife:$version.butterknife",
-        butterknifeCompiler: "com.jakewharton:butterknife-compiler:$version.butterknifeCompiler",
-        moxy: "com.arello-mobile:moxy:$version.moxy",
-        moxyAppCompat: "com.arello-mobile:moxy-app-compat:$version.moxyAppCompat",
-        moxyCompiler: "com.arello-mobile:moxy-compiler:$version.moxyCompiler",
-        junit: "junit:junit:$version.junit",
-        testRunner: "com.android.support.test:runner:$version.testRunner",
-        espressoCore: "com.android.support.test.espresso:espresso-core:$version.espressoCore",
+        ////Design///
+        supportAppcompat: "com.android.support:appcompat-v7:"+                                      "$version.support",
+        support: "com.android.support:support-v4:"+                                                 "$version.support",
+        supportDesign: "com.android.support:design:"+                                               "$version.support",
+        supportFragment: "com.android.support:support-fragment:"+                                   "$version.support",
+        recyclerview: "com.android.support:recyclerview-v7:"+                                       "$version.support",
+
+        ///Realm////
+        realm: "io.realm:realm-annotations-processor:"+                                             "$version.realm",
+
+        /////Timber//////
+        timber: "com.jakewharton.timber:timber:"+                                                   "$version.timber",
+
+        /////RXJAVA+RXANDROID//////
+        rxjava: "io.reactivex.rxjava2:rxjava:"+                                                     "$version.rxjava",
+        retrofit2Rxjava2Adapter: "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:"+             "$version.retrofit2Rxjava2Adapter",
+        rxandroid: "io.reactivex.rxjava2:rxandroid:"+                                               "$version.rxandroid",
+        rxbinding:"com.jakewharton.rxbinding2:rxbinding:"+                                          "$version.rxbinding",
+        /////RETROFIT/////
+        retrofit: "com.squareup.retrofit2:retrofit:"+                                               "$version.retrofit",
+        converterGson: "com.squareup.retrofit2:converter-gson:"+                                    "$version.retrofit",
+
+        /////GLIDE/////
+        glide: "com.github.bumptech.glide:glide:"+                                                  "$version.glide",
+        glideCompiler: "com.github.bumptech.glide:compiler:"+                                       "$version.glide",
+
+        ////Dagger////
+        dagger: "com.google.dagger:dagger:"+                                                        "$version.dagger",
+        daggerCompiler: "com.google.dagger:dagger-compiler:"+                                       "$version.dagger",
+        daggerAndroid: "com.google.dagger:dagger-android:"+                                         "$version.dagger",
+        daggerAndroidSupport: "com.google.dagger:dagger-android-support:"+                          "$version.dagger",
+        daggerAndroidProcessor: "com.google.dagger:dagger-android-processor:"+                      "$version.dagger",
+
+        /////ButterKnife/////
+        butterknife: "com.jakewharton:butterknife:"+                                                "$version.butterknife",
+        butterknifeCompiler: "com.jakewharton:butterknife-compiler:"+                               "$version.butterknife",
+
+        ///////Moxy/////
+        moxy: "com.arello-mobile:moxy:"+                                                            "$version.moxy",
+        moxyAppCompat: "com.arello-mobile:moxy-app-compat:"+                                        "$version.moxy",
+        moxyCompiler: "com.arello-mobile:moxy-compiler:"+                                           "$version.moxy",
+
+        /////CircleImageView///
+        circle: "de.hdodenhof:circleimageview:"+                                                    "$version.cicrleImageViewVersion",
+
+        junit: "junit:junit:"+                                                                      "$version.junit",
+        testRunner: "com.android.support.test:runner:"+                                             "$version.testRunner",
+        espressoCore: "com.android.support.test.espresso:espresso-core:"+                           "$version.espressoCore",
 
 
 

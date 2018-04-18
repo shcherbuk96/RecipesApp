@@ -17,48 +17,43 @@ public class Recipes {
         return q;
     }
 
-    public void setQ(String q) {
+    public void setQ(final String q) {
         this.q = q;
     }
 
-    public Integer getFrom() {
+    public int getFrom() {
         return from;
     }
 
-    public void setFrom(Integer from) {
+    public void setFrom(final int from) {
         this.from = from;
     }
 
-    public Integer getTo() {
+    public int getTo() {
         return to;
     }
 
-
-    public void setTo(Integer to) {
+    public void setTo(final int to) {
         this.to = to;
     }
 
-
-
-
-
-    public void setParams(ArrayList params) {
+    public void setParams(final ArrayList params) {
         this.params = params;
     }
 
-    public Boolean getMore() {
+    public boolean getMore() {
         return more;
     }
 
-    public void setMore(Boolean more) {
+    public void setMore(final boolean more) {
         this.more = more;
     }
 
-    public Integer getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(Integer count) {
+    public void setCount(final int count) {
         this.count = count;
     }
 
@@ -66,8 +61,7 @@ public class Recipes {
         return hits;
     }
 
-
-    public void setHits(ArrayList<Hits> hits) {
+    public void setHits(final ArrayList<Hits> hits) {
         this.hits = hits;
     }
 

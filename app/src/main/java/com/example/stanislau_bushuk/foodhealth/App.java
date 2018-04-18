@@ -4,8 +4,7 @@ import android.app.Application;
 
 import com.example.stanislau_bushuk.foodhealth.component.AppComponent;
 import com.example.stanislau_bushuk.foodhealth.component.DaggerAppComponent;
-import com.example.stanislau_bushuk.foodhealth.modul.Api;
-import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
+import com.example.stanislau_bushuk.foodhealth.modul.ResourceManagerModul;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -19,10 +18,10 @@ public class App extends Application {
         return appComponent;
     }
 
-
     @Override
     public void onCreate() {
         super.onCreate();
+
         setRealm();
         Timber.plant(new Timber.DebugTree());
         appComponent = buildComponent();
@@ -30,7 +29,7 @@ public class App extends Application {
 
     public void setRealm() {
         Realm.init(this);
-        RealmConfiguration realmConfig = new RealmConfiguration.Builder()
+        final RealmConfiguration realmConfig = new RealmConfiguration.Builder()
                 .deleteRealmIfMigrationNeeded()
                 .name("realm.realm")
                 .build();
@@ -39,8 +38,7 @@ public class App extends Application {
 
     public AppComponent buildComponent() {
         return DaggerAppComponent.builder()
-                .netWorkModul(new NetWorkModul())
-                .api(new Api())
+                .resourceManagerModul(new ResourceManagerModul(getApplicationContext()))
                 .build();
     }
 }
