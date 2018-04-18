@@ -9,7 +9,5 @@
     <string name="search_random">Random recipes</string>
 
     <string name="error_connection_api">Check internet connection or sorry for ending requests Api</string>
-    <!---Item Recycler View-->
-
 
 </resources>
