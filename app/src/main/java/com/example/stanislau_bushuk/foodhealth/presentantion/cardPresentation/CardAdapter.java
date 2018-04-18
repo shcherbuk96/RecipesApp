@@ -1,6 +1,5 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,12 +17,10 @@ import butterknife.ButterKnife;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> {
 
-    private Context context;
     private ArrayList<String> list;
 
-    CardAdapter(final ArrayList<String> list, final Context context) {
+    CardAdapter(final ArrayList<String> list) {
         this.list = list;
-        this.context = context;
     }
 
     @NonNull
@@ -44,7 +41,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
         return list.size();
     }
 
-    public void updateData(final ArrayList ingridients) {
+    public void updateData(final ArrayList<String> ingridients) {
         list.clear();
         list.addAll(ingridients);
         notifyDataSetChanged();

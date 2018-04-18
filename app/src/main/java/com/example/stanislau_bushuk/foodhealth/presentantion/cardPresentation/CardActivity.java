@@ -92,8 +92,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
     private void initAdapter(final ArrayList<String> recipe) {
 
         if (cardAdapter == null) {
-            cardAdapter = new CardAdapter(recipe, this);
-
+            cardAdapter = new CardAdapter(recipe);
         } else {
             cardAdapter.updateData(recipe);
         }

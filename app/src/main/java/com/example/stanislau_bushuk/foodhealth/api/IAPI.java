@@ -13,6 +13,9 @@ import retrofit2.http.Query;
 public interface IAPI {
 
     @GET("search")
+    Observable<Recipes> getRecipeWithName(@Query("q") String q, @Query("app_id") String app_id, @Query("app_key") String app_key, @Query("from") String from, @Query("to") String to);
+
+    @GET("search")
     Observable<Recipes> getRandomRecipe(@Query("q") String q, @Query("app_id") String app_id, @Query("app_key") String app_key, @Query("from") String from,
                                         @Query("to") String to, @Query("calories") String calories);
 

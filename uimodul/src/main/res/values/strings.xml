@@ -12,6 +12,7 @@
     <string name="card_daily_value">DAILY VALUE</string>
     <string name="card_servings">SERVINGS</string>
 
+    <string name="error_connection_api">Check internet connection or sorry for bad API</string>
 
     <string name="card_number_calories">%.1f</string>
     <string name="card_number_daily">%.1f%%</string>
