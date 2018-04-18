@@ -15,6 +15,7 @@ import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
+import com.sackcentury.shinebuttonlib.ShineButton;
 
 import java.util.List;
 
@@ -95,6 +96,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         @BindView(R.id.item_linear_layout)
         LinearLayout linearLayout;
+
+        @BindView(R.id.item_star_shine_button)
+        ShineButton starButton;
 
         MyViewHolder(final View view) {
             super(view);

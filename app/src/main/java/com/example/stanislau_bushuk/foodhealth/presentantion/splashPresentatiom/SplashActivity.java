@@ -7,11 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.stanislau_bushuk.foodhealth.ActivityManager;
-import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
-import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
-
-import javax.inject.Inject;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -20,8 +16,8 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final Context context=this;
-        Handler handler = new Handler();
+        final Context context = this;
+        final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {

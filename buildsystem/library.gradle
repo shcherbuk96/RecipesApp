@@ -32,6 +32,9 @@ ext.version = [
         /////CircleImageView///
         cicrleImageViewVersion : "2.2.0",
 
+        //ShineButton//
+        shineButton:"0.2.0",
+
         junit:"4.12",
         testRunner:"1.0.1",
         espressoCore:"3.0.1"
@@ -48,6 +51,7 @@ ext.library = [
         supportDesign: "com.android.support:design:"+                                               "$version.support",
         supportFragment: "com.android.support:support-fragment:"+                                   "$version.support",
         recyclerview: "com.android.support:recyclerview-v7:"+                                       "$version.support",
+        cardview: "com.android.support:cardview-v7:"+                                               "$version.support",
 
         ///Realm////
         realm: "io.realm:realm-annotations-processor:"+                                             "$version.realm",
@@ -86,6 +90,9 @@ ext.library = [
 
         /////CircleImageView///
         circle: "de.hdodenhof:circleimageview:"+                                                    "$version.cicrleImageViewVersion",
+
+        /////ShineButton///
+        shineButton: "com.sackcentury:shinebutton:"+                                                "$version.shineButton",
 
         junit: "junit:junit:"+                                                                      "$version.junit",
         testRunner: "com.android.support.test:runner:"+                                             "$version.testRunner",

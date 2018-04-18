@@ -62,8 +62,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
 
         initAdapter(recipe);
 
-        final Intent i = getIntent();
-        final String uri = i.getStringExtra(Constants.RECIPE_INTENT_KEY);
+        final String uri = getIntent().getStringExtra(Constants.RECIPE_INTENT_KEY);
         Timber.e(uri);
         presenter.getRecipeFromUri(uri);
         //http://www.edamam.com/ontologies/edamam.owl#recipe_aac66f3688a63daa664b2ac0adff1c11
