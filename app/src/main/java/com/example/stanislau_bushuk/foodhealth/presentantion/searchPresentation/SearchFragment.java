@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -31,6 +32,9 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
 
     @BindView(R.id.search_progressbar_progressbar)
     ProgressBar searchProgressBar;
+
+    @BindView(R.id.add_progressbar)
+    ProgressBar addProgressBar;
 
     @BindView(R.id.search_search_view)
     SearchView searchView;
@@ -61,14 +65,27 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
         presenter.getRandomRecipe();
         final List<Hits> hitsList = new ArrayList<>();
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerAdapter = new RecyclerAdapter(hitsList, getContext());
         listRecyclerView.setLayoutManager(mLayoutManager);
+        recyclerAdapter = new RecyclerAdapter(hitsList, getContext());
         listRecyclerView.setAdapter(recyclerAdapter);
+        presenter.searchObservable(searchView);
+        listRecyclerView.addOnScrollListener(new RecyclerViewMoreListener(listRecyclerView.getLayoutManager())  {
+            @Override
+            public void onScroll(final int totalItemCount) {
+                presenter.callRandomUpdate(totalItemCount,  String.valueOf(searchText.getText()));
+            }
+        });
     }
+
 
     @Override
     public void showList(final List<Hits> hitsList) {
         recyclerAdapter.updateAdapter(hitsList);
+    }
+
+    @Override
+    public void updateList(final List<Hits> hitsList) {
+        recyclerAdapter.updateList(hitsList);
     }
 
     @Override
@@ -79,5 +96,16 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     @Override
     public void setSearchText(final String text) {
         searchText.setText(text);
+    }
+
+    @Override
+    public void setSnackBar() {
+        Toast.makeText(getActivity(), getResources().getText(R.string.error_connection_api), Toast.LENGTH_LONG).show();
+    }
+
+
+    @Override
+    public void addProgressBarVisible(final int visible) {
+        addProgressBar.setVisibility(visible);
     }
 }

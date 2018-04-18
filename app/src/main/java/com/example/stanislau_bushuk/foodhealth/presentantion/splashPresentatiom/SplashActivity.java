@@ -13,9 +13,8 @@ import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 
 import javax.inject.Inject;
 
+
 public class SplashActivity extends AppCompatActivity {
-
-
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {

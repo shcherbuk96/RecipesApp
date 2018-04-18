@@ -4,8 +4,7 @@ import android.app.Application;
 
 import com.example.stanislau_bushuk.foodhealth.component.AppComponent;
 import com.example.stanislau_bushuk.foodhealth.component.DaggerAppComponent;
-import com.example.stanislau_bushuk.foodhealth.modul.Api;
-import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
+import com.example.stanislau_bushuk.foodhealth.modul.ResourceManagerModul;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -39,6 +38,7 @@ public class App extends Application {
 
     public AppComponent buildComponent() {
         return DaggerAppComponent.builder()
+                .resourceManagerModul(new ResourceManagerModul(getApplicationContext()))
                 .build();
     }
 }

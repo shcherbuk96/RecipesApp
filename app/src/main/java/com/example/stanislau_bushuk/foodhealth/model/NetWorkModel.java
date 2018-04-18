@@ -16,6 +16,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import timber.log.Timber;
 
+
 public class NetWorkModel {
 
     @Inject
@@ -31,11 +32,19 @@ public class NetWorkModel {
         callBackSearchPresenter = presenter;
     }
 
-    public void getRandomRecipe() {
-        int random = (int) (Math.random() * 90);
-        Timber.e("random " + random);
-        final Observable<Recipes> observable = iapi.getRandomRecipe(" ", Constants.APP_ID, Constants.APP_KEY, String.valueOf(random), String.valueOf(random + 10), "0-30000");
-        callBackSearchPresenter.call(observable);
+    public void getResponse(final String recipeName, final int from, final boolean update) {
+        final Observable<Recipes> observable = iapi.getRecipeWithName(recipeName, Constants.APP_ID, Constants.APP_KEY, String.valueOf(from), String.valueOf(from + Constants.ITEMS_IN_PAGE));
+        callBackSearchPresenter.call(observable, update, from);
     }
 
+    public void getRandomRecipe(final boolean update) {
+        final int random = (int) (Math.random() * Constants.RABDON);
+        Timber.e("random " + random);
+        final Observable<Recipes> observable = iapi.getRandomRecipe(Constants.RANDOM_RECIPE, Constants.APP_ID, Constants.APP_KEY, String.valueOf(random), String.valueOf(random + Constants.ITEMS_IN_PAGE), Constants.CALLORIES);
+        callBackSearchPresenter.call(observable, update, random);
+    }
+
+    public void getRecipeFromUri() {
+        final Observable<Recipe> observable = iapi.getRecipeWithUri(Constants.RANDOM_RECIPE, Constants.APP_ID, Constants.APP_KEY);
+    }
 }

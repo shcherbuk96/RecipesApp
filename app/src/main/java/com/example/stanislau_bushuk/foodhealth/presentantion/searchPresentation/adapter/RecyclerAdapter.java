@@ -28,6 +28,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     private Context context;
     private List<Hits> hits;
 
+
     public RecyclerAdapter(final List<Hits> hits, final Context context) {
         this.hits = hits;
         this.context = context;
@@ -67,12 +68,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     public void updateAdapter(final List<Hits> hits) {
 
-        if (hits != null && hits.size()!=0) {
+        if (hits != null && hits.size() != 0) {
             this.hits.clear();
             this.hits.addAll(hits);
             notifyDataSetChanged();
         }
+
     }
+
+    public void updateList(final List<Hits> hits) {
+
+        if (hits != null) {
+            this.hits.addAll(hits);
+            notifyDataSetChanged();
+        }
+
+    }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_title_text_view)
