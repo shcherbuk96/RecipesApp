@@ -51,7 +51,6 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                     public void onSubscribe(final Disposable d) {
                         if (!update)
                             getViewState().progressBarVisible(View.VISIBLE);
-                        else getViewState().addProgressBarVisible(View.VISIBLE);
                         Timber.e("subscribe response");
                     }
 
@@ -72,13 +71,11 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                         Timber.e("Error");
                         getViewState().progressBarVisible(View.GONE);
                         getViewState().setSnackBar();
-                        getViewState().addProgressBarVisible(View.GONE);
                     }
 
                     @Override
                     public void onComplete() {
                         getViewState().progressBarVisible(View.GONE);
-                        getViewState().addProgressBarVisible(View.GONE);
                         Timber.e("Complete");
                     }
                 });
