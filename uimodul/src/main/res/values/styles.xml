@@ -13,7 +13,7 @@
         <item name="android:windowBackground">@drawable/splash</item>
     </style>
 
-    <style name="ThemeActionBar" parent="Theme.AppCompat.Light">
+    <style name="ThemeActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>

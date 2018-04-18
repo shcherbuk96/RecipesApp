@@ -64,15 +64,17 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_card);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         ButterKnife.bind(this);
 
         final ArrayList<String> recipe = new ArrayList<>();
 
         initAdapter(recipe);
 
-        final String uri = getIntent().getStringExtra(Constants.RECIPE_INTENT_KEY);
-        Timber.e(uri);
-        presenter.getRecipeFromUri(uri);
+        presenter.getRecipeFromUri(getIntent().getStringExtra(Constants.RECIPE_INTENT_KEY));
         //http://www.edamam.com/ontologies/edamam.owl#recipe_aac66f3688a63daa664b2ac0adff1c11
     }
 
@@ -109,5 +111,11 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(cardAdapter);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
