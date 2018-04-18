@@ -35,13 +35,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
         final View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler, parent, false);
-
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        Recipe recipe = hits.get(position).getRecipe();
+        final Recipe recipe = hits.get(position).getRecipe();
         holder.titleTextView.setText(recipe.getLabel());
         GlideApp
                 .with(context)
@@ -57,12 +56,23 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     public void updateAdapter(final List<Hits> hits) {
 
-        if (hits != null && hits.size()!=0) {
+        if (hits != null && hits.size() != 0) {
             this.hits.clear();
             this.hits.addAll(hits);
             notifyDataSetChanged();
         }
+
     }
+
+    public void updateList(final List<Hits> hits) {
+
+        if (hits != null) {
+            this.hits.addAll(hits);
+            notifyDataSetChanged();
+        }
+
+    }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_title_text_view)
@@ -70,6 +80,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         @BindView(R.id.item_photo_image_view)
         ImageView photoImageView;
+
 
         MyViewHolder(final View view) {
             super(view);
