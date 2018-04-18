@@ -2,7 +2,7 @@
 <resources>
 
     <style name="ItemTextTitle">
-        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textSize">@dimen/title_medium_size</item>
         <item name="android:textColor">@color/black</item>
     </style>
