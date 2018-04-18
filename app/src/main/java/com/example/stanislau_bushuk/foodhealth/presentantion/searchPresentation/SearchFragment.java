@@ -33,9 +33,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     @BindView(R.id.search_progressbar_progressbar)
     ProgressBar searchProgressBar;
 
-    @BindView(R.id.add_progressbar)
-    ProgressBar addProgressBar;
-
     @BindView(R.id.search_search_view)
     SearchView searchView;
 
