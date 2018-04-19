@@ -4,7 +4,6 @@ package com.example.stanislau_bushuk.foodhealth.model;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.api.IAPI;
-import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
 
@@ -25,7 +24,7 @@ public class NetWorkModel {
         App.getAppComponent().inject(this);
     }
 
-    public void setCallBack(final SearchPresenter presenter) {
+    public void setCallBackSearch(final SearchPresenter presenter) {
         callBackSearchPresenter = presenter;
     }
 
@@ -39,9 +38,5 @@ public class NetWorkModel {
         Timber.e("random " + random);
         final Observable<Recipes> observable = iapi.getRandomRecipe(Constants.RANDOM_RECIPE, Constants.APP_ID, Constants.APP_KEY, String.valueOf(random), String.valueOf(random + Constants.ITEMS_IN_PAGE), Constants.CALLORIES);
         callBackSearchPresenter.call(observable, update, random);
-    }
-
-    public void getRecipeFromUri() {
-        final Observable<Recipe> observable = iapi.getRecipeWithUri(Constants.RANDOM_RECIPE, Constants.APP_ID, Constants.APP_KEY);
     }
 }

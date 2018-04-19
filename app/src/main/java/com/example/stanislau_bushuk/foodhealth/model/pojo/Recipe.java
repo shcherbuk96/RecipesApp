@@ -1,8 +1,7 @@
 package com.example.stanislau_bushuk.foodhealth.model.pojo;
 
-import com.example.stanislau_bushuk.foodhealth.model.pojo.lists.Digets;
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class Recipe {
 
@@ -17,14 +16,14 @@ public class Recipe {
     private ArrayList healthLabels;
 
     private ArrayList cautions;
-    private ArrayList ingredientLines;
-    private ArrayList ingredients;
+    private ArrayList<String> ingredientLines;
+    private List<Ingridients> ingredients;
     private float calories;
     private float totalWeight;
     private float totalTime;
-    //totalNutrients	{…}
-    //totalDaily	{…}
-    private ArrayList<Digets> digest;
+    private TotalNutrients totalNutrients;
+    private TotalDaily totalDaily;
+    private ArrayList digest;
     private boolean bookmarked;
     private boolean bought;
 
@@ -68,11 +67,11 @@ public class Recipe {
         return cautions;
     }
 
-    public ArrayList getIngredientLines() {
+    public ArrayList<String> getIngredientLines() {
         return ingredientLines;
     }
 
-    public ArrayList getIngredients() {
+    public List getIngredients() {
         return ingredients;
     }
 
@@ -99,4 +98,21 @@ public class Recipe {
     public boolean isBought() {
         return bought;
     }
+
+    public TotalNutrients getTotalNutrients() {
+        return totalNutrients;
+    }
+
+    public void setTotalNutrients(final TotalNutrients totalNutrients) {
+        this.totalNutrients = totalNutrients;
+    }
+
+    public TotalDaily getTotalDaily() {
+        return totalDaily;
+    }
+
+    public void setTotalDaily(final TotalDaily totalDaily) {
+        this.totalDaily = totalDaily;
+    }
+
 }

@@ -12,9 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".presentantion.splashPresentatiom.SplashActivity"
-            android:theme="@style/SplashTheme"
-            android:windowSoftInputMode="adjustPan|stateHidden">
+        <activity
+            android:name=".presentantion.splashPresentatiom.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,9 +24,12 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan|stateHidden">
+            android:windowSoftInputMode="adjustPan"/>
+        <activity
+            android:name=".presentantion.cardPresentation.CardActivity"
+            android:theme="@style/ThemeActionBar"
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
 
-        </activity>
     </application>
 
 </manifest>

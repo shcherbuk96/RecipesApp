@@ -9,8 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 
-import java.util.Timer;
-
 
 public class SplashActivity extends AppCompatActivity {
 

@@ -39,7 +39,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
     public SearchPresenter() {
         App.getAppComponent().inject(this);
-        netWorkModel.setCallBack(this);
+        netWorkModel.setCallBackSearch(this);
     }
 
     @Override
