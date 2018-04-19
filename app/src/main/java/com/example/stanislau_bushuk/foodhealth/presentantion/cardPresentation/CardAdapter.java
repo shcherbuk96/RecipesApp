@@ -13,13 +13,14 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.RealmList;
 
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> {
 
-    private ArrayList<String> list;
+    private RealmList<String> list;
 
-    CardAdapter(final ArrayList<String> list) {
+    CardAdapter(final RealmList<String> list) {
         this.list = list;
     }
 
@@ -41,7 +42,7 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> 
         return list.size();
     }
 
-    public void updateData(final ArrayList<String> ingridients) {
+    public void updateData(final RealmList<String> ingridients) {
         list.clear();
         list.addAll(ingridients);
         notifyDataSetChanged();

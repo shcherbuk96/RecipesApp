@@ -1,6 +1,8 @@
 package com.example.stanislau_bushuk.foodhealth.model.pojo;
 
-public class Ingridients {
+import io.realm.RealmObject;
+
+public class Ingridients extends RealmObject {
     private String text;
     private float weight;
 

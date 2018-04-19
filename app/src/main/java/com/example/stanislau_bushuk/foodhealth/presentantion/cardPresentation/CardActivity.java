@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
+import io.realm.RealmList;
 import timber.log.Timber;
 
 public class CardActivity extends MvpAppCompatActivity implements CardView {
@@ -64,7 +66,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
 
         ButterKnife.bind(this);
 
-        final ArrayList<String> recipe = new ArrayList<>();
+        final RealmList<String> recipe = new RealmList<>();
 
         initAdapter(recipe);
 
@@ -94,7 +96,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         initAdapter(data.getIngredientLines());
     }
 
-    private void initAdapter(final ArrayList<String> recipe) {
+    private void initAdapter(final RealmList<String> recipe) {
 
         if (cardAdapter == null) {
             cardAdapter = new CardAdapter(recipe);

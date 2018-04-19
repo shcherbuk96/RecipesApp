@@ -1,6 +1,8 @@
 package com.example.stanislau_bushuk.foodhealth.model.pojo;
 
-public class TotalDaily {
+import io.realm.RealmObject;
+
+public class TotalDaily extends RealmObject {
     private ItemTotal ENERC_KCAL;
 
     public ItemTotal getENERC_KCAL() {

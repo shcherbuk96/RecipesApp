@@ -11,13 +11,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.stanislau_bushuk.foodhealth.ActivityManager;
+import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.R;
+import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 import com.sackcentury.shinebuttonlib.ShineButton;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,8 +33,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     private Context context;
     private List<Hits> hits;
 
+    @Inject
+    RealmModel realmModel;
+
 
     public RecyclerAdapter(final List<Hits> hits, final Context context) {
+        App.getAppComponent().inject(this);
         this.hits = hits;
         this.context = context;
     }
@@ -46,12 +54,38 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         final Recipe recipe = hits.get(position).getRecipe();
+
+        if (realmModel.checkFavorite(recipe)) {
+            holder.starButton.setChecked(true);
+        }
+
+        holder.starButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                realmModel.removeDataToRealm(recipe);
+                notifyDataSetChanged();
+            }
+        });
+
         holder.titleTextView.setText(recipe.getLabel());
+
         GlideApp
                 .with(context)
                 .load(recipe.getImage())
                 .centerCrop()
                 .into(holder.photoImageView);
+
+        holder.starButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(final View view, final boolean checked) {
+                if(checked){
+                    realmModel.addDataToRealm(recipe);
+                }else{
+                    //Timber.e(String.valueOf(recipe));
+                    realmModel.removeDataToRealm(recipe);
+                }
+            }
+        });
 
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,6 +1,8 @@
 package com.example.stanislau_bushuk.foodhealth.model.pojo;
 
-public class TotalNutrients {
+import io.realm.RealmObject;
+
+public class TotalNutrients extends RealmObject {
     private ItemTotal FAT;
     private ItemTotal CHOCDF;
     private ItemTotal PROCNT;
