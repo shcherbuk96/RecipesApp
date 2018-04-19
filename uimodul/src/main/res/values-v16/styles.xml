@@ -1,21 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="ItemTextTitle">
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textSize">@dimen/title_medium_size</item>
+    <style name="Display_4">
         <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/Display_4_text_size</item>
+        <item name="android:fontFamily">sans-serif-light</item>
     </style>
 
-    <style name="MediumTextTitle">
-        <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:textSize">@dimen/medium_text_size</item>
+    <style name="Display_3">
         <item name="android:textColor">@color/black</item>
-    </style>
-    
-    <style name="ItemTextBody">
+        <item name="android:textSize">@dimen/Display_3_text_size</item>
         <item name="android:fontFamily">sans-serif</item>
-        <item name="android:textSize">@dimen/item_text_body_size</item>
+    </style>
+
+    <style name="Display_2">
         <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/Display_2_text_size</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="Display_1">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/Display_1_text_size</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="Headline">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/Headline_text_size</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="Title">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/Title_text_size</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="Subheading">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/Subheading_text_size</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="Body_2">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/Body_text_size</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="Body_1">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/Body_text_size</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="Caption">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/Caption_text_size</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="Button">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/Button_text_size</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:fontFamily">sans-serif</item>
     </style>
 </resources>

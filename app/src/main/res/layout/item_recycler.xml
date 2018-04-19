@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/padding_text_item_start_end"
         android:layout_marginTop="@dimen/text_item_start_end_spacing"
-        style="@style/ItemTextTitle"
+        style="@style/Subheading"
         android:layout_marginStart="@dimen/padding_text_item_start_end" />
 
 </LinearLayout>
