@@ -33,9 +33,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
     @BindView(R.id.search_progressbar_progressbar)
     ProgressBar searchProgressBar;
 
-    @BindView(R.id.add_progressbar)
-    ProgressBar addProgressBar;
-
     @BindView(R.id.search_search_view)
     SearchView searchView;
 
@@ -67,10 +64,10 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
         recyclerAdapter = new RecyclerAdapter(hitsList, getContext());
         listRecyclerView.setAdapter(recyclerAdapter);
         presenter.searchObservable(searchView);
-        listRecyclerView.addOnScrollListener(new RecyclerViewMoreListener(listRecyclerView.getLayoutManager())  {
+        listRecyclerView.addOnScrollListener(new RecyclerViewMoreListener(listRecyclerView.getLayoutManager()) {
             @Override
             public void onScroll(final int totalItemCount) {
-                presenter.callRandomUpdate(totalItemCount,  String.valueOf(searchText.getText()));
+                presenter.callRandomUpdate(totalItemCount, String.valueOf(searchText.getText()));
             }
         });
     }
@@ -101,9 +98,4 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
         Toast.makeText(getActivity(), getResources().getText(R.string.error_connection_api), Toast.LENGTH_LONG).show();
     }
 
-
-    @Override
-    public void addProgressBarVisible(final int visible) {
-        addProgressBar.setVisibility(visible);
-    }
 }

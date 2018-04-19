@@ -8,8 +8,15 @@
     <string name="search_edt">Enter the name of the recipe</string>
     <string name="search_random">Random recipes</string>
 
-    <string name="error_connection_api">Check internet connection or sorry for ending requests Api</string>
-    <!---Item Recycler View-->
+    <string name="card_calories">CALORIES / SERVING</string>
+    <string name="card_daily_value">DAILY VALUE</string>
+    <string name="card_servings">SERVINGS</string>
 
+    <string name="error_connection_api">Check internet connection or sorry for bad API</string>
 
+    <string name="card_number_calories">%.1f</string>
+    <string name="card_number_daily">%.1f%%</string>
+    <string name="card_number_fat">FAT - %.1fg</string>
+    <string name="card_number_protein">Protein - %.1fg</string>
+    <string name="card_number_carbs">Carbs - %.1fg</string>
 </resources>

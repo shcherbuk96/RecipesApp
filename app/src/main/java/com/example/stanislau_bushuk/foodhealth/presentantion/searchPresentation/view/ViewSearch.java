@@ -17,5 +17,4 @@ public interface ViewSearch extends MvpView {
 
     void setSnackBar();
 
-    void addProgressBarVisible(final int visible);
 }
