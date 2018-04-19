@@ -51,7 +51,7 @@
     <EditText
         android:id="@+id/from_deep_search_edit_text"
         style="@style/Body_1"
-        android:layout_width="@dimen/deep_serch_edit_text_width"
+        android:layout_width="@dimen/deep_search_edit_text_width"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/from_deep_search_text"
         android:layout_marginStart="@dimen/deep_search_start_end_padding"
@@ -59,7 +59,7 @@
         android:background="@drawable/item"
         android:hint="0"
         android:inputType="number"
-        android:maxLength="3" />
+        android:maxLength="4" />
 
     <TextView
         android:id="@+id/to_deep_search_text"
@@ -74,7 +74,7 @@
     <EditText
         android:id="@+id/to_deep_search_edit_text"
         style="@style/Body_1"
-        android:layout_width="@dimen/deep_serch_edit_text_width"
+        android:layout_width="@dimen/deep_search_edit_text_width"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/from_deep_search_edit_text"
         android:layout_below="@+id/from_deep_search_edit_text"
@@ -83,7 +83,7 @@
         android:background="@drawable/item"
         android:hint="0"
         android:inputType="number"
-        android:maxLength="3" />
+        android:maxLength="4" />
 
     <TextView
         android:id="@+id/up_to_deep_search_text"
@@ -97,7 +97,7 @@
     <EditText
         android:id="@+id/up_to_deep_search_edit_text"
         style="@style/Body_1"
-        android:layout_width="@dimen/deep_serch_edit_text_width"
+        android:layout_width="@dimen/deep_search_edit_text_width"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/up_to_deep_search_text"
         android:layout_marginStart="@dimen/deep_search_start_end_padding"
@@ -252,7 +252,7 @@
 
     <Button
         style="@style/Button"
-        android:layout_marginTop="@dimen/deep_search_elements_bottom_padding_from_title"
+        android:layout_marginTop="@dimen/deep_search_elements_marginTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/table_deep_search"

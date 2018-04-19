@@ -38,5 +38,5 @@
     <dimen name="deep_search_elements_bottom_padding_from_title">36dp</dimen>
     <dimen name="deep_search_start_end_padding">16dp</dimen>
     <dimen name="deep_search_elements_marginTop">8dp</dimen>
-    <dimen name="deep_serch_edit_text_width">36dp</dimen>
+    <dimen name="deep_search_edit_text_width">56dp</dimen>
 </resources>
