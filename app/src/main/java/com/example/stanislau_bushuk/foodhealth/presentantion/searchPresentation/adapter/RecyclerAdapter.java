@@ -7,17 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
+import com.sackcentury.shinebuttonlib.ShineButton;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
@@ -35,6 +39,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
         final View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler, parent, false);
+
         return new MyViewHolder(itemView);
     }
 
@@ -47,6 +52,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 .load(recipe.getImage())
                 .centerCrop()
                 .into(holder.photoImageView);
+
+        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+                Timber.e(recipe.getUri());
+                ActivityManager.startCardActivity(context,recipe.getUri());
+            }
+        });
     }
 
     @Override
@@ -81,6 +94,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         @BindView(R.id.item_photo_image_view)
         ImageView photoImageView;
 
+        @BindView(R.id.item_linear_layout)
+        LinearLayout linearLayout;
+
+        @BindView(R.id.item_star_shine_button)
+        ShineButton starButton;
 
         MyViewHolder(final View view) {
             super(view);
