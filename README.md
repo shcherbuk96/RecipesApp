@@ -19,7 +19,7 @@
 * ### Dimensions
 > **<FOR WHAT>_<WHERE>_<DESCRIPTION>_<WHAT>** - icon_home_menu_size / list_single_line_content_spacing
 * ### View
-> **<DESCRIPTION>_<WHAT>** - titleView / skipButton 
+> **<DESCRIPTION>_<WHAT>** - titleView / skipButton
 >
 > View          | 	Name
 > ------------- | -------------

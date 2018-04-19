@@ -17,7 +17,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/text_item_card_start_end_spacing"
         android:layout_marginStart="@dimen/text_item_card_start_end_spacing"
-        android:textColor="@color/black"
-        android:textSize="@dimen/text_item_title_size" />
+        style="@style/Body_2"/>
 
 </LinearLayout>
