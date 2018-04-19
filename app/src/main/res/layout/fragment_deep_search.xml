@@ -1,6 +1,261 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/title_deep_search"
+        style="@style/Headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/deep_search_title_bottom_padding"
+        android:text="@string/deep_search_title_text" />
+
+
+    <TextView
+        android:id="@+id/calorie_deep_search"
+        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_deep_search"
+        android:layout_marginStart="@dimen/deep_search_start_end_padding"
+        android:layout_marginTop="@dimen/deep_search_elements_bottom_padding_from_title"
+        android:text="@string/deep_search_calories_text" />
+
+    <TextView
+        android:id="@+id/ingredients_deep_search"
+        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/calorie_deep_search"
+        android:layout_marginEnd="@dimen/deep_search_start_end_padding"
+        android:text="@string/deep_search_ingredients_text" />
+
+
+    <TextView
+        android:id="@+id/from_deep_search_text"
+        style="@style/Body_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/calorie_deep_search"
+        android:layout_marginStart="@dimen/deep_search_start_end_padding"
+        android:layout_marginTop="@dimen/deep_search_elements_marginTop"
+        android:text="@string/deep_search_from_text" />
+
+    <EditText
+        android:id="@+id/from_deep_search_edit_text"
+        style="@style/Body_1"
+        android:layout_width="@dimen/deep_serch_edit_text_width"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/from_deep_search_text"
+        android:layout_marginStart="@dimen/deep_search_start_end_padding"
+        android:layout_toEndOf="@+id/from_deep_search_text"
+        android:background="@drawable/item"
+        android:hint="0"
+        android:inputType="number"
+        android:maxLength="3" />
+
+    <TextView
+        android:id="@+id/to_deep_search_text"
+        style="@style/Body_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/calorie_deep_search"
+        android:layout_below="@+id/from_deep_search_text"
+        android:layout_marginTop="@dimen/deep_search_title_bottom_padding"
+        android:text="@string/deep_search_to_text" />
+
+    <EditText
+        android:id="@+id/to_deep_search_edit_text"
+        style="@style/Body_1"
+        android:layout_width="@dimen/deep_serch_edit_text_width"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/from_deep_search_edit_text"
+        android:layout_below="@+id/from_deep_search_edit_text"
+        android:layout_alignBaseline="@+id/to_deep_search_text"
+
+        android:background="@drawable/item"
+        android:hint="0"
+        android:inputType="number"
+        android:maxLength="3" />
+
+    <TextView
+        android:id="@+id/up_to_deep_search_text"
+        style="@style/Body_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/ingredients_deep_search"
+        android:layout_alignTop="@+id/from_deep_search_text"
+        android:text="@string/deep_search_up_to_text" />
+
+    <EditText
+        android:id="@+id/up_to_deep_search_edit_text"
+        style="@style/Body_1"
+        android:layout_width="@dimen/deep_serch_edit_text_width"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/up_to_deep_search_text"
+        android:layout_marginStart="@dimen/deep_search_start_end_padding"
+        android:layout_toEndOf="@id/up_to_deep_search_text"
+        android:background="@drawable/item"
+
+        android:hint="0"
+        android:inputType="number"
+        android:maxLength="4" />
+
+    <TextView
+        android:id="@+id/diet_deep_search_text"
+        style="@style/Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/calorie_deep_search"
+        android:layout_below="@+id/to_deep_search_text"
+        android:layout_marginTop="@dimen/deep_search_elements_bottom_padding_from_title"
+        android:text="@string/deep_search_diet" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/table_deep_search"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/diet_deep_search_text"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/balanced_deep_search_checkbox"
+                style="@style/Body_1"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="@dimen/deep_search_start_end_padding"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/deep_search_elements_marginTop"
+                android:text="@string/deep_search_balanced"
+                app:buttonTint="@color/colorPrimary" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/high_protein_deep_search_checkbox"
+                style="@style/Body_1"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="@dimen/deep_search_start_end_padding"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/deep_search_elements_marginTop"
+                android:text="@string/deep_search_high_protein"
+                app:buttonTint="@color/colorPrimary" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/low_fat_deep_search_checkbox"
+                style="@style/Body_1"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="@dimen/deep_search_start_end_padding"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/deep_search_elements_marginTop"
+                android:text="@string/deep_search_low_fat"
+                app:buttonTint="@color/colorPrimary" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/low_carb_deep_search_checkbox"
+                style="@style/Body_1"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="@dimen/deep_search_start_end_padding"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/deep_search_elements_marginTop"
+                android:text="@string/deep_search_low_carb"
+                app:buttonTint="@color/colorPrimary" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/vegan_deep_search_checkbox"
+                style="@style/Body_1"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="@dimen/deep_search_start_end_padding"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/deep_search_elements_marginTop"
+                android:text="@string/deep_search_vegan"
+                app:buttonTint="@color/colorPrimary" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/vegetarian_deep_search_checkbox"
+                style="@style/Body_1"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="@dimen/deep_search_elements_marginTop"
+                android:layout_marginStart="@dimen/deep_search_start_end_padding"
+
+                android:layout_height="wrap_content"
+                android:text="@string/deep_search_vegetarian"
+                app:buttonTint="@color/colorPrimary" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/sugar_conscious_deep_search_checkbox"
+                style="@style/Body_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/deep_search_start_end_padding"
+
+                android:layout_marginTop="@dimen/deep_search_elements_marginTop"
+                android:text="@string/deep_search_sugar_conscious"
+                app:buttonTint="@color/colorPrimary" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/peanut_free_deep_search_checkbox"
+                style="@style/Body_1"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="@dimen/deep_search_start_end_padding"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/deep_search_elements_marginTop"
+                android:text="@string/deep_search_peabut_free"
+                app:buttonTint="@color/colorPrimary" />
+
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/tree-nut-free_deep_search_checkbox"
+                style="@style/Body_1"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="@dimen/deep_search_start_end_padding"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/deep_search_elements_marginTop"
+                android:text="@string/deep_search_tree_nut_free"
+                app:buttonTint="@color/colorPrimary" />
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/alcohol_free_deep_search_checkbox"
+                style="@style/Body_1"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="@dimen/deep_search_start_end_padding"
+
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/deep_search_elements_marginTop"
+                android:text="@string/deep_search_alcohol_free"
+                app:buttonTint="@color/colorPrimary" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        style="@style/Button"
+        android:layout_marginTop="@dimen/deep_search_elements_bottom_padding_from_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/table_deep_search"
+        android:layout_centerHorizontal="true"
+        android:text="@string/deep_search_button_text" />
+</RelativeLayout>

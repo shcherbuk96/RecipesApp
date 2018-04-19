@@ -19,4 +19,24 @@
     <string name="card_number_fat">FAT - %.1fg</string>
     <string name="card_number_protein">Protein - %.1fg</string>
     <string name="card_number_carbs">Carbs - %.1fg</string>
+
+    <!-- DeepSearch strings-->
+    <string name="deep_search_title_text">Calories, Diet, Ingredients</string>
+    <string name="deep_search_calories_text">Calories</string>
+    <string name="deep_search_ingredients_text">Ingredients</string>
+    <string name="deep_search_from_text">From</string>
+    <string name="deep_search_up_to_text">Up to</string>
+    <string name="deep_search_to_text">To</string>
+    <string name="deep_search_diet">Diet</string>
+    <string name="deep_search_balanced">balanced</string>
+    <string name="deep_search_high_protein">high protein</string>
+    <string name="deep_search_low_fat">low-fat</string>
+    <string name="deep_search_low_carb">low-carb</string>
+    <string name="deep_search_vegan">vegan</string>
+    <string name="deep_search_vegetarian">vegetarian</string>
+    <string name="deep_search_sugar_conscious">low-sugar</string>
+    <string name="deep_search_peabut_free">peanut-free</string>
+    <string name="deep_search_tree_nut_free">tree-nut-free</string>
+    <string name="deep_search_alcohol_free">alcohol-free</string>
+    <string name="deep_search_button_text">Find</string>
 </resources>

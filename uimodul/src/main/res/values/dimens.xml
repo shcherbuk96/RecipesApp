@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="text_search_random_size">20sp</dimen>
     <dimen name="item_padding_start_end">4dp</dimen>
     <dimen name="padding_text_item_start_end">8dp</dimen>
     <dimen name="image_item_photo_size">65dp</dimen>
@@ -33,4 +32,11 @@
     <dimen name="image_card_height">240dp</dimen>
 
     <dimen name="button_item_size">40dp</dimen>
+
+    <!-- DeepSearch-->
+    <dimen name="deep_search_title_bottom_padding">16dp</dimen>
+    <dimen name="deep_search_elements_bottom_padding_from_title">36dp</dimen>
+    <dimen name="deep_search_start_end_padding">16dp</dimen>
+    <dimen name="deep_search_elements_marginTop">8dp</dimen>
+    <dimen name="deep_serch_edit_text_width">36dp</dimen>
 </resources>
