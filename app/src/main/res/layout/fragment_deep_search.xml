@@ -136,6 +136,7 @@
                 android:id="@+id/balanced_deep_search_checkbox"
                 style="@style/Body_1"
                 android:layout_width="wrap_content"
+                android:tag="@string/deep_search_balanced"
                 android:layout_marginStart="@dimen/deep_search_start_end_padding"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/deep_search_elements_marginTop"
@@ -147,7 +148,7 @@
                 style="@style/Body_1"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="@dimen/deep_search_start_end_padding"
-
+                android:tag="@string/deep_search_high_protein"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/deep_search_elements_marginTop"
                 android:text="@string/deep_search_high_protein"
@@ -158,7 +159,7 @@
                 style="@style/Body_1"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="@dimen/deep_search_start_end_padding"
-
+                android:tag="@string/deep_search_low_fat"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/deep_search_elements_marginTop"
                 android:text="@string/deep_search_low_fat"
@@ -169,7 +170,7 @@
                 style="@style/Body_1"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="@dimen/deep_search_start_end_padding"
-
+                android:tag="@string/deep_search_low_carb"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/deep_search_elements_marginTop"
                 android:text="@string/deep_search_low_carb"
@@ -180,6 +181,7 @@
                 style="@style/Body_1"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="@dimen/deep_search_start_end_padding"
+                android:tag="@string/deep_search_vegan"
 
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/deep_search_elements_marginTop"
@@ -200,6 +202,7 @@
                 android:layout_width="wrap_content"
                 android:layout_marginTop="@dimen/deep_search_elements_marginTop"
                 android:layout_marginStart="@dimen/deep_search_start_end_padding"
+                android:tag="@string/deep_search_vegetarian"
 
                 android:layout_height="wrap_content"
                 android:text="@string/deep_search_vegetarian"
@@ -211,6 +214,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/deep_search_start_end_padding"
+                android:tag="@string/deep_search_sugar_conscious"
 
                 android:layout_marginTop="@dimen/deep_search_elements_marginTop"
                 android:text="@string/deep_search_sugar_conscious"
@@ -221,6 +225,7 @@
                 style="@style/Body_1"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="@dimen/deep_search_start_end_padding"
+                android:tag="@string/deep_search_peabut_free"
 
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/deep_search_elements_marginTop"
@@ -232,6 +237,7 @@
                 style="@style/Body_1"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="@dimen/deep_search_start_end_padding"
+                android:tag="@string/deep_search_tree_nut_free"
 
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/deep_search_elements_marginTop"
@@ -242,6 +248,7 @@
                 style="@style/Body_1"
                 android:layout_width="wrap_content"
                 android:layout_marginStart="@dimen/deep_search_start_end_padding"
+                android:tag="@string/deep_search_alcohol_free"
 
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/deep_search_elements_marginTop"
@@ -250,10 +257,12 @@
         </LinearLayout>
     </LinearLayout>
 
+
     <Button
         style="@style/Button"
         android:layout_marginTop="@dimen/deep_search_elements_marginTop"
         android:layout_width="wrap_content"
+        android:id="@+id/find_deep_search_button"
         android:layout_height="wrap_content"
         android:layout_below="@+id/table_deep_search"
         android:layout_centerHorizontal="true"

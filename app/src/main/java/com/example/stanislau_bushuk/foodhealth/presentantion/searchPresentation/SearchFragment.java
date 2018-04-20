@@ -72,6 +72,10 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
         });
     }
 
+    @Override
+    public void onSaveInstanceState(final Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     public void showList(final List<Hits> hitsList) {
