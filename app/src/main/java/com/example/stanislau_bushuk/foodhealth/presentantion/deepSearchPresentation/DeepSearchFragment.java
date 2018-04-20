@@ -81,7 +81,7 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
     @Override
     public void onClick(final View v) {
         if (v==findButton){
-            Timber.e("button click send request");
+            presenter.getRecipeFilter("0-3000");
         }
     }
 
@@ -102,6 +102,6 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
     @Override
     public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
         Timber.e(buttonView.getId()+" "+isChecked);
-        presenter.deepSearchModel.setMap(buttonView,isChecked);
+        presenter.model.setMap(buttonView,isChecked);
     }
 }
