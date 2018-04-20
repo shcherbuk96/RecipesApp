@@ -2,6 +2,9 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresenta
 
 import android.widget.CompoundButton;
 
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +13,8 @@ import timber.log.Timber;
 public class DeepSearchModel {
 
     private Map<String, Boolean> checkboxMap = new HashMap<String, Boolean>();
+
+
 
     public DeepSearchModel() {
         checkboxMap = new HashMap<String, Boolean>();
@@ -25,6 +30,7 @@ public class DeepSearchModel {
     public Map<String,String> getQueryMap(){
         final Map<String,String> query = new HashMap<String, String>();
         for (final String key : checkboxMap.keySet()) {
+            Timber.e(key);
             query.put("Health",key);
         }
         return query;

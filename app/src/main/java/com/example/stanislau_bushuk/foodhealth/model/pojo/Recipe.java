@@ -11,7 +11,7 @@ public class Recipe {
     private String source;
     private String url;
     private String shareAs;
-    private int yield;
+    private float yield;
     private ArrayList dietLabels;
     private ArrayList healthLabels;
 
@@ -51,7 +51,7 @@ public class Recipe {
         return shareAs;
     }
 
-    public int getYield() {
+    public float getYield() {
         return yield;
     }
 

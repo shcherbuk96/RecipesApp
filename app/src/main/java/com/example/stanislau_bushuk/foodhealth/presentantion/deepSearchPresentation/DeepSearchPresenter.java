@@ -1,5 +1,7 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation;
 
+import android.view.View;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
@@ -32,7 +34,7 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
     }
 
     public void getRecipeFilter(final String calories){
-        netWorkModel.getRecipeFilter("0-3000");
+        netWorkModel.getRecipeFilter(calories);
     }
 
     @Override
@@ -43,23 +45,27 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
                     @Override
                     public void onSubscribe(final Disposable d) {
                         Timber.e("Subscribe");
+                        getViewState().progressBarVisibility(View.VISIBLE);
                     }
 
                     @Override
                     public void onNext(final Recipes recipe) {
-                        Timber.e(String.valueOf(recipe.getHits().size()));
+
+                        getViewState().showData(recipe.getHits());
                     }
 
                     @Override
                     public void onError(final Throwable e) {
                         e.printStackTrace();
+                        getViewState().progressBarVisibility(View.INVISIBLE);
                         Timber.e("ERROR");
                     }
 
                     @Override
                     public void onComplete() {
-
+                        getViewState().progressBarVisibility(View.INVISIBLE);
                     }
                 });
     }
+
 }

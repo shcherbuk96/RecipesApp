@@ -10,11 +10,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.PresenterType;
+import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.R;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,10 +60,16 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
     @BindView(R.id.alcohol_free_deep_search_checkbox)
     AppCompatCheckBox alcoholCheckbox;
 
+    @BindView(R.id.to_deep_search_edit_text)
+    EditText toEditText;
+
+    @BindView(R.id.from_deep_search_edit_text)
+    EditText fromEditText;
+
     @BindView(R.id.find_deep_search_button)
     Button findButton;
 
-    @InjectPresenter
+    @InjectPresenter(type = PresenterType.GLOBAL)
     DeepSearchPresenter presenter;
 
     @Override
@@ -81,7 +93,8 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
     @Override
     public void onClick(final View v) {
         if (v==findButton){
-            presenter.getRecipeFilter("0-3000");
+            ActivityManager.startDeepSearchActivity(getActivity());
+            presenter.getRecipeFilter(fromEditText.getText().toString()+"-"+toEditText.getText().toString());
         }
     }
 
@@ -103,5 +116,15 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
     public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
         Timber.e(buttonView.getId()+" "+isChecked);
         presenter.model.setMap(buttonView,isChecked);
+    }
+
+    @Override
+    public void showData(final ArrayList<Hits> recipes) {
+
+    }
+
+    @Override
+    public void progressBarVisibility(final int visible) {
+
     }
 }
