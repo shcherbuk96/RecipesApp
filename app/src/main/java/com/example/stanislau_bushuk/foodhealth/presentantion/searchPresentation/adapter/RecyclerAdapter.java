@@ -59,14 +59,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             holder.starButton.setChecked(true);
         }
 
-        holder.starButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                realmModel.removeDataToRealm(recipe);
-                notifyDataSetChanged();
-            }
-        });
-
         holder.titleTextView.setText(recipe.getLabel());
 
         GlideApp
