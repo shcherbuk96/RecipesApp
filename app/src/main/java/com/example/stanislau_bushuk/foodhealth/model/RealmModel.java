@@ -54,8 +54,8 @@ public class RealmModel {
     }
 
     public boolean checkFavorite(final Recipe recipe) {
-        final RealmResults<Recipe> students = realm.where(Recipe.class).findAll();
-        final Recipe r = students.where().equalTo("uri", recipe.getUri()).findFirst();
+        final RealmResults<Recipe> recipes = realm.where(Recipe.class).findAll();
+        final Recipe r = recipes.where().equalTo("uri", recipe.getUri()).findFirst();
 
         if (r != null) {
             return true;
