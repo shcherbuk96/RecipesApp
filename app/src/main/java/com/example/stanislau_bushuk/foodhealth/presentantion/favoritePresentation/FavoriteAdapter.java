@@ -11,14 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.stanislau_bushuk.foodhealth.ActivityManager;
-import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.R;
-import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 import com.sackcentury.shinebuttonlib.ShineButton;
 
-import javax.inject.Inject;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,17 +25,14 @@ import timber.log.Timber;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyViewHolder> {
 
-    @Inject
-    RealmModel realmModel;
-
     private Context context;
-    private RealmResults<Recipe> recipes;
+    private List<Recipe> recipeList;
+    private CallBackFavorite callBackFavorite;
 
-
-    FavoriteAdapter(final RealmResults<Recipe> recipes, final Context context) {
-        App.getAppComponent().inject(this);
-        this.recipes = recipes;
+    FavoriteAdapter(final CallBackFavorite callBackFavorite, final List<Recipe> list, final Context context) {
+        this.recipeList = list;
         this.context = context;
+        this.callBackFavorite = callBackFavorite;
     }
 
     @NonNull
@@ -50,23 +45,20 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull final FavoriteAdapter.MyViewHolder holder, final int position) {
-        final Recipe recipe = recipes.get(position);
+        final Recipe recipe = recipeList.get(position);
 
         if (recipe != null) {
-
-            if (realmModel.checkFavorite(recipe)) {
-                holder.starButton.setChecked(true);
-            }
+            holder.starButton.setChecked(true);
 
             holder.starButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
-                    realmModel.removeDataToRealm(recipe);
-                    notifyDataSetChanged();
+                    callBackFavorite.deleteFromRealm(recipe);
                 }
             });
 
             holder.titleTextView.setText(recipe.getLabel());
+
             GlideApp
                     .with(context)
                     .load(recipe.getImage())
@@ -83,11 +75,26 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyView
         }
     }
 
-    @Override
-    public int getItemCount() {
-        return recipes.size();
+    public void updateAdapter(final RealmResults<Recipe> list) {
+        recipeList.clear();
+        recipeList.addAll(list);
+        notifyDataSetChanged();
     }
 
+    @Override
+    public int getItemCount() {
+        return recipeList.size();
+    }
+
+    @Override
+    public long getItemId(final int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(final int position) {
+        return position;
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_title_text_view)

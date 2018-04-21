@@ -1,6 +1,8 @@
 package com.example.stanislau_bushuk.foodhealth.model;
 
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
+import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.CallBackRealmData;
+import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoritePresenter;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -11,56 +13,43 @@ import timber.log.Timber;
 public class RealmModel {
 
     private Realm realm;
+    private CallBackRealmData callBackRealmData;
 
     public RealmModel() {
         realm = Realm.getDefaultInstance();
     }
 
+    public void setCallBack(final FavoritePresenter favoritePresenter) {
+        callBackRealmData = favoritePresenter;
+    }
+
     public void addDataToRealm(final Recipe recipe) {
+        recipe.setChecked(true);
         realm.beginTransaction();
         realm.insertOrUpdate(recipe);
         realm.commitTransaction();
-        Timber.e(String.valueOf(realm.where(Recipe.class).findAll()));
+        Timber.e(String.valueOf(recipe.isChecked()));
     }
 
     public void removeDataToRealm(final Recipe recipe) {
-        final RealmResults<Recipe> students = realm.where(Recipe.class).findAll();
-
-        final Recipe r = students.where().equalTo("uri", recipe.getUri()).findFirst();
-
-        if (r != null) {
-            realm.beginTransaction();
-            r.deleteFromRealm();
-            realm.commitTransaction();
-        }
-
-        Timber.e(String.valueOf(realm.where(Recipe.class).findAll()));
+        realm.beginTransaction();
+        recipe.setChecked(false);
+        realm.insertOrUpdate(recipe);
+        realm.commitTransaction();
+        Timber.e(String.valueOf(recipe.isChecked()));
     }
 
 
-    public Observable<RealmResults<Recipe>> getData() {
-        final RealmResults<Recipe> recipes = realm.where(Recipe.class).findAll();
+    public void getData() {
+        final RealmResults<Recipe> recipes = realm.where(Recipe.class).equalTo("isChecked", true).findAll();
 
         if (recipes != null) {
             Timber.e("getData");
             final Observable<RealmResults<Recipe>> observable = recipes.asFlowable().toObservable();
-
-            return observable.subscribeOn(AndroidSchedulers.mainThread());
+            callBackRealmData.getDataRealm(observable.subscribeOn(AndroidSchedulers.mainThread()));
+        } else {
+            Timber.e("getData null");
         }
-
-        Timber.e("getData null");
-
-        return null;
     }
 
-    public boolean checkFavorite(final Recipe recipe) {
-        final RealmResults<Recipe> recipes = realm.where(Recipe.class).findAll();
-        final Recipe r = recipes.where().equalTo("uri", recipe.getUri()).findFirst();
-
-        if (r != null) {
-            return true;
-        }
-
-        return false;
-    }
 }

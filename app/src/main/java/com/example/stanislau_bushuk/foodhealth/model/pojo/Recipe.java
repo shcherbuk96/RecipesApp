@@ -1,17 +1,14 @@
 package com.example.stanislau_bushuk.foodhealth.model.pojo;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PropertyKey;
-
 import io.realm.RealmList;
-import io.realm.RealmModel;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 public class Recipe extends RealmObject {
 
-    @PropertyKey
+    @PrimaryKey
     private String uri;
     private String label;
     private String image;
@@ -20,7 +17,7 @@ public class Recipe extends RealmObject {
     private String shareAs;
     private int yield;
     private RealmList<String> dietLabels;
-    private RealmList <String>  healthLabels;
+    private RealmList<String> healthLabels;
 
     private RealmList<String> cautions;
     private RealmList<String> ingredientLines;
@@ -32,6 +29,8 @@ public class Recipe extends RealmObject {
     private TotalDaily totalDaily;
     private boolean bookmarked;
     private boolean bought;
+
+    private boolean isChecked;
 
     public String getUri() {
         return uri;
@@ -94,7 +93,6 @@ public class Recipe extends RealmObject {
     }
 
 
-
     public boolean isBookmarked() {
         return bookmarked;
     }
@@ -119,4 +117,11 @@ public class Recipe extends RealmObject {
         this.totalDaily = totalDaily;
     }
 
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(final boolean checked) {
+        isChecked = checked;
+    }
 }

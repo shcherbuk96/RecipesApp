@@ -15,11 +15,17 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.RealmResults;
 
-public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteView {
+public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteView, CallBackFavorite {
+
+    FavoriteAdapter favoriteAdapter;
+
     @BindView(R.id.favorite_list_recycler_view)
     RecyclerView listRecyclerView;
 
@@ -37,13 +43,26 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
+        final List<Recipe> list = new ArrayList<>();
+        final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        listRecyclerView.setLayoutManager(mLayoutManager);
+        favoriteAdapter = new FavoriteAdapter(this, list, getContext());
+        listRecyclerView.setAdapter(favoriteAdapter);
     }
 
     @Override
     public void showList(final RealmResults<Recipe> recipes) {
-        final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        listRecyclerView.setLayoutManager(mLayoutManager);
-        final FavoriteAdapter favoriteAdapter = new FavoriteAdapter(recipes, getContext());
-        listRecyclerView.setAdapter(favoriteAdapter);
+        favoriteAdapter.updateAdapter(recipes);
     }
+
+    @Override
+    public void addToRealm(final Recipe recipe) {
+        favoritePresenter.addToRealm(recipe);
+    }
+
+    @Override
+    public void deleteFromRealm(final Recipe recipe) {
+        favoritePresenter.deleteFromRealm(recipe);
+    }
+
 }

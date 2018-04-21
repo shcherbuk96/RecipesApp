@@ -16,17 +16,18 @@ import io.realm.RealmResults;
 import timber.log.Timber;
 
 @InjectViewState
-public class FavoritePresenter extends MvpPresenter<FavoriteView>{
+public class FavoritePresenter extends MvpPresenter<FavoriteView> implements CallBackRealmData {
     @Inject
     RealmModel realmModel;
 
-    FavoritePresenter(){
+    FavoritePresenter() {
         App.getAppComponent().inject(this);
-        call(realmModel.getData());
-
+        realmModel.setCallBack(this);
+        realmModel.getData();
     }
 
-    private void call(final Observable<RealmResults<Recipe>> observable){
+    @Override
+    public void getDataRealm(final Observable<RealmResults<Recipe>> observable) {
         observable
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<RealmResults<Recipe>>() {
@@ -38,9 +39,8 @@ public class FavoritePresenter extends MvpPresenter<FavoriteView>{
                     @Override
                     public void onNext(final RealmResults<Recipe> recipes) {
                         Timber.e("onNext");
-                        if(recipes!=null){
+                        if (recipes != null) {
                             getViewState().showList(recipes);
-                            Timber.e("getViewState");
                         }
                     }
 
@@ -55,4 +55,14 @@ public class FavoritePresenter extends MvpPresenter<FavoriteView>{
                     }
                 });
     }
+
+    public void addToRealm(final Recipe recipe) {
+        realmModel.addDataToRealm(recipe);
+    }
+
+    public void deleteFromRealm(final Recipe recipe) {
+        realmModel.removeDataToRealm(recipe);
+    }
+
+
 }

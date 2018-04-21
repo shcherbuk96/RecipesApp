@@ -11,17 +11,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.stanislau_bushuk.foodhealth.ActivityManager;
-import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.R;
-import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
+import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.CallBackFavorite;
 import com.sackcentury.shinebuttonlib.ShineButton;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,14 +30,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     private Context context;
     private List<Hits> hits;
 
-    @Inject
-    RealmModel realmModel;
+    private CallBackFavorite callBackFavorite;
 
-
-    public RecyclerAdapter(final List<Hits> hits, final Context context) {
-        App.getAppComponent().inject(this);
+    public RecyclerAdapter(final CallBackFavorite callBackFavorite, final List<Hits> hits, final Context context) {
         this.hits = hits;
         this.context = context;
+        this.callBackFavorite = callBackFavorite;
     }
 
     @NonNull
@@ -55,10 +50,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         final Recipe recipe = hits.get(position).getRecipe();
 
-        if (realmModel.checkFavorite(recipe)) {
-            holder.starButton.setChecked(true);
-        }
-
         holder.titleTextView.setText(recipe.getLabel());
 
         GlideApp
@@ -70,11 +61,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         holder.starButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(final View view, final boolean checked) {
-                if(checked){
-                    realmModel.addDataToRealm(recipe);
-                }else{
-                    //Timber.e(String.valueOf(recipe));
-                    realmModel.removeDataToRealm(recipe);
+                if (checked) {
+                    callBackFavorite.addToRealm(recipe);
+                    //realmModel.addDataToRealm(recipe);
+                } else {
+                    callBackFavorite.deleteFromRealm(recipe);
                 }
             }
         });
@@ -83,9 +74,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             @Override
             public void onClick(final View v) {
                 Timber.e(recipe.getUri());
-                ActivityManager.startCardActivity(context,recipe.getUri());
+                ActivityManager.startCardActivity(context, recipe.getUri());
             }
         });
+       /* if (realmModel.checkFavorite(recipe)) {
+            holder.starButton.setChecked(true);
+            Timber.e(String.valueOf(position));
+        }*/
     }
 
     @Override
@@ -112,6 +107,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     }
 
+    @Override
+    public long getItemId(final int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(final int position) {
+        return position;
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_title_text_view)
