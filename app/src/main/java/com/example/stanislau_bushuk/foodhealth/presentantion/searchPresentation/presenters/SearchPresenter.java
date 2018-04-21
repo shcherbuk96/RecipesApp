@@ -42,6 +42,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
         netWorkModel.setCallBackSearch(this);
     }
 
+
     @Override
     public void call(final Observable<Recipes> observable, final boolean update, final int random) {
         observable.subscribeOn(Schedulers.io())
@@ -86,7 +87,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                 .map(new Function<CharSequence, String>() {
                     @Override
                     public String apply(final CharSequence charSequence) throws Exception {
-                        return charSequence.toString().trim();
+                        return charSequence.toString();
                     }
                 })
                 .debounce(Constants.TEXT_DEBOUNCE, TimeUnit.MILLISECONDS)
@@ -95,12 +96,13 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(final Disposable d) {
-
+                        Timber.e("TextSubscribe");
                     }
 
                     @Override
                     public void onNext(final String s) {
                         if (!s.isEmpty()) {
+
                             netWorkModel.getResponse(s, 0, false);
                             getViewState().setSearchText(s);
                         } else {

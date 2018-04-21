@@ -4,13 +4,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.PresenterType;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
+import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.RecyclerViewMoreListener;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
 
 import java.util.ArrayList;
@@ -31,38 +31,71 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     ProgressBar progressBar;
 
     private RecyclerAdapter adapter;
-    private ArrayList<Hits> recipes;
+    private boolean instanceState=false;
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deep_search);
 
+        if(savedInstanceState!=null){
+            instanceState=true;
+        }
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
+
+        setContentView(R.layout.activity_deep_search);
         ButterKnife.bind(this);
-        presenter.attachView(this);
-        Timber.e(presenter.getAttachedViews().toString());
-        recipes = new ArrayList<>();
-        adapter = new RecyclerAdapter(recipes, this);
-        final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(mLayoutManager);
+        adapter = new RecyclerAdapter(new ArrayList<Hits>(), this);
+        final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+        recyclerView.addOnScrollListener(new RecyclerViewMoreListener(layoutManager) {
+            @Override
+            public void onScroll(final int totalItemCount) {
+                presenter.updateRecipeFilter();
+            }
+        });
+        presenter.attachView(this);
     }
 
     @Override
     public void showData(final ArrayList<Hits> recipes) {
-
-        if (recipes != null && recipes.size() != 0) {
-            this.recipes.clear();
-            this.recipes.addAll(recipes);
-        }else{
-            Toast.makeText(this,"Cant find this",Toast.LENGTH_LONG).show();
+        Timber.e("show data");
+        if (!instanceState) {
+            adapter.updateAdapter(recipes);
+            instanceState=true;
+        }else {
+            adapter.updateList(recipes);
         }
-
-        adapter.updateAdapter(recipes);
     }
+
 
     @Override
     public void progressBarVisibility(final int visible) {
         progressBar.setVisibility(visible);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        presenter.model.setFrom(0);
+        onBackPressed();
+
+        return true;
+    }
+
+    @Override
+    protected void onSaveInstanceState(final Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        presenter.detachView(this);
     }
 }

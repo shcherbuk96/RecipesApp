@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
@@ -18,17 +17,14 @@ import com.arellomobile.mvp.presenter.PresenterType;
 import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
-import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
-public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSearchView , View.OnClickListener , AppCompatCheckBox.OnCheckedChangeListener{
+public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSearchView, View.OnClickListener, AppCompatCheckBox.OnCheckedChangeListener {
 
     @BindView(R.id.balanced_deep_search_checkbox)
     AppCompatCheckBox balancedCheckbox;
@@ -86,19 +82,21 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         initViews();
     }
 
     @Override
     public void onClick(final View v) {
-        if (v==findButton){
+
+        if (v == findButton) {
             ActivityManager.startDeepSearchActivity(getActivity());
-            presenter.getRecipeFilter(fromEditText.getText().toString()+"-"+toEditText.getText().toString());
+            presenter.getRecipeFilter(fromEditText.getText().toString(), toEditText.getText().toString());
         }
+
     }
 
-    public void initViews(){
+    public void initViews() {
         findButton.setOnClickListener(this);
         balancedCheckbox.setOnCheckedChangeListener(this);
         alcoholCheckbox.setOnCheckedChangeListener(this);
@@ -114,8 +112,7 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
 
     @Override
     public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
-        Timber.e(buttonView.getId()+" "+isChecked);
-        presenter.model.setMap(buttonView,isChecked);
+        presenter.model.setMap(buttonView, isChecked);
     }
 
     @Override
