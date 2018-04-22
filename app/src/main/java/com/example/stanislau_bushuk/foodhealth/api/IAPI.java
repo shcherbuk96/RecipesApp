@@ -29,6 +29,9 @@ public interface IAPI {
     Observable<Recipes> getRecipeFilter(@Query("q") String q, @Query("app_id") String app_id, @Query("app_key") String app_key, @Query("from") String from,
                                         @Query("to") String to, @Query("calories") String calories, @QueryMap Map<String,String> health);
 
+    @GET("search")
+    Observable<Recipes> getRecipeFilterCountIngredients(@Query("q") String q, @Query("app_id") String app_id, @Query("app_key") String app_key, @Query("from") String from,
+                                                        @Query("to") String to, @Query("calories") String calories, @Query("ingr") String countIngredients, @QueryMap Map<String,String> health);
 
     //sample of url
     //http://www.edamam.com/ontologies/edamam.owl#recipe_ef501809e5dd1a4cf72c650b04ffca96

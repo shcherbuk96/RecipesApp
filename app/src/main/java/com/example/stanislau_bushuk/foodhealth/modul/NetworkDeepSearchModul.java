@@ -1,6 +1,6 @@
 package com.example.stanislau_bushuk.foodhealth.modul;
 
-import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.NetWorkModelDeepSearch;
+import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.model.NetWorkModelDeepSearch;
 
 import javax.inject.Singleton;
 

@@ -10,9 +10,8 @@ import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetworkDeepSearchModul;
 import com.example.stanislau_bushuk.foodhealth.modul.ResourceManagerModul;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardPresenter;
-import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchModel;
-import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchPresenter;
-import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.NetWorkModelDeepSearch;
+import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters.DeepSearchPresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.model.NetWorkModelDeepSearch;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
 
 import javax.inject.Singleton;

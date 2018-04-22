@@ -3,13 +3,18 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresenta
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.MenuItem;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.PresenterType;
+import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
+import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters.DeepSearchPresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.view.DeepSearchView;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.RecyclerViewMoreListener;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
 
@@ -17,7 +22,6 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSearchView {
 
@@ -31,15 +35,15 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     ProgressBar progressBar;
 
     private RecyclerAdapter adapter;
-    private boolean instanceState=false;
+    private boolean instanceState = false;
 
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(savedInstanceState!=null){
-            instanceState=true;
+        if (savedInstanceState != null) {
+            instanceState = true;
         }
 
         if (getSupportActionBar() != null) {
@@ -59,11 +63,12 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
                 presenter.updateRecipeFilter();
             }
         });
-
+        presenter.attachView(this);
     }
 
     @Override
     public void showData(final ArrayList<Hits> recipes) {
+
         adapter.updateList(recipes);
     }
 
@@ -74,32 +79,39 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     }
 
     @Override
-    public void clearAdapter() {
-
-        if(adapter.getItemCount()>0 && !instanceState){
-            instanceState=true;
-            Timber.e("clear");
-            adapter.clearAdapter();
-        }
-
+    public void notFound() {
+        Toast.makeText(this, Constants.NOTFOUND, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public boolean onSupportNavigateUp() {
         presenter.model.setFrom(0);
-        onBackPressed();
+        presenter.model.getRecipes().clear();
+
+        super.onBackPressed();
 
         return true;
     }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem menuItem) {
+
+        switch (menuItem.getItemId()) {
+            case android.R.id.home:
+                presenter.model.setFrom(0);
+                presenter.model.getRecipes().clear();
+
+                super.onBackPressed();
+                return true;
+        }
+
+        return (super.onOptionsItemSelected(menuItem));
+    }
+
 
     @Override
     protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-    }
 }

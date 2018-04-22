@@ -1,13 +1,14 @@
-package com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation;
+package com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.model;
 
 import android.widget.CompoundButton;
 
 import com.example.stanislau_bushuk.foodhealth.Constants;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import timber.log.Timber;
 
 public class DeepSearchModel {
 
@@ -15,8 +16,15 @@ public class DeepSearchModel {
     private Map<String, Boolean> checkboxMap;
     private String calories;
 
+
+    private ArrayList<Hits> recipes = new ArrayList<>();
+
     public DeepSearchModel() {
         checkboxMap = new HashMap<>();
+    }
+
+    public ArrayList<Hits> getRecipes() {
+        return recipes;
     }
 
     public String getCalories() {

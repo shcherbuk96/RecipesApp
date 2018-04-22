@@ -17,12 +17,13 @@ import com.arellomobile.mvp.presenter.PresenterType;
 import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
+import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters.DeepSearchPresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.view.DeepSearchView;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSearchView, View.OnClickListener, AppCompatCheckBox.OnCheckedChangeListener {
 
@@ -62,6 +63,9 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
     @BindView(R.id.from_deep_search_edit_text)
     EditText fromEditText;
 
+    @BindView(R.id.up_to_deep_search_edit_text)
+    EditText upToEditText;
+
     @BindView(R.id.find_deep_search_button)
     Button findButton;
 
@@ -91,7 +95,7 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
 
         if (v == findButton) {
             ActivityManager.startDeepSearchActivity(getActivity());
-            presenter.getRecipeFilter(fromEditText.getText().toString(), toEditText.getText().toString());
+            presenter.getRecipeFilter(fromEditText.getText().toString(), toEditText.getText().toString(),upToEditText.getText().toString());
         }
 
     }
@@ -126,7 +130,7 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
     }
 
     @Override
-    public void clearAdapter() {
+    public void notFound() {
 
     }
 }
