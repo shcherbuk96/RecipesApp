@@ -35,16 +35,11 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     ProgressBar progressBar;
 
     private RecyclerAdapter adapter;
-    private boolean instanceState = false;
 
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (savedInstanceState != null) {
-            instanceState = true;
-        }
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -84,13 +79,11 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
+    public void onBackPressed() {
         presenter.model.setFrom(0);
         presenter.model.getRecipes().clear();
 
         super.onBackPressed();
-
-        return true;
     }
 
     @Override
