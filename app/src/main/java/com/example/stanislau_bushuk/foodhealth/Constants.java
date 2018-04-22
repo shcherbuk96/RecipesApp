@@ -22,4 +22,8 @@ public class Constants {
 
     public static final int RABDON = 90;
 
+    public static final String HYPHEN = "-";
+
+    public static final String HEALTH = "Health";
+
 }

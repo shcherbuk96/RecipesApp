@@ -33,15 +33,14 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
 
     public void getRecipeFilter(final String caloriesFrom, final String caloriesTo) {
         final int from = model.getFrom();
-        if (caloriesTo.equals("0")) {
+        if (caloriesTo.equals("0") || caloriesTo.isEmpty() || caloriesFrom.isEmpty()) {
             netWorkModel.getRecipeFilter(Constants.CALLORIES, from, model.getQueryMap());
             model.setCalories(Constants.CALLORIES);
         } else {
-            final String calories = caloriesFrom + "-" + caloriesTo;
+            final String calories = caloriesFrom + Constants.HYPHEN + caloriesTo;
             netWorkModel.getRecipeFilter(calories, from, model.getQueryMap());
             model.setCalories(calories);
         }
-        Timber.e("Request");
         model.setFrom(from+Constants.ITEMS_IN_PAGE+1);
     }
 
@@ -58,6 +57,7 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
                 .subscribe(new Observer<Recipes>() {
                     @Override
                     public void onSubscribe(final Disposable d) {
+                        getViewState().clearAdapter();
                         getViewState().progressBarVisibility(View.VISIBLE);
                     }
 
@@ -71,7 +71,6 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
                     public void onError(final Throwable e) {
                         e.printStackTrace();
                         getViewState().progressBarVisibility(View.INVISIBLE);
-                        Timber.e("ERROR");
                     }
 
                     @Override

@@ -10,9 +10,11 @@ import java.util.ArrayList;
 
 public interface DeepSearchView extends MvpView {
 
-    @StateStrategyType(AddToEndSingleStrategy.class)
     void showData(final ArrayList<Hits> recipes);
 
     @StateStrategyType(AddToEndSingleStrategy.class)
     void progressBarVisibility(final int visibility);
+
+    @StateStrategyType(AddToEndSingleStrategy.class)
+    void clearAdapter();
 }

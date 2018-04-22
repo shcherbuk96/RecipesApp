@@ -124,4 +124,9 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
     public void progressBarVisibility(final int visible) {
 
     }
+
+    @Override
+    public void clearAdapter() {
+
+    }
 }

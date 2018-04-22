@@ -77,6 +77,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     }
 
+    public void clearAdapter(){
+        hits.clear();
+        notifyDataSetChanged();
+    }
+
     public void updateList(final List<Hits> hits) {
 
         if (hits != null) {

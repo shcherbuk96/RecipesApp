@@ -21,9 +21,6 @@ public class NetWorkModelDeepSearch {
     @Inject
     IAPI iapi;
 
-    @Inject
-    DeepSearchModel deepSearchModel;
-
     private DeepSearchPresenter presenter;
 
     public NetWorkModelDeepSearch() {

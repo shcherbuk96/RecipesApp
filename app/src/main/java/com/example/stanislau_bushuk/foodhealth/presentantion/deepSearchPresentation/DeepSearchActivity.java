@@ -59,24 +59,29 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
                 presenter.updateRecipeFilter();
             }
         });
-        presenter.attachView(this);
+
     }
 
     @Override
     public void showData(final ArrayList<Hits> recipes) {
-        Timber.e("show data");
-        if (!instanceState) {
-            adapter.updateAdapter(recipes);
-            instanceState=true;
-        }else {
-            adapter.updateList(recipes);
-        }
+        adapter.updateList(recipes);
     }
 
 
     @Override
     public void progressBarVisibility(final int visible) {
         progressBar.setVisibility(visible);
+    }
+
+    @Override
+    public void clearAdapter() {
+
+        if(adapter.getItemCount()>0 && !instanceState){
+            instanceState=true;
+            Timber.e("clear");
+            adapter.clearAdapter();
+        }
+
     }
 
     @Override
@@ -96,6 +101,5 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     protected void onDestroy() {
         super.onDestroy();
 
-        presenter.detachView(this);
     }
 }

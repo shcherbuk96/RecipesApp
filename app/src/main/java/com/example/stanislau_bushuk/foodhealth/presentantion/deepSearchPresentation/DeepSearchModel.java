@@ -2,6 +2,8 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresenta
 
 import android.widget.CompoundButton;
 
+import com.example.stanislau_bushuk.foodhealth.Constants;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,8 +28,6 @@ public class DeepSearchModel {
     }
 
     public void setMap(final CompoundButton compoundButton, final Boolean bool) {
-        Timber.e(compoundButton.getTag().toString());
-
         if (bool)
             checkboxMap.put(compoundButton.getTag().toString(), true);
         else checkboxMap.remove(compoundButton.getTag().toString());
@@ -38,8 +38,7 @@ public class DeepSearchModel {
         final Map<String, String> query = new HashMap<>();
 
         for (final String key : checkboxMap.keySet()) {
-            Timber.e(key);
-            query.put("Health", key);
+            query.put(Constants.HEALTH, key);
         }
 
         return query;
