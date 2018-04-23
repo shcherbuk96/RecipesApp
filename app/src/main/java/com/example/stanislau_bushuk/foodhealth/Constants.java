@@ -26,6 +26,4 @@ public class Constants {
 
     public static final String HEALTH = "Health";
 
-    public static final String NOTFOUND = "Not found for you request";
-
 }

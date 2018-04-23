@@ -12,6 +12,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.PresenterType;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.R;
+import com.example.stanislau_bushuk.foodhealth.ResourceManager;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters.DeepSearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.view.DeepSearchView;
@@ -19,6 +20,8 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
 
 import java.util.ArrayList;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -33,6 +36,9 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
 
     @BindView(R.id.progressbar_deep_search)
     ProgressBar progressBar;
+
+    @Inject
+    ResourceManager resourceManager;
 
     private RecyclerAdapter adapter;
 
@@ -75,7 +81,7 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
 
     @Override
     public void notFound() {
-        Toast.makeText(this, Constants.NOTFOUND, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, resourceManager.getString(R.string.deep_search_not_found), Toast.LENGTH_LONG).show();
     }
 
     @Override
