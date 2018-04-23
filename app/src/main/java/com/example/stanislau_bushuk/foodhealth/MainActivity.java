@@ -18,29 +18,35 @@ public class MainActivity extends MvpAppCompatActivity {
     @BindView(R.id.main_navigation_bottom_navigation_view)
     BottomNavigationView bottomNavigationView;
 
+    private FragmentTransaction fragment;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (savedInstanceState == null) {
+            fragment = getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new SearchFragment());
+            fragment.commit();
+        }
+
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        final FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new SearchFragment());
-        fragmentTransaction.commit();
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull final MenuItem item) {
 
                 switch (item.getItemId()) {
                     case R.id.search:
-                        final FragmentTransaction fragment = getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new SearchFragment());
+                        fragment = getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new SearchFragment());
                         fragment.commit();
 
                         break;
                     case R.id.search_deep:
                         break;
                     case R.id.featured:
-                        final FragmentTransaction fragment3 = getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new FavoriteFragment());
-                        fragment3.commit();
+                        fragment = getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new FavoriteFragment());
+                        fragment.commit();
 
                         break;
                 }
@@ -49,4 +55,5 @@ public class MainActivity extends MvpAppCompatActivity {
             }
         });
     }
+
 }

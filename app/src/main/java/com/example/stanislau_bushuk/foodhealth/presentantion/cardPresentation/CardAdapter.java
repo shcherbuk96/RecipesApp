@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.example.stanislau_bushuk.foodhealth.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -18,9 +18,9 @@ import io.realm.RealmList;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> {
 
-    private RealmList<String> list;
+    private List<String> list;
 
-    CardAdapter(final RealmList<String> list) {
+    CardAdapter(final List<String> list) {
         this.list = list;
     }
 

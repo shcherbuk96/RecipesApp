@@ -52,4 +52,15 @@ public class RealmModel {
         }
     }
 
+    public boolean checkFavorite(final Recipe recipe) {
+        final RealmResults<Recipe> realmResults = realm.where(Recipe.class).findAll();
+        final Recipe r = realmResults.where().equalTo("uri", recipe.getUri()).findFirst();
+
+        if (r != null) {
+            return true;
+        }
+
+        return false;
+    }
+
 }

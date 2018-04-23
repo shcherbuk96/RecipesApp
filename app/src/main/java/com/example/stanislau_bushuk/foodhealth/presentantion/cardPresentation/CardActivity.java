@@ -17,11 +17,10 @@ import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.Realm;
-import io.realm.RealmList;
 import timber.log.Timber;
 
 public class CardActivity extends MvpAppCompatActivity implements CardView {
@@ -66,9 +65,10 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
 
         ButterKnife.bind(this);
 
-        final RealmList<String> recipe = new RealmList<>();
-
-        initAdapter(recipe);
+        final List<String> list = new ArrayList<>();
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        cardAdapter = new CardAdapter(list);
+        recyclerView.setAdapter(cardAdapter);
 
         presenter.getRecipeFromUri(getIntent().getStringExtra(Constants.RECIPE_INTENT_KEY));
         //http://www.edamam.com/ontologies/edamam.owl#recipe_aac66f3688a63daa664b2ac0adff1c11
@@ -93,20 +93,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         fatView.setText(getString(R.string.card_number_fat, data.getFat().getQuantity()));
         proteinView.setText(getString(R.string.card_number_protein, data.getProt().getQuantity()));
         carbsView.setText(getString(R.string.card_number_carbs, data.getChocdf().getQuantity()));
-        initAdapter(data.getIngredientLines());
-    }
-
-    private void initAdapter(final RealmList<String> recipe) {
-
-        if (cardAdapter == null) {
-            cardAdapter = new CardAdapter(recipe);
-        } else {
-            cardAdapter.updateData(recipe);
-        }
-
-        final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(cardAdapter);
+        cardAdapter.updateData(data.getIngredientLines());
     }
 
     @Override

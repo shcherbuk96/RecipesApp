@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 
@@ -22,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.RealmResults;
 
-public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteView, CallBackFavorite {
+public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteView, CallBackFavorite, CallBackActivity {
 
     FavoriteAdapter favoriteAdapter;
 
@@ -44,9 +45,8 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
 
         ButterKnife.bind(this, view);
         final List<Recipe> list = new ArrayList<>();
-        final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        listRecyclerView.setLayoutManager(mLayoutManager);
-        favoriteAdapter = new FavoriteAdapter(this, list, getContext());
+        listRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        favoriteAdapter = new FavoriteAdapter(this, this, list, getContext());
         listRecyclerView.setAdapter(favoriteAdapter);
     }
 
@@ -63,6 +63,11 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
     @Override
     public void deleteFromRealm(final Recipe recipe) {
         favoritePresenter.deleteFromRealm(recipe);
+    }
+
+    @Override
+    public void getInfo(final String uri) {
+        ActivityManager.startCardActivity(getActivity(), uri);
     }
 
 }

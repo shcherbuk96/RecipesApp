@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
@@ -28,11 +27,13 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyView
     private Context context;
     private List<Recipe> recipeList;
     private CallBackFavorite callBackFavorite;
+    private CallBackActivity callBackActivity;
 
-    FavoriteAdapter(final CallBackFavorite callBackFavorite, final List<Recipe> list, final Context context) {
+    FavoriteAdapter(final CallBackFavorite callBackFavorite,final CallBackActivity callBackActivity, final List<Recipe> list, final Context context) {
         this.recipeList = list;
         this.context = context;
         this.callBackFavorite = callBackFavorite;
+        this.callBackActivity = callBackActivity;
     }
 
     @NonNull
@@ -68,8 +69,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyView
             holder.linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
-                    Timber.e(recipe.getUri());
-                    ActivityManager.startCardActivity(context, recipe.getUri());
+                    callBackActivity.getInfo(recipe.getUri());
                 }
             });
         }

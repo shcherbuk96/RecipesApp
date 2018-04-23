@@ -77,10 +77,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 ActivityManager.startCardActivity(context, recipe.getUri());
             }
         });
-       /* if (realmModel.checkFavorite(recipe)) {
-            holder.starButton.setChecked(true);
-            Timber.e(String.valueOf(position));
-        }*/
     }
 
     @Override
