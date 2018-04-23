@@ -24,38 +24,40 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
 
-public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSearchView, View.OnClickListener, AppCompatCheckBox.OnCheckedChangeListener {
+public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSearchView{
 
-    @BindView(R.id.balanced_deep_search_checkbox)
-    AppCompatCheckBox balancedCheckbox;
-
-    @BindView(R.id.high_protein_deep_search_checkbox)
-    AppCompatCheckBox highProteinCheckbox;
-
-    @BindView(R.id.low_fat_deep_search_checkbox)
-    AppCompatCheckBox lowFatCheckbox;
-
-    @BindView(R.id.low_carb_deep_search_checkbox)
-    AppCompatCheckBox lowCarbCheckbox;
-
-    @BindView(R.id.vegan_deep_search_checkbox)
-    AppCompatCheckBox veganCheckbox;
-
-    @BindView(R.id.vegetarian_deep_search_checkbox)
-    AppCompatCheckBox vegetarianCheckbox;
-
-    @BindView(R.id.sugar_conscious_deep_search_checkbox)
-    AppCompatCheckBox sugarCheckbox;
-
-    @BindView(R.id.peanut_free_deep_search_checkbox)
-    AppCompatCheckBox peanutCheckbox;
-
-    @BindView(R.id.tree_nut_free_deep_search_checkbox)
-    AppCompatCheckBox treeCheckbox;
-
-    @BindView(R.id.alcohol_free_deep_search_checkbox)
-    AppCompatCheckBox alcoholCheckbox;
+//    @BindView(R.id.balanced_deep_search_checkbox)
+//    AppCompatCheckBox balancedCheckbox;
+//
+//    @BindView(R.id.high_protein_deep_search_checkbox)
+//    AppCompatCheckBox highProteinCheckbox;
+//
+//    @BindView(R.id.low_fat_deep_search_checkbox)
+//    AppCompatCheckBox lowFatCheckbox;
+//
+//    @BindView(R.id.low_carb_deep_search_checkbox)
+//    AppCompatCheckBox lowCarbCheckbox;
+//
+//    @BindView(R.id.vegan_deep_search_checkbox)
+//    AppCompatCheckBox veganCheckbox;
+//
+//    @BindView(R.id.vegetarian_deep_search_checkbox)
+//    AppCompatCheckBox vegetarianCheckbox;
+//
+//    @BindView(R.id.sugar_conscious_deep_search_checkbox)
+//    AppCompatCheckBox sugarCheckbox;
+//
+//    @BindView(R.id.peanut_free_deep_search_checkbox)
+//    AppCompatCheckBox peanutCheckbox;
+//
+//    @BindView(R.id.tree_nut_free_deep_search_checkbox)
+//    AppCompatCheckBox treeCheckbox;
+//
+//    @BindView(R.id.alcohol_free_deep_search_checkbox)
+//    AppCompatCheckBox alcoholCheckbox;
 
     @BindView(R.id.to_deep_search_edit_text)
     EditText toEditText;
@@ -87,10 +89,9 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
-        initViews();
     }
 
-    @Override
+    @OnClick(R.id.find_deep_search_button)
     public void onClick(final View v) {
 
         if (v == findButton) {
@@ -100,22 +101,12 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
 
     }
 
-    public void initViews() {
-        findButton.setOnClickListener(this);
-        balancedCheckbox.setOnCheckedChangeListener(this);
-        alcoholCheckbox.setOnCheckedChangeListener(this);
-        highProteinCheckbox.setOnCheckedChangeListener(this);
-        lowCarbCheckbox.setOnCheckedChangeListener(this);
-        lowFatCheckbox.setOnCheckedChangeListener(this);
-        peanutCheckbox.setOnCheckedChangeListener(this);
-        sugarCheckbox.setOnCheckedChangeListener(this);
-        treeCheckbox.setOnCheckedChangeListener(this);
-        veganCheckbox.setOnCheckedChangeListener(this);
-        vegetarianCheckbox.setOnCheckedChangeListener(this);
-    }
-
-    @Override
-    public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
+    @OnCheckedChanged({R.id.balanced_deep_search_checkbox, R.id.high_protein_deep_search_checkbox,R.id.low_fat_deep_search_checkbox,
+            R.id.low_carb_deep_search_checkbox,R.id.vegan_deep_search_checkbox,R.id.vegetarian_deep_search_checkbox,
+            R.id.sugar_conscious_deep_search_checkbox,R.id.peanut_free_deep_search_checkbox,R.id.tree_nut_free_deep_search_checkbox,
+            R.id.alcohol_free_deep_search_checkbox
+    })
+    public void onRadioButtonCheckChanged(final CompoundButton buttonView, final boolean isChecked) {
         presenter.model.setMap(buttonView, isChecked);
     }
 
@@ -131,6 +122,11 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
 
     @Override
     public void notFound() {
+
+    }
+
+    @Override
+    public void clearViewStateCommands() {
 
     }
 }

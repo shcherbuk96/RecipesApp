@@ -1,7 +1,6 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.view;
 
 import com.arellomobile.mvp.MvpView;
-import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;

@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.PresenterType;
-import com.example.stanislau_bushuk.foodhealth.Constants;
+import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.ResourceManager;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
@@ -25,6 +25,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSearchView {
 
@@ -42,7 +43,6 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
 
     private RecyclerAdapter adapter;
 
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +52,7 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
+        App.getAppComponent().inject(this);
         setContentView(R.layout.activity_deep_search);
         ButterKnife.bind(this);
         adapter = new RecyclerAdapter(new ArrayList<Hits>(), this);
@@ -64,12 +65,10 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
                 presenter.updateRecipeFilter();
             }
         });
-        presenter.attachView(this);
     }
 
     @Override
     public void showData(final ArrayList<Hits> recipes) {
-
         adapter.updateList(recipes);
     }
 
@@ -85,32 +84,27 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     }
 
     @Override
-    public void onBackPressed() {
-        presenter.model.setFrom(0);
-        presenter.model.getRecipes().clear();
-
-        super.onBackPressed();
+    public void clearViewStateCommands() {
+        Timber.e("clear");
     }
+
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem menuItem) {
 
-        switch (menuItem.getItemId()) {
-            case android.R.id.home:
-                presenter.model.setFrom(0);
-                presenter.model.getRecipes().clear();
-
-                super.onBackPressed();
-                return true;
+        if (menuItem.getItemId() == android.R.id.home) {
+            presenter.setStartFrom();
+            presenter.getViewState().clearViewStateCommands();
+            super.onBackPressed();
         }
 
         return (super.onOptionsItemSelected(menuItem));
     }
 
-
     @Override
-    protected void onSaveInstanceState(final Bundle outState) {
-        super.onSaveInstanceState(outState);
+    public void onBackPressed() {
+        presenter.setStartFrom();
+        presenter.getViewState().clearViewStateCommands();
+        super.onBackPressed();
     }
-
 }

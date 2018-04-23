@@ -16,15 +16,8 @@ public class DeepSearchModel {
     private Map<String, Boolean> checkboxMap;
     private String calories;
 
-
-    private ArrayList<Hits> recipes = new ArrayList<>();
-
     public DeepSearchModel() {
         checkboxMap = new HashMap<>();
-    }
-
-    public ArrayList<Hits> getRecipes() {
-        return recipes;
     }
 
     public String getCalories() {

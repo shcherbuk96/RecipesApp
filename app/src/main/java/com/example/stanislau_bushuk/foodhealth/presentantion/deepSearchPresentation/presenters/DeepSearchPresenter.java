@@ -26,6 +26,7 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
 
     @Inject
     public DeepSearchModel model;
+
     @Inject
     NetWorkModelDeepSearch netWorkModel;
 
@@ -34,10 +35,14 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
         netWorkModel.setCallBack(this);
     }
 
+    public void setStartFrom() {
+        model.setFrom(0);
+    }
+
     public void getRecipeFilter(final String caloriesFrom, final String caloriesTo, final String upToIngredients) {
         final int from = model.getFrom();
         if (upToIngredients.isEmpty()) {
-            if (caloriesTo.equals("0") || caloriesTo.isEmpty() || caloriesFrom.isEmpty()) {
+            if (caloriesTo.isEmpty() || caloriesFrom.isEmpty()) {
                 netWorkModel.getRecipeFilter(Constants.CALLORIES, from, model.getQueryMap());
                 model.setCalories(Constants.CALLORIES);
             } else {
@@ -46,7 +51,7 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
                 model.setCalories(calories);
             }
         } else {
-            if (caloriesTo.equals("0") || caloriesTo.isEmpty() || caloriesFrom.isEmpty()) {
+            if (caloriesTo.isEmpty() || caloriesFrom.isEmpty()) {
                 netWorkModel.getRecipeFilterCountIngredients(Constants.CALLORIES, from, model.getQueryMap(), upToIngredients);
                 model.setCalories(Constants.CALLORIES);
             } else {
@@ -78,15 +83,14 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
                     @Override
                     public void onNext(final Recipes recipe) {
                         Timber.e(String.valueOf(recipe.getHits().size()));
-                        model.getRecipes().addAll(recipe.getHits());
-                        if(model.getRecipes().size()==0)
+                        if (recipe.getHits().size() == 0) {
                             getViewState().notFound();
-                        getViewState().showData(model.getRecipes());
+                        }
+                        getViewState().showData(recipe.getHits());
                     }
 
                     @Override
                     public void onError(final Throwable e) {
-                        e.printStackTrace();
                         getViewState().progressBarVisibility(View.INVISIBLE);
                     }
 

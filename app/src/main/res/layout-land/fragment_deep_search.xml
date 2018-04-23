@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -23,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/title_deep_search"
         android:layout_marginStart="@dimen/deep_search_start_end_padding"
-        android:layout_marginTop="@dimen/deep_search_elements_bottom_padding_from_title"
+        android:layout_marginTop="@dimen/deep_search_elements_marginTop"
         android:text="@string/deep_search_calories_text" />
 
     <TextView
@@ -66,9 +67,8 @@
         style="@style/Body_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/calorie_deep_search"
-        android:layout_below="@+id/from_deep_search_text"
-        android:layout_marginTop="@dimen/deep_search_title_bottom_padding"
+        android:layout_alignStart="@+id/title_deep_search"
+        android:layout_alignTop="@+id/from_deep_search_text"
         android:text="@string/deep_search_to_text" />
 
     <EditText
@@ -76,10 +76,10 @@
         style="@style/Body_1"
         android:layout_width="@dimen/deep_search_edit_text_width"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/to_deep_search_text"
-        android:layout_alignStart="@+id/from_deep_search_edit_text"
-        android:layout_below="@+id/from_deep_search_edit_text"
 
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/calorie_deep_search"
+        android:layout_marginStart="160dp"
         android:background="@drawable/item"
         android:hint="0"
         android:inputType="number"
@@ -115,13 +115,14 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/calorie_deep_search"
         android:layout_below="@+id/to_deep_search_text"
-        android:layout_marginTop="@dimen/deep_search_elements_bottom_padding_from_title"
+        android:layout_marginTop="@dimen/deep_search_elements_marginTop"
         android:text="@string/deep_search_diet" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
+        android:layout_above="@+id/find_deep_search_button"
         android:id="@+id/scroll_deep_search"
         android:layout_below="@+id/diet_deep_search_text">
 
@@ -268,8 +269,7 @@
         style="@style/Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/scroll_deep_search"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/deep_search_elements_marginTop"
         android:text="@string/deep_search_button_text" />
 </RelativeLayout>
