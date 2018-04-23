@@ -23,6 +23,10 @@ public class FavoritePresenter extends MvpPresenter<FavoriteView> implements Cal
     FavoritePresenter() {
         App.getAppComponent().inject(this);
         realmModel.setCallBack(this);
+        dataRealm();
+    }
+
+    private void dataRealm(){
         realmModel.getData();
     }
 
