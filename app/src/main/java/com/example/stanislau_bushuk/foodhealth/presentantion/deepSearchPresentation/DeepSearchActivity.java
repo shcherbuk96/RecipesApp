@@ -93,7 +93,7 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
 
         if (menuItem.getItemId() == android.R.id.home) {
             presenter.setStartFrom();
-            presenter.getViewState().clearViewStateCommands();
+           // presenter.getViewState().clearViewStateCommands();
             super.onBackPressed();
         }
 
@@ -103,7 +103,7 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     @Override
     public void onBackPressed() {
         presenter.setStartFrom();
-        presenter.getViewState().clearViewStateCommands();
+        //presenter.getViewState().clearViewStateCommands();
         super.onBackPressed();
     }
 }
