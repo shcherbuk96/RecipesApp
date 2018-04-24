@@ -25,7 +25,6 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
-import timber.log.Timber;
 
 public class CardActivity extends MvpAppCompatActivity implements CardView {
 
@@ -95,13 +94,8 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
 
                     @Override
                     public void onNext(final String s) {
-                        if(!s.isEmpty()){
-                            int count=Integer.parseInt(s);
-                            caloriesView.setText(getString(R.string.card_number_calories, data.getCalories()*count/data.getYield()));
-                            daylyView.setText(getString(R.string.card_number_daily, data.getENERC_KCAL().getQuantity()*count/data.getYield()));
-                            fatView.setText(getString(R.string.card_number_fat, data.getFat().getQuantity()*count/data.getYield()));
-                            proteinView.setText(getString(R.string.card_number_protein, data.getProt().getQuantity()*count/data.getYield()));
-                            carbsView.setText(getString(R.string.card_number_carbs, data.getChocdf().getQuantity()*count/data.getYield()));
+                        if (!s.isEmpty()) {
+                            presenter.getEditData(Integer.parseInt(s), data);
                         }
                     }
 
@@ -120,7 +114,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
 
     @Override
     public void showList(final Data data) {
-        this.data=data;
+        this.data = data;
         setTitle(data.getLabel());
 
         RequestOptions requestOptions = new RequestOptions();
@@ -138,6 +132,15 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         proteinView.setText(getString(R.string.card_number_protein, data.getProt().getQuantity()));
         carbsView.setText(getString(R.string.card_number_carbs, data.getChocdf().getQuantity()));
         cardAdapter.updateData(data.getIngredientLines());
+    }
+
+    @Override
+    public void showEditData(final EditData data) {
+        caloriesView.setText(getString(R.string.card_number_calories, data.getCalories()));
+        daylyView.setText(getString(R.string.card_number_daily, data.getENERC_KCAL()));
+        fatView.setText(getString(R.string.card_number_fat, data.getFat()));
+        proteinView.setText(getString(R.string.card_number_protein, data.getProt()));
+        carbsView.setText(getString(R.string.card_number_carbs, data.getChocdf()));
     }
 
     @Override

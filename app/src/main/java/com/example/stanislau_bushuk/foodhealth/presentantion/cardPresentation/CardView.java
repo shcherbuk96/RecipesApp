@@ -4,4 +4,6 @@ import com.arellomobile.mvp.MvpView;
 
 public interface CardView extends MvpView {
     void showList(Data data);
+
+    void showEditData(EditData data);
 }
