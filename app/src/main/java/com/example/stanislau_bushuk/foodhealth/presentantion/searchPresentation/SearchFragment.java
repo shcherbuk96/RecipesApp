@@ -60,10 +60,9 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
-        final List<Hits> hitsList = new ArrayList<>();
-        final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        listRecyclerView.setLayoutManager(mLayoutManager);
-        recyclerAdapter = new RecyclerAdapter(this, hitsList);
+
+        listRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerAdapter = new RecyclerAdapter(this, new ArrayList<Hits>());
         listRecyclerView.setAdapter(recyclerAdapter);
         presenter.searchObservable(searchView);
         listRecyclerView.addOnScrollListener(new RecyclerViewMoreListener(listRecyclerView.getLayoutManager()) {

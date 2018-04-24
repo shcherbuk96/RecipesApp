@@ -17,7 +17,6 @@ import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -65,12 +64,12 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
 
         ButterKnife.bind(this);
 
-        final List<String> list = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        cardAdapter = new CardAdapter(list);
+        cardAdapter = new CardAdapter(new ArrayList<String>());
         recyclerView.setAdapter(cardAdapter);
 
         presenter.getRecipeFromUri(getIntent().getStringExtra(Constants.RECIPE_INTENT_KEY));
+
         //http://www.edamam.com/ontologies/edamam.owl#recipe_aac66f3688a63daa664b2ac0adff1c11
     }
 

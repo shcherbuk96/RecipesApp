@@ -23,10 +23,9 @@ public class FavoritePresenter extends MvpPresenter<FavoriteView> implements Cal
     FavoritePresenter() {
         App.getAppComponent().inject(this);
         realmModel.setCallBack(this);
-        dataRealm();
     }
 
-    private void dataRealm(){
+    public void dataRealm() {
         realmModel.getData();
     }
 
@@ -37,12 +36,10 @@ public class FavoritePresenter extends MvpPresenter<FavoriteView> implements Cal
                 .subscribe(new Observer<RealmResults<Recipe>>() {
                     @Override
                     public void onSubscribe(final Disposable d) {
-                        Timber.e("onSubscribe");
                     }
 
                     @Override
                     public void onNext(final RealmResults<Recipe> recipes) {
-                        Timber.e("onNext");
                         if (recipes != null) {
                             getViewState().showList(recipes);
                         }
@@ -55,13 +52,8 @@ public class FavoritePresenter extends MvpPresenter<FavoriteView> implements Cal
 
                     @Override
                     public void onComplete() {
-                        Timber.e("onComplete");
                     }
                 });
-    }
-
-    public void addToRealm(final Recipe recipe) {
-        realmModel.addDataToRealm(recipe);
     }
 
     public void deleteFromRealm(final Recipe recipe) {

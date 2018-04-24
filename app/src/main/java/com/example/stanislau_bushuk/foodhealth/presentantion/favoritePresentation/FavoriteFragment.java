@@ -17,7 +17,6 @@ import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,10 +43,10 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
-        final List<Recipe> list = new ArrayList<>();
         listRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        favoriteAdapter = new FavoriteAdapter(list, this);
+        favoriteAdapter = new FavoriteAdapter(new ArrayList<Recipe>(), this);
         listRecyclerView.setAdapter(favoriteAdapter);
+        favoritePresenter.dataRealm();
     }
 
     @Override

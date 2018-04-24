@@ -58,22 +58,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
     public void updateAdapter(final List<Hits> hits) {
-
         if (hits != null && hits.size() != 0) {
             this.hits.clear();
             this.hits.addAll(hits);
             notifyDataSetChanged();
         }
-
     }
 
     public void updateList(final List<Hits> hits) {
-
         if (hits != null) {
             this.hits.addAll(hits);
             notifyDataSetChanged();
         }
-
     }
 
     @Override
