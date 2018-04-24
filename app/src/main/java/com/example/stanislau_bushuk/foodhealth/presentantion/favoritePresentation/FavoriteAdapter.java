@@ -1,6 +1,5 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,20 +19,15 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.RealmResults;
-import timber.log.Timber;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyViewHolder> {
 
-    private Context context;
     private List<Recipe> recipeList;
-    private CallBackFavorite callBackFavorite;
-    private CallBackActivity callBackActivity;
+    private Listener listener;
 
-    FavoriteAdapter(final CallBackFavorite callBackFavorite,final CallBackActivity callBackActivity, final List<Recipe> list, final Context context) {
+    FavoriteAdapter(final List<Recipe> list, Listener listener) {
         this.recipeList = list;
-        this.context = context;
-        this.callBackFavorite = callBackFavorite;
-        this.callBackActivity = callBackActivity;
+        this.listener = listener;
     }
 
     @NonNull
@@ -51,27 +45,13 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyView
         if (recipe != null) {
             holder.starButton.setChecked(true);
 
-            holder.starButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-                    callBackFavorite.deleteFromRealm(recipe);
-                }
-            });
-
             holder.titleTextView.setText(recipe.getLabel());
 
             GlideApp
-                    .with(context)
+                    .with(holder.photoImageView.getContext())
                     .load(recipe.getImage())
                     .centerCrop()
                     .into(holder.photoImageView);
-
-            holder.linearLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(final View v) {
-                    callBackActivity.getInfo(recipe.getUri());
-                }
-            });
         }
     }
 
@@ -96,6 +76,12 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyView
         return position;
     }
 
+    public interface Listener {
+        void onItemClick(String uri);
+
+        void deleteFromFavorite(Recipe recipe);
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_title_text_view)
         TextView titleTextView;
@@ -113,6 +99,24 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyView
             super(view);
 
             ButterKnife.bind(this, view);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    if (listener != null) {
+                        listener.onItemClick(recipeList.get(getAdapterPosition()).getUri());
+                    }
+                }
+            });
+
+            starButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    if (listener != null) {
+                        listener.deleteFromFavorite(recipeList.get(getAdapterPosition()));
+                    }
+                }
+            });
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,32 +9,26 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
-import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.CallBackFavorite;
 import com.sackcentury.shinebuttonlib.ShineButton;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
 
-    private Context context;
     private List<Hits> hits;
+    private Listener listener;
 
-    private CallBackFavorite callBackFavorite;
-
-    public RecyclerAdapter(final CallBackFavorite callBackFavorite, final List<Hits> hits, final Context context) {
+    public RecyclerAdapter(final Listener listener, final List<Hits> hits) {
         this.hits = hits;
-        this.context = context;
-        this.callBackFavorite = callBackFavorite;
+        this.listener = listener;
     }
 
     @NonNull
@@ -53,30 +46,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         holder.titleTextView.setText(recipe.getLabel());
 
         GlideApp
-                .with(context)
+                .with(holder.photoImageView.getContext())
                 .load(recipe.getImage())
                 .centerCrop()
                 .into(holder.photoImageView);
-
-        holder.starButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(final View view, final boolean checked) {
-                if (checked) {
-                    callBackFavorite.addToRealm(recipe);
-                    //realmModel.addDataToRealm(recipe);
-                } else {
-                    callBackFavorite.deleteFromRealm(recipe);
-                }
-            }
-        });
-
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                Timber.e(recipe.getUri());
-                ActivityManager.startCardActivity(context, recipe.getUri());
-            }
-        });
     }
 
     @Override
@@ -113,6 +86,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         return position;
     }
 
+    public interface Listener {
+        void onItemClick(String uri);
+
+        void addToFavorite(Recipe recipe);
+
+        void deleteFromFavorite(Recipe recipe);
+    }
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_title_text_view)
         TextView titleTextView;
@@ -130,6 +111,28 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             super(view);
 
             ButterKnife.bind(this, view);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    if (listener != null) {
+                        listener.onItemClick(hits.get(getAdapterPosition()).getRecipe().getUri());
+                    }
+                }
+            });
+
+            starButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(final View view, final boolean checked) {
+                    if (listener != null) {
+                        if (checked) {
+                            listener.addToFavorite(hits.get(getAdapterPosition()).getRecipe());
+                        } else {
+                            listener.deleteFromFavorite(hits.get(getAdapterPosition()).getRecipe());
+                        }
+                    }
+                }
+            });
         }
     }
 }

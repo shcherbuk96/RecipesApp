@@ -23,7 +23,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.RealmResults;
 
-public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteView, CallBackFavorite, CallBackActivity {
+public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteView, FavoriteAdapter.Listener {
 
     FavoriteAdapter favoriteAdapter;
 
@@ -46,7 +46,7 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
         ButterKnife.bind(this, view);
         final List<Recipe> list = new ArrayList<>();
         listRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        favoriteAdapter = new FavoriteAdapter(this, this, list, getContext());
+        favoriteAdapter = new FavoriteAdapter(list, this);
         listRecyclerView.setAdapter(favoriteAdapter);
     }
 
@@ -56,18 +56,12 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
     }
 
     @Override
-    public void addToRealm(final Recipe recipe) {
-        favoritePresenter.addToRealm(recipe);
-    }
-
-    @Override
-    public void deleteFromRealm(final Recipe recipe) {
-        favoritePresenter.deleteFromRealm(recipe);
-    }
-
-    @Override
-    public void getInfo(final String uri) {
+    public void onItemClick(final String uri) {
         ActivityManager.startCardActivity(getActivity(), uri);
     }
 
+    @Override
+    public void deleteFromFavorite(final Recipe recipe) {
+        favoritePresenter.deleteFromRealm(recipe);
+    }
 }
