@@ -19,6 +19,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import timber.log.Timber;
 
 @InjectViewState
 public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements CallBackDeepSearchPresenter {
@@ -55,11 +56,13 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
         } else {
 
             if (caloriesTo.isEmpty() || caloriesFrom.isEmpty()) {
-                netWorkModel.getRecipeFilterCountIngredients(Constants.CALLORIES, from, model.getQueryMap(), upToIngredients);
+                netWorkModel.getRecipeFilterCountIngredients(Constants.CALLORIES, from, model.getQueryMap(),
+                        upToIngredients);
                 model.setCalories(Constants.CALLORIES);
             } else {
                 final String calories = caloriesFrom + Constants.HYPHEN + caloriesTo;
-                netWorkModel.getRecipeFilterCountIngredients(calories, from, model.getQueryMap(), upToIngredients);
+                netWorkModel.getRecipeFilterCountIngredients(calories, from, model.getQueryMap(),
+                        upToIngredients);
                 model.setCalories(calories);
             }
 
@@ -98,6 +101,7 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
                     @Override
                     public void onError(final Throwable e) {
                         getViewState().progressBarVisibility(View.INVISIBLE);
+                        Timber.e(e.toString());
                     }
 
                     @Override

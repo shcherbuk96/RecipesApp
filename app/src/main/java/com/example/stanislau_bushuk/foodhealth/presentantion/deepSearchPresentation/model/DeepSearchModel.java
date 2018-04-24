@@ -10,7 +10,7 @@ import java.util.Map;
 public class DeepSearchModel {
 
     private int from = 0;
-    private Map<String, Boolean> checkboxMap;
+    private Map<String, String> checkboxMap;
     private String calories;
 
     public DeepSearchModel() {
@@ -25,10 +25,10 @@ public class DeepSearchModel {
         this.calories = calories;
     }
 
-    public void setMap(final CompoundButton compoundButton, final Boolean bool) {
+    public void setMap(final CompoundButton compoundButton, final Boolean bool, final String label) {
 
         if (bool) {
-            checkboxMap.put(compoundButton.getTag().toString(), true);
+            checkboxMap.put(compoundButton.getTag().toString(), label);
         } else {
             checkboxMap.remove(compoundButton.getTag().toString());
         }
@@ -36,14 +36,10 @@ public class DeepSearchModel {
     }
 
     public Map<String, String> getQueryMap() {
-        final Map<String, String> query = new HashMap<>();
 
-        for (final String key : checkboxMap.keySet()) {
-            query.put(Constants.HEALTH, key);
-        }
-
-        return query;
+        return checkboxMap;
     }
+
 
     public int getFrom() {
         return from;

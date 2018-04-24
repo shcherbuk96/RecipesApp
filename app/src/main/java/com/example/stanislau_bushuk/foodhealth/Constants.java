@@ -24,6 +24,9 @@ public class Constants {
 
     public static final String HYPHEN = "-";
 
-    public static final String HEALTH = "Health";
+    public static final String HEALTH = "health";
+
+    public static final String DIET = "diet";
+
 
 }

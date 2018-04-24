@@ -14,6 +14,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.PresenterType;
 import com.example.stanislau_bushuk.foodhealth.ActivityManager;
+import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters.DeepSearchPresenter;
@@ -28,35 +29,6 @@ import butterknife.OnClick;
 
 public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSearchView {
 
-//    @BindView(R.id.balanced_deep_search_checkbox)
-//    AppCompatCheckBox balancedCheckbox;
-//
-//    @BindView(R.id.high_protein_deep_search_checkbox)
-//    AppCompatCheckBox highProteinCheckbox;
-//
-//    @BindView(R.id.low_fat_deep_search_checkbox)
-//    AppCompatCheckBox lowFatCheckbox;
-//
-//    @BindView(R.id.low_carb_deep_search_checkbox)
-//    AppCompatCheckBox lowCarbCheckbox;
-//
-//    @BindView(R.id.vegan_deep_search_checkbox)
-//    AppCompatCheckBox veganCheckbox;
-//
-//    @BindView(R.id.vegetarian_deep_search_checkbox)
-//    AppCompatCheckBox vegetarianCheckbox;
-//
-//    @BindView(R.id.sugar_conscious_deep_search_checkbox)
-//    AppCompatCheckBox sugarCheckbox;
-//
-//    @BindView(R.id.peanut_free_deep_search_checkbox)
-//    AppCompatCheckBox peanutCheckbox;
-//
-//    @BindView(R.id.tree_nut_free_deep_search_checkbox)
-//    AppCompatCheckBox treeCheckbox;
-//
-//    @BindView(R.id.alcohol_free_deep_search_checkbox)
-//    AppCompatCheckBox alcoholCheckbox;
 
     @BindView(R.id.to_deep_search_edit_text)
     EditText toEditText;
@@ -100,13 +72,19 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
 
     }
 
-    @OnCheckedChanged({R.id.balanced_deep_search_checkbox, R.id.high_protein_deep_search_checkbox, R.id.low_fat_deep_search_checkbox,
-            R.id.low_carb_deep_search_checkbox, R.id.vegan_deep_search_checkbox, R.id.vegetarian_deep_search_checkbox,
+    @OnCheckedChanged({R.id.vegan_deep_search_checkbox, R.id.vegetarian_deep_search_checkbox,
             R.id.sugar_conscious_deep_search_checkbox, R.id.peanut_free_deep_search_checkbox, R.id.tree_nut_free_deep_search_checkbox,
             R.id.alcohol_free_deep_search_checkbox
     })
-    public void onRadioButtonCheckChanged(final CompoundButton buttonView, final boolean isChecked) {
-        presenter.model.setMap(buttonView, isChecked);
+
+    public void changedCheckHealth(final CompoundButton buttonView, final boolean isChecked) {
+        presenter.model.setMap(buttonView, isChecked, Constants.HEALTH);
+    }
+
+    @OnCheckedChanged({R.id.balanced_deep_search_checkbox, R.id.high_protein_deep_search_checkbox, R.id.low_fat_deep_search_checkbox,
+            R.id.low_carb_deep_search_checkbox})
+    public void changedCheckDiet(final CompoundButton buttonView, final boolean isChecked) {
+        presenter.model.setMap(buttonView, isChecked, Constants.DIET);
     }
 
     @Override
