@@ -25,6 +25,7 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 public class CardActivity extends MvpAppCompatActivity implements CardView {
 
@@ -74,7 +75,9 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         cardAdapter = new CardAdapter(new ArrayList<String>());
         recyclerView.setAdapter(cardAdapter);
 
-        presenter.getRecipeFromUri(getIntent().getStringExtra(Constants.RECIPE_INTENT_KEY));
+        if (savedInstanceState == null) {
+            presenter.getRecipeFromUri(getIntent().getStringExtra(Constants.RECIPE_INTENT_KEY));
+        }
 
         RxTextView
                 .textChanges(servingsEditText)
@@ -84,7 +87,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
                         return charSequence.toString();
                     }
                 })
-                .subscribeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
                     @Override
@@ -148,4 +151,6 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         onBackPressed();
         return true;
     }
+
+
 }

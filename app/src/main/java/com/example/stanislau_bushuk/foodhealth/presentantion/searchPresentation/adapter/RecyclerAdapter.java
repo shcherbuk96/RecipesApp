@@ -72,16 +72,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         }
     }
 
-    @Override
-    public long getItemId(final int position) {
-        return position;
-    }
-
-    @Override
-    public int getItemViewType(final int position) {
-        return position;
-    }
-
     public interface Listener {
         void onItemClick(String uri);
 
