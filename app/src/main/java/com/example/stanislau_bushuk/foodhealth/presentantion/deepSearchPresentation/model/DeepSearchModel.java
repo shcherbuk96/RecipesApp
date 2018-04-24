@@ -3,10 +3,7 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresenta
 import android.widget.CompoundButton;
 
 import com.example.stanislau_bushuk.foodhealth.Constants;
-import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
-import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,9 +26,12 @@ public class DeepSearchModel {
     }
 
     public void setMap(final CompoundButton compoundButton, final Boolean bool) {
-        if (bool)
+
+        if (bool) {
             checkboxMap.put(compoundButton.getTag().toString(), true);
-        else checkboxMap.remove(compoundButton.getTag().toString());
+        } else {
+            checkboxMap.remove(compoundButton.getTag().toString());
+        }
 
     }
 

@@ -3,7 +3,6 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresenta
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatCheckBox;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +26,7 @@ import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 
-public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSearchView{
+public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSearchView {
 
 //    @BindView(R.id.balanced_deep_search_checkbox)
 //    AppCompatCheckBox balancedCheckbox;
@@ -96,14 +95,14 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
 
         if (v == findButton) {
             ActivityManager.startDeepSearchActivity(getActivity());
-            presenter.getRecipeFilter(fromEditText.getText().toString(), toEditText.getText().toString(),upToEditText.getText().toString());
+            presenter.getRecipeFilter(fromEditText.getText().toString(), toEditText.getText().toString(), upToEditText.getText().toString());
         }
 
     }
 
-    @OnCheckedChanged({R.id.balanced_deep_search_checkbox, R.id.high_protein_deep_search_checkbox,R.id.low_fat_deep_search_checkbox,
-            R.id.low_carb_deep_search_checkbox,R.id.vegan_deep_search_checkbox,R.id.vegetarian_deep_search_checkbox,
-            R.id.sugar_conscious_deep_search_checkbox,R.id.peanut_free_deep_search_checkbox,R.id.tree_nut_free_deep_search_checkbox,
+    @OnCheckedChanged({R.id.balanced_deep_search_checkbox, R.id.high_protein_deep_search_checkbox, R.id.low_fat_deep_search_checkbox,
+            R.id.low_carb_deep_search_checkbox, R.id.vegan_deep_search_checkbox, R.id.vegetarian_deep_search_checkbox,
+            R.id.sugar_conscious_deep_search_checkbox, R.id.peanut_free_deep_search_checkbox, R.id.tree_nut_free_deep_search_checkbox,
             R.id.alcohol_free_deep_search_checkbox
     })
     public void onRadioButtonCheckChanged(final CompoundButton buttonView, final boolean isChecked) {
