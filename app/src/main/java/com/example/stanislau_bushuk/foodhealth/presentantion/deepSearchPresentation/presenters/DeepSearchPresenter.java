@@ -1,6 +1,7 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters;
 
 import android.view.View;
+import android.widget.CompoundButton;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -109,6 +110,10 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
                         getViewState().progressBarVisibility(View.INVISIBLE);
                     }
                 });
+    }
+
+    public void setMap(final CompoundButton compoundButton, final boolean checked, final String label){
+        model.setMap(compoundButton,checked,label);
     }
 
 }

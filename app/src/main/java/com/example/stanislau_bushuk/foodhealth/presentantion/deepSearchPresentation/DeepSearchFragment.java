@@ -77,13 +77,13 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
             R.id.alcohol_free_deep_search_checkbox
     })
     public void changedCheckHealth(final CompoundButton buttonView, final boolean isChecked) {
-        presenter.model.setMap(buttonView, isChecked, Constants.HEALTH);
+        presenter.setMap(buttonView, isChecked, Constants.HEALTH);
     }
 
     @OnCheckedChanged({R.id.balanced_deep_search_checkbox, R.id.high_protein_deep_search_checkbox, R.id.low_fat_deep_search_checkbox,
             R.id.low_carb_deep_search_checkbox})
     public void changedCheckDiet(final CompoundButton buttonView, final boolean isChecked) {
-        presenter.model.setMap(buttonView, isChecked, Constants.DIET);
+        presenter.setMap(buttonView, isChecked, Constants.DIET);
     }
 
     @Override
