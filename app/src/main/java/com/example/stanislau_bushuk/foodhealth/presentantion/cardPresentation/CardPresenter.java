@@ -35,6 +35,8 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
         netWorkModel.getRecipeFromUri(uri);
     }
 
+
+
     @Override
     public void call(final Observable<List<Recipe>> observable) {
         observable.subscribeOn(Schedulers.io())
