@@ -156,7 +156,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/deep_search_start_end_padding"
                     android:layout_marginTop="@dimen/deep_search_elements_marginTop"
-                    android:tag="@string/deep_search_high_protein"
+                    android:tag="@string/deep_search_high_protein_label"
                     android:text="@string/deep_search_high_protein"
                     app:buttonTint="@color/colorPrimary" />
 

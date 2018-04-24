@@ -28,7 +28,7 @@ public class DeepSearchModel {
     public void setMap(final CompoundButton compoundButton, final Boolean bool, final String label) {
 
         if (bool) {
-            checkboxMap.put(compoundButton.getTag().toString(), label);
+            checkboxMap.put(label,compoundButton.getTag().toString());
         } else {
             checkboxMap.remove(compoundButton.getTag().toString());
         }
@@ -36,7 +36,6 @@ public class DeepSearchModel {
     }
 
     public Map<String, String> getQueryMap() {
-
         return checkboxMap;
     }
 

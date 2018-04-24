@@ -40,4 +40,5 @@
     <string name="deep_search_alcohol_free">alcohol-free</string>
     <string name="deep_search_button_text">Find</string>
     <string name="deep_search_not_found">Not found for you request</string>
+    <string name="deep_search_high_protein_label">high-protein</string>
 </resources>
