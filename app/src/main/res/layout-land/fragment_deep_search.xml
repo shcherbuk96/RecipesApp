@@ -222,7 +222,7 @@
                     android:layout_marginStart="@dimen/deep_search_start_end_padding"
                     android:layout_marginTop="@dimen/deep_search_elements_marginTop"
 
-                    android:tag="@string/deep_search_sugar_conscious"
+                    android:tag="@string/deep_search_low_sugar_label"
                     android:text="@string/deep_search_sugar_conscious"
                     app:buttonTint="@color/colorPrimary" />
 

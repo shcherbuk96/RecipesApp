@@ -88,7 +88,6 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
         Timber.e("clear");
     }
 
-
     @Override
     public boolean onOptionsItemSelected(final MenuItem menuItem) {
 
