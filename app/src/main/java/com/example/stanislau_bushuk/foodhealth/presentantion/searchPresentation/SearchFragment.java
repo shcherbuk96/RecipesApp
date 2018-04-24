@@ -15,8 +15,10 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.view.ViewSearch;
@@ -28,7 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
+public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, RecyclerAdapter.Listener {
 
     @BindView(R.id.search_progressbar_progressbar)
     ProgressBar searchProgressBar;
@@ -58,10 +60,9 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
-        final List<Hits> hitsList = new ArrayList<>();
-        final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        listRecyclerView.setLayoutManager(mLayoutManager);
-        recyclerAdapter = new RecyclerAdapter(hitsList, getContext());
+
+        listRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerAdapter = new RecyclerAdapter(this, new ArrayList<Hits>());
         listRecyclerView.setAdapter(recyclerAdapter);
         presenter.searchObservable(searchView);
         listRecyclerView.addOnScrollListener(new RecyclerViewMoreListener(listRecyclerView.getLayoutManager()) {
@@ -98,4 +99,19 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch {
         Toast.makeText(getActivity(), getResources().getText(R.string.error_connection_api), Toast.LENGTH_LONG).show();
     }
 
+
+    @Override
+    public void onItemClick(final String uri) {
+        ActivityManager.startCardActivity(getActivity(), uri);
+    }
+
+    @Override
+    public void addToFavorite(final Recipe recipe) {
+        presenter.addToRealm(recipe);
+    }
+
+    @Override
+    public void deleteFromFavorite(final Recipe recipe) {
+        presenter.deleteFromRealm(recipe);
+    }
 }

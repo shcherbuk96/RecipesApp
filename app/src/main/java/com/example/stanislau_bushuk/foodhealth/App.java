@@ -31,7 +31,7 @@ public class App extends Application {
         Realm.init(this);
         final RealmConfiguration realmConfig = new RealmConfiguration.Builder()
                 .deleteRealmIfMigrationNeeded()
-                .name("realm.realm")
+                .name("HealthFood.realm")
                 .build();
         Realm.setDefaultConfiguration(realmConfig);
     }

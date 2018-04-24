@@ -64,11 +64,12 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
 
         ButterKnife.bind(this);
 
-        final ArrayList<String> recipe = new ArrayList<>();
-
-        initAdapter(recipe);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        cardAdapter = new CardAdapter(new ArrayList<String>());
+        recyclerView.setAdapter(cardAdapter);
 
         presenter.getRecipeFromUri(getIntent().getStringExtra(Constants.RECIPE_INTENT_KEY));
+
         //http://www.edamam.com/ontologies/edamam.owl#recipe_aac66f3688a63daa664b2ac0adff1c11
     }
 
@@ -91,20 +92,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         fatView.setText(getString(R.string.card_number_fat, data.getFat().getQuantity()));
         proteinView.setText(getString(R.string.card_number_protein, data.getProt().getQuantity()));
         carbsView.setText(getString(R.string.card_number_carbs, data.getChocdf().getQuantity()));
-        initAdapter(data.getIngredientLines());
-    }
-
-    private void initAdapter(final ArrayList<String> recipe) {
-
-        if (cardAdapter == null) {
-            cardAdapter = new CardAdapter(recipe);
-        } else {
-            cardAdapter.updateData(recipe);
-        }
-
-        final RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(cardAdapter);
+        cardAdapter.updateData(data.getIngredientLines());
     }
 
     @Override

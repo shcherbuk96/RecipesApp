@@ -1,4 +1,4 @@
-package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter;
+package com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.stanislau_bushuk.foodhealth.R;
-import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 import com.sackcentury.shinebuttonlib.ShineButton;
@@ -19,57 +18,52 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.RealmResults;
 
+public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyViewHolder> {
 
-public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
-
-    private List<Hits> hits;
+    private List<Recipe> recipeList;
     private Listener listener;
 
-    public RecyclerAdapter(final Listener listener, final List<Hits> hits) {
-        this.hits = hits;
+    FavoriteAdapter(final List<Recipe> list, Listener listener) {
+        this.recipeList = list;
         this.listener = listener;
     }
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
+    public FavoriteAdapter.MyViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
         final View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler, parent, false);
 
-        return new MyViewHolder(itemView);
+        return new FavoriteAdapter.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-        final Recipe recipe = hits.get(position).getRecipe();
+    public void onBindViewHolder(@NonNull final FavoriteAdapter.MyViewHolder holder, final int position) {
+        final Recipe recipe = recipeList.get(position);
 
-        holder.titleTextView.setText(recipe.getLabel());
+        if (recipe != null) {
+            holder.starButton.setChecked(true);
 
-        GlideApp
-                .with(holder.photoImageView.getContext())
-                .load(recipe.getImage())
-                .centerCrop()
-                .into(holder.photoImageView);
+            holder.titleTextView.setText(recipe.getLabel());
+
+            GlideApp
+                    .with(holder.photoImageView.getContext())
+                    .load(recipe.getImage())
+                    .centerCrop()
+                    .into(holder.photoImageView);
+        }
+    }
+
+    public void updateAdapter(final RealmResults<Recipe> list) {
+        recipeList.clear();
+        recipeList.addAll(list);
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return hits.size();
-    }
-
-    public void updateAdapter(final List<Hits> hits) {
-        if (hits != null && hits.size() != 0) {
-            this.hits.clear();
-            this.hits.addAll(hits);
-            notifyDataSetChanged();
-        }
-    }
-
-    public void updateList(final List<Hits> hits) {
-        if (hits != null) {
-            this.hits.addAll(hits);
-            notifyDataSetChanged();
-        }
+        return recipeList.size();
     }
 
     @Override
@@ -84,8 +78,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     public interface Listener {
         void onItemClick(String uri);
-
-        void addToFavorite(Recipe recipe);
 
         void deleteFromFavorite(Recipe recipe);
     }
@@ -112,24 +104,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 @Override
                 public void onClick(final View v) {
                     if (listener != null) {
-                        listener.onItemClick(hits.get(getAdapterPosition()).getRecipe().getUri());
+                        listener.onItemClick(recipeList.get(getAdapterPosition()).getUri());
                     }
                 }
             });
 
-            starButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
+            starButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onCheckedChanged(final View view, final boolean checked) {
+                public void onClick(final View v) {
                     if (listener != null) {
-                        if (checked) {
-                            listener.addToFavorite(hits.get(getAdapterPosition()).getRecipe());
-                        } else {
-                            listener.deleteFromFavorite(hits.get(getAdapterPosition()).getRecipe());
-                        }
+                        listener.deleteFromFavorite(recipeList.get(getAdapterPosition()));
                     }
                 }
             });
         }
     }
 }
-
