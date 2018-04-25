@@ -78,21 +78,21 @@
 
             <TextView
                 android:id="@+id/card_fat_text_view"
-                style="@style/Orange_Text"
+                style="@style/Body_1.OrangeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center" />
 
             <TextView
                 android:id="@+id/card_carbs_text_view"
-                style="@style/Blue_Text"
+                style="@style/Body_1.BlueText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center" />
 
             <TextView
                 android:id="@+id/card_protein_text_view"
-                style="@style/Green_Text"
+                style="@style/Body_1.GreenText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center" />
