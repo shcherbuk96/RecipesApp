@@ -22,10 +22,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
 public class CardActivity extends MvpAppCompatActivity implements CardView {
 
@@ -87,8 +85,6 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
                         return charSequence.toString();
                     }
                 })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<String>() {
                     @Override
                     public void onSubscribe(final Disposable d) {

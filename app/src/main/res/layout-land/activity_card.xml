@@ -7,9 +7,9 @@
 
     <ImageView
         android:id="@+id/card_photo_image_view"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/image_card_height_landscape_size"
+        android:layout_height="@dimen/image_card_height_landscape_size"
         android:layout_gravity="center"
-        android:layout_height="@dimen/image_card_height"
         android:paddingBottom="@dimen/image_card_top_bottom_spacing"
         android:paddingEnd="@dimen/image_card_start_end_spacing"
         android:paddingStart="@dimen/image_card_start_end_spacing"
