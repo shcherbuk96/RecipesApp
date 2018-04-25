@@ -1,10 +1,14 @@
 package com.example.stanislau_bushuk.foodhealth.model.pojo;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class Recipe {
+import io.realm.RealmList;
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
+public class Recipe extends RealmObject {
+
+    @PrimaryKey
     private String uri;
     private String label;
     private String image;
@@ -12,20 +16,21 @@ public class Recipe {
     private String url;
     private String shareAs;
     private float yield;
-    private ArrayList dietLabels;
-    private ArrayList healthLabels;
+    private RealmList<String> dietLabels;
+    private RealmList<String> healthLabels;
 
-    private ArrayList cautions;
-    private ArrayList<String> ingredientLines;
-    private List<Ingridients> ingredients;
+    private RealmList<String> cautions;
+    private RealmList<String> ingredientLines;
+    private RealmList<Ingridients> ingredients;
     private float calories;
     private float totalWeight;
     private float totalTime;
     private TotalNutrients totalNutrients;
     private TotalDaily totalDaily;
-    private ArrayList digest;
     private boolean bookmarked;
     private boolean bought;
+
+    private boolean isChecked;
 
     public String getUri() {
         return uri;
@@ -55,19 +60,19 @@ public class Recipe {
         return yield;
     }
 
-    public ArrayList getDietLabels() {
+    public RealmList<String> getDietLabels() {
         return dietLabels;
     }
 
-    public ArrayList getHealthLabels() {
+    public RealmList<String> getHealthLabels() {
         return healthLabels;
     }
 
-    public ArrayList getCautions() {
+    public RealmList<String> getCautions() {
         return cautions;
     }
 
-    public ArrayList<String> getIngredientLines() {
+    public RealmList<String> getIngredientLines() {
         return ingredientLines;
     }
 
@@ -87,9 +92,6 @@ public class Recipe {
         return totalTime;
     }
 
-    public ArrayList getDigest() {
-        return digest;
-    }
 
     public boolean isBookmarked() {
         return bookmarked;
@@ -115,4 +117,11 @@ public class Recipe {
         this.totalDaily = totalDaily;
     }
 
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(final boolean checked) {
+        isChecked = checked;
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.stanislau_bushuk.foodhealth.modul;
 
 import com.example.stanislau_bushuk.foodhealth.model.CardNetWorkModel;
+import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
 
 import javax.inject.Singleton;
 
@@ -14,4 +15,5 @@ public class CardNetWorkModul {
     public CardNetWorkModel cardNetWorkModel() {
         return new CardNetWorkModel();
     }
+
 }

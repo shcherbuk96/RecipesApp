@@ -17,6 +17,7 @@ import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 import com.sackcentury.shinebuttonlib.ShineButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -26,13 +27,12 @@ import timber.log.Timber;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
 
-    private Context context;
-    private List<Hits> hits;
+    private ArrayList<Hits> hits;
+    private Listener listener;
 
-
-    public RecyclerAdapter(final List<Hits> hits, final Context context) {
+    public RecyclerAdapter(final Listener listener, final ArrayList<Hits> hits) {
         this.hits = hits;
-        this.context = context;
+        this.listener = listener;
     }
 
     @NonNull
@@ -46,7 +46,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         final Recipe recipe = hits.get(position).getRecipe();
+        final  Context context = holder.photoImageView.getContext();
         holder.titleTextView.setText(recipe.getLabel());
+
         GlideApp
                 .with(context)
                 .load(recipe.getImage())
@@ -57,7 +59,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             @Override
             public void onClick(final View v) {
                 Timber.e(recipe.getUri());
-                ActivityManager.startCardActivity(context,recipe.getUri());
+                ActivityManager.startCardActivity(context, recipe.getUri());
             }
         });
     }
@@ -69,7 +71,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     public void updateAdapter(final List<Hits> hits) {
 
-        if (hits != null) {
+        if (hits != null && hits.size() != 0) {
             this.hits.clear();
             this.hits.addAll(hits);
             notifyDataSetChanged();
@@ -77,7 +79,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     }
 
-    public void clearAdapter(){
+    public void clearAdapter() {
         hits.clear();
         notifyDataSetChanged();
     }
@@ -88,9 +90,25 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             this.hits.addAll(hits);
             notifyDataSetChanged();
         }
-
     }
 
+    @Override
+    public long getItemId(final int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(final int position) {
+        return position;
+    }
+
+    public interface Listener {
+        void onItemClick(String uri);
+
+        void addToFavorite(Recipe recipe);
+
+        void deleteFromFavorite(Recipe recipe);
+    }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.item_title_text_view)
@@ -109,6 +127,28 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             super(view);
 
             ButterKnife.bind(this, view);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    if (listener != null) {
+                        listener.onItemClick(hits.get(getAdapterPosition()).getRecipe().getUri());
+                    }
+                }
+            });
+
+            starButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(final View view, final boolean checked) {
+                    if (listener != null) {
+                        if (checked) {
+                            listener.addToFavorite(hits.get(getAdapterPosition()).getRecipe());
+                        } else {
+                            listener.deleteFromFavorite(hits.get(getAdapterPosition()).getRecipe());
+                        }
+                    }
+                }
+            });
         }
     }
 }

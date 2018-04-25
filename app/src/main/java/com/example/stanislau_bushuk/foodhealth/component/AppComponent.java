@@ -7,8 +7,13 @@ import com.example.stanislau_bushuk.foodhealth.modul.Api;
 import com.example.stanislau_bushuk.foodhealth.modul.CardNetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.DeepSearchModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
+import com.example.stanislau_bushuk.foodhealth.modul.RealmModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetworkDeepSearchModul;
 import com.example.stanislau_bushuk.foodhealth.modul.ResourceManagerModul;
+import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardPresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteAdapter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoritePresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters.DeepSearchPresenter;
@@ -22,7 +27,7 @@ import dagger.Component;
 
 @Singleton
 @Component(modules = {Api.class, NetWorkModul.class, CardNetWorkModul.class,
-        ResourceManagerModul.class, DeepSearchModul.class, NetworkDeepSearchModul.class})
+        ResourceManagerModul.class, DeepSearchModul.class, NetworkDeepSearchModul.class,ResourceManagerModul.class, RealmModul.class})
 public interface AppComponent {
 
     void inject(SearchPresenter searchPresenter);
@@ -32,6 +37,12 @@ public interface AppComponent {
     void inject(NetWorkModel netWorkModel);
 
     void inject(CardNetWorkModel cardNetWorkModel);
+
+    void inject(FavoritePresenter favoritePresenter);
+
+    void inject(FavoriteAdapter favoriteAdapter);
+
+    void inject(RecyclerAdapter recyclerAdapter);
 
     void inject(DeepSearchPresenter deepSearchPresenter);
 

@@ -14,12 +14,14 @@ import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.ResourceManager;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters.DeepSearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.view.DeepSearchView;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.RecyclerViewMoreListener;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -27,7 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
-public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSearchView {
+public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSearchView,RecyclerAdapter.Listener {
 
     @InjectPresenter(type = PresenterType.GLOBAL)
     DeepSearchPresenter presenter;
@@ -55,7 +57,7 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
         App.getAppComponent().inject(this);
         setContentView(R.layout.activity_deep_search);
         ButterKnife.bind(this);
-        adapter = new RecyclerAdapter(new ArrayList<Hits>(), this);
+        adapter = new RecyclerAdapter(this ,new ArrayList<Hits>());
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -105,5 +107,20 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
         presenter.setStartFrom();
         //presenter.getViewState().clearViewStateCommands();
         super.onBackPressed();
+    }
+
+    @Override
+    public void onItemClick(final String uri) {
+
+    }
+
+    @Override
+    public void addToFavorite(final Recipe recipe) {
+
+    }
+
+    @Override
+    public void deleteFromFavorite(final Recipe recipe) {
+
     }
 }

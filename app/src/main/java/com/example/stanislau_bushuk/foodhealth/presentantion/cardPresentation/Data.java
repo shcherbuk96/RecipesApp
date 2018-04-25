@@ -7,6 +7,8 @@ import com.example.stanislau_bushuk.foodhealth.model.pojo.TotalNutrients;
 
 import java.util.ArrayList;
 
+import io.realm.RealmList;
+
 public class Data {
     private ItemTotal fat;
     private ItemTotal prot;
@@ -16,13 +18,13 @@ public class Data {
     private float calories;
     private String label;
     private String image;
-    private ArrayList<String> ingredientLines;
+    private RealmList<String> ingredientLines;
 
     public static Builder newBuilder() {
         return new Data().new Builder();
     }
 
-    public ArrayList<String> getIngredientLines() {
+    public RealmList<String> getIngredientLines() {
         return ingredientLines;
     }
 

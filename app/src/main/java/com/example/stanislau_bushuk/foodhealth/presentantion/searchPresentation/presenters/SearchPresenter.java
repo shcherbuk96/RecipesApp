@@ -12,6 +12,8 @@ import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.ResourceManager;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackSearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
+import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.view.ViewSearch;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
@@ -30,6 +32,9 @@ import timber.log.Timber;
 
 @InjectViewState
 public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBackSearchPresenter {
+
+    @Inject
+    RealmModel realmModel;
 
     @Inject
     NetWorkModel netWorkModel;
@@ -129,5 +134,13 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
         } else {
             netWorkModel.getResponse(recipeName, from, true);
         }
+    }
+
+    public void addToRealm(final Recipe recipe) {
+        realmModel.addDataToRealm(recipe);
+    }
+
+    public void deleteFromRealm(final Recipe recipe) {
+        realmModel.removeDataToRealm(recipe);
     }
 }
