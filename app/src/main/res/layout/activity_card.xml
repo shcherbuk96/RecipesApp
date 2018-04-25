@@ -72,27 +72,24 @@
 
         <TextView
             android:id="@+id/card_fat_text_view"
-            style="@style/Body_1"
+            style="@style/Orange_Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/fat" />
+            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/card_carbs_text_view"
-            style="@style/Body_1"
+            style="@style/Blue_Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/carbs" />
+            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/card_protein_text_view"
-            style="@style/Body_1"
+            style="@style/Green_Text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/prot" />
+            android:layout_gravity="center" />
     </GridLayout>
 
     <android.support.v7.widget.RecyclerView

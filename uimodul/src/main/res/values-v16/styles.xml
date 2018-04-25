@@ -55,6 +55,18 @@
         <item name="android:fontFamily">sans-serif</item>
     </style>
 
+    <style name="Orange_Text" parent="Body_1">
+        <item name="android:textColor">@color/fat</item>
+    </style>
+
+    <style name="Blue_Text" parent="Body_1">
+        <item name="android:textColor">@color/carbs</item>
+    </style>
+
+    <style name="Green_Text" parent="Body_1">
+        <item name="android:textColor">@color/prot</item>
+    </style>
+
     <style name="Caption">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">12sp</item>
