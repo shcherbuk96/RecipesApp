@@ -32,78 +32,73 @@
 
             <TextView
                 android:id="@+id/card_calories_text_view"
+                style="@style/Body_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_card_size" />
+                android:layout_gravity="center" />
 
             <TextView
                 android:id="@+id/card_dayly_text_view"
+                style="@style/Body_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_card_size" />
+                android:layout_gravity="center" />
 
             <EditText
                 android:id="@+id/card_servings_edit_text"
+                style="@style/Body_2"
                 android:layout_width="@dimen/grid_card_width"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/item"
                 android:gravity="center"
                 android:inputType="number"
-                android:maxLength="3"
-                android:textSize="@dimen/text_card_size" />
+                android:maxLength="3" />
 
             <TextView
+                style="@style/Body_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/card_calories"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_card_title_size" />
+                android:text="@string/card_calories" />
 
             <TextView
+                style="@style/Body_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/card_daily_value"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_card_title_size" />
+                android:text="@string/card_daily_value" />
 
             <TextView
+                style="@style/Body_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/card_servings"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_card_title_size" />
+                android:text="@string/card_servings" />
 
             <TextView
                 android:id="@+id/card_fat_text_view"
+                style="@style/Body_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/fat"
-                android:textSize="@dimen/text_card_calories_size" />
+                android:textColor="@color/fat" />
 
             <TextView
                 android:id="@+id/card_carbs_text_view"
+                style="@style/Body_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/carbs"
-                android:textSize="@dimen/text_card_calories_size" />
+                android:textColor="@color/carbs" />
 
             <TextView
                 android:id="@+id/card_protein_text_view"
+                style="@style/Body_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/prot"
-                android:textSize="@dimen/text_card_calories_size" />
+                android:textColor="@color/prot" />
         </GridLayout>
 
         <android.support.v7.widget.RecyclerView
