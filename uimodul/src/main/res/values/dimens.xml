@@ -31,6 +31,6 @@
 
     <dimen name="grid_card_width">48dp</dimen>
     <dimen name="image_card_height">240dp</dimen>
-
+    <dimen name="image_card_height_landscape_size">140dp</dimen>
     <dimen name="button_item_size">40dp</dimen>
 </resources>

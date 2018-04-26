@@ -35,6 +35,18 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
         netWorkModel.getRecipeFromUri(uri);
     }
 
+    public void getEditData(final int number, final Data data) {
+        final EditData editData = EditData.newBuilder()
+                .setCalories(data.getCalories() * number / data.getYield())
+                .setENERC_KCAL(data.getENERC_KCAL().getQuantity() * number / data.getYield())
+                .setChocdf(data.getChocdf().getQuantity() * number / data.getYield())
+                .setFat(data.getFat().getQuantity() * number / data.getYield())
+                .setProt(data.getProt().getQuantity() * number / data.getYield())
+                .setYield(data.getYield())
+                .build();
+        getViewState().showEditData(editData);
+    }
+
     @Override
     public void call(final Observable<List<Recipe>> observable) {
         observable.subscribeOn(Schedulers.io())

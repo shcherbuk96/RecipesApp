@@ -15,12 +15,15 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
+import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 
 public class CardActivity extends MvpAppCompatActivity implements CardView {
 
@@ -53,6 +56,8 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
 
     private CardAdapter cardAdapter;
 
+    private Data data;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,14 +73,47 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         cardAdapter = new CardAdapter(new ArrayList<String>());
         recyclerView.setAdapter(cardAdapter);
 
-        presenter.getRecipeFromUri(getIntent().getStringExtra(Constants.RECIPE_INTENT_KEY));
+        if (savedInstanceState == null) {
+            presenter.getRecipeFromUri(getIntent().getStringExtra(Constants.RECIPE_INTENT_KEY));
+        }
 
+        RxTextView
+                .textChanges(servingsEditText)
+                .map(new Function<CharSequence, String>() {
+                    @Override
+                    public String apply(final CharSequence charSequence) throws Exception {
+                        return charSequence.toString();
+                    }
+                })
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onSubscribe(final Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(final String s) {
+                        if (!s.isEmpty()) {
+                            presenter.getEditData(Integer.parseInt(s), data);
+                        }
+                    }
+
+                    @Override
+                    public void onError(final Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
         //http://www.edamam.com/ontologies/edamam.owl#recipe_aac66f3688a63daa664b2ac0adff1c11
     }
 
     @Override
     public void showList(final Data data) {
-        Timber.e(String.valueOf(data));
+        this.data = data;
         setTitle(data.getLabel());
 
         RequestOptions requestOptions = new RequestOptions();
@@ -96,8 +134,19 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
     }
 
     @Override
+    public void showEditData(final EditData data) {
+        caloriesView.setText(getString(R.string.card_number_calories, data.getCalories()));
+        daylyView.setText(getString(R.string.card_number_daily, data.getENERC_KCAL()));
+        fatView.setText(getString(R.string.card_number_fat, data.getFat()));
+        proteinView.setText(getString(R.string.card_number_protein, data.getProt()));
+        carbsView.setText(getString(R.string.card_number_carbs, data.getChocdf()));
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+
+
 }

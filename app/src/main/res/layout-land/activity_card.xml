@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_main"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/card_photo_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_card_height"
+            android:layout_gravity="center"
+            android:paddingBottom="@dimen/image_card_top_bottom_spacing"
+            android:paddingEnd="@dimen/image_card_start_end_spacing"
+            android:paddingStart="@dimen/image_card_start_end_spacing"
+            android:paddingTop="@dimen/image_card_top_bottom_spacing" />
+
+        <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:columnCount="3"
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true"
+            android:useDefaultMargins="true">
+
+            <TextView
+                android:id="@+id/card_calories_text_view"
+                style="@style/Body_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/card_dayly_text_view"
+                style="@style/Body_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <EditText
+                android:id="@+id/card_servings_edit_text"
+                style="@style/Body_2"
+                android:layout_width="@dimen/grid_card_width"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/item"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="3" />
+
+            <TextView
+                style="@style/Body_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/card_calories" />
+
+            <TextView
+                style="@style/Body_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/card_daily_value" />
+
+            <TextView
+                style="@style/Body_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/card_servings" />
+
+            <TextView
+                android:id="@+id/card_fat_text_view"
+                style="@style/Body_1.OrangeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/card_carbs_text_view"
+                style="@style/Body_1.BlueText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <TextView
+                android:id="@+id/card_protein_text_view"
+                style="@style/Body_1.GreenText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </GridLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/card_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

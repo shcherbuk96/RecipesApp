@@ -66,16 +66,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyView
         return recipeList.size();
     }
 
-    @Override
-    public long getItemId(final int position) {
-        return position;
-    }
-
-    @Override
-    public int getItemViewType(final int position) {
-        return position;
-    }
-
     public interface Listener {
         void onItemClick(String uri);
 
