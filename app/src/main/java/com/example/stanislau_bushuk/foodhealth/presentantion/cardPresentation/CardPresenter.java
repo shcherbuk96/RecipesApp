@@ -7,8 +7,6 @@ import com.example.stanislau_bushuk.foodhealth.model.CallBackCardPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.CardNetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
@@ -31,8 +29,12 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
         netWorkModel.setCallBackCard(this);
     }
 
-    public void getRecipeFromUri(final String uri) {
-        netWorkModel.getRecipeFromUri(uri);
+//    public void getRecipeFromUri(final String uri) {
+//        netWorkModel.getRecipeFromUri(uri);
+//    }
+
+    public void getRecipeFromRealmUri(final String uri) {
+        netWorkModel.getRecipeFromRealmUri(uri);
     }
 
     public void getEditData(final int number, final Data data) {
@@ -48,12 +50,11 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
     }
 
     @Override
-    public void call(final Observable<List<Recipe>> observable) {
+    public void call(final Observable<Recipe> observable) {
         observable.subscribeOn(Schedulers.io())
-                .map(new Function<List<Recipe>, Data>() {
+                .map(new Function<Recipe, Data>() {
                     @Override
-                    public Data apply(final List<Recipe> recipeList) {
-                        final Recipe recipe = recipeList.get(0);
+                    public Data apply(final Recipe recipe) {
 
                         return Data.newBuilder()
                                 .setFat(recipe.getTotalNutrients())
@@ -72,7 +73,6 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
                 .subscribe(new Observer<Data>() {
                     @Override
                     public void onSubscribe(final Disposable d) {
-                        Timber.e("onSubscribe");
                     }
 
                     @Override
@@ -88,7 +88,6 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
 
                     @Override
                     public void onComplete() {
-                        Timber.e("onComplete");
                     }
                 });
     }

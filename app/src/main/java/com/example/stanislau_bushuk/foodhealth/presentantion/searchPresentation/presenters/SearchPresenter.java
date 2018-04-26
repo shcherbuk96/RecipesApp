@@ -51,18 +51,33 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     public void call(final Observable<Recipes> observable, final boolean update, final int random) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .map(new Function<Recipes, Recipes>() {
+                    @Override
+                    public Recipes apply(final Recipes recipes) throws Exception {
+                        for (int i = 0; i < recipes.getHits().size(); i++) {
+                            final Recipe recipe = recipes.getHits().get(i).getRecipe();
+                            if (!realmModel.checkRecipeInRealm(recipe)) {
+                                realmModel.addToRealm(recipe);
+                            } else {
+                                recipe.setChecked(realmModel.getIsChecked(recipe));
+                            }
+                        }
+
+                        return recipes;
+                    }
+                })
                 .subscribe(new Observer<Recipes>() {
                     @Override
                     public void onSubscribe(final Disposable d) {
                         if (!update)
                             getViewState().progressBarVisible(View.VISIBLE);
-                        Timber.e("subscribe response");
                     }
 
                     @Override
                     public void onNext(final Recipes recipes) {
                         Timber.e("next response");
                         if (recipes.getCount() != 0) {
+
                             if (!update) {
                                 getViewState().showList(recipes.getHits());
                             } else getViewState().updateList(recipes.getHits());
@@ -81,7 +96,6 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                     @Override
                     public void onComplete() {
                         getViewState().progressBarVisible(View.GONE);
-                        Timber.e("Complete");
                     }
                 });
     }
@@ -134,11 +148,11 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
         }
     }
 
-    public void addToRealm(final Recipe recipe) {
-        realmModel.addDataToRealm(recipe);
+    public void addToFavorite(final Recipe recipe) {
+        realmModel.addToFavorite(recipe);
     }
 
-    public void deleteFromRealm(final Recipe recipe) {
-        realmModel.removeDataToRealm(recipe);
+    public void deleteFromFavorite(final Recipe recipe) {
+        realmModel.deleteFromFavorite(recipe);
     }
 }

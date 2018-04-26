@@ -50,6 +50,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 .load(recipe.getImage())
                 .centerCrop()
                 .into(holder.photoImageView);
+
+        holder.starButton.setChecked(hits.get(position).getRecipe().isChecked());
     }
 
     @Override
