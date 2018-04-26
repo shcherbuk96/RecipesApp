@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <android.support.constraint.ConstraintLayout
@@ -52,15 +52,16 @@
         app:layout_constraintVertical_bias="0.0" />
 
 
-    <TextView
-        android:id="@+id/from_deep_search_text"
-        style="@style/Body_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/deep_search_from_text"
-        app:layout_constraintBottom_toTopOf="@+id/to_deep_search_text"
-        app:layout_constraintStart_toStartOf="@+id/calorie_deep_search"
-        app:layout_constraintTop_toBottomOf="@+id/calorie_deep_search" />
+        <TextView
+            android:id="@+id/from_deep_search_text"
+            style="@style/Body_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/deep_search_from_text"
+            app:layout_constraintBottom_toTopOf="@+id/to_deep_search_text"
+            app:layout_constraintStart_toStartOf="@+id/calorie_deep_search"
+            app:layout_constraintTop_toBottomOf="@+id/calorie_deep_search" />
 
     <EditText
         android:id="@+id/from_deep_search_edit_text"
@@ -76,15 +77,16 @@
         app:layout_constraintStart_toEndOf="@+id/from_deep_search_text"
         app:layout_constraintVertical_chainStyle="spread_inside" />
 
-    <TextView
-        android:id="@+id/to_deep_search_text"
-        style="@style/Body_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/deep_search_to_text"
-        app:layout_constraintBottom_toTopOf="@+id/diet_deep_search_text"
-        app:layout_constraintStart_toStartOf="@+id/from_deep_search_text"
-        app:layout_constraintTop_toBottomOf="@+id/from_deep_search_text" />
+        <TextView
+            android:id="@+id/to_deep_search_text"
+            style="@style/Body_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/deep_search_to_text"
+            app:layout_constraintBottom_toTopOf="@+id/diet_deep_search_text"
+            app:layout_constraintStart_toStartOf="@+id/from_deep_search_text"
+            app:layout_constraintTop_toBottomOf="@+id/from_deep_search_text" />
 
     <EditText
         android:id="@+id/to_deep_search_edit_text"
@@ -138,108 +140,112 @@
         app:layout_constraintTop_toBottomOf="@+id/to_deep_search_text" />
 
 
-    <android.support.v7.widget.AppCompatCheckBox
-        android:id="@+id/balanced_deep_search_checkbox"
-        style="@style/Body_1"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:tag="@string/deep_search_balanced"
-        android:text="@string/deep_search_balanced"
-        app:buttonTint="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/high_protein_deep_search_checkbox"
-        app:layout_constraintStart_toStartOf="@+id/high_protein_deep_search_checkbox"
-        app:layout_constraintTop_toBottomOf="@+id/low_fat_deep_search_checkbox" />
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/balanced_deep_search_checkbox"
+            style="@style/Body_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:tag="@string/deep_search_balanced"
+            android:text="@string/deep_search_balanced"
+            app:buttonTint="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/high_protein_deep_search_checkbox"
+            app:layout_constraintStart_toStartOf="@+id/high_protein_deep_search_checkbox"
+            app:layout_constraintTop_toBottomOf="@+id/low_fat_deep_search_checkbox" />
 
-    <android.support.v7.widget.AppCompatCheckBox
-        android:id="@+id/high_protein_deep_search_checkbox"
-        style="@style/Body_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:tag="@string/deep_search_high_protein_label"
-        android:text="@string/deep_search_high_protein"
-        app:buttonTint="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/tree-nut-free_deep_search_checkbox"
-        app:layout_constraintStart_toStartOf="@+id/tree-nut-free_deep_search_checkbox"
-        app:layout_constraintTop_toBottomOf="@+id/balanced_deep_search_checkbox" />
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/high_protein_deep_search_checkbox"
+            style="@style/Body_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:tag="@string/deep_search_high_protein_label"
+            android:text="@string/deep_search_high_protein"
+            app:buttonTint="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/tree-nut-free_deep_search_checkbox"
+            app:layout_constraintStart_toStartOf="@+id/tree-nut-free_deep_search_checkbox"
+            app:layout_constraintTop_toBottomOf="@+id/balanced_deep_search_checkbox" />
 
-    <android.support.v7.widget.AppCompatCheckBox
-        android:id="@+id/low_fat_deep_search_checkbox"
-        style="@style/Body_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:tag="@string/deep_search_low_fat"
-        android:text="@string/deep_search_low_fat"
-        app:buttonTint="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/balanced_deep_search_checkbox"
-        app:layout_constraintStart_toStartOf="@+id/balanced_deep_search_checkbox"
-        app:layout_constraintTop_toBottomOf="@+id/low_carb_deep_search_checkbox" />
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/low_fat_deep_search_checkbox"
+            style="@style/Body_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:tag="@string/deep_search_low_fat"
+            android:text="@string/deep_search_low_fat"
+            app:buttonTint="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/balanced_deep_search_checkbox"
+            app:layout_constraintStart_toStartOf="@+id/balanced_deep_search_checkbox"
+            app:layout_constraintTop_toBottomOf="@+id/low_carb_deep_search_checkbox" />
 
         <android.support.v7.widget.AppCompatCheckBox
             android:id="@+id/low_carb_deep_search_checkbox"
             style="@style/Body_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:tag="@string/deep_search_low_carb"
             android:text="@string/deep_search_low_carb"
             app:buttonTint="@color/colorPrimary"
             app:layout_constraintBottom_toTopOf="@+id/low_fat_deep_search_checkbox"
             app:layout_constraintStart_toStartOf="@+id/low_fat_deep_search_checkbox"
-            app:layout_constraintTop_toTopOf="@+id/sugar_conscious_deep_search_checkbox"
+            app:layout_constraintTop_toBottomOf="@+id/diet_deep_search_text"
             app:layout_constraintVertical_chainStyle="spread_inside" />
 
-    <android.support.v7.widget.AppCompatCheckBox
-        android:id="@+id/vegan_deep_search_checkbox"
-        style="@style/Body_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/deep_search_start_end_padding"
-        android:tag="@string/deep_search_vegan"
-        android:text="@string/deep_search_vegan"
-        app:buttonTint="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/find_deep_search_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vegetarian_deep_search_checkbox" />
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/vegan_deep_search_checkbox"
+            style="@style/Body_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/deep_search_start_end_padding"
+            android:layout_marginTop="16dp"
+            android:tag="@string/deep_search_vegan"
+            android:text="@string/deep_search_vegan"
+            app:buttonTint="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vegetarian_deep_search_checkbox" />
 
 
-    <android.support.v7.widget.AppCompatCheckBox
-        android:id="@+id/vegetarian_deep_search_checkbox"
-        style="@style/Body_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:tag="@string/deep_search_vegetarian"
-        android:text="@string/deep_search_vegetarian"
-        app:buttonTint="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/vegan_deep_search_checkbox"
-        app:layout_constraintStart_toStartOf="@+id/vegan_deep_search_checkbox"
-        app:layout_constraintTop_toBottomOf="@+id/alcohol_free_deep_search_checkbox"
-        app:layout_constraintVertical_bias="0.102" />
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/vegetarian_deep_search_checkbox"
+            style="@style/Body_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:tag="@string/deep_search_vegetarian"
+            android:text="@string/deep_search_vegetarian"
+            app:buttonTint="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/vegan_deep_search_checkbox"
+            app:layout_constraintStart_toStartOf="@+id/vegan_deep_search_checkbox"
+            app:layout_constraintTop_toBottomOf="@+id/alcohol_free_deep_search_checkbox" />
 
-    <android.support.v7.widget.AppCompatCheckBox
-        android:id="@+id/sugar_conscious_deep_search_checkbox"
-        style="@style/Body_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/deep_search_elements_marginTop"
-        android:tag="@string/deep_search_low_sugar_label"
-        android:text="@string/deep_search_sugar_conscious"
-        app:buttonTint="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/peanut_free_deep_search_checkbox"
-        app:layout_constraintStart_toStartOf="@+id/peanut_free_deep_search_checkbox"
-        app:layout_constraintTop_toBottomOf="@+id/diet_deep_search_text"
-        app:layout_constraintVertical_chainStyle="packed" />
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/sugar_conscious_deep_search_checkbox"
+            style="@style/Body_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:tag="@string/deep_search_low_sugar_label"
+            android:text="@string/deep_search_sugar_conscious"
+            app:buttonTint="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/peanut_free_deep_search_checkbox"
+            app:layout_constraintStart_toStartOf="@+id/peanut_free_deep_search_checkbox"
+            app:layout_constraintTop_toBottomOf="@+id/diet_deep_search_text"
+            app:layout_constraintVertical_chainStyle="packed" />
 
-    <android.support.v7.widget.AppCompatCheckBox
-        android:id="@+id/peanut_free_deep_search_checkbox"
-        style="@style/Body_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:tag="@string/deep_search_peabut_free"
-        android:text="@string/deep_search_peabut_free"
-        app:buttonTint="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/alcohol_free_deep_search_checkbox"
-        app:layout_constraintStart_toStartOf="@+id/alcohol_free_deep_search_checkbox"
-        app:layout_constraintTop_toBottomOf="@+id/sugar_conscious_deep_search_checkbox"
-        app:layout_constraintVertical_bias="0.024" />
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/peanut_free_deep_search_checkbox"
+            style="@style/Body_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:tag="@string/deep_search_peabut_free"
+            android:text="@string/deep_search_peabut_free"
+            app:buttonTint="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/alcohol_free_deep_search_checkbox"
+            app:layout_constraintStart_toStartOf="@+id/alcohol_free_deep_search_checkbox"
+            app:layout_constraintTop_toBottomOf="@+id/sugar_conscious_deep_search_checkbox" />
 
         <android.support.v7.widget.AppCompatCheckBox
             android:id="@+id/tree-nut-free_deep_search_checkbox"
@@ -247,6 +253,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/deep_search_start_end_padding"
+            android:layout_marginTop="16dp"
             android:tag="@string/deep_search_tree_nut_free"
             android:text="@string/deep_search_tree_nut_free"
             app:buttonTint="@color/colorPrimary"
@@ -254,17 +261,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/high_protein_deep_search_checkbox" />
 
-    <android.support.v7.widget.AppCompatCheckBox
-        android:id="@+id/alcohol_free_deep_search_checkbox"
-        style="@style/Body_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:tag="@string/deep_search_alcohol_free"
-        android:text="@string/deep_search_alcohol_free"
-        app:buttonTint="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/vegetarian_deep_search_checkbox"
-        app:layout_constraintStart_toStartOf="@+id/vegetarian_deep_search_checkbox"
-        app:layout_constraintTop_toBottomOf="@+id/peanut_free_deep_search_checkbox" />
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/alcohol_free_deep_search_checkbox"
+            style="@style/Body_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:tag="@string/deep_search_alcohol_free"
+            android:text="@string/deep_search_alcohol_free"
+            app:buttonTint="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/vegetarian_deep_search_checkbox"
+            app:layout_constraintStart_toStartOf="@+id/vegetarian_deep_search_checkbox"
+            app:layout_constraintTop_toBottomOf="@+id/peanut_free_deep_search_checkbox" />
 
         <Button
             android:id="@+id/find_deep_search_button"
@@ -273,10 +281,9 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="@string/deep_search_button_text"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.499"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="483dp" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>
