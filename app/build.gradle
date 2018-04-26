@@ -30,6 +30,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':uimodul')
 
+
     ///Realm////
     compile "${library.realm}"
     ////

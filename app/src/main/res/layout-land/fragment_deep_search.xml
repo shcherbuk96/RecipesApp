@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,10 +11,12 @@
         style="@style/Headline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/deep_search_title_bottom_padding"
-        android:text="@string/deep_search_title_text" />
+        android:layout_marginTop="@dimen/deep_search_elements_marginTop"
+        android:text="@string/deep_search_title_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -22,20 +24,23 @@
         style="@style/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title_deep_search"
         android:layout_marginStart="@dimen/deep_search_start_end_padding"
-        android:layout_marginTop="@dimen/deep_search_elements_marginTop"
-        android:text="@string/deep_search_calories_text" />
+        android:layout_marginTop="@dimen/deep_search_title_bottom_padding"
+        android:text="@string/deep_search_calories_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_deep_search" />
 
     <TextView
         android:id="@+id/ingredients_deep_search"
         style="@style/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_alignTop="@+id/calorie_deep_search"
         android:layout_marginEnd="@dimen/deep_search_start_end_padding"
-        android:text="@string/deep_search_ingredients_text" />
+        android:layout_marginTop="@dimen/deep_search_title_bottom_padding"
+        android:text="@string/deep_search_ingredients_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_deep_search" />
 
 
     <TextView
@@ -43,47 +48,49 @@
         style="@style/Body_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/calorie_deep_search"
-        android:layout_marginStart="@dimen/deep_search_start_end_padding"
         android:layout_marginTop="@dimen/deep_search_elements_marginTop"
-        android:text="@string/deep_search_from_text" />
+        android:text="@string/deep_search_from_text"
+        app:layout_constraintStart_toStartOf="@+id/calorie_deep_search"
+        app:layout_constraintTop_toBottomOf="@+id/calorie_deep_search" />
 
     <EditText
         android:id="@+id/from_deep_search_edit_text"
         style="@style/Body_1"
         android:layout_width="@dimen/deep_search_edit_text_width"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/from_deep_search_text"
-        android:layout_marginStart="@dimen/deep_search_start_end_padding"
-        android:layout_toEndOf="@+id/from_deep_search_text"
+        android:layout_marginStart="@dimen/deep_search_elements_marginTop"
         android:background="@drawable/item"
         android:hint="0"
         android:inputType="number"
-        android:maxLength="4" />
+        android:maxLength="4"
+        app:layout_constraintBaseline_toBaselineOf="@+id/from_deep_search_text"
+        app:layout_constraintBottom_toTopOf="@+id/to_deep_search_edit_text"
+        app:layout_constraintStart_toEndOf="@+id/from_deep_search_text" />
 
     <TextView
         android:id="@+id/to_deep_search_text"
         style="@style/Body_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/title_deep_search"
-        android:layout_alignTop="@+id/from_deep_search_text"
-        android:text="@string/deep_search_to_text" />
+        android:layout_marginStart="16dp"
+        android:text="@string/deep_search_to_text"
+        app:layout_constraintStart_toEndOf="@+id/from_deep_search_edit_text"
+        app:layout_constraintTop_toTopOf="@+id/from_deep_search_text" />
 
     <EditText
         android:id="@+id/to_deep_search_edit_text"
         style="@style/Body_1"
         android:layout_width="@dimen/deep_search_edit_text_width"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/deep_search_start_end_padding"
-        android:layout_alignBaseline="@+id/to_deep_search_text"
-        android:layout_alignBottom="@+id/to_deep_search_text"
-        android:layout_toEndOf="@+id/to_deep_search_text"
+        android:layout_alignStart="@+id/from_deep_search_edit_text"
+        android:layout_below="@+id/from_deep_search_edit_text"
+        android:layout_marginStart="112dp"
         android:background="@drawable/item"
         android:hint="0"
         android:inputType="number"
-        android:maxLength="4" />
+        android:maxLength="4"
+        app:layout_constraintBaseline_toBaselineOf="@+id/to_deep_search_text"
+        app:layout_constraintStart_toStartOf="@+id/from_deep_search_edit_text" />
 
     <TextView
         android:id="@+id/up_to_deep_search_text"
@@ -92,7 +99,9 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/ingredients_deep_search"
         android:layout_alignTop="@+id/from_deep_search_text"
-        android:text="@string/deep_search_up_to_text" />
+        android:text="@string/deep_search_up_to_text"
+        app:layout_constraintBaseline_toBaselineOf="@+id/from_deep_search_text"
+        app:layout_constraintStart_toStartOf="@+id/ingredients_deep_search" />
 
     <EditText
         android:id="@+id/up_to_deep_search_edit_text"
@@ -100,13 +109,15 @@
         android:layout_width="@dimen/deep_search_edit_text_width"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/up_to_deep_search_text"
-        android:layout_marginStart="@dimen/deep_search_start_end_padding"
+        android:layout_marginStart="@dimen/deep_search_elements_marginTop"
         android:layout_toEndOf="@id/up_to_deep_search_text"
-        android:background="@drawable/item"
 
+        android:background="@drawable/item"
         android:hint="0"
         android:inputType="number"
-        android:maxLength="4" />
+        android:maxLength="4"
+        app:layout_constraintBaseline_toBaselineOf="@+id/up_to_deep_search_text"
+        app:layout_constraintStart_toEndOf="@+id/up_to_deep_search_text" />
 
     <TextView
         android:id="@+id/diet_deep_search_text"
@@ -115,21 +126,22 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/calorie_deep_search"
         android:layout_below="@+id/to_deep_search_text"
-        android:layout_marginTop="@dimen/deep_search_elements_marginTop"
-        android:text="@string/deep_search_diet" />
+        android:text="@string/deep_search_diet"
+        app:layout_constraintStart_toStartOf="@+id/from_deep_search_text"
+        app:layout_constraintTop_toBottomOf="@+id/from_deep_search_text" />
 
     <ScrollView
+        android:id="@+id/scroll_deep_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/find_deep_search_button"
-        android:id="@+id/scroll_deep_search"
-        android:layout_below="@+id/diet_deep_search_text">
+        app:layout_constraintBottom_toBottomOf="@+id/find_deep_search_button"
+        app:layout_constraintTop_toBottomOf="@+id/diet_deep_search_text">
 
         <LinearLayout
             android:id="@+id/table_deep_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:baselineAligned="false"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -209,7 +221,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/deep_search_start_end_padding"
                     android:layout_marginTop="@dimen/deep_search_elements_marginTop"
-
                     android:tag="@string/deep_search_vegetarian"
                     android:text="@string/deep_search_vegetarian"
                     app:buttonTint="@color/colorPrimary" />
@@ -221,7 +232,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/deep_search_start_end_padding"
                     android:layout_marginTop="@dimen/deep_search_elements_marginTop"
-
                     android:tag="@string/deep_search_low_sugar_label"
                     android:text="@string/deep_search_sugar_conscious"
                     app:buttonTint="@color/colorPrimary" />
@@ -232,7 +242,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/deep_search_start_end_padding"
-
                     android:layout_marginTop="@dimen/deep_search_elements_marginTop"
                     android:tag="@string/deep_search_peabut_free"
                     android:text="@string/deep_search_peabut_free"
@@ -269,7 +278,13 @@
         style="@style/Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/scroll_deep_search"
         android:layout_centerHorizontal="true"
-        android:text="@string/deep_search_button_text" />
-</RelativeLayout>
+        android:layout_marginBottom="@dimen/deep_search_start_end_padding"
+        android:text="@string/deep_search_button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scroll_deep_search" />
+</android.support.constraint.ConstraintLayout>

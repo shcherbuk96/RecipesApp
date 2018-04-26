@@ -24,6 +24,7 @@ dependencies {
     api "${library.supportAppcompat}"
     api "${library.support}"
     api "${library.supportDesign}"
+    api "${library.constraint}"
     api "${library.supportFragment}"
     implementation "${library.recyclerview}"
     api "${library.cardview}"

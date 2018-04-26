@@ -21,7 +21,6 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -29,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
-public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSearchView,RecyclerAdapter.Listener {
+public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSearchView, RecyclerAdapter.Listener {
 
     @InjectPresenter(type = PresenterType.GLOBAL)
     DeepSearchPresenter presenter;
@@ -39,9 +38,6 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
 
     @BindView(R.id.progressbar_deep_search)
     ProgressBar progressBar;
-
-    @Inject
-    ResourceManager resourceManager;
 
     private RecyclerAdapter adapter;
 
@@ -57,7 +53,7 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
         App.getAppComponent().inject(this);
         setContentView(R.layout.activity_deep_search);
         ButterKnife.bind(this);
-        adapter = new RecyclerAdapter(this ,new ArrayList<Hits>());
+        adapter = new RecyclerAdapter(this, new ArrayList<Hits>());
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -82,7 +78,7 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
 
     @Override
     public void notFound() {
-        Toast.makeText(this, resourceManager.getString(R.string.deep_search_not_found), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getResources().getString(R.string.deep_search_not_found), Toast.LENGTH_LONG).show();
     }
 
     @Override
