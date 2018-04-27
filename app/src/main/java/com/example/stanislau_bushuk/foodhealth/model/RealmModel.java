@@ -23,8 +23,8 @@ public class RealmModel {
     }
 
     public void addToFavorite(final Recipe recipe) {
-        recipe.setChecked(true);
         realm.beginTransaction();
+        recipe.setChecked(true);
         realm.insertOrUpdate(recipe);
         realm.commitTransaction();
     }
@@ -52,6 +52,7 @@ public class RealmModel {
         }
     }
 
+
     public boolean getIsChecked(final Recipe recipe) {
         final Recipe r = realm.where(Recipe.class).equalTo("uri", recipe.getUri()).findFirst();
 
@@ -64,11 +65,7 @@ public class RealmModel {
     public boolean checkRecipeInRealm(final Recipe recipe) {
         final Recipe r = realm.where(Recipe.class).equalTo("uri", recipe.getUri()).findFirst();
 
-        if (r != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return r != null;
     }
 
 }

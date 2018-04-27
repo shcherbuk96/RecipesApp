@@ -67,6 +67,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         }
     }
 
+/*    public void updateAdapterRealm(final RealmResults<Recipe> recipes) {
+        if (hits != null && hits.size() != 0) {
+            this.hits.clear();
+            this.hits.addAll(recipes);
+            notifyDataSetChanged();
+        }
+    }*/
+
     public void updateList(final List<Hits> hits) {
         if (hits != null) {
             this.hits.addAll(hits);

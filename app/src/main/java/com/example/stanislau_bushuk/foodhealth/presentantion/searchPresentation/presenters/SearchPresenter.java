@@ -56,6 +56,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                     public Recipes apply(final Recipes recipes) throws Exception {
                         for (int i = 0; i < recipes.getHits().size(); i++) {
                             final Recipe recipe = recipes.getHits().get(i).getRecipe();
+
                             if (!realmModel.checkRecipeInRealm(recipe)) {
                                 realmModel.addToRealm(recipe);
                             } else {
@@ -87,10 +88,15 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
                     @Override
                     public void onError(final Throwable e) {
-                        e.printStackTrace();
-                        Timber.e("Error");
+                        if (netWorkModel.getRandomData().isEmpty()) {
+                            getViewState().setSnackBar();
+                        } else {
+                            getViewState().showList(netWorkModel.getRandomData());
+                        }
+
                         getViewState().progressBarVisible(View.GONE);
-                        getViewState().setSnackBar();
+
+                        Timber.e("Error");
                     }
 
                     @Override
