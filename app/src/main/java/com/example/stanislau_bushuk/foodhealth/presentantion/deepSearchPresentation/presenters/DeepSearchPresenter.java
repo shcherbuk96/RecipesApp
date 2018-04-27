@@ -112,8 +112,8 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
                 });
     }
 
-    public void setMap(final CompoundButton compoundButton, final boolean checked, final String label){
-        model.setMap(compoundButton,checked,label);
+    public void setMap(final CompoundButton compoundButton, final boolean checked, final String label) {
+        model.setMap(compoundButton, checked, label);
     }
 
 }

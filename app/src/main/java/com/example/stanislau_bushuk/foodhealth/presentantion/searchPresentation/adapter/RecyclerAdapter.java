@@ -59,7 +59,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             @Override
             public void onClick(final View v) {
                 Timber.e(recipe.getUri());
-                ActivityManager.startCardActivity(context, recipe.getUri());
+                listener.onItemClick(recipe.getUri());
             }
         });
     }

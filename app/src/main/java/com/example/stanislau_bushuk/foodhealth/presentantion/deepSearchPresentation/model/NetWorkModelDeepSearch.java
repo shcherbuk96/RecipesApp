@@ -12,10 +12,6 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 
-/**
- * Created by logoped583st on 20.4.18.
- */
-
 public class NetWorkModelDeepSearch {
 
     @Inject

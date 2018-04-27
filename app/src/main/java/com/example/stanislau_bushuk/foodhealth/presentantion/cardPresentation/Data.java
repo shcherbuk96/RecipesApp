@@ -5,8 +5,6 @@ import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.TotalDaily;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.TotalNutrients;
 
-import java.util.ArrayList;
-
 import io.realm.RealmList;
 
 public class Data {
@@ -83,6 +81,7 @@ public class Data {
 
             return this;
         }
+
         public Builder setImage(final Recipe recipe) {
             image = recipe.getImage();
 

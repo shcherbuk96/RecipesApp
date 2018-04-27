@@ -10,7 +10,6 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import timber.log.Timber;
 
 
 public class NetWorkModel {

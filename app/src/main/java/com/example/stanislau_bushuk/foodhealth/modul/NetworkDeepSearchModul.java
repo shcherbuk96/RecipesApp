@@ -7,10 +7,6 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 
-/**
- * Created by logoped583st on 20.4.18.
- */
-
 @Module
 public class NetworkDeepSearchModul {
 
