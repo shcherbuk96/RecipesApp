@@ -12,7 +12,7 @@ public class Data {
     private ItemTotal prot;
     private ItemTotal chocdf;
     private ItemTotal ENERC_KCAL;
-    private int yield;
+    private float yield;
     private float calories;
     private String label;
     private String image;
@@ -38,7 +38,7 @@ public class Data {
         return ENERC_KCAL;
     }
 
-    public int getYield() {
+    public float getYield() {
         return yield;
     }
 
@@ -81,6 +81,7 @@ public class Data {
 
             return this;
         }
+
         public Builder setImage(final Recipe recipe) {
             image = recipe.getImage();
 

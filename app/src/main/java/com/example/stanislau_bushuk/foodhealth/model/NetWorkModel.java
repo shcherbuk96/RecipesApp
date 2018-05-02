@@ -10,7 +10,6 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import timber.log.Timber;
 
 
 public class NetWorkModel {
@@ -35,7 +34,6 @@ public class NetWorkModel {
 
     public void getRandomRecipe(final boolean update) {
         final int random = (int) (Math.random() * Constants.RABDON);
-        Timber.e("random " + random);
         final Observable<Recipes> observable = iapi.getRandomRecipe(Constants.RANDOM_RECIPE, Constants.APP_ID, Constants.APP_KEY, String.valueOf(random), String.valueOf(random + Constants.ITEMS_IN_PAGE), Constants.CALLORIES);
         callBackSearchPresenter.call(observable, update, random);
     }
