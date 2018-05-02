@@ -25,10 +25,11 @@ android {
         }
     }
 }
-def library=ext.library
+def library = ext.library
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compile project (':uimodul')
+    compile project(':uimodul')
+
 
     ///Realm////
     compile "${library.realm}"
@@ -67,13 +68,11 @@ dependencies {
     annotationProcessor "${library.butterknifeCompiler}"
     ///
 
-
-
     ///////Moxy/////
     compile "${library.moxy}"
     compile "${library.moxyAppCompat}"
     annotationProcessor "${library.moxyCompiler}"
     testImplementation "${library.junit}"
-    androidTestImplementation"${library.testRunner}"
+    androidTestImplementation "${library.testRunner}"
     androidTestImplementation "${library.espressoCore}"
 }

@@ -81,6 +81,7 @@ public class Data {
 
             return this;
         }
+
         public Builder setImage(final Recipe recipe) {
             image = recipe.getImage();
 
@@ -94,7 +95,7 @@ public class Data {
         }
 
         public Builder setYield(final Recipe recipe) {
-            yield = recipe.getYield();
+            yield = (int) recipe.getYield();
 
             return this;
         }

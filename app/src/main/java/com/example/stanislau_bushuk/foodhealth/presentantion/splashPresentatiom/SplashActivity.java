@@ -26,4 +26,9 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, Constants.WAIT);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }

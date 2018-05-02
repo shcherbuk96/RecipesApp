@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
 
@@ -38,11 +39,14 @@ public class MainActivity extends MvpAppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.search:
+
                         fragment = getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new SearchFragment());
                         fragment.commit();
 
                         break;
                     case R.id.search_deep:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new DeepSearchFragment()).commit();
+
                         break;
                     case R.id.featured:
                         fragment = getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new FavoriteFragment());

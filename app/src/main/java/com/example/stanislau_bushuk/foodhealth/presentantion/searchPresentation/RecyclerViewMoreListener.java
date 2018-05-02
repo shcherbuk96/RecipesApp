@@ -5,15 +5,13 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.stanislau_bushuk.foodhealth.Constants;
 
-import timber.log.Timber;
-
-abstract class RecyclerViewMoreListener extends RecyclerView.OnScrollListener {
+public abstract class RecyclerViewMoreListener extends RecyclerView.OnScrollListener {
 
     private RecyclerView.LayoutManager layoutManager;
     private int previousTotalItemCount = 0;
     private boolean loading = true;
 
-    RecyclerViewMoreListener(final RecyclerView.LayoutManager layoutManager) {
+    public RecyclerViewMoreListener(final RecyclerView.LayoutManager layoutManager) {
         this.layoutManager = layoutManager;
     }
 

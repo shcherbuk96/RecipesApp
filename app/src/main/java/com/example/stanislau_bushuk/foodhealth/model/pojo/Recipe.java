@@ -15,7 +15,7 @@ public class Recipe extends RealmObject {
     private String source;
     private String url;
     private String shareAs;
-    private int yield;
+    private float yield;
     private RealmList<String> dietLabels;
     private RealmList<String> healthLabels;
 
@@ -56,7 +56,7 @@ public class Recipe extends RealmObject {
         return shareAs;
     }
 
-    public int getYield() {
+    public float getYield() {
         return yield;
     }
 
