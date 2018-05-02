@@ -10,12 +10,12 @@ import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import timber.log.Timber;
@@ -41,20 +41,23 @@ public class NetWorkModel {
 
     public void getResponse(final String recipeName, final int from, final boolean update) {
         final Observable<Recipes> observable = iapi.getRecipeWithName(recipeName, Constants.APP_ID, Constants.APP_KEY, String.valueOf(from), String.valueOf(from + Constants.ITEMS_IN_PAGE));
-        callBackSearchPresenter.call(observable, update, from);
+        callBackSearchPresenter.call(observable, update, false);
     }
 
     public void getRandomRecipe(final boolean update) {
         final int random = (int) (Math.random() * Constants.RABDON);
-        Timber.e("random " + random);
         final Observable<Recipes> observable = iapi.getRandomRecipe(Constants.RANDOM_RECIPE, Constants.APP_ID, Constants.APP_KEY, String.valueOf(random), String.valueOf(random + Constants.ITEMS_IN_PAGE), Constants.CALLORIES);
-        callBackSearchPresenter.call(observable, update, random);
+        callBackSearchPresenter.call(observable, update, false);
     }
 
-
-    public List<Hits> getRandomData() {
+    public boolean checkRealmIsEmpty() {
         final RealmResults<Recipe> recipes = realm.where(Recipe.class).findAll();
-        final List<Hits> list = new ArrayList<>();
+        return recipes.isEmpty();
+    }
+
+    public void getRandomData(final boolean update) {
+        final RealmResults<Recipe> recipes = realm.where(Recipe.class).findAll();
+        final ArrayList<Hits> list = new ArrayList<>();
 
         if (recipes != null) {
             for (final Recipe recipe : recipes) {
@@ -63,14 +66,12 @@ public class NetWorkModel {
 
             if (list.size() > 50) {
                 final int random = new Random().nextInt(list.size() - 50);
-
-                return list.subList(random, random + 50);
+                callBackSearchPresenter.call(Observable.just(new Recipes(new ArrayList<>(list.subList(random, random + 50)), 1)).subscribeOn(AndroidSchedulers.mainThread()), update, true);
             } else {
-                return list;
+                callBackSearchPresenter.call(Observable.just(new Recipes(list, 1)).subscribeOn(AndroidSchedulers.mainThread()), update, true);
             }
 
-        } else {
-            return new ArrayList<>();
         }
     }
+
 }

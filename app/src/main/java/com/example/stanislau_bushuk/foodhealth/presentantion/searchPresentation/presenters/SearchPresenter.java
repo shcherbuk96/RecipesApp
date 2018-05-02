@@ -48,19 +48,21 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     }
 
     @Override
-    public void call(final Observable<Recipes> observable, final boolean update, final int random) {
+    public void call(final Observable<Recipes> observable, final boolean update, final boolean db) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Function<Recipes, Recipes>() {
                     @Override
                     public Recipes apply(final Recipes recipes) throws Exception {
-                        for (int i = 0; i < recipes.getHits().size(); i++) {
-                            final Recipe recipe = recipes.getHits().get(i).getRecipe();
+                        if (!db) {
+                            for (int i = 0; i < recipes.getHits().size(); i++) {
+                                final Recipe recipe = recipes.getHits().get(i).getRecipe();
 
-                            if (!realmModel.checkRecipeInRealm(recipe)) {
-                                realmModel.addToRealm(recipe);
-                            } else {
-                                recipe.setChecked(realmModel.getIsChecked(recipe));
+                                if (!realmModel.checkRecipeInRealm(recipe)) {
+                                    realmModel.addToRealm(recipe);
+                                } else {
+                                    recipe.setChecked(realmModel.getIsChecked(recipe));
+                                }
                             }
                         }
 
@@ -78,7 +80,6 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                     public void onNext(final Recipes recipes) {
                         Timber.e("next response");
                         if (recipes.getCount() != 0) {
-
                             if (!update) {
                                 getViewState().showList(recipes.getHits());
                             } else getViewState().updateList(recipes.getHits());
@@ -88,12 +89,8 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
                     @Override
                     public void onError(final Throwable e) {
-                        if (netWorkModel.getRandomData().isEmpty()) {
-                            getViewState().setSnackBar();
-                        } else {
-                            getViewState().showList(netWorkModel.getRandomData());
-                        }
-
+                        e.printStackTrace();
+                        getViewState().setSnackBar();
                         getViewState().progressBarVisible(View.GONE);
 
                         Timber.e("Error");
@@ -129,7 +126,11 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                             netWorkModel.getResponse(s, 0, false);
                             getViewState().setSearchText(s);
                         } else {
-                            netWorkModel.getRandomRecipe(false);
+                            if (!netWorkModel.checkRealmIsEmpty()) {
+                                netWorkModel.getRandomData(false);
+                            } else {
+                                netWorkModel.getRandomRecipe(false);
+                            }
                             getViewState().setSearchText(resourceManager.getString(R.string.search_random));
                         }
                     }
