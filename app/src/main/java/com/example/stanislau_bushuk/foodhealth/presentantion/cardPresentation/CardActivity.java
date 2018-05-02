@@ -94,7 +94,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
                     @Override
                     public void onNext(final String s) {
                         if (!s.isEmpty()) {
-                            presenter.getEditData(Integer.parseInt(s), data);
+                            presenter.getEditData(Float.parseFloat(s), data);
                         }
                     }
 

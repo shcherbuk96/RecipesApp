@@ -4,25 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <SearchView
-        android:id="@+id/search_search_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/view_search_start_end_spacing"
-        android:layout_marginStart="@dimen/view_search_start_end_spacing"
-        android:layout_marginTop="@dimen/view_search_top_bot_spacing"
-        android:background="@drawable/item"
-        android:focusable="false"
-        android:iconifiedByDefault="false"
-        android:queryHint="@string/search_edt" />
+    <include android:id="@+id/search"
+        layout="@layout/custom_action_bar"/>
 
     <TextView
         android:id="@+id/search_random_text_view"
         style="@style/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/search_search_view"
+        android:layout_below="@+id/search"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/view_search_top_bot_spacing"
         android:text="@string/search_random" />

@@ -1,6 +1,7 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation;
 
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
@@ -55,6 +56,9 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+        final DividerItemDecoration itemDecorator = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(getResources().getDrawable(R.drawable.devider));
+        recyclerView.addItemDecoration(itemDecorator);
         recyclerView.addOnScrollListener(new RecyclerViewMoreListener(layoutManager) {
             @Override
             public void onScroll(final int totalItemCount) {

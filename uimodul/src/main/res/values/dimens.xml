@@ -2,7 +2,7 @@
 <resources>
     <dimen name="item_padding_start_end">4dp</dimen>
     <dimen name="padding_text_item_start_end">8dp</dimen>
-    <dimen name="image_item_photo_size">65dp</dimen>
+    <dimen name="image_item_photo_size">56dp</dimen>
 
     <dimen name="text_item_title_size">16sp</dimen>
 
@@ -15,6 +15,7 @@
     <dimen name="list_featured_start_end_spacing">16dp</dimen>
     <dimen name="list_featured_top_bot_spacing">8dp</dimen>
 
+    <!-- CARD -->
     <dimen name="image_card_start_end_spacing">16dp</dimen>
     <dimen name="image_card_top_bottom_spacing">8dp</dimen>
     <dimen name="text_card_start_end_spacing">50</dimen>
@@ -27,7 +28,7 @@
     <dimen name="relative_card_bottom_spacing">4dp</dimen>
 
     <dimen name="text_item_card_start_end_spacing">16dp</dimen>
-
+    <dimen name="text_top_bottom_padding">4dp</dimen>
     <dimen name="grid_card_width">48dp</dimen>
     <dimen name="image_card_height">240dp</dimen>
     <dimen name="image_card_height_landscape_size">140dp</dimen>

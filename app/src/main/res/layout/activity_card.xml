@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_main"
     android:orientation="vertical">
 
     <ImageView
@@ -10,10 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/image_card_height"
         android:layout_gravity="center"
-        android:paddingBottom="@dimen/image_card_top_bottom_spacing"
-        android:paddingEnd="@dimen/image_card_start_end_spacing"
-        android:paddingStart="@dimen/image_card_start_end_spacing"
-        android:paddingTop="@dimen/image_card_top_bottom_spacing" />
+        android:paddingBottom="@dimen/image_card_top_bottom_spacing" />
 
     <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
@@ -29,14 +25,18 @@
             style="@style/Body_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/text_top_bottom_padding"
+            android:layout_marginTop="@dimen/text_top_bottom_padding" />
 
         <TextView
             android:id="@+id/card_dayly_text_view"
             style="@style/Body_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/text_top_bottom_padding"
+            android:layout_marginTop="@dimen/text_top_bottom_padding" />
 
         <EditText
             android:id="@+id/card_servings_edit_text"
@@ -44,7 +44,8 @@
             android:layout_width="@dimen/grid_card_width"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/item"
+            android:layout_marginBottom="@dimen/text_top_bottom_padding"
+            android:layout_marginTop="@dimen/text_top_bottom_padding"
             android:gravity="center"
             android:inputType="number"
             android:maxLength="3" />
@@ -74,6 +75,8 @@
             android:id="@+id/card_fat_text_view"
             style="@style/Body_1.OrangeText"
             android:layout_width="wrap_content"
+            android:layout_marginBottom="@dimen/text_top_bottom_padding"
+            android:layout_marginTop="@dimen/text_top_bottom_padding"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
@@ -81,6 +84,8 @@
             android:id="@+id/card_carbs_text_view"
             style="@style/Body_1.BlueText"
             android:layout_width="wrap_content"
+            android:layout_marginBottom="@dimen/text_top_bottom_padding"
+            android:layout_marginTop="@dimen/text_top_bottom_padding"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
@@ -88,6 +93,8 @@
             android:id="@+id/card_protein_text_view"
             style="@style/Body_1.GreenText"
             android:layout_width="wrap_content"
+            android:layout_marginBottom="@dimen/text_top_bottom_padding"
+            android:layout_marginTop="@dimen/text_top_bottom_padding"
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
     </GridLayout>
@@ -95,6 +102,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/card_recycler_view"
         android:layout_width="match_parent"
+        android:paddingTop="@dimen/image_card_top_bottom_spacing"
         android:layout_height="match_parent" />
 
 

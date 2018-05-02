@@ -35,7 +35,7 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
         netWorkModel.getRecipeFromUri(uri);
     }
 
-    public void getEditData(final int number, final Data data) {
+    public void getEditData(final float number, final Data data) {
         final EditData editData = EditData.newBuilder()
                 .setCalories(data.getCalories() * number / data.getYield())
                 .setENERC_KCAL(data.getENERC_KCAL().getQuantity() * number / data.getYield())

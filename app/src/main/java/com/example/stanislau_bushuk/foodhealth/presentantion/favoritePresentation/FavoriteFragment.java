@@ -4,6 +4,7 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentati
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.stanislau_bushuk.foodhealth.ActivityManager;
+import com.example.stanislau_bushuk.foodhealth.MainActivity;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 
@@ -45,6 +47,9 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
         ButterKnife.bind(this, view);
         listRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         favoriteAdapter = new FavoriteAdapter(new ArrayList<Recipe>(), this);
+        final DividerItemDecoration itemDecorator = new DividerItemDecoration(listRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(getResources().getDrawable(R.drawable.devider));
+        listRecyclerView.addItemDecoration(itemDecorator);
         listRecyclerView.setAdapter(favoriteAdapter);
         favoritePresenter.dataRealm();
     }
