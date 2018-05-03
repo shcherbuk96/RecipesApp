@@ -28,5 +28,6 @@ public class Constants {
 
     public static final String DIET = "diet";
 
+    public static final int SEARCH_RANDOM_COUNT = 50;
 
 }

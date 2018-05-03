@@ -18,7 +18,6 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.realm.Realm;
 import io.realm.RealmResults;
-import timber.log.Timber;
 
 
 public class NetWorkModel {
@@ -64,9 +63,9 @@ public class NetWorkModel {
                 list.add(new Hits(recipe));
             }
 
-            if (list.size() > 50) {
-                final int random = new Random().nextInt(list.size() - 50);
-                callBackSearchPresenter.call(Observable.just(new Recipes(new ArrayList<>(list.subList(random, random + 50)), 1)).subscribeOn(AndroidSchedulers.mainThread()), update, true);
+            if (list.size() > Constants.SEARCH_RANDOM_COUNT) {
+                final int random = new Random().nextInt(list.size() - Constants.SEARCH_RANDOM_COUNT);
+                callBackSearchPresenter.call(Observable.just(new Recipes(new ArrayList<>(list.subList(random, random + Constants.SEARCH_RANDOM_COUNT)), 1)).subscribeOn(AndroidSchedulers.mainThread()), update, true);
             } else {
                 callBackSearchPresenter.call(Observable.just(new Recipes(list, 1)).subscribeOn(AndroidSchedulers.mainThread()), update, true);
             }
