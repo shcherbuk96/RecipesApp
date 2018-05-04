@@ -39,11 +39,11 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
 
     public void getEditData(final int number, final Data data) {
         final EditData editData = EditData.newBuilder()
-                .setCalories(data.getCalories() * number / data.getYield())
-                .setENERC_KCAL(data.getENERC_KCAL().getQuantity() * number / data.getYield())
-                .setChocdf(data.getChocdf().getQuantity() * number / data.getYield())
-                .setFat(data.getFat().getQuantity() * number / data.getYield())
-                .setProt(data.getProt().getQuantity() * number / data.getYield())
+                .setCalories(data.getCalories() * data.getYield() / number)
+                .setENERC_KCAL(data.getENERC_KCAL().getQuantity() * data.getYield() / number)
+                .setChocdf(data.getChocdf().getQuantity() * data.getYield() / number)
+                .setFat(data.getFat().getQuantity() * data.getYield() / number)
+                .setProt(data.getProt().getQuantity() * data.getYield() / number)
                 .setYield(data.getYield())
                 .build();
         getViewState().showEditData(editData);

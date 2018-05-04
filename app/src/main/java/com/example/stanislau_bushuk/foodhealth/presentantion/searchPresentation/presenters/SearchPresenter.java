@@ -60,12 +60,8 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
                             for (final Hits hits : recipes.getHits()) {
                                 final Recipe recipe = hits.getRecipe();
-
-                                if (!realmModel.checkRecipeInRealm(recipe)) {
-                                    realmModel.addToRealm(recipe);
-                                } else {
-                                    recipe.setChecked(realmModel.getIsChecked(recipe));
-                                }
+                                realmModel.addToRealm(recipe);
+                                recipe.setChecked(realmModel.getIsChecked(recipe));
                             }
                         }
 

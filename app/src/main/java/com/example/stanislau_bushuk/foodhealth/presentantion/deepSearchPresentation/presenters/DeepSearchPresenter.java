@@ -96,12 +96,8 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
 
                         for (final Hits hits : recipes.getHits()) {
                             final Recipe recipe = hits.getRecipe();
-
-                            if (!realmModel.checkRecipeInRealm(recipe)) {
-                                realmModel.addToRealm(recipe);
-                            } else {
-                                recipe.setChecked(realmModel.getIsChecked(recipe));
-                            }
+                            realmModel.addToRealm(recipe);
+                            recipe.setChecked(realmModel.getIsChecked(recipe));
                         }
 
                         return recipes;

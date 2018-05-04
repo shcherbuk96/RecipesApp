@@ -56,16 +56,7 @@ public class RealmModel {
     public boolean getIsChecked(final Recipe recipe) {
         final Recipe r = realm.where(Recipe.class).equalTo("uri", recipe.getUri()).findFirst();
 
-        if (r != null) {
-            return r.isChecked();
-        } else
-            return false;
-    }
-
-    public boolean checkRecipeInRealm(final Recipe recipe) {
-        final Recipe r = realm.where(Recipe.class).equalTo("uri", recipe.getUri()).findFirst();
-
-        return r != null;
+        return r != null ? r.isChecked() : false;
     }
 
 }
