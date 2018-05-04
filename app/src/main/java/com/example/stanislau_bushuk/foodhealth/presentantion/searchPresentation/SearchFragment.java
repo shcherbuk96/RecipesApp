@@ -5,10 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -40,8 +44,8 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
     @BindView(R.id.search_progressbar_progressbar)
     ProgressBar searchProgressBar;
 
-    @BindView(R.id.search_search_view)
-    SearchView searchView;
+  /*  @BindView(R.id.search_search_view)
+    SearchView searchView;*/
 
     @BindView(R.id.search_list_recycler_view)
     RecyclerView listRecyclerView;
@@ -53,11 +57,17 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
     SearchPresenter presenter;
 
     private RecyclerAdapter recyclerAdapter;
+    private SearchView searchView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container,
                              @Nullable final Bundle savedInstanceState) {
+
+        if(!((AppCompatActivity)getActivity()).getSupportActionBar().isShowing()){
+            ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+        }
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
@@ -66,7 +76,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
-        setStilesSearchView();
+
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         listRecyclerView.setLayoutManager(layoutManager);
         recyclerAdapter = new RecyclerAdapter(this, new ArrayList<Hits>());
@@ -75,7 +85,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         listRecyclerView.addItemDecoration(itemDecorator);
         listRecyclerView.setAdapter(recyclerAdapter);
         if (savedInstanceState == null) {
-            presenter.searchObservable(searchView);
+            //presenter.searchObservable(searchView);
         }
 
         listRecyclerView.addOnScrollListener(new RecyclerViewMoreListener(listRecyclerView.getLayoutManager()) {
@@ -124,6 +134,16 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
     }
 
     @Override
+    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.action_bar_menu, menu);
+        final MenuItem menuItem = menu.findItem(R.id.action_search);
+        searchView = (SearchView) menuItem.getActionView();
+        searchView.setFocusable(false);
+        presenter.searchObservable(searchView);
+    }
+
+    @Override
     public void addToFavorite(final Recipe recipe) {
         presenter.addToRealm(recipe);
     }
@@ -133,24 +153,4 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         presenter.deleteFromRealm(recipe);
     }
 
-    public void setStilesSearchView(){
-        final int textId = searchView.getContext().getResources().getIdentifier(
-                "android:id/search_src_text", null, null);
-        final EditText textView = searchView.findViewById(textId);
-        textView.setTextColor(getResources().getColor(R.color.white));
-        textView.setHintTextColor(getResources().getColor(R.color.hint));
-        textView.setBackgroundColor(Color.TRANSPARENT);
-        final int iconId = searchView.getContext().getResources().getIdentifier(
-                "android:id/search_mag_icon", null, null);
-        final ImageView imageView = searchView.findViewById(iconId);
-        imageView.setColorFilter(R.color.white);
-        final int closeId = searchView.getContext().getResources().getIdentifier(
-                "android:id/search_close_btn", null, null);
-        final ImageView searchCloseIcon = searchView.findViewById(closeId);
-        searchCloseIcon.setColorFilter(R.color.hint);
-        final int underId = searchView.getContext().getResources().getIdentifier(
-                "android:id/search_plate", null, null);
-        final View v = searchView.findViewById(underId);
-        v.setBackgroundColor(Color.TRANSPARENT);
-    }
 }

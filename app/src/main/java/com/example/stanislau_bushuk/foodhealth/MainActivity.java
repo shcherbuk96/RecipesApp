@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
+import android.widget.SearchView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchFragment;
@@ -18,13 +19,13 @@ public class MainActivity extends MvpAppCompatActivity {
 
     @BindView(R.id.main_navigation_bottom_navigation_view)
     BottomNavigationView bottomNavigationView;
+    private SearchView searchView;
 
     private FragmentTransaction fragment;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         if (savedInstanceState == null) {
             fragment = getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new SearchFragment());
             fragment.commit();
@@ -39,16 +40,18 @@ public class MainActivity extends MvpAppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.search:
-
+                        getSupportActionBar().show();
                         fragment = getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new SearchFragment());
                         fragment.commit();
 
                         break;
                     case R.id.search_deep:
+                        getSupportActionBar().hide();
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new DeepSearchFragment()).commit();
 
                         break;
                     case R.id.featured:
+                        getSupportActionBar().hide();
                         fragment = getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new FavoriteFragment());
                         fragment.commit();
 
@@ -59,5 +62,4 @@ public class MainActivity extends MvpAppCompatActivity {
             }
         });
     }
-
 }
