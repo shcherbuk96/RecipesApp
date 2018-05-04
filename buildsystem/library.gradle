@@ -36,6 +36,9 @@ ext.version = [
         //ShineButton//
         shineButton:"0.2.0",
 
+        ///cicerone///
+        cicerone:"3.0.0",
+
         junit:"4.12",
         testRunner:"1.0.1",
         espressoCore:"3.0.1"
@@ -94,6 +97,9 @@ ext.library = [
 
         /////ShineButton///
         shineButton: "com.sackcentury:shinebutton:"+                                                "$version.shineButton",
+
+        ///cicerone///
+        cicerone: "ru.terrakok.cicerone:cicerone:"+                                                 "$version.cicerone",
 
         junit: "junit:junit:"+                                                                      "$version.junit",
         testRunner: "com.android.support.test:runner:"+                                             "$version.testRunner",

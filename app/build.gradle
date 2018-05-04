@@ -33,7 +33,7 @@ dependencies {
 
     ///Realm////
     compile "${library.realm}"
-    ////
+    //
     /////Timber//////
     implementation "${library.timber}"
     ///
@@ -43,17 +43,17 @@ dependencies {
     compile "${library.retrofit2Rxjava2Adapter}"
     compile "${library.rxandroid}"
     compile "${library.rxbinding}"
-    ///
+    //
 
     /////RETROFIT/////
     implementation "${library.retrofit}"
     implementation "${library.converterGson}"
-    ///
+    //
 
     /////GLIDE/////
     implementation "${library.glide}"
     annotationProcessor "${library.glideCompiler}"
-    ////
+    //
 
     ////dagger////
     implementation "${library.dagger}"
@@ -61,17 +61,20 @@ dependencies {
     implementation "${library.daggerAndroid}"
     implementation "${library.daggerAndroidSupport}"
     annotationProcessor "${library.daggerAndroidProcessor}"
-    ///
+    //
 
     /////ButterKnife/////
     compile "${library.butterknife}"
     annotationProcessor "${library.butterknifeCompiler}"
-    ///
-
+    //
+    compile "${library.cicerone}"
     ///////Moxy/////
     compile "${library.moxy}"
-    compile "${library.moxyAppCompat}"
     annotationProcessor "${library.moxyCompiler}"
+    //
+    ////Cicerone////
+    compile "${library.moxyAppCompat}"
+    //
     testImplementation "${library.junit}"
     androidTestImplementation "${library.testRunner}"
     androidTestImplementation "${library.espressoCore}"
