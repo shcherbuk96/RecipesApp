@@ -74,7 +74,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         recyclerView.setAdapter(cardAdapter);
 
         if (savedInstanceState == null) {
-            presenter.getRecipeFromUri(getIntent().getStringExtra(Constants.RECIPE_INTENT_KEY));
+            presenter.getRecipeFromRealmUri(getIntent().getStringExtra(Constants.RECIPE_INTENT_KEY));
         }
 
         RxTextView
@@ -116,12 +116,10 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         this.data = data;
         setTitle(data.getLabel());
 
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(30));
         GlideApp
                 .with(this)
                 .load(data.getImage())
-                .apply(requestOptions)
+                .centerCrop()
                 .into(photoView);
 
         caloriesView.setText(getString(R.string.card_number_calories, data.getCalories()));
