@@ -7,11 +7,14 @@ public class Recipes {
     private String q;
     private int from;
     private int to;
-    private Object params;
     private boolean more;
     private int count;
     private ArrayList<Hits> hits;
 
+    public Recipes(final ArrayList<Hits> hits, final int count) {
+        this.hits = hits;
+        this.count = count;
+    }
 
     public String getQ() {
         return q;
@@ -35,10 +38,6 @@ public class Recipes {
 
     public void setTo(final int to) {
         this.to = to;
-    }
-
-    public void setParams(final ArrayList params) {
-        this.params = params;
     }
 
     public boolean getMore() {

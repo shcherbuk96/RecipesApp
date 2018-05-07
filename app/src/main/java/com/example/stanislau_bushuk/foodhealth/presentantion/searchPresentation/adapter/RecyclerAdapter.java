@@ -1,6 +1,5 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,20 +16,18 @@ import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
 
-    private ArrayList<Hits> hits;
+    private List<Hits> hits;
     private Listener listener;
 
-    public RecyclerAdapter(final Listener listener, final ArrayList<Hits> hits) {
+    public RecyclerAdapter(final Listener listener, final List<Hits> hits) {
         this.hits = hits;
         this.listener = listener;
     }
@@ -46,22 +43,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         final Recipe recipe = hits.get(position).getRecipe();
-        final Context context = holder.photoImageView.getContext();
+
         holder.titleTextView.setText(recipe.getLabel());
 
         GlideApp
-                .with(context)
+                .with(holder.photoImageView.getContext())
                 .load(recipe.getImage())
                 .centerCrop()
                 .into(holder.photoImageView);
 
-        holder.linearLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                Timber.e(recipe.getUri());
-                listener.onItemClick(recipe.getUri());
-            }
-        });
+        holder.starButton.setChecked(hits.get(position).getRecipe().isChecked());
     }
 
     @Override
@@ -70,17 +61,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
     public void updateAdapter(final List<Hits> hits) {
-
         if (hits != null && hits.size() != 0) {
             this.hits.clear();
             this.hits.addAll(hits);
             notifyDataSetChanged();
         }
-
     }
 
     public void updateList(final List<Hits> hits) {
-
         if (hits != null) {
             this.hits.addAll(hits);
             notifyDataSetChanged();

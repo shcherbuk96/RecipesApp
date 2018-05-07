@@ -8,7 +8,7 @@ public class Constants {
 
     public static final int WAIT = 2000;
 
-    public static final String RECIPE_INTENT_KEY="recipe";
+    public static final String RECIPE_INTENT_KEY = "recipe";
 
     public static final int ITEMS_IN_PAGE = 20;
 
@@ -18,7 +18,7 @@ public class Constants {
 
     public static final String RANDOM_RECIPE = "";
 
-    public static final int TEXT_DEBOUNCE = 500;
+    public static final int TEXT_DEBOUNCE = 1000;
 
     public static final int RABDON = 90;
 
@@ -28,5 +28,6 @@ public class Constants {
 
     public static final String DIET = "diet";
 
+    public static final int SEARCH_RANDOM_COUNT = 50;
 
 }
