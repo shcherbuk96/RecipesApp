@@ -13,6 +13,7 @@ import com.example.stanislau_bushuk.foodhealth.ResourceManager;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackSearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.view.ViewSearch;
@@ -49,21 +50,37 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
 
     @Override
-    public void call(final Observable<Recipes> observable, final boolean update, final int random) {
+    public void call(final Observable<Recipes> observable, final boolean update, final boolean db) {
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .map(new Function<Recipes, Recipes>() {
+                    @Override
+                    public Recipes apply(final Recipes recipes) throws Exception {
+                        if (!db) {
+
+                            for (final Hits hits : recipes.getHits()) {
+                                final Recipe recipe = hits.getRecipe();
+                                realmModel.addToRealm(recipe);
+                                recipe.setChecked(realmModel.getIsChecked(recipe));
+                            }
+                        }
+
+                        return recipes;
+                    }
+                })
                 .subscribe(new Observer<Recipes>() {
                     @Override
                     public void onSubscribe(final Disposable d) {
                         if (!update)
                             getViewState().progressBarVisible(View.VISIBLE);
-                        Timber.e("subscribe response");
                     }
 
                     @Override
                     public void onNext(final Recipes recipes) {
                         Timber.e("next response");
+
                         if (recipes.getCount() != 0) {
+
                             if (!update) {
                                 getViewState().showList(recipes.getHits());
                             } else getViewState().updateList(recipes.getHits());
@@ -74,15 +91,15 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                     @Override
                     public void onError(final Throwable e) {
                         e.printStackTrace();
-                        Timber.e("Error");
-                        getViewState().progressBarVisible(View.GONE);
                         getViewState().setSnackBar();
+                        getViewState().progressBarVisible(View.GONE);
+
+                        Timber.e("Error");
                     }
 
                     @Override
                     public void onComplete() {
                         getViewState().progressBarVisible(View.GONE);
-                        Timber.e("Complete");
                     }
                 });
     }
@@ -111,7 +128,11 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                             netWorkModel.getResponse(s, 0, false);
                             getViewState().setSearchText(s);
                         } else {
-                            netWorkModel.getRandomRecipe(false);
+                            if (!netWorkModel.checkRealmIsEmpty()) {
+                                netWorkModel.getRandomData(false);
+                            } else {
+                                netWorkModel.getRandomRecipe(false);
+                            }
                             getViewState().setSearchText(resourceManager.getString(R.string.search_random));
                         }
                     }
@@ -136,11 +157,11 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
         }
     }
 
-    public void addToRealm(final Recipe recipe) {
-        realmModel.addDataToRealm(recipe);
+    public void addToFavorite(final Recipe recipe) {
+        realmModel.addToFavorite(recipe);
     }
 
-    public void deleteFromRealm(final Recipe recipe) {
-        realmModel.removeDataToRealm(recipe);
+    public void deleteFromFavorite(final Recipe recipe) {
+        realmModel.deleteFromFavorite(recipe);
     }
 }

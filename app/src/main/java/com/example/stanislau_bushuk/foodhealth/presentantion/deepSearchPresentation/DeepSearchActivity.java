@@ -110,11 +110,11 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
 
     @Override
     public void addToFavorite(final Recipe recipe) {
-
+        presenter.addToFavorite(recipe);
     }
 
     @Override
     public void deleteFromFavorite(final Recipe recipe) {
-
+        presenter.deleteFromFavorite(recipe);
     }
 }

@@ -56,8 +56,8 @@ public class FavoritePresenter extends MvpPresenter<FavoriteView> implements Cal
                 });
     }
 
-    public void deleteFromRealm(final Recipe recipe) {
-        realmModel.removeDataToRealm(recipe);
+    public void deleteFromFavorite(final Recipe recipe) {
+        realmModel.deleteFromFavorite(recipe);
     }
 
 

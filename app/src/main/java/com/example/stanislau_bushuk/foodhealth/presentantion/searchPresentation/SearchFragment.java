@@ -107,7 +107,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         Toast.makeText(getActivity(), getResources().getText(R.string.error_connection_api), Toast.LENGTH_LONG).show();
     }
 
-
     @Override
     public void onItemClick(final String uri) {
         ActivityManager.startCardActivity(getActivity(), uri);
@@ -115,11 +114,11 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
     @Override
     public void addToFavorite(final Recipe recipe) {
-        presenter.addToRealm(recipe);
+        presenter.addToFavorite(recipe);
     }
 
     @Override
     public void deleteFromFavorite(final Recipe recipe) {
-        presenter.deleteFromRealm(recipe);
+        presenter.deleteFromFavorite(recipe);
     }
 }

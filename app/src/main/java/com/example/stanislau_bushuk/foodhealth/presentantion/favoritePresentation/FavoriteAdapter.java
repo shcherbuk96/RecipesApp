@@ -25,7 +25,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyView
     private List<Recipe> recipeList;
     private Listener listener;
 
-    FavoriteAdapter(final List<Recipe> list, Listener listener) {
+    FavoriteAdapter(final List<Recipe> list, final Listener listener) {
         this.recipeList = list;
         this.listener = listener;
     }
