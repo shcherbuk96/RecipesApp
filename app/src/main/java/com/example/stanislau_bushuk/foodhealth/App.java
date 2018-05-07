@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.example.stanislau_bushuk.foodhealth.component.AppComponent;
 import com.example.stanislau_bushuk.foodhealth.component.DaggerAppComponent;
+import com.example.stanislau_bushuk.foodhealth.modul.CiceroneModul;
 import com.example.stanislau_bushuk.foodhealth.modul.ResourceManagerModul;
 
 import io.realm.Realm;
@@ -20,7 +21,6 @@ public class App extends Application {
     public static AppComponent getAppComponent() {
         return appComponent;
     }
-    private Cicerone<Router> cicerone;
 
     @Override
     public void onCreate() {
@@ -28,7 +28,6 @@ public class App extends Application {
 
         setRealm();
         Timber.plant(new Timber.DebugTree());
-        cicerone = Cicerone.create();
         appComponent = buildComponent();
     }
 
@@ -45,13 +44,5 @@ public class App extends Application {
         return DaggerAppComponent.builder()
                 .resourceManagerModul(new ResourceManagerModul(getApplicationContext()))
                 .build();
-    }
-
-    public NavigatorHolder getNavigatorHolder() {
-        return cicerone.getNavigatorHolder();
-    }
-
-    public Router getRouter() {
-        return cicerone.getRouter();
     }
 }
