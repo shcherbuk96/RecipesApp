@@ -9,9 +9,9 @@
     <color name="orange">#ffffbb33</color>
     <color name="blue">#5bc6d6fb</color>
 
-    <color name="fat">#ED7433</color>
-    <color name="carbs">#277BAB</color>
-    <color name="prot">#82CC1C</color>
+    <color name="fat">#F57C00</color>
+    <color name="carbs">#0288D1</color>
+    <color name="prot">#4CAF50</color>
 
 </resources>
 
