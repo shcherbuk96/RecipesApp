@@ -15,12 +15,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:columnCount="3"
-        android:paddingStart="@dimen/margin_padding_size_medium"
-        android:paddingEnd="@dimen/margin_padding_size_medium"
-        android:paddingTop="@dimen/margin_padding_size_small"
-        android:paddingBottom="@dimen/margin_padding_size_small"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
+        android:paddingBottom="@dimen/margin_padding_size_small"
+        android:paddingEnd="@dimen/margin_padding_size_medium"
+        android:paddingStart="@dimen/margin_padding_size_medium"
+        android:paddingTop="@dimen/margin_padding_size_small"
         android:useDefaultMargins="true">
 
         <TextView
