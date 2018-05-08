@@ -5,8 +5,6 @@ import android.support.v7.widget.RecyclerView;
 
 import com.example.stanislau_bushuk.foodhealth.Constants;
 
-import timber.log.Timber;
-
 public abstract class RecyclerViewMoreListener extends RecyclerView.OnScrollListener {
 
     private RecyclerView.LayoutManager layoutManager;

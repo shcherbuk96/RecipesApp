@@ -17,7 +17,6 @@
         android:columnCount="3"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
-        android:paddingBottom="@dimen/margin_padding_size_small"
         android:paddingEnd="@dimen/margin_padding_size_medium"
         android:paddingStart="@dimen/margin_padding_size_medium"
         android:paddingTop="@dimen/margin_padding_size_small"
@@ -43,10 +42,9 @@
             android:layout_width="@dimen/grid_card_width"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/item"
             android:gravity="center"
             android:inputType="number"
-            android:maxLength="3" />
+            android:maxLength="2" />
 
         <TextView
             style="@style/Body_1"
@@ -94,7 +92,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/card_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/margin_padding_size_small" />
 
 
 </LinearLayout>

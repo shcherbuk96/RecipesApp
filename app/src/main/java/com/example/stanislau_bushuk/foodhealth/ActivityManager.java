@@ -19,7 +19,7 @@ public class ActivityManager {
         context.startActivity(intent);
     }
 
-    public static void startDeepSearchActivity(final Context context){
+    public static void startDeepSearchActivity(final Context context) {
         final Intent intent = new Intent(context, DeepSearchActivity.class);
         context.startActivity(intent);
     }

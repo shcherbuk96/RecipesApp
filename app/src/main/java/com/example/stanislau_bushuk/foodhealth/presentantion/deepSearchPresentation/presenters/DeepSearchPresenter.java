@@ -7,6 +7,9 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
+import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.CallBackDeepSearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.model.DeepSearchModel;
@@ -19,6 +22,7 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -27,6 +31,9 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
 
     @Inject
     public DeepSearchModel model;
+
+    @Inject
+    RealmModel realmModel;
 
     @Inject
     NetWorkModelDeepSearch netWorkModel;
@@ -83,6 +90,19 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(AndroidSchedulers.mainThread())
+                .map(new Function<Recipes, Recipes>() {
+                    @Override
+                    public Recipes apply(final Recipes recipes) throws Exception {
+
+                        for (final Hits hits : recipes.getHits()) {
+                            final Recipe recipe = hits.getRecipe();
+                            realmModel.addToRealm(recipe);
+                            recipe.setChecked(realmModel.getIsChecked(recipe));
+                        }
+
+                        return recipes;
+                    }
+                })
                 .subscribe(new Observer<Recipes>() {
                     @Override
                     public void onSubscribe(final Disposable d) {
@@ -116,4 +136,11 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
         model.setMap(compoundButton, checked, label);
     }
 
+    public void addToFavorite(final Recipe recipe) {
+        realmModel.addToFavorite(recipe);
+    }
+
+    public void deleteFromFavorite(final Recipe recipe) {
+        realmModel.deleteFromFavorite(recipe);
+    }
 }

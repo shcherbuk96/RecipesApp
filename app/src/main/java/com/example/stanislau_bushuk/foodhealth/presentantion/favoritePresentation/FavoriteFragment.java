@@ -61,6 +61,6 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
 
     @Override
     public void deleteFromFavorite(final Recipe recipe) {
-        favoritePresenter.deleteFromRealm(recipe);
+        favoritePresenter.deleteFromFavorite(recipe);
     }
 }

@@ -3,7 +3,6 @@
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_main"
     android:orientation="vertical">
 
     <LinearLayout
@@ -18,12 +17,15 @@
             android:layout_gravity="center" />
 
         <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:columnCount="3"
             android:descendantFocusability="beforeDescendants"
             android:focusableInTouchMode="true"
+            android:paddingEnd="@dimen/margin_padding_size_medium"
+            android:paddingStart="@dimen/margin_padding_size_medium"
+            android:paddingTop="@dimen/margin_padding_size_small"
             android:useDefaultMargins="true">
 
             <TextView
@@ -49,7 +51,7 @@
                 android:background="@drawable/item"
                 android:gravity="center"
                 android:inputType="number"
-                android:maxLength="3" />
+                android:maxLength="2" />
 
             <TextView
                 style="@style/Body_1"

@@ -74,7 +74,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
         recyclerView.setAdapter(cardAdapter);
 
         if (savedInstanceState == null) {
-            presenter.getRecipeFromUri(getIntent().getStringExtra(Constants.RECIPE_INTENT_KEY));
+            presenter.getRecipeFromRealmUri(getIntent().getStringExtra(Constants.RECIPE_INTENT_KEY));
         }
 
         RxTextView

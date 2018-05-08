@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_linear_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginEnd="@dimen/recycler_card_start_end_spacing"
-    android:layout_marginStart="@dimen/recycler_card_start_end_spacing"
-    android:layout_marginBottom="@dimen/view_item_top_bot_spacing"
-    android:layout_marginTop="@dimen/view_item_top_bot_spacing"
-    android:background="@drawable/item"
-    android:gravity="center"
+    android:layout_height="@dimen/item_card_height"
     android:orientation="horizontal">
 
     <TextView
         android:id="@+id/item_card_title_text_view"
-        android:layout_width="wrap_content"
+        style="@style/ItemList"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/text_item_card_start_end_spacing"
-        android:layout_marginStart="@dimen/text_item_card_start_end_spacing"
-        style="@style/Body_2"/>
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="@dimen/text_item_card_start_end_spacing"
+        android:paddingRight="@dimen/text_item_card_start_end_spacing"
+        tools:text="Single Line" />
 
 </LinearLayout>
