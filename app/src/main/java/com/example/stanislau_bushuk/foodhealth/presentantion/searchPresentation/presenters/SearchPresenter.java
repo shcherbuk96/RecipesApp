@@ -124,7 +124,6 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                     @Override
                     public void onNext(final String s) {
                         if (!s.isEmpty()) {
-
                             netWorkModel.getResponse(s, 0, false);
                             getViewState().setSearchText(s);
                         } else {

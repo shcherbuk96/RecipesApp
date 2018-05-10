@@ -25,7 +25,6 @@ public abstract class RecyclerViewMoreListener extends RecyclerView.OnScrollList
             previousTotalItemCount = totalItemCount;
         }
 
-
         if (!loading && (lastVisibleItemPosition + Constants.HALF_ITEMS_IN_PAGE) >= previousTotalItemCount) {//на анонимном классе не сделаешь нормальное обновление, нужен кол бек из презентера, что реквест не прошёл
             onScroll(totalItemCount);
             loading = true;

@@ -10,18 +10,20 @@ public class FragmentManager {
 
     public static Fragment getNewInstanceFragment(final String screenKey) {
         Fragment fragment = null;
-
         switch (screenKey) {
             case Constants.SEARCH_SCREEN: {
                 fragment = new SearchFragment();
+
                 break;
             }
             case Constants.DEEP_SEARCH_SCREEN: {
                 fragment = new DeepSearchFragment();
+
                 break;
             }
             case Constants.FAVOURITE_SCREEN: {
                 fragment = new FavoriteFragment();
+
                 break;
             }
         }

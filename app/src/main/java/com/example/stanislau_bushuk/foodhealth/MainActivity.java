@@ -21,8 +21,7 @@ import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
 import ru.terrakok.cicerone.android.SupportFragmentNavigator;
 import ru.terrakok.cicerone.commands.Command;
-import ru.terrakok.cicerone.commands.Replace;
-import timber.log.Timber;
+import ru.terrakok.cicerone.commands.Forward;
 
 public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
@@ -43,7 +42,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
         @Override
         protected Fragment createFragment(final String screenKey, final Object data) {
-            Timber.e(screenKey + " KEY");
+
             return FragmentManager.getNewInstanceFragment(screenKey);
         }
 
@@ -51,7 +50,6 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         protected void showSystemMessage(final String message) {
             Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
         }
-
 
         @Override
         protected void exit() {
@@ -73,7 +71,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         if (savedInstanceState == null) {
-            navigator.applyCommands(new Command[]{new Replace(Constants.SEARCH_SCREEN, 1)});
+            navigator.applyCommands(new Command[]{new Forward(Constants.SEARCH_SCREEN, 0)});
         }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
