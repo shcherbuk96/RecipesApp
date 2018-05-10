@@ -26,6 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
+import timber.log.Timber;
 
 public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSearchView {
 
@@ -58,7 +59,7 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        Timber.e(String.valueOf(getArguments().getInt("KEY")));
         ButterKnife.bind(this, view);
     }
 

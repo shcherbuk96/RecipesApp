@@ -18,7 +18,6 @@ public class MainActivityPresenter extends MvpPresenter<MvpView> {
 
     public void goBack(final String screenKey) {
         router.backTo(screenKey);
-
     }
 
     public void createNewChain(final String screenKey) {
@@ -30,6 +29,6 @@ public class MainActivityPresenter extends MvpPresenter<MvpView> {
     }
 
     public void goTo(final String screenKey) {
-        router.navigateTo(screenKey);
+        router.navigateTo(screenKey,1);
     }
 }

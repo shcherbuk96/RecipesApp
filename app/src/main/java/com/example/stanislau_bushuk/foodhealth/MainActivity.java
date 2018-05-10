@@ -22,6 +22,7 @@ import ru.terrakok.cicerone.Router;
 import ru.terrakok.cicerone.android.SupportFragmentNavigator;
 import ru.terrakok.cicerone.commands.Command;
 import ru.terrakok.cicerone.commands.Forward;
+import ru.terrakok.cicerone.commands.Replace;
 
 public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
@@ -43,7 +44,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         @Override
         protected Fragment createFragment(final String screenKey, final Object data) {
 
-            return FragmentManager.getNewInstanceFragment(screenKey);
+            return FragmentManager.getNewInstanceFragment(screenKey,(int)data);
         }
 
         @Override

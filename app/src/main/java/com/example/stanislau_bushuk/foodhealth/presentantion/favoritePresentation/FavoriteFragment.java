@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.RealmResults;
+import timber.log.Timber;
 
 public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteView, FavoriteAdapter.Listener {
 
@@ -41,7 +42,7 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        Timber.e(String.valueOf(getArguments().getInt("KEY")));
         ButterKnife.bind(this, view);
         listRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         favoriteAdapter = new FavoriteAdapter(new ArrayList<Recipe>(), this);

@@ -56,6 +56,12 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
     private RecyclerAdapter recyclerAdapter;
 
+
+    @Override
+    public void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
@@ -72,7 +78,8 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         recyclerAdapter = new RecyclerAdapter(this, new ArrayList<Hits>());
         listRecyclerView.setAdapter(recyclerAdapter);
 
-        if (savedInstanceState != null) {
+        Timber.e(String.valueOf(getArguments().getInt("KEY")));
+        if (savedInstanceState == null && getArguments().getInt("KEY")!=1) {
             Timber.e("SAVED INSTANCE ==  NULL");
             presenter.searchObservable(searchView);
         }
