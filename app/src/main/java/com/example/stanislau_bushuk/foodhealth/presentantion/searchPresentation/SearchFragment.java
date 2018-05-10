@@ -31,6 +31,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.terrakok.cicerone.Router;
+import timber.log.Timber;
 
 
 public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, RecyclerAdapter.Listener {
@@ -72,6 +73,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         listRecyclerView.setAdapter(recyclerAdapter);
 
         if (savedInstanceState == null) {
+            Timber.e("SAVED INSTANCE ==  NULL");
             presenter.searchObservable(searchView);
         }
 
