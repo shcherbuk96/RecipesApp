@@ -18,6 +18,7 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentat
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters.DeepSearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoritePresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
 
@@ -29,10 +30,12 @@ import dagger.Component;
 @Singleton
 @Component(modules = {Api.class, NetWorkModul.class, CardNetWorkModul.class,
         ResourceManagerModul.class, DeepSearchModul.class, NetworkDeepSearchModul.class,
-        RealmModul.class , CiceroneModul.class})
+        RealmModul.class, CiceroneModul.class})
 public interface AppComponent {
 
     void inject(SearchPresenter searchPresenter);
+
+    void inject(SearchFragment searchFragment);
 
     void inject(CardPresenter cardPresenter);
 
@@ -52,5 +55,5 @@ public interface AppComponent {
 
     void inject(DeepSearchActivity deepSearchActivity);
 
-    void inject (MainActivity mainActivity);
+    void inject(MainActivity mainActivity);
 }

@@ -26,8 +26,11 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.terrakok.cicerone.Router;
 
 
 public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, RecyclerAdapter.Listener {
@@ -43,6 +46,9 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
     @BindView(R.id.search_random_text_view)
     TextView searchText;
+
+    @Inject
+    Router router;
 
     @InjectPresenter
     SearchPresenter presenter;

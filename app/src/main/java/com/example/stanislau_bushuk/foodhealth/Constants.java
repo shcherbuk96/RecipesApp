@@ -30,4 +30,9 @@ public class Constants {
 
     public static final int SEARCH_RANDOM_COUNT = 50;
 
+    public static final String SEARCH_SCREEN = "SEARCH_SCREEN";
+
+    public static final String DEEP_SEARCH_SCREEN = "DEEP_SEARCH_SCREEN";
+
+    public static final String FAVOURITE_SCREEN = "FAVOURITE_SCREEN";
 }
