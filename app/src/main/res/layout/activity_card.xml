@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_main"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/card_photo_image_view"
         android:layout_width="match_parent"
         android:layout_height="@dimen/image_card_height"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:paddingBottom="@dimen/image_card_top_bottom_spacing"/>
 
     <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"

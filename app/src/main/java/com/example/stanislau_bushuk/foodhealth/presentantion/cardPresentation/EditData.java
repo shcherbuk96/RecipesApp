@@ -6,7 +6,7 @@ public class EditData {
     private float chocdf;
     private float ENERC_KCAL;
     private float calories;
-    private int yield;
+    private float yield;
 
     public static Builder newBuilder() {
         return new EditData().new Builder();
@@ -32,7 +32,7 @@ public class EditData {
         return calories;
     }
 
-    public int getYield() {
+    public float getYield() {
         return yield;
     }
 
@@ -54,7 +54,7 @@ public class EditData {
             return this;
         }
 
-        public Builder setYield(final int quanity) {
+        public Builder setYield(final float quanity) {
             yield = quanity;
 
             return this;

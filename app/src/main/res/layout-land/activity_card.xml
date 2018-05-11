@@ -3,7 +3,6 @@
 <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_main"
     android:orientation="vertical">
 
     <LinearLayout
@@ -17,8 +16,6 @@
             android:layout_height="@dimen/image_card_height"
             android:layout_gravity="center"
             android:paddingBottom="@dimen/image_card_top_bottom_spacing"
-            android:paddingEnd="@dimen/image_card_start_end_spacing"
-            android:paddingStart="@dimen/image_card_start_end_spacing"
             android:paddingTop="@dimen/image_card_top_bottom_spacing" />
 
         <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -50,7 +47,6 @@
                 android:layout_width="@dimen/grid_card_width"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/item"
                 android:gravity="center"
                 android:inputType="number"
                 android:maxLength="3" />
@@ -101,6 +97,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/card_recycler_view"
             android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/image_card_top_bottom_spacing"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
