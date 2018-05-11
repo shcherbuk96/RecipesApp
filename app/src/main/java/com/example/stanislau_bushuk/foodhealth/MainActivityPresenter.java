@@ -20,13 +20,6 @@ public class MainActivityPresenter extends MvpPresenter<MvpView> {
         router.backTo(screenKey);
     }
 
-    public void createNewChain(final String screenKey) {
-        router.newScreenChain(screenKey);
-    }
-
-    public void createScreen(final String screenKey) {
-        router.replaceScreen(screenKey);
-    }
 
     public void goTo(final String screenKey) {
         router.navigateTo(screenKey,1);

@@ -1,9 +1,10 @@
 package com.example.stanislau_bushuk.foodhealth;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -11,6 +12,9 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchFragment;
+import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteFragment;
+import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
 
 import javax.inject.Inject;
 
@@ -19,10 +23,11 @@ import butterknife.ButterKnife;
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
-import ru.terrakok.cicerone.android.SupportFragmentNavigator;
+import ru.terrakok.cicerone.commands.BackTo;
 import ru.terrakok.cicerone.commands.Command;
 import ru.terrakok.cicerone.commands.Forward;
 import ru.terrakok.cicerone.commands.Replace;
+import ru.terrakok.cicerone.commands.SystemMessage;
 
 public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
@@ -38,25 +43,123 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
     @InjectPresenter
     MainActivityPresenter presenter;
 
-
-    private Navigator navigator = new SupportFragmentNavigator(getSupportFragmentManager(), R.id.main_contener_frame_layout) {
+    private SearchFragment searchFragment;
+    private DeepSearchFragment deepSearchFragment;
+    private FavoriteFragment favoriteFragment;
+    private Navigator navigator = new Navigator() {
 
         @Override
-        protected Fragment createFragment(final String screenKey, final Object data) {
-
-            return FragmentManager.getNewInstanceFragment(screenKey,(int)data);
+        public void applyCommands(final Command[] commands) {
+            for (final Command command : commands) applyCommand(command);
         }
 
-        @Override
-        protected void showSystemMessage(final String message) {
-            Toast.makeText(MainActivity.this, message, Toast.LENGTH_LONG).show();
-        }
+        void applyCommand(final Command command) {
+            final android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
 
-        @Override
-        protected void exit() {
-            finish();
+            if (command instanceof BackTo) {
+                final Bundle bundle = new Bundle();
+                bundle.putInt("KEY", 1);
+                searchFragment.setArguments(bundle);
+                fm.beginTransaction()
+                        .detach(deepSearchFragment)
+                        .detach(favoriteFragment)
+                        .attach(searchFragment)
+                        .commitNow();
+
+            } else if (command instanceof SystemMessage) {
+                Toast.makeText(MainActivity.this, ((SystemMessage) command).getMessage(), Toast.LENGTH_SHORT).show();
+            } else if (command instanceof Forward) {
+
+                switch (((Forward) command).getScreenKey()) {
+                    case Constants.SEARCH_SCREEN:
+                        fm.beginTransaction()
+                                .detach(deepSearchFragment)
+                                .detach(favoriteFragment)
+                                .attach(searchFragment)
+                                .commitNow();
+
+                        break;
+
+                    case Constants.DEEP_SEARCH_SCREEN:
+                        fm.beginTransaction()
+                                .detach(searchFragment)
+                                .detach(favoriteFragment)
+                                .attach(deepSearchFragment)
+                                .commitNow();
+
+                        break;
+
+                    case Constants.FAVOURITE_SCREEN:
+                        fm.beginTransaction()
+                                .detach(searchFragment)
+                                .detach(deepSearchFragment)
+                                .attach(favoriteFragment)
+                                .commitNow();
+
+                        break;
+
+                }
+
+            } else if (command instanceof Replace) {
+                switch (((Replace) command).getScreenKey()) {
+
+                    case Constants.SEARCH_SCREEN:
+                        final Bundle bundle = new Bundle();
+                        bundle.putInt("KEY", 0);
+                        searchFragment.setArguments(bundle);
+                        fm.beginTransaction()
+                                .detach(deepSearchFragment)
+                                .detach(favoriteFragment)
+                                .attach(searchFragment)
+                                .commitNow();
+
+                        break;
+                }
+            }
+
         }
     };
+
+    private void initContainers() {
+        final android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        searchFragment = (SearchFragment) fm.findFragmentByTag(Constants.SEARCH_SCREEN);
+        if (searchFragment == null) {
+            searchFragment = (SearchFragment) FragmentManager.getNewInstanceFragment(Constants.SEARCH_SCREEN);
+            fm.beginTransaction()
+                    .add(R.id.main_contener_frame_layout, searchFragment, Constants.SEARCH_SCREEN)
+                    .detach(searchFragment).commitNow();
+        }
+
+        deepSearchFragment = (DeepSearchFragment) fm.findFragmentByTag(Constants.DEEP_SEARCH_SCREEN);
+        if (deepSearchFragment == null) {
+            deepSearchFragment = (DeepSearchFragment) FragmentManager.getNewInstanceFragment(Constants.DEEP_SEARCH_SCREEN);
+            fm.beginTransaction()
+                    .add(R.id.main_contener_frame_layout, deepSearchFragment, Constants.DEEP_SEARCH_SCREEN)
+                    .detach(deepSearchFragment).commitNow();
+        }
+
+        favoriteFragment = (FavoriteFragment) fm.findFragmentByTag(Constants.FAVOURITE_SCREEN);
+        if (favoriteFragment == null) {
+            favoriteFragment = (FavoriteFragment) FragmentManager.getNewInstanceFragment(Constants.FAVOURITE_SCREEN);
+            fm.beginTransaction()
+                    .add(R.id.main_contener_frame_layout, favoriteFragment, Constants.FAVOURITE_SCREEN)
+                    .detach(favoriteFragment).commitNow();
+        }
+    }
+
+
+    @Override
+    public void onBackPressed() {
+
+        if (getSupportFragmentManager().getFragments().contains(searchFragment)) {
+            super.onBackPressed();
+        } else {
+            final MenuItem menuItem = bottomNavigationView.getMenu().findItem(R.id.search);
+            menuItem.setChecked(true);
+            router.backTo(Constants.SEARCH_SCREEN);
+        }
+
+    }
 
     @ProvidePresenter
     public MainActivityPresenter createMainActivityPresenter() {
@@ -68,11 +171,12 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         App.getAppComponent().inject(this);
 
         super.onCreate(savedInstanceState);
-
+        initContainers();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         if (savedInstanceState == null) {
-            navigator.applyCommands(new Command[]{new Forward(Constants.SEARCH_SCREEN, 0)});
+            navigator.applyCommands(new Command[]{new Replace(Constants.SEARCH_SCREEN, 0)});
+
         }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

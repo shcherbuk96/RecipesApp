@@ -78,8 +78,8 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         recyclerAdapter = new RecyclerAdapter(this, new ArrayList<Hits>());
         listRecyclerView.setAdapter(recyclerAdapter);
 
-        Timber.e(String.valueOf(getArguments().getInt("KEY")));
-        if (savedInstanceState == null && getArguments().getInt("KEY")!=1) {
+
+        if (getArguments() != null && savedInstanceState == null && getArguments().getInt("KEY") == 0) {
             Timber.e("SAVED INSTANCE ==  NULL");
             presenter.searchObservable(searchView);
         }
