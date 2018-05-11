@@ -5,6 +5,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,7 +15,6 @@ import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
-import com.sackcentury.shinebuttonlib.ShineButton;
 
 import java.util.List;
 
@@ -93,7 +94,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         LinearLayout linearLayout;
 
         @BindView(R.id.item_star_shine_button)
-        ShineButton starButton;
+        CheckBox starButton;
 
         MyViewHolder(final View view) {
             super(view);
@@ -109,7 +110,21 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 }
             });
 
-            starButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
+            starButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
+                    if (listener != null) {
+                        if (isChecked) {
+                            buttonView.setButtonDrawable(R.drawable.ic_star_checked);
+                            listener.addToFavorite(hits.get(getAdapterPosition()).getRecipe());
+                        } else {
+                            listener.deleteFromFavorite(hits.get(getAdapterPosition()).getRecipe());
+                            buttonView.setButtonDrawable(R.drawable.ic_star);
+                        }
+                    }
+                }
+            });
+            /*starButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(final View view, final boolean checked) {
                     if (listener != null) {
@@ -120,7 +135,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         }
                     }
                 }
-            });
+            });*/
         }
     }
 }

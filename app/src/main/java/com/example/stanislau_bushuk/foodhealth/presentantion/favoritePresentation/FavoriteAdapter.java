@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,7 +13,6 @@ import android.widget.TextView;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
-import com.sackcentury.shinebuttonlib.ShineButton;
 
 import java.util.List;
 
@@ -44,7 +44,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyView
 
         if (recipe != null) {
             holder.starButton.setChecked(true);
-
+            holder.starButton.setButtonDrawable(R.drawable.ic_star_checked);
             holder.titleTextView.setText(recipe.getLabel());
 
             GlideApp
@@ -83,7 +83,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyView
         LinearLayout linearLayout;
 
         @BindView(R.id.item_star_shine_button)
-        ShineButton starButton;
+        CheckBox starButton;
 
         MyViewHolder(final View view) {
             super(view);

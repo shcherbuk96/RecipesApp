@@ -3,12 +3,12 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-
+    <color name="grey">#BDBDBD</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="orange">#ffffbb33</color>
     <color name="blue">#5bc6d6fb</color>
-
+    <color name="hint">#c5cae9</color>
     <color name="fat">#ED7433</color>
     <color name="carbs">#277BAB</color>
     <color name="prot">#82CC1C</color>

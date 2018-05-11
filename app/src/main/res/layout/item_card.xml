@@ -7,9 +7,8 @@
     android:layout_marginStart="@dimen/recycler_card_start_end_spacing"
     android:layout_marginBottom="@dimen/view_item_top_bot_spacing"
     android:layout_marginTop="@dimen/view_item_top_bot_spacing"
-    android:background="@drawable/item"
-    android:gravity="center"
     android:orientation="horizontal">
+    <!--android:gravity="center"-->
 
     <TextView
         android:id="@+id/item_card_title_text_view"
@@ -18,5 +17,7 @@
         android:layout_marginEnd="@dimen/text_item_card_start_end_spacing"
         android:layout_marginStart="@dimen/text_item_card_start_end_spacing"
         style="@style/Body_2"/>
+
+    
 
 </LinearLayout>
