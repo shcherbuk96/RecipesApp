@@ -22,20 +22,19 @@
         android:layout_marginTop="@dimen/view_search_top_bot_spacing"
         android:text="@string/search_random" />
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/search_random_text_view"
+        android:layout_marginTop="@dimen/view_search_top_bot_spacing"
+        android:layout_height="match_parent">
     <android.support.v7.widget.RecyclerView
         android:id="@+id/search_list_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/search_random_text_view"
-        android:layout_marginTop="@dimen/view_search_top_bot_spacing" />
+         />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
-    <ProgressBar
-        android:id="@+id/search_progressbar_progressbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:visibility="visible" />
 
 </RelativeLayout>

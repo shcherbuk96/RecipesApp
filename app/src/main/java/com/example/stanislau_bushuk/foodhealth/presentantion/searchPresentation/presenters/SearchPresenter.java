@@ -157,6 +157,14 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
         }
     }
 
+    public void refreshData(final String recipeName){
+        if (recipeName.equals(resourceManager.getString(R.string.search_random))) {
+            netWorkModel.getRandomRecipe(false);
+        } else {
+            netWorkModel.getResponse(recipeName, 0, false);
+        }
+    }
+
     public void addToFavorite(final Recipe recipe) {
         realmModel.addToFavorite(recipe);
     }
