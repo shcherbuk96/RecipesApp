@@ -157,11 +157,11 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
         }
     }
 
-    public void refreshData(final String recipeName){
-        if (recipeName.equals(resourceManager.getString(R.string.search_random))) {
+    public void refreshData(final String searchText){
+        if (searchText.isEmpty()) {
             netWorkModel.getRandomRecipe(false);
         } else {
-            netWorkModel.getResponse(recipeName, 0, false);
+            netWorkModel.getResponse(searchText, 0, false);
         }
     }
 

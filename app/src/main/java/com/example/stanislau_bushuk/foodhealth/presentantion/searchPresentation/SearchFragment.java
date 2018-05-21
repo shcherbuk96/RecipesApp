@@ -53,6 +53,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
     private RecyclerAdapter recyclerAdapter;
     private Bundle instanceState;
+    private SearchView searchView;
 
     @Nullable
     @Override
@@ -134,7 +135,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.action_bar_menu, menu);
         final MenuItem menuItem = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) menuItem.getActionView();
+        searchView = (SearchView) menuItem.getActionView();
         searchView.setFocusable(false);
 
         if (instanceState == null) {
@@ -154,6 +155,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
     @Override
     public void onRefresh() {
-        presenter.refreshData( String.valueOf(searchText.getText()));
+        presenter.refreshData(searchView.getQuery().toString());
     }
 }
