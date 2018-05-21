@@ -22,6 +22,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.App;
+import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.MainActivity;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
@@ -146,7 +147,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         final SearchView searchView = (SearchView) menuItem.getActionView();
         searchView.setFocusable(false);
 
-        if (getArguments() != null && instanceState == null && getArguments().getInt("KEY") == 0) {
+        if (getArguments() != null && instanceState == null && getArguments().getInt(Constants.KEY_FRAGMENT) == 0) {
             presenter.searchObservable(searchView);
         }
     }

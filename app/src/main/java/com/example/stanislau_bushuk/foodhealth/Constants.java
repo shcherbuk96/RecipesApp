@@ -35,4 +35,7 @@ public class Constants {
     public static final String DEEP_SEARCH_SCREEN = "DEEP_SEARCH_SCREEN";
 
     public static final String FAVOURITE_SCREEN = "FAVOURITE_SCREEN";
+
+    public static final String KEY_FRAGMENT = "KEY";
+
 }

@@ -6,7 +6,7 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentat
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
 
-public class FragmentManager {
+public class FragmentCreater {
 
 
     public static Fragment getNewInstanceFragment(final String screenKey) {

@@ -13,7 +13,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
-
+import android.support.v4.app.FragmentManager;
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -52,11 +52,11 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         }
 
         void applyCommand(final Command command) {
-            final android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+            final FragmentManager fm = getSupportFragmentManager();
 
             if (command instanceof BackTo) {
                 final Bundle bundle = new Bundle();
-                bundle.putInt("KEY", 1);
+                bundle.putInt(Constants.KEY_FRAGMENT, 1);
                 searchFragment.setArguments(bundle);
                 fm.beginTransaction()
                         .detach(deepSearchFragment)
@@ -103,7 +103,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
                     case Constants.SEARCH_SCREEN:
                         final Bundle bundle = new Bundle();
-                        bundle.putInt("KEY", 0);
+                        bundle.putInt(Constants.KEY_FRAGMENT, 0);
                         searchFragment.setArguments(bundle);
                         fm.beginTransaction()
                                 .detach(deepSearchFragment)
@@ -119,10 +119,10 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
     };
 
     private void initContainers() {
-        final android.support.v4.app.FragmentManager fm = getSupportFragmentManager();
+        final FragmentManager fm = getSupportFragmentManager();
         searchFragment = (SearchFragment) fm.findFragmentByTag(Constants.SEARCH_SCREEN);
         if (searchFragment == null) {
-            searchFragment = (SearchFragment) FragmentManager.getNewInstanceFragment(Constants.SEARCH_SCREEN);
+            searchFragment = (SearchFragment) FragmentCreater.getNewInstanceFragment(Constants.SEARCH_SCREEN);
             fm.beginTransaction()
                     .add(R.id.main_contener_frame_layout, searchFragment, Constants.SEARCH_SCREEN)
                     .detach(searchFragment).commitNow();
@@ -130,7 +130,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
         deepSearchFragment = (DeepSearchFragment) fm.findFragmentByTag(Constants.DEEP_SEARCH_SCREEN);
         if (deepSearchFragment == null) {
-            deepSearchFragment = (DeepSearchFragment) FragmentManager.getNewInstanceFragment(Constants.DEEP_SEARCH_SCREEN);
+            deepSearchFragment = (DeepSearchFragment) FragmentCreater.getNewInstanceFragment(Constants.DEEP_SEARCH_SCREEN);
             fm.beginTransaction()
                     .add(R.id.main_contener_frame_layout, deepSearchFragment, Constants.DEEP_SEARCH_SCREEN)
                     .detach(deepSearchFragment).commitNow();
@@ -138,7 +138,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
         favoriteFragment = (FavoriteFragment) fm.findFragmentByTag(Constants.FAVOURITE_SCREEN);
         if (favoriteFragment == null) {
-            favoriteFragment = (FavoriteFragment) FragmentManager.getNewInstanceFragment(Constants.FAVOURITE_SCREEN);
+            favoriteFragment = (FavoriteFragment) FragmentCreater.getNewInstanceFragment(Constants.FAVOURITE_SCREEN);
             fm.beginTransaction()
                     .add(R.id.main_contener_frame_layout, favoriteFragment, Constants.FAVOURITE_SCREEN)
                     .detach(favoriteFragment).commitNow();
