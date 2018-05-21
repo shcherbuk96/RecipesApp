@@ -68,6 +68,11 @@ dependencies {
     annotationProcessor "${library.butterknifeCompiler}"
     ///
 
+    ///Firebase///
+    implementation "${library.firebaseDatabase}"
+    implementation "${library.firebaseAuth}"
+    ///
+
     ///////Moxy/////
     compile "${library.moxy}"
     compile "${library.moxyAppCompat}"

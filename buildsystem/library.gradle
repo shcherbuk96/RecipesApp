@@ -38,7 +38,11 @@ ext.version = [
 
         junit:"4.12",
         testRunner:"1.0.1",
-        espressoCore:"3.0.1"
+        espressoCore:"3.0.1",
+
+        //FireBase//
+        firebaseDatabase: "15.0.0",
+        firebaseAuth:"15.1.0"
 
 
 ]
@@ -99,6 +103,7 @@ ext.library = [
         testRunner: "com.android.support.test:runner:"+                                             "$version.testRunner",
         espressoCore: "com.android.support.test.espresso:espresso-core:"+                           "$version.espressoCore",
 
-
+        firebaseDatabase:"com.google.firebase:firebase-database:"+                                  "$version.firebaseDatabase",
+        firebaseAuth:"com.google.firebase:firebase-auth:"+                                          "$version.firebaseAuth"
 
 ]
