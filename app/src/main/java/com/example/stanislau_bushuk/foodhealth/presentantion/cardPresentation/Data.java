@@ -95,7 +95,7 @@ public class Data {
         }
 
         public Builder setYield(final Recipe recipe) {
-            yield = (int) recipe.getYield();
+            yield = (int)recipe.getYield();
 
             return this;
         }

@@ -40,4 +40,12 @@
     <dimen name="deep_search_start_end_padding">16dp</dimen>
     <dimen name="deep_search_elements_marginTop">8dp</dimen>
     <dimen name="deep_search_edit_text_width">56dp</dimen>
+
+    <!-- Margins & Padding -->
+    <dimen name="margin_padding_size_small">8dp</dimen>
+    <dimen name="margin_padding_size_medium">16dp</dimen>
+    <dimen name="margin_padding_size_large">32dp</dimen>
+
+    <dimen name="item_card_height">48dp</dimen>
+    <dimen name="item_card_top_bottom_spacing">8dp</dimen>
 </resources>

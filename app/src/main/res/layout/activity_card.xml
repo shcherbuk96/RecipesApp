@@ -12,12 +12,15 @@
         android:paddingBottom="@dimen/image_card_top_bottom_spacing"/>
 
     <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:columnCount="3"
         android:descendantFocusability="beforeDescendants"
         android:focusableInTouchMode="true"
+        android:paddingEnd="@dimen/margin_padding_size_medium"
+        android:paddingStart="@dimen/margin_padding_size_medium"
+        android:paddingTop="@dimen/margin_padding_size_small"
         android:useDefaultMargins="true">
 
         <TextView
@@ -40,10 +43,9 @@
             android:layout_width="@dimen/grid_card_width"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@drawable/item"
             android:gravity="center"
             android:inputType="number"
-            android:maxLength="3" />
+            android:maxLength="2" />
 
         <TextView
             style="@style/Body_1"
@@ -91,7 +93,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/card_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/margin_padding_size_small" />
 
 
 </LinearLayout>

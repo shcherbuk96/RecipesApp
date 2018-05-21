@@ -14,17 +14,18 @@
             android:id="@+id/card_photo_image_view"
             android:layout_width="match_parent"
             android:layout_height="@dimen/image_card_height"
-            android:layout_gravity="center"
-            android:paddingBottom="@dimen/image_card_top_bottom_spacing"
-            android:paddingTop="@dimen/image_card_top_bottom_spacing" />
+            android:layout_gravity="center" />
 
         <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:columnCount="3"
             android:descendantFocusability="beforeDescendants"
             android:focusableInTouchMode="true"
+            android:paddingEnd="@dimen/margin_padding_size_medium"
+            android:paddingStart="@dimen/margin_padding_size_medium"
+            android:paddingTop="@dimen/margin_padding_size_small"
             android:useDefaultMargins="true">
 
             <TextView
@@ -49,7 +50,7 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:inputType="number"
-                android:maxLength="3" />
+                android:maxLength="2" />
 
             <TextView
                 style="@style/Body_1"
@@ -97,7 +98,6 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/card_recycler_view"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/image_card_top_bottom_spacing"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
