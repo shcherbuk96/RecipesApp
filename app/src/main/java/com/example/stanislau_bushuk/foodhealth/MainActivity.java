@@ -154,7 +154,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         } else {
             final MenuItem menuItem = bottomNavigationView.getMenu().findItem(R.id.search);
             menuItem.setChecked(true);
-            router.backTo(Constants.SEARCH_SCREEN);
+            presenter.goBack(Constants.SEARCH_SCREEN);
         }
 
     }
@@ -172,9 +172,9 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         initContainers();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
         if (savedInstanceState == null) {
             navigator.applyCommands(new Command[]{new Replace(Constants.SEARCH_SCREEN, 0)});
-
         }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

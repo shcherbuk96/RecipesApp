@@ -43,6 +43,8 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     @Inject
     ResourceManager resourceManager;
 
+    private boolean stateUpdate;
+
     public SearchPresenter() {
         App.getAppComponent().inject(this);
         netWorkModel.setCallBackSearch(this);
@@ -104,7 +106,8 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                 });
     }
 
-    public void searchObservable(final SearchView searchView) {
+    public void searchObservable(final SearchView searchView, final boolean state) {
+        this.stateUpdate = state;
         RxSearchView.queryTextChanges(searchView)
                 .map(new Function<CharSequence, String>() {
                     @Override
@@ -123,16 +126,20 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
                     @Override
                     public void onNext(final String s) {
-                        if (!s.isEmpty()) {
-                            netWorkModel.getResponse(s, 0, false);
-                            getViewState().setSearchText(s);
-                        } else {
-                            if (!netWorkModel.checkRealmIsEmpty()) {
-                                netWorkModel.getRandomData(false);
+                        if (!stateUpdate) {
+                            if (!s.isEmpty()) {
+                                netWorkModel.getResponse(s, 0, false);
+                                getViewState().setSearchText(s);
                             } else {
-                                netWorkModel.getRandomRecipe(false);
+                                if (!netWorkModel.checkRealmIsEmpty()) {
+                                    netWorkModel.getRandomData(false);
+                                } else {
+                                    netWorkModel.getRandomRecipe(false);
+                                }
+                                getViewState().setSearchText(resourceManager.getString(R.string.search_random));
                             }
-                            getViewState().setSearchText(resourceManager.getString(R.string.search_random));
+                        }else {
+                            SearchPresenter.this.stateUpdate = false;
                         }
                     }
 

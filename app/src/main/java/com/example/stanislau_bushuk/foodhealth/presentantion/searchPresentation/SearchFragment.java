@@ -14,7 +14,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,12 +62,8 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
     private RecyclerAdapter recyclerAdapter;
     private Bundle instanceState;
     private SearchView searchView;
+    private String searchQueryText;
 
-
-    @Override
-    public void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Nullable
     @Override
@@ -105,10 +100,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         });
     }
 
-    @Override
-    public void onSaveInstanceState(final Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
 
     @Override
     public void showList(final List<Hits> hitsList) {
@@ -123,12 +114,13 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
     @Override
     public void progressBarVisible(final int visible) {
 
-        if(visible==View.VISIBLE) {
+        if (visible == View.VISIBLE) {
             swipeRefreshLayout.setRefreshing(true);
-        }else{
+        } else {
             swipeRefreshLayout.setRefreshing(false);
         }
     }
+
 
     @Override
     public void setSearchText(final String text) {
@@ -152,11 +144,19 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         inflater.inflate(R.menu.action_bar_menu, menu);
         final MenuItem menuItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) menuItem.getActionView();
-        searchView.setFocusable(false);
+
+        if(!searchText.getText().toString().equals(getResources().getString(R.string.search_random))) {
+            searchView.setIconified(false);
+            searchView.setQuery(searchText.getText(), false);
+        }
 
         if (getArguments() != null && instanceState == null && getArguments().getInt(Constants.KEY_FRAGMENT) == 0) {
-            presenter.searchObservable(searchView);
+            presenter.searchObservable(searchView,false);
+        }else {
+            presenter.searchObservable(searchView,true);
         }
+
+        searchView.clearFocus();
     }
 
     @Override
