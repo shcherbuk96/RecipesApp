@@ -3,6 +3,8 @@ package com.example.stanislau_bushuk.foodhealth;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -13,7 +15,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
-import android.support.v4.app.FragmentManager;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -21,11 +23,13 @@ import butterknife.ButterKnife;
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
+import ru.terrakok.cicerone.commands.Back;
 import ru.terrakok.cicerone.commands.BackTo;
 import ru.terrakok.cicerone.commands.Command;
 import ru.terrakok.cicerone.commands.Forward;
 import ru.terrakok.cicerone.commands.Replace;
 import ru.terrakok.cicerone.commands.SystemMessage;
+import timber.log.Timber;
 
 public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
@@ -44,6 +48,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
     private SearchFragment searchFragment;
     private DeepSearchFragment deepSearchFragment;
     private FavoriteFragment favoriteFragment;
+
     private Navigator navigator = new Navigator() {
 
         @Override
@@ -54,7 +59,10 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         void applyCommand(final Command command) {
             final FragmentManager fm = getSupportFragmentManager();
 
+
+
             if (command instanceof BackTo) {
+
                 final Bundle bundle = new Bundle();
                 bundle.putInt(Constants.KEY_FRAGMENT, 1);
                 searchFragment.setArguments(bundle);
@@ -69,7 +77,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
             } else if (command instanceof Forward) {
 
                 switch (((Forward) command).getScreenKey()) {
-                    case Constants.SEARCH_SCREEN:
+                    case Constants.SEARCH_SCREEN: {
                         fm.beginTransaction()
                                 .detach(deepSearchFragment)
                                 .detach(favoriteFragment)
@@ -77,8 +85,9 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
                                 .commitNow();
 
                         break;
+                    }
 
-                    case Constants.DEEP_SEARCH_SCREEN:
+                    case Constants.DEEP_SEARCH_SCREEN: {
                         fm.beginTransaction()
                                 .detach(searchFragment)
                                 .detach(favoriteFragment)
@@ -86,8 +95,9 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
                                 .commitNow();
 
                         break;
+                    }
 
-                    case Constants.FAVOURITE_SCREEN:
+                    case Constants.FAVOURITE_SCREEN: {
                         fm.beginTransaction()
                                 .detach(searchFragment)
                                 .detach(deepSearchFragment)
@@ -95,7 +105,12 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
                                 .commitNow();
 
                         break;
+                    }
 
+                    case Constants.CARD_ACTIVITY: {
+                        ActivityManager.startCardActivity(MainActivity.this,((Forward) command)
+                                .getTransitionData().toString());
+                    }
                 }
 
             } else if (command instanceof Replace) {

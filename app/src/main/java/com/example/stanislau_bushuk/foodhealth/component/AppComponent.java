@@ -12,6 +12,7 @@ import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetworkDeepSearchModul;
 import com.example.stanislau_bushuk.foodhealth.modul.RealmModul;
 import com.example.stanislau_bushuk.foodhealth.modul.ResourceManagerModul;
+import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.model.NetWorkModelDeepSearch;
@@ -38,6 +39,8 @@ public interface AppComponent {
     void inject(SearchFragment searchFragment);
 
     void inject(CardPresenter cardPresenter);
+
+    void inject(CardActivity cardActivity);
 
     void inject(NetWorkModel netWorkModel);
 

@@ -38,6 +38,6 @@ public class Constants {
 
     public static final String KEY_FRAGMENT = "KEY";
 
-    public static final String SEARCH_RECIPE_EXIT = "RECIPENAME";
+    public static final String CARD_ACTIVITY = "CARD_ACTIVITY";
 
 }

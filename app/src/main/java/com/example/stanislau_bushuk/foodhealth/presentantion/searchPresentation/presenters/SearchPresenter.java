@@ -29,6 +29,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import ru.terrakok.cicerone.Router;
 import timber.log.Timber;
 
 @InjectViewState
@@ -39,6 +40,9 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
     @Inject
     NetWorkModel netWorkModel;
+
+    @Inject
+    Router router;
 
     @Inject
     ResourceManager resourceManager;
@@ -178,4 +182,9 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     public void deleteFromFavorite(final Recipe recipe) {
         realmModel.deleteFromFavorite(recipe);
     }
+
+    public void navigateTo(final String screenKey, final String data){
+        router.navigateTo(screenKey,data);
+    }
+
 }

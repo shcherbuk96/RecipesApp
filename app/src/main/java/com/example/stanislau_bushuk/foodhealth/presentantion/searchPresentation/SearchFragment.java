@@ -53,16 +53,12 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
     @BindView(R.id.swipe_layout)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    @Inject
-    Router router;
-
     @InjectPresenter
     SearchPresenter presenter;
 
     private RecyclerAdapter recyclerAdapter;
     private Bundle instanceState;
     private SearchView searchView;
-    private String searchQueryText;
 
 
     @Nullable
@@ -135,7 +131,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
     @Override
     public void onItemClick(final String uri) {
-        ActivityManager.startCardActivity(getActivity(), uri);
+        presenter.navigateTo(Constants.CARD_ACTIVITY,uri);
     }
 
     @Override

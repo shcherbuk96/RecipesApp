@@ -1,8 +1,11 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation;
 
+import android.support.v4.app.FragmentManager;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
+import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackCardPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.CardNetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
@@ -15,6 +18,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import ru.terrakok.cicerone.Navigator;
+import ru.terrakok.cicerone.Router;
+import ru.terrakok.cicerone.commands.Back;
+import ru.terrakok.cicerone.commands.Command;
 import timber.log.Timber;
 
 
@@ -24,14 +31,16 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
     @Inject
     CardNetWorkModel netWorkModel;
 
+    @Inject
+    Router router;
+
     CardPresenter() {
         App.getAppComponent().inject(this);
         netWorkModel.setCallBackCard(this);
     }
 
-//    public void getRecipeFromUri(final String uri) {
-//        netWorkModel.getRecipeFromUri(uri);
-//    }
+
+
 
     public void getRecipeFromRealmUri(final String uri) {
         netWorkModel.getRecipeFromRealmUri(uri);
@@ -90,5 +99,9 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
                     public void onComplete() {
                     }
                 });
+    }
+
+    public void back(){
+        router.exit();
     }
 }
