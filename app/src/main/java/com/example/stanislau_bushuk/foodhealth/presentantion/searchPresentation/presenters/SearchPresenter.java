@@ -29,6 +29,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import ru.terrakok.cicerone.Router;
 import timber.log.Timber;
 
 @InjectViewState
@@ -41,7 +42,12 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     NetWorkModel netWorkModel;
 
     @Inject
+    Router router;
+
+    @Inject
     ResourceManager resourceManager;
+
+    private boolean stateUpdate;
 
     public SearchPresenter() {
         App.getAppComponent().inject(this);
@@ -104,7 +110,8 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                 });
     }
 
-    public void searchObservable(final SearchView searchView) {
+    public void searchObservable(final SearchView searchView, final boolean state) {
+        this.stateUpdate = state;
         RxSearchView.queryTextChanges(searchView)
                 .map(new Function<CharSequence, String>() {
                     @Override
@@ -123,17 +130,20 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
                     @Override
                     public void onNext(final String s) {
-                        if (!s.isEmpty()) {
-
-                            netWorkModel.getResponse(s, 0, false);
-                            getViewState().setSearchText(s);
-                        } else {
-                            if (!netWorkModel.checkRealmIsEmpty()) {
-                                netWorkModel.getRandomData(false);
+                        if (!stateUpdate) {
+                            if (!s.isEmpty()) {
+                                netWorkModel.getResponse(s, 0, false);
+                                getViewState().setSearchText(s);
                             } else {
-                                netWorkModel.getRandomRecipe(false);
+                                if (!netWorkModel.checkRealmIsEmpty()) {
+                                    netWorkModel.getRandomData(false);
+                                } else {
+                                    netWorkModel.getRandomRecipe(false);
+                                }
+                                getViewState().setSearchText(resourceManager.getString(R.string.search_random));
                             }
-                            getViewState().setSearchText(resourceManager.getString(R.string.search_random));
+                        }else {
+                            SearchPresenter.this.stateUpdate = false;
                         }
                     }
 
@@ -172,4 +182,9 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     public void deleteFromFavorite(final Recipe recipe) {
         realmModel.deleteFromFavorite(recipe);
     }
+
+    public void navigateTo(final String screenKey, final String data){
+        router.navigateTo(screenKey,data);
+    }
+
 }

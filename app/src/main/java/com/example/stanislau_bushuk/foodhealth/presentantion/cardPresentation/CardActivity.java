@@ -9,9 +9,7 @@ import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
+import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
@@ -19,11 +17,18 @@ import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
+import ru.terrakok.cicerone.Navigator;
+import ru.terrakok.cicerone.NavigatorHolder;
+import ru.terrakok.cicerone.commands.Back;
+import ru.terrakok.cicerone.commands.Command;
+import timber.log.Timber;
 
 public class CardActivity extends MvpAppCompatActivity implements CardView {
 
@@ -54,12 +59,31 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
     @InjectPresenter
     CardPresenter presenter;
 
+    @Inject
+    NavigatorHolder navigatorHolder;
+
     private CardAdapter cardAdapter;
 
     private Data data;
 
+    private Navigator navigator = new Navigator() {
+        @Override
+        public void applyCommands(final Command[] commands) {
+            for (final Command command : commands) applyCommand(command);
+        }
+    };
+
+    void applyCommand(final Command command) {
+        if (command instanceof Back) {
+            Timber.e("FINISH");
+            finish();
+        }
+    }
+
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        App.getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_card);
@@ -142,9 +166,26 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        presenter.back();
         return true;
     }
 
+    @Override
+    public void onBackPressed() {
+        presenter.back();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        navigatorHolder.setNavigator(navigator);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        navigatorHolder.removeNavigator();
+    }
 }

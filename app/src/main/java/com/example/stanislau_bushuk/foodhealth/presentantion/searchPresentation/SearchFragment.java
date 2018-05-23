@@ -14,14 +14,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.example.stanislau_bushuk.foodhealth.ActivityManager;
+import com.example.stanislau_bushuk.foodhealth.App;
+import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.MainActivity;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
@@ -55,6 +55,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
     private Bundle instanceState;
     private SearchView searchView;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container,
@@ -68,6 +69,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
+        App.getAppComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
@@ -89,10 +91,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         });
     }
 
-    @Override
-    public void onSaveInstanceState(final Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
 
     @Override
     public void showList(final List<Hits> hitsList) {
@@ -107,12 +105,13 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
     @Override
     public void progressBarVisible(final int visible) {
 
-        if(visible==View.VISIBLE) {
+        if (visible == View.VISIBLE) {
             swipeRefreshLayout.setRefreshing(true);
-        }else{
+        } else {
             swipeRefreshLayout.setRefreshing(false);
         }
     }
+
 
     @Override
     public void setSearchText(final String text) {
@@ -127,7 +126,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
     @Override
     public void onItemClick(final String uri) {
-        ActivityManager.startCardActivity(getActivity(), uri);
+        presenter.navigateTo(Constants.CARD_ACTIVITY, uri);
     }
 
     @Override
@@ -136,11 +135,20 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         inflater.inflate(R.menu.action_bar_menu, menu);
         final MenuItem menuItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) menuItem.getActionView();
-        searchView.setFocusable(false);
 
-        if (instanceState == null) {
-            presenter.searchObservable(searchView);
+        if (!searchText.getText().toString().equals(getResources().getString(R.string.search_random))) {
+            searchView.setIconified(false);
+            searchView.setQuery(searchText.getText(), false);
         }
+
+        if (getArguments() != null && instanceState == null && getArguments().getInt(Constants.KEY_FRAGMENT) == 0) {
+            presenter.searchObservable(searchView, false);
+        } else {
+            presenter.searchObservable(searchView, true);
+        }
+
+        searchView.clearFocus();
+        searchView.setFocusable(false);
     }
 
     @Override
