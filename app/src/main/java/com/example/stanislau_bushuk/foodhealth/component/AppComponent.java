@@ -59,4 +59,5 @@ public interface AppComponent {
     void inject(DeepSearchActivity deepSearchActivity);
 
     void inject(MainActivity mainActivity);
+
 }
