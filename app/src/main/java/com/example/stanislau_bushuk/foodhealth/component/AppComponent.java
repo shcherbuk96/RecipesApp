@@ -9,6 +9,7 @@ import com.example.stanislau_bushuk.foodhealth.modul.Api;
 import com.example.stanislau_bushuk.foodhealth.modul.CardNetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.CiceroneModul;
 import com.example.stanislau_bushuk.foodhealth.modul.DeepSearchModul;
+import com.example.stanislau_bushuk.foodhealth.modul.NavigationUtilModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetworkDeepSearchModul;
 import com.example.stanislau_bushuk.foodhealth.modul.RealmModul;
