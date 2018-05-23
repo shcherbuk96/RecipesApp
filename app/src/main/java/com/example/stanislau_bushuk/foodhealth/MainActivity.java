@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -23,13 +22,11 @@ import butterknife.ButterKnife;
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
-import ru.terrakok.cicerone.commands.Back;
 import ru.terrakok.cicerone.commands.BackTo;
 import ru.terrakok.cicerone.commands.Command;
 import ru.terrakok.cicerone.commands.Forward;
 import ru.terrakok.cicerone.commands.Replace;
 import ru.terrakok.cicerone.commands.SystemMessage;
-import timber.log.Timber;
 
 public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
@@ -58,8 +55,6 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
         void applyCommand(final Command command) {
             final FragmentManager fm = getSupportFragmentManager();
-
-
 
             if (command instanceof BackTo) {
 
@@ -108,7 +103,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
                     }
 
                     case Constants.CARD_ACTIVITY: {
-                        ActivityManager.startCardActivity(MainActivity.this,((Forward) command)
+                        ActivityManager.startCardActivity(MainActivity.this, ((Forward) command)
                                 .getTransitionData().toString());
                     }
                 }
@@ -174,16 +169,14 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
     }
 
-    @ProvidePresenter
-    public MainActivityPresenter createMainActivityPresenter() {
-        return new MainActivityPresenter(router);
-    }
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         App.getAppComponent().inject(this);
 
         super.onCreate(savedInstanceState);
+
         initContainers();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);

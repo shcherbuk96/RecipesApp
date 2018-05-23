@@ -148,11 +148,11 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
         realmModel.deleteFromFavorite(recipe);
     }
 
-    public void back(){
+    public void back() {
         router.exit();
     }
 
-    public void goTo(final String screenKey,final String uri) {
-        router.navigateTo(screenKey,uri);
+    public void goTo(final String screenKey, final String uri) {
+        router.navigateTo(screenKey, uri);
     }
 }

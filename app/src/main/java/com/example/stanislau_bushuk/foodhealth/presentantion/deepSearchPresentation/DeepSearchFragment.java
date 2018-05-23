@@ -3,7 +3,6 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresenta
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.PresenterType;
 import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.Constants;
-import com.example.stanislau_bushuk.foodhealth.MainActivity;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters.DeepSearchPresenter;
@@ -28,10 +26,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
-import timber.log.Timber;
 
 public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSearchView {
-
 
     @BindView(R.id.to_deep_search_edit_text)
     EditText toEditText;

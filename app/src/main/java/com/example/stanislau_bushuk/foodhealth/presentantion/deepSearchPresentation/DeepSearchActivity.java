@@ -14,7 +14,6 @@ import com.arellomobile.mvp.presenter.PresenterType;
 import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
-import com.example.stanislau_bushuk.foodhealth.MainActivity;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
@@ -60,6 +59,7 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     };
 
     void applyCommand(final Command command) {
+
         if (command instanceof Back) {
             Timber.e("FINISH");
             finish();
@@ -72,6 +72,7 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
                 }
             }
         }
+
     }
 
     @Override
@@ -144,7 +145,7 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
 
     @Override
     public void onItemClick(final String uri) {
-        presenter.goTo(Constants.CARD_ACTIVITY,uri);
+        presenter.goTo(Constants.CARD_ACTIVITY, uri);
     }
 
     @Override

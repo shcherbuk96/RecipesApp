@@ -2,6 +2,7 @@ package com.example.stanislau_bushuk.foodhealth.component;
 
 
 import com.example.stanislau_bushuk.foodhealth.MainActivity;
+import com.example.stanislau_bushuk.foodhealth.MainActivityPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.CardNetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.modul.Api;
@@ -41,6 +42,8 @@ public interface AppComponent {
     void inject(CardPresenter cardPresenter);
 
     void inject(CardActivity cardActivity);
+
+    void inject(MainActivityPresenter mainActivityPresenter);
 
     void inject(NetWorkModel netWorkModel);
 

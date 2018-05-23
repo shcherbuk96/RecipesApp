@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.MainActivity;
@@ -34,12 +33,8 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ru.terrakok.cicerone.Router;
-import timber.log.Timber;
 
 
 public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, RecyclerAdapter.Listener, SwipeRefreshLayout.OnRefreshListener {
@@ -131,7 +126,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
     @Override
     public void onItemClick(final String uri) {
-        presenter.navigateTo(Constants.CARD_ACTIVITY,uri);
+        presenter.navigateTo(Constants.CARD_ACTIVITY, uri);
     }
 
     @Override
@@ -141,15 +136,15 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         final MenuItem menuItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) menuItem.getActionView();
 
-        if(!searchText.getText().toString().equals(getResources().getString(R.string.search_random))) {
+        if (!searchText.getText().toString().equals(getResources().getString(R.string.search_random))) {
             searchView.setIconified(false);
             searchView.setQuery(searchText.getText(), false);
         }
 
         if (getArguments() != null && instanceState == null && getArguments().getInt(Constants.KEY_FRAGMENT) == 0) {
-            presenter.searchObservable(searchView,false);
-        }else {
-            presenter.searchObservable(searchView,true);
+            presenter.searchObservable(searchView, false);
+        } else {
+            presenter.searchObservable(searchView, true);
         }
 
         searchView.clearFocus();
