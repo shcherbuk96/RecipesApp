@@ -87,3 +87,5 @@ dependencies {
     androidTestImplementation "${library.testRunner}"
     androidTestImplementation "${library.espressoCore}"
 }
+
+apply plugin: 'com.google.gms.google-services'
