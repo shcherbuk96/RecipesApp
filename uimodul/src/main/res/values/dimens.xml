@@ -40,4 +40,8 @@
     <dimen name="deep_search_start_end_padding">16dp</dimen>
     <dimen name="deep_search_elements_marginTop">8dp</dimen>
     <dimen name="deep_search_edit_text_width">56dp</dimen>
+
+    <!-- LoginActivity-->
+    <dimen name="login_start_end_spacing">16dp</dimen>
+    <dimen name="login_top_bot_spacing">8dp</dimen>
 </resources>

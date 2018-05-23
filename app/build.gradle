@@ -8,6 +8,7 @@ android {
         applicationId "com.example.stanislau_bushuk.foodhealth"
         minSdkVersion 17
         targetSdkVersion 27
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -28,8 +29,8 @@ android {
 def library = ext.library
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     compile project(':uimodul')
-
 
     ///Realm////
     compile "${library.realm}"
@@ -73,6 +74,11 @@ dependencies {
     implementation "${library.firebaseAuth}"
     ///
 
+    ///MultiDex//
+    compile "${library.multidex}"
+
+    ///Rx2Firebase///
+    compile "${library.rxfirebase}"
     ///////Moxy/////
     compile "${library.moxy}"
     compile "${library.moxyAppCompat}"

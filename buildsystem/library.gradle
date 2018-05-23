@@ -42,9 +42,13 @@ ext.version = [
 
         //FireBase//
         firebaseDatabase: "15.0.0",
-        firebaseAuth:"15.1.0"
+        firebaseAuth:"15.0.0",
 
+        //Rx2Firebase//
+        rxfirebase:"0.0.15",
 
+        //Multidex//
+        multidex:"1.0.1"
 ]
 
 def version = ext.version
@@ -104,6 +108,10 @@ ext.library = [
         espressoCore: "com.android.support.test.espresso:espresso-core:"+                           "$version.espressoCore",
 
         firebaseDatabase:"com.google.firebase:firebase-database:"+                                  "$version.firebaseDatabase",
-        firebaseAuth:"com.google.firebase:firebase-auth:"+                                          "$version.firebaseAuth"
+        firebaseAuth:"com.google.firebase:firebase-auth:"+                                          "$version.firebaseAuth",
 
+        //MultiDex///
+        multidex: "com.android.support:multidex:"+                                                  "$version.multidex",
+        /////Rx2Firebase/////
+        rxfirebase:"com.kelvinapps:rxfirebase:"+                                                    "$version.rxfirebase"
 ]

@@ -42,4 +42,10 @@
     <string name="deep_search_not_found">Not found for you request</string>
     <string name="deep_search_high_protein_label">high-protein</string>
     <string name="deep_search_low_sugar_label">sugar-conscious </string>
+
+    <!-- LoginActivity strings-->
+    <string name="login_email_hint">Email</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_sign_in">Sign in</string>
+    <string name="login_sign_up">Sign up</string>
 </resources>
