@@ -153,6 +153,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         }
 
         searchView.clearFocus();
+        searchView.setFocusable(false);
     }
 
     @Override
