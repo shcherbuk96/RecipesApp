@@ -10,6 +10,7 @@ import com.example.stanislau_bushuk.foodhealth.modul.LoginModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetworkDeepSearchModul;
 import com.example.stanislau_bushuk.foodhealth.modul.RealmModul;
+import com.example.stanislau_bushuk.foodhealth.modul.RegistrationModul;
 import com.example.stanislau_bushuk.foodhealth.modul.ResourceManagerModul;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchActivity;
@@ -18,6 +19,7 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentat
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoritePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.loginPresentation.LoginPresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.registratinPresentation.RegistrationPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
 
@@ -29,7 +31,7 @@ import dagger.Component;
 @Singleton
 @Component(modules = {Api.class, NetWorkModul.class, CardNetWorkModul.class,
         ResourceManagerModul.class, DeepSearchModul.class, NetworkDeepSearchModul.class,
-        RealmModul.class, LoginModul.class})
+        RealmModul.class, LoginModul.class, RegistrationModul.class})
 public interface AppComponent {
 
     void inject(SearchPresenter searchPresenter);
@@ -53,4 +55,6 @@ public interface AppComponent {
     void inject(DeepSearchActivity deepSearchActivity);
 
     void inject(LoginPresenter loginPresenter);
+
+    void inject(RegistrationPresenter registrationPresenter);
 }

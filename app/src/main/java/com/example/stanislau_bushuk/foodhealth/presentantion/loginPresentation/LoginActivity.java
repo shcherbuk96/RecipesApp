@@ -34,32 +34,33 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     LoginPresenter loginPresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         ButterKnife.bind(this);
-
-        input.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                loginPresenter.signInUser(email.getText().toString(), password.getText().toString());
-            }
-        });
-
-        anonymous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                loginPresenter.signInAnonymous();
-            }
-        });
-
     }
 
+    @OnClick(R.id.login_sign_in_button)
+    public void clickSignIn(final View view) {
+        loginPresenter.signInUser(email.getText().toString(), password.getText().toString());
+    }
+
+    @OnClick(R.id.login_sign_up_button)
+    public void clickSignUp(final View view) {
+        ActivityManager.startRegistrationActivity(this);
+        finish();
+    }
+
+    @OnClick(R.id.login_anonymous_button)
+    public void clickAnonymous(final View view) {
+        loginPresenter.signInAnonymous();
+    }
 
     @Override
     public void getUser(final FirebaseUser firebaseUser) {
         ActivityManager.startMainActivity(this);
+        finish();
     }
 
     @Override

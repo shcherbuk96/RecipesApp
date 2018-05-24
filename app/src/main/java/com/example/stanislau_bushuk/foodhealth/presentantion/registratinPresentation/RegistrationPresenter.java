@@ -1,4 +1,4 @@
-package com.example.stanislau_bushuk.foodhealth.presentantion.loginPresentation;
+package com.example.stanislau_bushuk.foodhealth.presentantion.registratinPresentation;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -12,22 +12,23 @@ import rx.Observer;
 import timber.log.Timber;
 
 @InjectViewState
-public class LoginPresenter extends MvpPresenter<LoginView> implements CallBackLoginPresenter {
+public class RegistrationPresenter extends MvpPresenter<RegistrationView> implements CallBackRegistrationPresenter {
 
     @Inject
-    LoginModel loginModel;
+    RegistrationModel registrationModel;
 
-    public LoginPresenter() {
+    public RegistrationPresenter() {
         App.getAppComponent().inject(this);
-        loginModel.setCallBack(this);
+        registrationModel.setCallBack(this);
     }
 
-    public void signInUser(final String email, final String password) {
-        loginModel.signIn(email, password);
-    }
+    public void registrationUser(final String email, final String password, final String confirm_password) {
+        if (password.equals(confirm_password)) {
+            registrationModel.registrationUser(email, password);
+        } else {
+            getViewState().checkPassword();
+        }
 
-    public void signInAnonymous() {
-        loginModel.signInAnonymous();
     }
 
     @Override
@@ -42,7 +43,7 @@ public class LoginPresenter extends MvpPresenter<LoginView> implements CallBackL
                     @Override
                     public void onError(final Throwable e) {
                         Timber.e("onError");
-                        getViewState().error();
+                        getViewState().error(e);
                     }
 
                     @Override
@@ -50,7 +51,7 @@ public class LoginPresenter extends MvpPresenter<LoginView> implements CallBackL
                         Timber.e("onNext");
                         if (authResult != null) {
                             Timber.e(authResult.getUser().toString());
-                            getViewState().getUser(authResult.getUser());
+                            getViewState().user(authResult.getUser());
                         }
                     }
                 });

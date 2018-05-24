@@ -50,4 +50,12 @@
     <string name="login_sign_up">Sign up</string>
     <string name="login_anonymous">Sign in anonymous</string>
     <string name="login_error">Check internet connection or login and password</string>
+
+    <!-- RegistrationActivity strings-->
+    <string name="registration_email_hint">Email</string>
+    <string name="registration_password_hint">Password</string>
+    <string name="registration_confirm_password_hint">Confirm Password</string>
+    <string name="registration_sign_in">Registration</string>
+    <string name="registration_error">Check internet connection or login and password</string>
+    <string name="registration_check_password">Password do not match</string>
 </resources>

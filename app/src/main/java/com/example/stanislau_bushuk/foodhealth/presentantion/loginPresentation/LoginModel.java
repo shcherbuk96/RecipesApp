@@ -8,7 +8,7 @@ import rx.Observable;
 
 public class LoginModel {
 
-    private FirebaseAuth mAuth;
+    private final FirebaseAuth mAuth;
     private CallBackLoginPresenter callBackLoginPresenter;
 
     public LoginModel() {
@@ -19,14 +19,14 @@ public class LoginModel {
         callBackLoginPresenter = loginPresenter;
     }
 
-    public void signIn(String email, String password) {
-        Observable<AuthResult> observable = RxFirebaseAuth.signInWithEmailAndPassword(mAuth, email, password)
+    public void signIn(final String email, final String password) {
+        final Observable<AuthResult> observable = RxFirebaseAuth.signInWithEmailAndPassword(mAuth, email, password)
                 .asObservable();
         callBackLoginPresenter.call(observable);
     }
 
     public void signInAnonymous(){
-        Observable<AuthResult> observable = RxFirebaseAuth.signInAnonymously(mAuth).asObservable();
+        final Observable<AuthResult> observable = RxFirebaseAuth.signInAnonymously(mAuth).asObservable();
         callBackLoginPresenter.call(observable);
     }
 }
