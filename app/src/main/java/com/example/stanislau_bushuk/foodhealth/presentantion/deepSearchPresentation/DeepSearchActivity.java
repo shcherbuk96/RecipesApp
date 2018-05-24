@@ -44,6 +44,7 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
 
     @Inject
     NavigatorHolder navigatorHolder;
+
     private RecyclerAdapter adapter;
 
     @Inject

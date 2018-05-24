@@ -61,7 +61,6 @@ public abstract class OwnNavigator extends SupportAppNavigator implements Naviga
         Timber.e(String.valueOf(fragmentCreater.getSearchFragment()));
         if(fragmentManager.getFragments().contains(fragmentCreater.getSearchFragment()) &&
                 (int)command.getTransitionData()==-1){
-            Timber.e("EXIT");
             exit();
         } else {
             final Fragment fragment = createFragment(key, command.getTransitionData());

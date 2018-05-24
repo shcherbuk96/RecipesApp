@@ -21,7 +21,6 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.Ca
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.model.NetWorkModelDeepSearch;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters.DeepSearchPresenter;
-import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoritePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
@@ -51,11 +50,7 @@ public interface AppComponent {
 
     void inject(NetWorkModel netWorkModel);
 
-    void inject(CardNetWorkModel cardNetWorkModel);
-
     void inject(FavoritePresenter favoritePresenter);
-
-    void inject(FavoriteAdapter favoriteAdapter);
 
     void inject(RecyclerAdapter recyclerAdapter);
 
@@ -67,10 +62,10 @@ public interface AppComponent {
 
     void inject(MainActivity mainActivity);
 
-    void inject (NavigationUtil navigationUtil);
+    void inject(NavigationUtil navigationUtil);
 
-    void inject (SplashActivity splashActivity);
+    void inject(SplashActivity splashActivity);
 
-    void inject (OwnNavigator ownNavigator);
+    void inject(OwnNavigator ownNavigator);
 
 }

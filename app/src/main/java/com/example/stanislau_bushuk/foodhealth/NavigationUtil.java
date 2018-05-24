@@ -41,7 +41,7 @@ public class NavigationUtil extends OwnNavigator {
 
     @Override
     protected Intent createActivityIntent(final Context context, final String screenKey, final Object data) {
-        Intent intent = null;
+        final Intent intent;
 
         switch (screenKey){
             case Constants.MAIN_ACTIVITY:{

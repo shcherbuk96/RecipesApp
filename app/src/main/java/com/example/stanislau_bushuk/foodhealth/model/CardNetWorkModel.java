@@ -1,6 +1,5 @@
 package com.example.stanislau_bushuk.foodhealth.model;
 
-import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardPresenter;
 
@@ -14,7 +13,6 @@ public class CardNetWorkModel {
 
     public CardNetWorkModel() {
         realm = Realm.getDefaultInstance();
-        App.getAppComponent().inject(this);
     }
 
     public void setCallBackCard(final CardPresenter cardPresenter) {
