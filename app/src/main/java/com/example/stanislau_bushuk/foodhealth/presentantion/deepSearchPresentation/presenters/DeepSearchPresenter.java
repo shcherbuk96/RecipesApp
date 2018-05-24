@@ -7,6 +7,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
+import com.example.stanislau_bushuk.foodhealth.cicerone.OwnRouter;
 import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
@@ -24,7 +25,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import ru.terrakok.cicerone.Router;
 import timber.log.Timber;
 
 @InjectViewState
@@ -40,7 +40,7 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
     NetWorkModelDeepSearch netWorkModel;
 
     @Inject
-    Router router;
+    OwnRouter router;
 
     public DeepSearchPresenter() {
         App.getAppComponent().inject(this);
@@ -152,7 +152,11 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
         router.exit();
     }
 
-    public void goTo(final String screenKey, final String uri) {
-        router.navigateTo(screenKey, uri);
+    public void goTo(final String screenKey) {
+        router.navigateTo(screenKey);
+    }
+
+    public void goTo(final String screenKey,final String uri) {
+        router.navigateTo(screenKey,uri);
     }
 }

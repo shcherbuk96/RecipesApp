@@ -8,6 +8,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
+import com.example.stanislau_bushuk.foodhealth.cicerone.OwnRouter;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.ResourceManager;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackSearchPresenter;
@@ -29,7 +30,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import ru.terrakok.cicerone.Router;
 import timber.log.Timber;
 
 @InjectViewState
@@ -42,7 +42,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     NetWorkModel netWorkModel;
 
     @Inject
-    Router router;
+    OwnRouter router;
 
     @Inject
     ResourceManager resourceManager;
@@ -83,7 +83,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
                     @Override
                     public void onNext(final Recipes recipes) {
-                        Timber.e("next response");
+
 
                         if (recipes.getCount() != 0) {
 
@@ -131,6 +131,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                     @Override
                     public void onNext(final String s) {
                         if (!stateUpdate) {
+                            Timber.e("next response");
                             if (!s.isEmpty()) {
                                 netWorkModel.getResponse(s, 0, false);
                                 getViewState().setSearchText(s);

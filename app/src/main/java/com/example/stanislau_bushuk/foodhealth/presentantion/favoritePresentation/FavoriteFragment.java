@@ -13,15 +13,19 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.example.stanislau_bushuk.foodhealth.ActivityManager;
+import com.example.stanislau_bushuk.foodhealth.Constants;
+import com.example.stanislau_bushuk.foodhealth.NavigationUtil;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.RealmResults;
+import ru.terrakok.cicerone.NavigatorHolder;
 
 public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteView, FavoriteAdapter.Listener {
 
@@ -32,6 +36,14 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
 
     @InjectPresenter
     FavoritePresenter favoritePresenter;
+
+    @Inject
+    NavigatorHolder navigatorHolder;
+
+    @Inject
+    NavigationUtil navigationUtil(){
+        return new NavigationUtil(getActivity());
+    };
 
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
@@ -62,8 +74,23 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+
+        navigatorHolder.setNavigator(navigationUtil());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        navigatorHolder.removeNavigator();
+    }
+
+
+    @Override
     public void onItemClick(final String uri) {
-        ActivityManager.startCardActivity(getActivity(), uri);
+        favoritePresenter.goTo(Constants.CARD_ACTIVITY,uri);
     }
 
     @Override

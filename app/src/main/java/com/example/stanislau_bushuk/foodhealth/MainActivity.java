@@ -3,20 +3,19 @@ package com.example.stanislau_bushuk.foodhealth;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.FragmentActivity;
 import android.view.MenuItem;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.example.stanislau_bushuk.foodhealth.cicerone.OwnRouter;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.Provides;
 import ru.terrakok.cicerone.NavigatorHolder;
-import ru.terrakok.cicerone.Router;
-import timber.log.Timber;
 
 public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
@@ -24,7 +23,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
     BottomNavigationView bottomNavigationView;
 
     @Inject
-    Router router;
+    OwnRouter router;
 
     @Inject
     NavigatorHolder navigatorHolder;
@@ -37,29 +36,14 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         return new NavigationUtil(this);
     }
 
-//    NavigationUtil navigationUtil(){
-//        if(navigationUtil==null) {
-//            this.navigationUtil = new NavigationUtil(fragmentActivity);
-//        }
-//        return navigationUtil;
-//    }
 
 
-
-
-
-//    @Override
-//    public void onBackPressed() {
-//
-//        if (getSupportFragmentManager().getFragments().contains(searchFragment)) {
-//            super.onBackPressed();
-//        } else {
-//            final MenuItem menuItem = bottomNavigationView.getMenu().findItem(R.id.search);
-//            menuItem.setChecked(true);
-//            presenter.goBack(Constants.SEARCH_SCREEN);
-//        }
-//
-//    }
+    @Override
+    public void onBackPressed() {
+        final MenuItem menuItem = bottomNavigationView.getMenu().findItem(R.id.search);
+        menuItem.setChecked(true);
+        presenter.goBack(Constants.SEARCH_SCREEN,-1);
+    }
 
 
     @Override
@@ -67,7 +51,11 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         super.onCreate(savedInstanceState);
 
         App.getAppComponent().inject(this);
-        router.replaceScreen(Constants.SEARCH_SCREEN);
+
+        if (savedInstanceState == null) {
+            router.replaceScreen(Constants.SEARCH_SCREEN,0);
+        }
+
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
@@ -77,7 +65,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
                 switch (item.getItemId()) {
                     case R.id.search:
-                        presenter.goBack(Constants.SEARCH_SCREEN);
+                        presenter.goBack(Constants.SEARCH_SCREEN,1);
                         item.setChecked(true);
 
                         break;

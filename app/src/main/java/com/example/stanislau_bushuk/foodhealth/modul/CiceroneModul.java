@@ -1,27 +1,33 @@
 package com.example.stanislau_bushuk.foodhealth.modul;
 
+import com.example.stanislau_bushuk.foodhealth.cicerone.OwnRouter;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import ru.terrakok.cicerone.Cicerone;
 import ru.terrakok.cicerone.NavigatorHolder;
-import ru.terrakok.cicerone.Router;
 
 @Module
 public class CiceroneModul {
 
-    private Cicerone<Router> cicerone;
+    private Cicerone<OwnRouter> cicerone;
 
     public CiceroneModul() {
-        cicerone = Cicerone.create();
+        cicerone = create();
     }
 
     @Provides
     @Singleton
-    Router provideRouter() {
+    OwnRouter provideRouter() {
         return cicerone.getRouter();
     }
+
+    public Cicerone<OwnRouter> create() {
+        return Cicerone.create(new OwnRouter());
+    }
+
 
     @Provides
     @Singleton

@@ -3,13 +3,15 @@ package com.example.stanislau_bushuk.foodhealth.component;
 
 import com.example.stanislau_bushuk.foodhealth.MainActivity;
 import com.example.stanislau_bushuk.foodhealth.MainActivityPresenter;
+import com.example.stanislau_bushuk.foodhealth.NavigationUtil;
+import com.example.stanislau_bushuk.foodhealth.cicerone.OwnNavigator;
 import com.example.stanislau_bushuk.foodhealth.model.CardNetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.modul.Api;
 import com.example.stanislau_bushuk.foodhealth.modul.CardNetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.CiceroneModul;
 import com.example.stanislau_bushuk.foodhealth.modul.DeepSearchModul;
-import com.example.stanislau_bushuk.foodhealth.modul.NavigationUtilModul;
+import com.example.stanislau_bushuk.foodhealth.modul.FragmentCreaterModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetworkDeepSearchModul;
 import com.example.stanislau_bushuk.foodhealth.modul.RealmModul;
@@ -24,6 +26,7 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentatio
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.splashPresentatiom.SplashActivity;
 
 import javax.inject.Singleton;
 
@@ -33,7 +36,7 @@ import dagger.Component;
 @Singleton
 @Component(modules = {Api.class, NetWorkModul.class, CardNetWorkModul.class,
         ResourceManagerModul.class, DeepSearchModul.class, NetworkDeepSearchModul.class,
-        RealmModul.class, CiceroneModul.class})
+        RealmModul.class, CiceroneModul.class, FragmentCreaterModul.class,})
 public interface AppComponent {
 
     void inject(SearchPresenter searchPresenter);
@@ -63,5 +66,11 @@ public interface AppComponent {
     void inject(DeepSearchActivity deepSearchActivity);
 
     void inject(MainActivity mainActivity);
+
+    void inject (NavigationUtil navigationUtil);
+
+    void inject (SplashActivity splashActivity);
+
+    void inject (OwnNavigator ownNavigator);
 
 }

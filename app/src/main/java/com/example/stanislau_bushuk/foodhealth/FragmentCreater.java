@@ -1,5 +1,6 @@
 package com.example.stanislau_bushuk.foodhealth;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchFragment;
@@ -8,28 +9,52 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.
 
 public class FragmentCreater {
 
+    private SearchFragment searchFragment;
+    private DeepSearchFragment deepSearchFragment;
+    private FavoriteFragment favoriteFragment;
 
-    public static Fragment getNewInstanceFragment(final String screenKey) {
-        Fragment fragment = null;
+    public Fragment getNewInstanceFragment(final String screenKey, final int data) {
+        final Bundle bundle = new Bundle();
+        bundle.putInt(Constants.KEY_FRAGMENT,data);
 
         switch (screenKey) {
             case Constants.SEARCH_SCREEN: {
-                fragment = new SearchFragment();
 
-                break;
+                if (this.searchFragment == null) {
+                    searchFragment = new SearchFragment();
+                }
+                searchFragment.setArguments(bundle);
+                return searchFragment;
+
             }
+
             case Constants.DEEP_SEARCH_SCREEN: {
-                fragment = new DeepSearchFragment();
 
-                break;
+                if (this.deepSearchFragment == null) {
+                    deepSearchFragment = new DeepSearchFragment();
+                }
+                deepSearchFragment.setArguments(bundle);
+                return deepSearchFragment;
             }
+
             case Constants.FAVOURITE_SCREEN: {
-                fragment = new FavoriteFragment();
 
-                break;
+                if (this.favoriteFragment == null) {
+                    favoriteFragment = new FavoriteFragment();
+                }
+
+                favoriteFragment.setArguments(bundle);
+                return favoriteFragment;
             }
-        }
 
-        return fragment;
+            default: {
+                return null;
+            }
+
+        }
+    }
+
+    public SearchFragment getSearchFragment() {
+        return searchFragment;
     }
 }

@@ -40,4 +40,8 @@ public class Constants {
 
     public static final String CARD_ACTIVITY = "CARD_ACTIVITY";
 
+    public static final String DEEP_SEARCH_ACTIVITY = "DEEP_SEARCH_ACTIVITY";
+
+    public static final String MAIN_ACTIVITY = "MAIN_ACTIVITY";
+
 }
