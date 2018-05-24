@@ -5,11 +5,13 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
+import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,6 +26,7 @@ public class MainActivity extends MvpAppCompatActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (savedInstanceState == null) {
             fragment = getSupportFragmentManager().beginTransaction().replace(R.id.main_contener_frame_layout, new SearchFragment());
             fragment.commit();

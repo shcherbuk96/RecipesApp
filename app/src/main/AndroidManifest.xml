@@ -32,7 +32,8 @@
         <activity
             android:name=".presentantion.deepSearchPresentation.DeepSearchActivity"
             android:theme="@style/ThemeActionBar" />
-        <activity android:name=".presentantion.loginPresentation.LoginActivity"/>
+        <activity android:name=".presentantion.loginPresentation.LoginActivity" />
+        <activity android:name=".RegistationActivity"></activity>
     </application>
 
 </manifest>

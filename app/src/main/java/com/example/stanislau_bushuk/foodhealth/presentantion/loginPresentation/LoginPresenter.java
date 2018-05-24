@@ -31,6 +31,10 @@ public class LoginPresenter extends MvpPresenter<LoginView> implements CallBackL
         loginModel.signIn(email,password);
     }
 
+    public void signInAnonymous(){
+        loginModel.signInAnonymous();
+    }
+
     @Override
     public void call(final Observable<AuthResult> observable) {
         observable

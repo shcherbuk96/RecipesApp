@@ -23,6 +23,10 @@ public class LoginModel {
         Observable<AuthResult> observable = RxFirebaseAuth.signInWithEmailAndPassword(mAuth, email, password)
                 .asObservable();
         callBackLoginPresenter.call(observable);
+    }
 
+    public void signInAnonymous(){
+        Observable<AuthResult> observable = RxFirebaseAuth.signInAnonymously(mAuth).asObservable();
+        callBackLoginPresenter.call(observable);
     }
 }
