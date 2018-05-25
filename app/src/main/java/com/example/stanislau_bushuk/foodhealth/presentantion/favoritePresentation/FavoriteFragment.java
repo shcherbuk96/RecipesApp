@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.NavigationUtil;
 import com.example.stanislau_bushuk.foodhealth.R;
@@ -42,8 +43,8 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
 
     @Inject
     NavigationUtil navigationUtil(){
-        return new NavigationUtil(getActivity());
-    };
+        return new NavigationUtil(getContext());
+    }
 
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
@@ -57,6 +58,7 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
         super.onViewCreated(view, savedInstanceState);
 
 
+        App.getAppComponent().inject(this);
         ButterKnife.bind(this, view);
         listRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         favoriteAdapter = new FavoriteAdapter(new ArrayList<Recipe>(), this);
@@ -79,6 +81,7 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
 
         navigatorHolder.setNavigator(navigationUtil());
     }
+
 
     @Override
     public void onPause() {
