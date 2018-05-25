@@ -1,4 +1,4 @@
-package com.example.stanislau_bushuk.foodhealth.presentantion.registratinPresentation;
+package com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RegistrationActivity extends MvpAppCompatActivity implements RegistrationView {
+public class RegistrationActivity extends MvpAppCompatActivity implements LoginView {
 
     @BindView(R.id.registration_email_editText)
     EditText email;
@@ -29,9 +29,8 @@ public class RegistrationActivity extends MvpAppCompatActivity implements Regist
     @BindView(R.id.registration_sign_in_button)
     Button registration;
 
-
     @InjectPresenter
-    RegistrationPresenter registrationPresenter;
+    LoginPresenter loginPresenter;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -39,12 +38,11 @@ public class RegistrationActivity extends MvpAppCompatActivity implements Regist
         setContentView(R.layout.activity_registation);
 
         ButterKnife.bind(this);
-
     }
 
     @OnClick(R.id.registration_sign_in_button)
-    public void click_registration() {
-        registrationPresenter.registrationUser(email.getText().toString(),
+    public void clickRegistration() {
+        loginPresenter.registrationUser(email.getText().toString(),
                 password.getText().toString(),
                 confirm_password.getText().toString());
     }
@@ -63,5 +61,13 @@ public class RegistrationActivity extends MvpAppCompatActivity implements Regist
     @Override
     public void checkPassword() {
         Toast.makeText(this, R.string.registration_check_password, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        ActivityManager.startLoginActivity(this);
+        finish();
     }
 }

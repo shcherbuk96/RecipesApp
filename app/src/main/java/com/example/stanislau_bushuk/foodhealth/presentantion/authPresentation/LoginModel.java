@@ -1,4 +1,4 @@
-package com.example.stanislau_bushuk.foodhealth.presentantion.loginPresentation;
+package com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation;
 
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,8 +25,14 @@ public class LoginModel {
         callBackLoginPresenter.call(observable);
     }
 
-    public void signInAnonymous(){
+    public void signInAnonymous() {
         final Observable<AuthResult> observable = RxFirebaseAuth.signInAnonymously(mAuth).asObservable();
+        callBackLoginPresenter.call(observable);
+    }
+
+    public void registrationUser(final String email, final String password) {
+        final Observable<AuthResult> observable = RxFirebaseAuth.createUserWithEmailAndPassword(mAuth, email, password)
+                .asObservable();
         callBackLoginPresenter.call(observable);
     }
 }

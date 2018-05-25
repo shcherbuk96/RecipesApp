@@ -1,6 +1,6 @@
 package com.example.stanislau_bushuk.foodhealth.modul;
 
-import com.example.stanislau_bushuk.foodhealth.presentantion.loginPresentation.LoginModel;
+import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginModel;
 
 import javax.inject.Singleton;
 
@@ -11,7 +11,7 @@ import dagger.Provides;
 public class LoginModul {
     @Provides
     @Singleton
-    public LoginModel loginModel(){
+    public LoginModel loginModel() {
         return new LoginModel();
     }
 }

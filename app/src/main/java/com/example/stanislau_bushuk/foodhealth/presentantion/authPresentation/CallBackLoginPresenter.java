@@ -1,4 +1,4 @@
-package com.example.stanislau_bushuk.foodhealth.presentantion.loginPresentation;
+package com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation;
 
 import com.google.firebase.auth.AuthResult;
 

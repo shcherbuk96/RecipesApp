@@ -5,8 +5,8 @@ import android.content.Intent;
 
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchActivity;
-import com.example.stanislau_bushuk.foodhealth.presentantion.loginPresentation.LoginActivity;
-import com.example.stanislau_bushuk.foodhealth.presentantion.registratinPresentation.RegistrationActivity;
+import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginActivity;
+import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.RegistrationActivity;
 
 public class ActivityManager {
 

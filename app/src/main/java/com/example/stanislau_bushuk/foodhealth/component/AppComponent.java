@@ -1,25 +1,28 @@
 package com.example.stanislau_bushuk.foodhealth.component;
 
 
+import com.example.stanislau_bushuk.foodhealth.MainActivity;
+import com.example.stanislau_bushuk.foodhealth.MainActivityPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.CardNetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.modul.Api;
 import com.example.stanislau_bushuk.foodhealth.modul.CardNetWorkModul;
+import com.example.stanislau_bushuk.foodhealth.modul.CiceroneModul;
 import com.example.stanislau_bushuk.foodhealth.modul.DeepSearchModul;
 import com.example.stanislau_bushuk.foodhealth.modul.LoginModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetworkDeepSearchModul;
 import com.example.stanislau_bushuk.foodhealth.modul.RealmModul;
-import com.example.stanislau_bushuk.foodhealth.modul.RegistrationModul;
 import com.example.stanislau_bushuk.foodhealth.modul.ResourceManagerModul;
+import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginPresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.model.NetWorkModelDeepSearch;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters.DeepSearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoritePresenter;
-import com.example.stanislau_bushuk.foodhealth.presentantion.loginPresentation.LoginPresenter;
-import com.example.stanislau_bushuk.foodhealth.presentantion.registratinPresentation.RegistrationPresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
 
@@ -31,12 +34,18 @@ import dagger.Component;
 @Singleton
 @Component(modules = {Api.class, NetWorkModul.class, CardNetWorkModul.class,
         ResourceManagerModul.class, DeepSearchModul.class, NetworkDeepSearchModul.class,
-        RealmModul.class, LoginModul.class, RegistrationModul.class})
+        RealmModul.class, LoginModul.class, CiceroneModul.class})
 public interface AppComponent {
 
     void inject(SearchPresenter searchPresenter);
 
+    void inject(SearchFragment searchFragment);
+
     void inject(CardPresenter cardPresenter);
+
+    void inject(CardActivity cardActivity);
+
+    void inject(MainActivityPresenter mainActivityPresenter);
 
     void inject(NetWorkModel netWorkModel);
 
@@ -54,7 +63,7 @@ public interface AppComponent {
 
     void inject(DeepSearchActivity deepSearchActivity);
 
-    void inject(LoginPresenter loginPresenter);
+    void inject(MainActivity mainActivity);
 
-    void inject(RegistrationPresenter registrationPresenter);
+    void inject(LoginPresenter loginPresenter);
 }

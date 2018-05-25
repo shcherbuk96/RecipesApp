@@ -1,4 +1,4 @@
-package com.example.stanislau_bushuk.foodhealth.presentantion.loginPresentation;
+package com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation;
 
 import android.os.Bundle;
 import android.view.View;
@@ -58,13 +58,20 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     }
 
     @Override
-    public void getUser(final FirebaseUser firebaseUser) {
+    public void user(final FirebaseUser firebaseUser) {
         ActivityManager.startMainActivity(this);
         finish();
     }
 
     @Override
-    public void error() {
-        Toast.makeText(this, R.string.login_error, Toast.LENGTH_SHORT).show();
+    public void error(final Throwable e) {
+        Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void checkPassword() {
+        Toast.makeText(this, R.string.registration_check_password, Toast.LENGTH_SHORT).show();
+    }
+
+
 }

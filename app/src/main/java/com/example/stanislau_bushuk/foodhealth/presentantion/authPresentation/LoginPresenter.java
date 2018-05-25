@@ -1,4 +1,4 @@
-package com.example.stanislau_bushuk.foodhealth.presentantion.loginPresentation;
+package com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -30,6 +30,14 @@ public class LoginPresenter extends MvpPresenter<LoginView> implements CallBackL
         loginModel.signInAnonymous();
     }
 
+    public void registrationUser(final String email, final String password, final String confirm_password) {
+        if (password.equals(confirm_password)) {
+            loginModel.registrationUser(email, password);
+        } else {
+            getViewState().checkPassword();
+        }
+    }
+
     @Override
     public void call(final Observable<AuthResult> observable) {
         observable
@@ -42,7 +50,7 @@ public class LoginPresenter extends MvpPresenter<LoginView> implements CallBackL
                     @Override
                     public void onError(final Throwable e) {
                         Timber.e("onError");
-                        getViewState().error();
+                        getViewState().error(e);
                     }
 
                     @Override
@@ -50,7 +58,7 @@ public class LoginPresenter extends MvpPresenter<LoginView> implements CallBackL
                         Timber.e("onNext");
                         if (authResult != null) {
                             Timber.e(authResult.getUser().toString());
-                            getViewState().getUser(authResult.getUser());
+                            getViewState().user(authResult.getUser());
                         }
                     }
                 });

@@ -3,7 +3,7 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,14 +14,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.example.stanislau_bushuk.foodhealth.ActivityManager;
+import com.example.stanislau_bushuk.foodhealth.App;
+import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.MainActivity;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
@@ -37,10 +37,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, RecyclerAdapter.Listener {
-
-    @BindView(R.id.search_progressbar_progressbar)
-    ProgressBar searchProgressBar;
+public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, RecyclerAdapter.Listener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.search_list_recycler_view)
     RecyclerView listRecyclerView;
@@ -48,11 +45,16 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
     @BindView(R.id.search_random_text_view)
     TextView searchText;
 
+    @BindView(R.id.swipe_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     @InjectPresenter
     SearchPresenter presenter;
 
     private RecyclerAdapter recyclerAdapter;
     private Bundle instanceState;
+    private SearchView searchView;
+
 
     @Nullable
     @Override
@@ -67,12 +69,14 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
+        App.getAppComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
         final Toolbar mActionBarToolbar = view.findViewById(R.id.toolbar_actionbar);
-        ((MainActivity)getActivity()).setSupportActionBar(mActionBarToolbar);
+        ((MainActivity) getActivity()).setSupportActionBar(mActionBarToolbar);
         final RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        swipeRefreshLayout.setOnRefreshListener(this);
         listRecyclerView.setLayoutManager(layoutManager);
         recyclerAdapter = new RecyclerAdapter(this, new ArrayList<Hits>());
         final DividerItemDecoration itemDecorator = new DividerItemDecoration(listRecyclerView.getContext(), DividerItemDecoration.VERTICAL);
@@ -87,10 +91,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         });
     }
 
-    @Override
-    public void onSaveInstanceState(final Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
 
     @Override
     public void showList(final List<Hits> hitsList) {
@@ -104,8 +104,14 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
     @Override
     public void progressBarVisible(final int visible) {
-        searchProgressBar.setVisibility(visible);
+
+        if (visible == View.VISIBLE) {
+            swipeRefreshLayout.setRefreshing(true);
+        } else {
+            swipeRefreshLayout.setRefreshing(false);
+        }
     }
+
 
     @Override
     public void setSearchText(final String text) {
@@ -120,7 +126,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
     @Override
     public void onItemClick(final String uri) {
-        ActivityManager.startCardActivity(getActivity(), uri);
+        presenter.navigateTo(Constants.CARD_ACTIVITY, uri);
     }
 
     @Override
@@ -128,12 +134,21 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.action_bar_menu, menu);
         final MenuItem menuItem = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) menuItem.getActionView();
-        searchView.setFocusable(false);
+        searchView = (SearchView) menuItem.getActionView();
 
-        if (instanceState == null) {
-            presenter.searchObservable(searchView);
+        if (!searchText.getText().toString().equals(getResources().getString(R.string.search_random))) {
+            searchView.setIconified(false);
+            searchView.setQuery(searchText.getText(), false);
         }
+
+        if (getArguments() != null && instanceState == null && getArguments().getInt(Constants.KEY_FRAGMENT) == 0) {
+            presenter.searchObservable(searchView, false);
+        } else {
+            presenter.searchObservable(searchView, true);
+        }
+
+        searchView.clearFocus();
+        searchView.setFocusable(false);
     }
 
     @Override
@@ -146,4 +161,8 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         presenter.deleteFromFavorite(recipe);
     }
 
+    @Override
+    public void onRefresh() {
+        presenter.refreshData(searchView.getQuery().toString());
+    }
 }

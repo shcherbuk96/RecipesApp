@@ -79,10 +79,15 @@ dependencies {
 
     ///Rx2Firebase///
     compile "${library.rxfirebase}"
+    //
+    compile "${library.cicerone}"
     ///////Moxy/////
     compile "${library.moxy}"
-    compile "${library.moxyAppCompat}"
     annotationProcessor "${library.moxyCompiler}"
+    //
+    ////Cicerone////
+    compile "${library.moxyAppCompat}"
+    //
     testImplementation "${library.junit}"
     androidTestImplementation "${library.testRunner}"
     androidTestImplementation "${library.espressoCore}"

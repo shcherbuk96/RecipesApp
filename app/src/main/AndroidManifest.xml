@@ -24,7 +24,7 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan|stateHidden"/>
         <activity
             android:name=".presentantion.cardPresentation.CardActivity"
             android:theme="@style/ThemeActionBar"
@@ -32,8 +32,8 @@
         <activity
             android:name=".presentantion.deepSearchPresentation.DeepSearchActivity"
             android:theme="@style/ThemeActionBar" />
-        <activity android:name=".presentantion.loginPresentation.LoginActivity" />
-        <activity android:name=".presentantion.registratinPresentation.RegistrationActivity"></activity>
+        <activity android:name=".presentantion.authPresentation.LoginActivity" />
+        <activity android:name=".presentantion.authPresentation.RegistrationActivity"/>
     </application>
 
 </manifest>

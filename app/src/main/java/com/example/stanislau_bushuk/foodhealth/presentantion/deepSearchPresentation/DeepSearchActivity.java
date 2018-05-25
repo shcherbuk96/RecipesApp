@@ -13,6 +13,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.PresenterType;
 import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.App;
+import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
@@ -23,8 +24,15 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.terrakok.cicerone.Navigator;
+import ru.terrakok.cicerone.NavigatorHolder;
+import ru.terrakok.cicerone.commands.Back;
+import ru.terrakok.cicerone.commands.Command;
+import ru.terrakok.cicerone.commands.Forward;
 import timber.log.Timber;
 
 public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSearchView, RecyclerAdapter.Listener {
@@ -38,10 +46,38 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     @BindView(R.id.progressbar_deep_search)
     ProgressBar progressBar;
 
+    @Inject
+    NavigatorHolder navigatorHolder;
+
     private RecyclerAdapter adapter;
+
+    private Navigator navigator = new Navigator() {
+        @Override
+        public void applyCommands(final Command[] commands) {
+            for (final Command command : commands) applyCommand(command);
+        }
+    };
+
+    void applyCommand(final Command command) {
+
+        if (command instanceof Back) {
+            Timber.e("FINISH");
+            finish();
+        } else if (command instanceof Forward) {
+
+            switch (((Forward) command).getScreenKey()) {
+                case Constants.CARD_ACTIVITY: {
+                    ActivityManager.startCardActivity(DeepSearchActivity.this, ((Forward) command)
+                            .getTransitionData().toString());
+                }
+            }
+        }
+
+    }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        App.getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
 
         if (getSupportActionBar() != null) {
@@ -94,7 +130,7 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
         if (menuItem.getItemId() == android.R.id.home) {
             presenter.setStartFrom();
             presenter.getViewState().clearViewStateCommands();
-            super.onBackPressed();
+            presenter.back();
         }
 
         return (super.onOptionsItemSelected(menuItem));
@@ -104,12 +140,12 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     public void onBackPressed() {
         presenter.setStartFrom();
         presenter.getViewState().clearViewStateCommands();
-        super.onBackPressed();
+        presenter.back();
     }
 
     @Override
     public void onItemClick(final String uri) {
-        ActivityManager.startCardActivity(this,uri);
+        presenter.goTo(Constants.CARD_ACTIVITY, uri);
     }
 
     @Override
@@ -120,5 +156,19 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     @Override
     public void deleteFromFavorite(final Recipe recipe) {
         presenter.deleteFromFavorite(recipe);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        navigatorHolder.setNavigator(navigator);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        navigatorHolder.removeNavigator();
     }
 }

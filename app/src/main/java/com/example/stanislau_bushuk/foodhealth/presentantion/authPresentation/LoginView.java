@@ -1,4 +1,4 @@
-package com.example.stanislau_bushuk.foodhealth.presentantion.loginPresentation;
+package com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation;
 
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
@@ -7,7 +7,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 public interface LoginView extends MvpView {
     @StateStrategyType(SkipStrategy.class)
-    void getUser(FirebaseUser firebaseUser);
+    void user(FirebaseUser firebaseUser);
 
-    void error();
+    void error(Throwable e);
+
+    void checkPassword();
 }

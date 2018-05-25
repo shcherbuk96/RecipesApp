@@ -47,4 +47,12 @@
 
     <!--RegistrationActivity-->
     <dimen name="image_registration_height">240dp</dimen>
+
+    <!-- Margins & Padding -->
+    <dimen name="margin_padding_size_small">8dp</dimen>
+    <dimen name="margin_padding_size_medium">16dp</dimen>
+    <dimen name="margin_padding_size_large">32dp</dimen>
+
+    <dimen name="item_card_height">48dp</dimen>
+    <dimen name="item_card_top_bottom_spacing">8dp</dimen>
 </resources>
