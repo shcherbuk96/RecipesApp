@@ -31,7 +31,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
     @InjectPresenter
     MainActivityPresenter presenter;
 
-    @Inject
+
     NavigationUtil navigationUtil(){
         return new NavigationUtil(this);
     }
@@ -94,8 +94,8 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onDestroy() {
+        super.onDestroy();
 
         navigatorHolder.removeNavigator();
     }

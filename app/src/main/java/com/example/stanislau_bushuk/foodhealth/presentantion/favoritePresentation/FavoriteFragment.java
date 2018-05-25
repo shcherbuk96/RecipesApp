@@ -41,10 +41,6 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
     @Inject
     NavigatorHolder navigatorHolder;
 
-    @Inject
-    NavigationUtil navigationUtil(){
-        return new NavigationUtil(getContext());
-    }
 
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
@@ -75,20 +71,7 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
         favoriteAdapter.updateAdapter(recipes);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
 
-        navigatorHolder.setNavigator(navigationUtil());
-    }
-
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        navigatorHolder.removeNavigator();
-    }
 
 
     @Override

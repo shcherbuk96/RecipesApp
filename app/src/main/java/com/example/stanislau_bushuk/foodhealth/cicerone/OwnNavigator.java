@@ -17,12 +17,14 @@ import javax.inject.Inject;
 
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.android.SupportAppNavigator;
+import ru.terrakok.cicerone.commands.Back;
 import ru.terrakok.cicerone.commands.Command;
 import timber.log.Timber;
 
 public abstract class OwnNavigator extends SupportAppNavigator implements Navigator {
 
     private FragmentManager fragmentManager;
+    private FragmentActivity fragmentActivity;
 
     @Inject
     FragmentCreater fragmentCreater;
@@ -31,13 +33,14 @@ public abstract class OwnNavigator extends SupportAppNavigator implements Naviga
         super(activity, containerId);
         App.getAppComponent().inject(this);
         this.fragmentManager = activity.getSupportFragmentManager();
+        this.fragmentActivity = activity;
     }
 
     @Override
     protected void applyCommand(final Command command) {
 
         fragmentManager.executePendingTransactions();
-
+        Timber.e("COMMAND");
         if (command instanceof OwnBackToCommand) {
             backToOwnCommand((OwnBackToCommand) command);
         } else if (command != null) {
@@ -61,7 +64,7 @@ public abstract class OwnNavigator extends SupportAppNavigator implements Naviga
         Timber.e(String.valueOf(fragmentCreater.getSearchFragment()));
         if(fragmentManager.getFragments().contains(fragmentCreater.getSearchFragment()) &&
                 (int)command.getTransitionData()==-1){
-            exit();
+            fragmentActivity.finish();
         } else {
             final Fragment fragment = createFragment(key, command.getTransitionData());
 

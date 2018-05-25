@@ -149,7 +149,7 @@ public class DeepSearchPresenter extends MvpPresenter<DeepSearchView> implements
     }
 
     public void back() {
-        router.exit();
+        router.finishChain();
     }
 
     public void goTo(final String screenKey) {
