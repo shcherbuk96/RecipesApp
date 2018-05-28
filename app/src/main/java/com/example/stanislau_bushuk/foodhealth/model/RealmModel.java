@@ -52,11 +52,17 @@ public class RealmModel {
         }
     }
 
+    public Observable<RealmResults<Recipe>> getFavourite(){
+        final RealmResults<Recipe> recipes = realm.where(Recipe.class).equalTo("isChecked", true).findAll();
+        final Observable<RealmResults<Recipe>> observable = recipes.asFlowable().toObservable();
+        return observable;
+    }
+
 
     public boolean getIsChecked(final Recipe recipe) {
         final Recipe r = realm.where(Recipe.class).equalTo("uri", recipe.getUri()).findFirst();
 
-        return r != null ? r.isChecked() : false;
+        return r != null && r.isChecked();
     }
 
 }

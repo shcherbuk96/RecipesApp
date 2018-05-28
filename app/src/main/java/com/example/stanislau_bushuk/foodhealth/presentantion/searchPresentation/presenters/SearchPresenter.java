@@ -11,6 +11,7 @@ import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.ResourceManager;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackSearchPresenter;
+import com.example.stanislau_bushuk.foodhealth.model.FirebaseModel;
 import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
@@ -46,6 +47,9 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
     @Inject
     ResourceManager resourceManager;
+
+    @Inject
+    FirebaseModel firebaseModel;
 
     private boolean stateUpdate;
 
@@ -179,8 +183,16 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
         realmModel.addToFavorite(recipe);
     }
 
+    public void addRecipeToDB(final Recipe recipe){
+        firebaseModel.addRecipeToFbDb(recipe.getLabel(),recipe.getUri(),recipe.getImage());
+    }
+
     public void deleteFromFavorite(final Recipe recipe) {
         realmModel.deleteFromFavorite(recipe);
+    }
+
+    public void deleteRecipeFromDb(final String name){
+        firebaseModel.deleteRecipeFromDb(name);
     }
 
     public void navigateTo(final String screenKey, final String data){

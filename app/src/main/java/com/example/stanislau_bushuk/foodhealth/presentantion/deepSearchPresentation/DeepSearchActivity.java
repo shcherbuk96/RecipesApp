@@ -159,6 +159,16 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     }
 
     @Override
+    public void addToFb(Recipe recipe) {
+
+    }
+
+    @Override
+    public void deleteFromFb(Recipe recipe) {
+
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 

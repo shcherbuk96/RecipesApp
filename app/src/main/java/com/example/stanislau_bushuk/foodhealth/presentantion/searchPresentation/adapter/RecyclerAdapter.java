@@ -20,6 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
@@ -81,6 +82,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         void addToFavorite(Recipe recipe);
 
         void deleteFromFavorite(Recipe recipe);
+
+        void addToFb(Recipe recipe);
+
+        void deleteFromFb(Recipe recipe);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -106,6 +111,18 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 public void onClick(final View v) {
                     if (listener != null) {
                         listener.onItemClick(hits.get(getAdapterPosition()).getRecipe().getUri());
+                    }
+                }
+            });
+
+            starButton.setOnClickListener(new CheckBox.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CheckBox checkBox = (CheckBox) v;
+                    if(checkBox.isChecked()){
+                        listener.addToFb(hits.get(getAdapterPosition()).getRecipe());
+                    }else {
+                        listener.deleteFromFb(hits.get(getAdapterPosition()).getRecipe());
                     }
                 }
             });

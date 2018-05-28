@@ -24,6 +24,7 @@ import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.MainActivity;
 import com.example.stanislau_bushuk.foodhealth.R;
+import com.example.stanislau_bushuk.foodhealth.model.FirebaseModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
@@ -32,6 +33,8 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +53,9 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
     @InjectPresenter
     SearchPresenter presenter;
+
+    @Inject
+    FirebaseModel firebaseModel;
 
     private RecyclerAdapter recyclerAdapter;
     private Bundle instanceState;
@@ -156,8 +162,19 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         presenter.addToFavorite(recipe);
     }
 
+
     @Override
     public void deleteFromFavorite(final Recipe recipe) {
+        presenter.deleteRecipeFromDb(recipe.getLabel());
+    }
+
+    @Override
+    public void addToFb(final Recipe recipe) {
+        presenter.addRecipeToDB(recipe);
+    }
+
+    @Override
+    public void deleteFromFb(final Recipe recipe) {
         presenter.deleteFromFavorite(recipe);
     }
 
