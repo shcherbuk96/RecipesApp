@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_linear_layout"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/item_card_height"
+    android:layout_height="wrap_content"
     android:orientation="horizontal">
 
     <TextView
