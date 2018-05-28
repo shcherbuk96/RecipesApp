@@ -1,5 +1,6 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,8 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.R;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.auth.FirebaseUser;
 
 import butterknife.BindView;
@@ -37,7 +40,7 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        isGooglePlayServicesAvailable();
         ButterKnife.bind(this);
     }
 
@@ -74,4 +77,16 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     }
 
 
+    private boolean isGooglePlayServicesAvailable() {
+        final GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
+        final Integer resultCode = googleApiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            final Dialog dialog = googleApiAvailability.getErrorDialog(this, resultCode, 0);
+            if (dialog != null) {
+                dialog.show();
+            }
+            return false;
+        }
+        return true;
+    }
 }

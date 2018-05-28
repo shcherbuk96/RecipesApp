@@ -1,5 +1,9 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation;
 
+import android.app.Dialog;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.kelvinapps.rxfirebase.RxFirebaseAuth;
@@ -35,4 +39,5 @@ public class LoginModel {
                 .asObservable();
         callBackLoginPresenter.call(observable);
     }
+
 }
