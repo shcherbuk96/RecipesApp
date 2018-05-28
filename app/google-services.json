@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "470742503733",
+    "firebase_url": "https://recipesapp-fed80.firebaseio.com",
+    "project_id": "recipesapp-fed80",
+    "storage_bucket": "recipesapp-fed80.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:470742503733:android:0ca27f700c0a5a55",
+        "android_client_info": {
+          "package_name": "com.example.stanislau_bushuk.foodhealth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "470742503733-ps92uat161h7ro9necr0t7oodh66q145.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.stanislau_bushuk.foodhealth",
+            "certificate_hash": "3566345c5b46edfb63b29a00a8146f6e922e4fd9"
+          }
+        },
+        {
+          "client_id": "470742503733-ml4bnatc7pc3idjlcdv25ufg7cjjn56m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZL2MGdhIJhw_xfqEiaB5BpUXt15o5qEA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "470742503733-ml4bnatc7pc3idjlcdv25ufg7cjjn56m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

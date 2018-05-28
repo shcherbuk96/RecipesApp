@@ -10,7 +10,6 @@ import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
@@ -46,7 +45,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
     private DeepSearchFragment deepSearchFragment;
     private FavoriteFragment favoriteFragment;
 
-    private Navigator navigator = new Navigator() {
+    private final Navigator navigator = new Navigator() {
 
         @Override
         public void applyCommands(final Command[] commands) {
@@ -57,7 +56,6 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
             final FragmentManager fm = getSupportFragmentManager();
 
             if (command instanceof BackTo) {
-
                 final Bundle bundle = new Bundle();
                 bundle.putInt(Constants.KEY_FRAGMENT, 1);
                 searchFragment.setArguments(bundle);
@@ -109,8 +107,8 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
                 }
 
             } else if (command instanceof Replace) {
-                switch (((Replace) command).getScreenKey()) {
 
+                switch (((Replace) command).getScreenKey()) {
                     case Constants.SEARCH_SCREEN:
                         final Bundle bundle = new Bundle();
                         bundle.putInt(Constants.KEY_FRAGMENT, 0);
@@ -131,6 +129,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
     private void initContainers() {
         final FragmentManager fm = getSupportFragmentManager();
         searchFragment = (SearchFragment) fm.findFragmentByTag(Constants.SEARCH_SCREEN);
+
         if (searchFragment == null) {
             searchFragment = (SearchFragment) FragmentCreater.getNewInstanceFragment(Constants.SEARCH_SCREEN);
             fm.beginTransaction()
@@ -139,6 +138,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         }
 
         deepSearchFragment = (DeepSearchFragment) fm.findFragmentByTag(Constants.DEEP_SEARCH_SCREEN);
+
         if (deepSearchFragment == null) {
             deepSearchFragment = (DeepSearchFragment) FragmentCreater.getNewInstanceFragment(Constants.DEEP_SEARCH_SCREEN);
             fm.beginTransaction()
@@ -147,6 +147,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         }
 
         favoriteFragment = (FavoriteFragment) fm.findFragmentByTag(Constants.FAVOURITE_SCREEN);
+
         if (favoriteFragment == null) {
             favoriteFragment = (FavoriteFragment) FragmentCreater.getNewInstanceFragment(Constants.FAVOURITE_SCREEN);
             fm.beginTransaction()
@@ -158,7 +159,6 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
     @Override
     public void onBackPressed() {
-
         if (getSupportFragmentManager().getFragments().contains(searchFragment)) {
             super.onBackPressed();
         } else {
@@ -168,7 +168,6 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         }
 
     }
-
 
 
     @Override

@@ -11,7 +11,7 @@ import ru.terrakok.cicerone.Router;
 @Module
 public class CiceroneModul {
 
-    private Cicerone<Router> cicerone;
+    private final Cicerone<Router> cicerone;
 
     public CiceroneModul() {
         cicerone = Cicerone.create();

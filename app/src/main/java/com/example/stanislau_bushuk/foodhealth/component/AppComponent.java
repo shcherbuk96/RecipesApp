@@ -9,10 +9,12 @@ import com.example.stanislau_bushuk.foodhealth.modul.Api;
 import com.example.stanislau_bushuk.foodhealth.modul.CardNetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.CiceroneModul;
 import com.example.stanislau_bushuk.foodhealth.modul.DeepSearchModul;
+import com.example.stanislau_bushuk.foodhealth.modul.LoginModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetworkDeepSearchModul;
 import com.example.stanislau_bushuk.foodhealth.modul.RealmModul;
 import com.example.stanislau_bushuk.foodhealth.modul.ResourceManagerModul;
+import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchActivity;
@@ -32,7 +34,7 @@ import dagger.Component;
 @Singleton
 @Component(modules = {Api.class, NetWorkModul.class, CardNetWorkModul.class,
         ResourceManagerModul.class, DeepSearchModul.class, NetworkDeepSearchModul.class,
-        RealmModul.class, CiceroneModul.class})
+        RealmModul.class, LoginModul.class, CiceroneModul.class})
 public interface AppComponent {
 
     void inject(SearchPresenter searchPresenter);
@@ -63,4 +65,5 @@ public interface AppComponent {
 
     void inject(MainActivity mainActivity);
 
+    void inject(LoginPresenter loginPresenter);
 }

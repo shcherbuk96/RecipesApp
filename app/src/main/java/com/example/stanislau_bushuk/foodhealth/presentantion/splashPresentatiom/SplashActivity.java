@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.Constants;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class SplashActivity extends AppCompatActivity {
@@ -21,8 +22,13 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                ActivityManager.startMainActivity(context);
-                finish();
+                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+                    ActivityManager.startLoginActivity(context);
+                    finish();
+                } else {
+                    ActivityManager.startMainActivity(context);
+                    finish();
+                }
             }
         }, Constants.WAIT);
     }
@@ -31,4 +37,5 @@ public class SplashActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
 }

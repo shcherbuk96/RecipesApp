@@ -5,6 +5,8 @@ import android.content.Intent;
 
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchActivity;
+import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginActivity;
+import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.RegistrationActivity;
 
 public class ActivityManager {
 
@@ -21,6 +23,16 @@ public class ActivityManager {
 
     public static void startDeepSearchActivity(final Context context) {
         final Intent intent = new Intent(context, DeepSearchActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void startLoginActivity(final Context context) {
+        final Intent intent = new Intent(context, LoginActivity.class);
+        context.startActivity(intent);
+    }
+
+    public static void startRegistrationActivity(final Context context) {
+        final Intent intent = new Intent(context, RegistrationActivity.class);
         context.startActivity(intent);
     }
 

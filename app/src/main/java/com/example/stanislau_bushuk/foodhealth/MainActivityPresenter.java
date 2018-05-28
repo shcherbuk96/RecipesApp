@@ -7,7 +7,6 @@ import com.arellomobile.mvp.MvpView;
 import javax.inject.Inject;
 
 import ru.terrakok.cicerone.Router;
-import timber.log.Timber;
 
 public class MainActivityPresenter extends MvpPresenter<MvpView> {
 
@@ -23,6 +22,6 @@ public class MainActivityPresenter extends MvpPresenter<MvpView> {
     }
 
     public void goTo(final String screenKey) {
-        router.navigateTo(screenKey,1);
+        router.navigateTo(screenKey, 1);
     }
 }

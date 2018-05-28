@@ -31,7 +31,9 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".presentantion.deepSearchPresentation.DeepSearchActivity"
-            android:theme="@style/ThemeActionBar"/>
+            android:theme="@style/ThemeActionBar" />
+        <activity android:name=".presentantion.authPresentation.LoginActivity" />
+        <activity android:name=".presentantion.authPresentation.RegistrationActivity"/>
     </application>
 
 </manifest>
