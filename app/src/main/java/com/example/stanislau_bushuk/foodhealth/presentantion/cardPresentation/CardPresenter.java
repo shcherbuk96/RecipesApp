@@ -3,6 +3,7 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
+import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.cicerone.OwnRouter;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackCardPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.CardNetWorkModel;
@@ -98,4 +99,5 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
     public void back(){
         router.exit();
     }
+
 }

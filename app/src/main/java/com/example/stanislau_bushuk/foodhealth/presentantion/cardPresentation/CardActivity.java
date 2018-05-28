@@ -1,6 +1,7 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation;
 
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
@@ -83,6 +84,9 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         cardAdapter = new CardAdapter(new ArrayList<String>());
+        final DividerItemDecoration itemDecorator = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(getResources().getDrawable(R.drawable.devider));
+        recyclerView.addItemDecoration(itemDecorator);
         recyclerView.setAdapter(cardAdapter);
 
         if (savedInstanceState == null) {

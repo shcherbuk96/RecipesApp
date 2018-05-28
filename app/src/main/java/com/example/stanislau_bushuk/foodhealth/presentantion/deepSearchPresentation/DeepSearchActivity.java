@@ -146,7 +146,7 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     @Override
     protected void onPause() {
         super.onPause();
-
+        Timber.e("PAUSE DEEPACTIVITY");
         navigatorHolder.removeNavigator();
     }
 }

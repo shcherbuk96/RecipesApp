@@ -44,4 +44,8 @@ public class Constants {
 
     public static final String MAIN_ACTIVITY = "MAIN_ACTIVITY";
 
+    public static final String LOGIN_ACTIVITY = "LOGIN_ACTIVITY";
+
+    public static final String REGISTRATION_ACTIVITY = "REGISTRATION_ACTIVITY";
+
 }

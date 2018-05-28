@@ -12,10 +12,13 @@ import com.example.stanislau_bushuk.foodhealth.modul.CardNetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.CiceroneModul;
 import com.example.stanislau_bushuk.foodhealth.modul.DeepSearchModul;
 import com.example.stanislau_bushuk.foodhealth.modul.FragmentCreaterModul;
+import com.example.stanislau_bushuk.foodhealth.modul.LoginModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetworkDeepSearchModul;
 import com.example.stanislau_bushuk.foodhealth.modul.RealmModul;
 import com.example.stanislau_bushuk.foodhealth.modul.ResourceManagerModul;
+import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginActivity;
+import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchActivity;
@@ -27,6 +30,7 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.splashPresentatiom.SplashActivity;
+import com.example.stanislau_bushuk.foodhealth.presentantion.splashPresentatiom.SplashActivityPresenter;
 
 import javax.inject.Singleton;
 
@@ -36,7 +40,7 @@ import dagger.Component;
 @Singleton
 @Component(modules = {Api.class, NetWorkModul.class, CardNetWorkModul.class,
         ResourceManagerModul.class, DeepSearchModul.class, NetworkDeepSearchModul.class,
-        RealmModul.class, CiceroneModul.class, FragmentCreaterModul.class,})
+        RealmModul.class, CiceroneModul.class, FragmentCreaterModul.class,LoginModul.class})
 public interface AppComponent {
 
     void inject(SearchPresenter searchPresenter);
@@ -71,4 +75,9 @@ public interface AppComponent {
 
     void inject(FavoriteFragment favoriteFragment);
 
+    void inject(LoginPresenter loginPresenter);
+
+    void inject(SplashActivityPresenter splashActivityPresenter);
+
+    void inject(LoginActivity loginActivity);
 }

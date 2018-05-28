@@ -5,6 +5,7 @@ import android.app.Application;
 import com.example.stanislau_bushuk.foodhealth.component.AppComponent;
 import com.example.stanislau_bushuk.foodhealth.component.DaggerAppComponent;
 import com.example.stanislau_bushuk.foodhealth.modul.ResourceManagerModul;
+import com.google.firebase.FirebaseApp;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -24,6 +25,7 @@ public class App extends Application {
 
         setRealm();
         Timber.plant(new Timber.DebugTree());
+        FirebaseApp.initializeApp(this);
         appComponent = buildComponent();
     }
 

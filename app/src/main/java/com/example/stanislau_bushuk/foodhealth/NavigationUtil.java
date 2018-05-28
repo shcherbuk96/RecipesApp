@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import com.example.stanislau_bushuk.foodhealth.cicerone.OwnNavigator;
+import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginActivity;
+import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.RegistrationActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchActivity;
 
@@ -43,21 +45,32 @@ public class NavigationUtil extends OwnNavigator {
     protected Intent createActivityIntent(final Context context, final String screenKey, final Object data) {
         final Intent intent;
 
-        switch (screenKey){
-            case Constants.MAIN_ACTIVITY:{
-                intent=new Intent(context,MainActivity.class);
+        Timber.e(screenKey);
+
+        switch (screenKey) {
+            case Constants.MAIN_ACTIVITY: {
+                intent = new Intent(context, MainActivity.class);
                 return intent;
             }
-            case Constants.DEEP_SEARCH_ACTIVITY:{
-                intent=new Intent(context, DeepSearchActivity.class);
+            case Constants.DEEP_SEARCH_ACTIVITY: {
+                intent = new Intent(context, DeepSearchActivity.class);
                 return intent;
             }
-            case Constants.CARD_ACTIVITY:{
-                intent=new Intent(context, CardActivity.class);
-                intent.putExtra(Constants.RECIPE_INTENT_KEY,(String)data);
+            case Constants.CARD_ACTIVITY: {
+                intent = new Intent(context, CardActivity.class);
+                intent.putExtra(Constants.RECIPE_INTENT_KEY, (String) data);
                 return intent;
             }
-            default:{
+            case Constants.LOGIN_ACTIVITY: {
+                intent = new Intent(context, LoginActivity.class);
+                return intent;
+            }
+            case Constants.REGISTRATION_ACTIVITY: {
+                intent = new Intent(context, RegistrationActivity.class);
+                return intent;
+            }
+
+            default: {
                 return null;
             }
         }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".presentantion.authPresentation.RegistrationActivity">
+
+    <ImageView
+        android:id="@+id/registration_imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/login_top_bot_spacing"
+        app:srcCompat="@drawable/foodhealth" />
+
+    <EditText
+        android:id="@+id/registration_email_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/login_top_bot_spacing"
+        android:ems="10"
+        android:hint="@string/registration_email_hint"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/registration_password1_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/login_top_bot_spacing"
+        android:ems="10"
+        android:hint="@string/registration_password_hint"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/registration_password2_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/login_top_bot_spacing"
+        android:ems="10"
+        android:hint="@string/registration_confirm_password_hint"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/registration_sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/login_top_bot_spacing"
+        android:text="@string/registration_sign_in" />
+
+
+</LinearLayout>

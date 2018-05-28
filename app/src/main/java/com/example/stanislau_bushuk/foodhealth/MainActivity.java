@@ -14,8 +14,8 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import dagger.Provides;
 import ru.terrakok.cicerone.NavigatorHolder;
+import timber.log.Timber;
 
 public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
@@ -31,32 +31,30 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
     @InjectPresenter
     MainActivityPresenter presenter;
 
+    private boolean instance = false;
 
-    NavigationUtil navigationUtil(){
+
+    @Inject
+    NavigationUtil navigationUtil() {
         return new NavigationUtil(this);
     }
-
 
 
     @Override
     public void onBackPressed() {
         final MenuItem menuItem = bottomNavigationView.getMenu().findItem(R.id.search);
         menuItem.setChecked(true);
-        presenter.goBack(Constants.SEARCH_SCREEN,-1);
+        presenter.goBack(Constants.SEARCH_SCREEN, -1);
     }
-
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        App.getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
 
-        App.getAppComponent().inject(this);
-
-        if (savedInstanceState == null) {
-            router.replaceScreen(Constants.SEARCH_SCREEN,0);
-        }
-
         setContentView(R.layout.activity_main);
+
+
         ButterKnife.bind(this);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -65,7 +63,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
                 switch (item.getItemId()) {
                     case R.id.search:
-                        presenter.goBack(Constants.SEARCH_SCREEN,1);
+                        presenter.goBack(Constants.SEARCH_SCREEN, 1);
                         item.setChecked(true);
 
                         break;
@@ -86,16 +84,20 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         });
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
-
         navigatorHolder.setNavigator(navigationUtil());
+
+        router.replaceScreen(Constants.SEARCH_SCREEN, 0);
+
+
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onPause() {
+        super.onPause();
 
         navigatorHolder.removeNavigator();
     }
