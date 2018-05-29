@@ -6,10 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import com.example.stanislau_bushuk.foodhealth.App;
-import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.FragmentCreater;
 import com.example.stanislau_bushuk.foodhealth.R;
-import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
 
 import java.util.LinkedList;
 
@@ -17,14 +15,13 @@ import javax.inject.Inject;
 
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.android.SupportAppNavigator;
-import ru.terrakok.cicerone.commands.Back;
 import ru.terrakok.cicerone.commands.Command;
 import timber.log.Timber;
 
 public abstract class OwnNavigator extends SupportAppNavigator implements Navigator {
 
-    private FragmentManager fragmentManager;
-    private FragmentActivity fragmentActivity;
+    private final FragmentManager fragmentManager;
+    private final FragmentActivity fragmentActivity;
 
     @Inject
     FragmentCreater fragmentCreater;
@@ -40,7 +37,6 @@ public abstract class OwnNavigator extends SupportAppNavigator implements Naviga
     protected void applyCommand(final Command command) {
 
         fragmentManager.executePendingTransactions();
-        Timber.e("COMMAND");
         if (command instanceof OwnBackToCommand) {
             backToOwnCommand((OwnBackToCommand) command);
         } else if (command != null) {
@@ -62,8 +58,8 @@ public abstract class OwnNavigator extends SupportAppNavigator implements Naviga
 
         final String key = command.getScreenKey();
         Timber.e(String.valueOf(fragmentCreater.getSearchFragment()));
-        if(fragmentManager.getFragments().contains(fragmentCreater.getSearchFragment()) &&
-                (int)command.getTransitionData()==-1){
+        if (fragmentManager.getFragments().contains(fragmentCreater.getSearchFragment()) &&
+                (int) command.getTransitionData() == -1) {
             fragmentActivity.finish();
         } else {
             final Fragment fragment = createFragment(key, command.getTransitionData());

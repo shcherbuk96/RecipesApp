@@ -98,8 +98,8 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onPause() {
+        super.onPause();
         Timber.e("STOP LOGIN");
         navigatorHolder.removeNavigator();
     }

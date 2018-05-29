@@ -15,7 +15,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.terrakok.cicerone.NavigatorHolder;
-import timber.log.Timber;
 
 public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
@@ -30,8 +29,6 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
     @InjectPresenter
     MainActivityPresenter presenter;
-
-    private boolean instance = false;
 
 
     @Inject
@@ -54,6 +51,10 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
         setContentView(R.layout.activity_main);
 
+
+        if (savedInstanceState == null) {
+            router.replaceScreen(Constants.SEARCH_SCREEN, 0);
+        }
 
         ButterKnife.bind(this);
 
@@ -90,14 +91,11 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         super.onResume();
         navigatorHolder.setNavigator(navigationUtil());
 
-        router.replaceScreen(Constants.SEARCH_SCREEN, 0);
-
-
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onDestroy() {
+        super.onDestroy();
 
         navigatorHolder.removeNavigator();
     }

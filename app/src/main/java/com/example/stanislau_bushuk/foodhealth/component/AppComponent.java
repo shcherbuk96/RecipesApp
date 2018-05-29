@@ -19,6 +19,7 @@ import com.example.stanislau_bushuk.foodhealth.modul.RealmModul;
 import com.example.stanislau_bushuk.foodhealth.modul.ResourceManagerModul;
 import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginPresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.RegistrationActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchActivity;
@@ -80,4 +81,6 @@ public interface AppComponent {
     void inject(SplashActivityPresenter splashActivityPresenter);
 
     void inject(LoginActivity loginActivity);
+
+    void inject(RegistrationActivity registrationActivity);
 }

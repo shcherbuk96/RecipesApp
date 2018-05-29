@@ -70,14 +70,14 @@ public class LoginPresenter extends MvpPresenter<LoginView> implements CallBackL
     }
 
     public void goTo(final String screenKey){
-        router.navigateTo(screenKey);
+        router.newRootScreen(screenKey);
     }
 
     public void replace(final String screenKey){
-        router.navigateTo(screenKey);
+        router.newRootScreen(screenKey);
     }
 
-    public void back(final String screenKey){
-        router.backTo(screenKey);
+    public void exit(){
+        router.exit();
     }
 }

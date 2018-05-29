@@ -82,8 +82,8 @@ public class OwnRouter extends BaseRouter {
      */
     public void newScreenChain(final String screenKey) {
         newScreenChain(screenKey, null);
-    }
 
+    }
     /**
      * Clear the current screens chain and start new one
      * by opening a new screen right after the root.

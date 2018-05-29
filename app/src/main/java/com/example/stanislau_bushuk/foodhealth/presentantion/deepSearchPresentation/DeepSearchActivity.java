@@ -44,14 +44,12 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
 
     @Inject
     NavigatorHolder navigatorHolder;
-
-    @Inject
-    NavigationUtil navigationUtil(){
-        return new NavigationUtil(this);
-    }
-
     private RecyclerAdapter adapter;
 
+    @Inject
+    NavigationUtil navigationUtil() {
+        return new NavigationUtil(this);
+    }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {

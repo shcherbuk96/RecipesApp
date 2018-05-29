@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.NavigationUtil;
 import com.example.stanislau_bushuk.foodhealth.R;
@@ -46,6 +47,7 @@ public class RegistrationActivity extends MvpAppCompatActivity implements LoginV
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        App.getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registation);
 
@@ -76,7 +78,7 @@ public class RegistrationActivity extends MvpAppCompatActivity implements LoginV
 
     @Override
     public void onBackPressed() {
-        loginPresenter.back(Constants.LOGIN_ACTIVITY);
+        loginPresenter.exit();
     }
 
     @Override
@@ -87,8 +89,8 @@ public class RegistrationActivity extends MvpAppCompatActivity implements LoginV
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onPause() {
+        super.onPause();
 
         navigatorHolder.removeNavigator();
     }
