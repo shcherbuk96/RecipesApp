@@ -18,7 +18,7 @@ import io.realm.RealmList;
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.MyViewHolder> {
 
-    private List<String> list;
+    private final List<String> list;
 
     CardAdapter(final List<String> list) {
         this.list = list;

@@ -4,11 +4,13 @@ package com.example.stanislau_bushuk.foodhealth.component;
 import com.example.stanislau_bushuk.foodhealth.MainActivity;
 import com.example.stanislau_bushuk.foodhealth.MainActivityPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.CardNetWorkModel;
+import com.example.stanislau_bushuk.foodhealth.model.FirebaseModel;
 import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.modul.Api;
 import com.example.stanislau_bushuk.foodhealth.modul.CardNetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.CiceroneModul;
 import com.example.stanislau_bushuk.foodhealth.modul.DeepSearchModul;
+import com.example.stanislau_bushuk.foodhealth.modul.FirebaseModul;
 import com.example.stanislau_bushuk.foodhealth.modul.LoginModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetworkDeepSearchModul;
@@ -34,7 +36,7 @@ import dagger.Component;
 @Singleton
 @Component(modules = {Api.class, NetWorkModul.class, CardNetWorkModul.class,
         ResourceManagerModul.class, DeepSearchModul.class, NetworkDeepSearchModul.class,
-        RealmModul.class, LoginModul.class, CiceroneModul.class})
+        RealmModul.class, LoginModul.class, CiceroneModul.class, FirebaseModul.class})
 public interface AppComponent {
 
     void inject(SearchPresenter searchPresenter);
