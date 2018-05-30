@@ -3,6 +3,8 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
+import com.example.stanislau_bushuk.foodhealth.Constants;
+import com.example.stanislau_bushuk.foodhealth.cicerone.OwnRouter;
 import com.google.firebase.auth.AuthResult;
 
 import javax.inject.Inject;
@@ -16,6 +18,9 @@ public class LoginPresenter extends MvpPresenter<LoginView> implements CallBackL
 
     @Inject
     LoginModel loginModel;
+
+    @Inject
+    OwnRouter router;
 
     public LoginPresenter() {
         App.getAppComponent().inject(this);
@@ -31,11 +36,13 @@ public class LoginPresenter extends MvpPresenter<LoginView> implements CallBackL
     }
 
     public void registrationUser(final String email, final String password, final String confirm_password) {
+
         if (password.equals(confirm_password)) {
             loginModel.registrationUser(email, password);
         } else {
             getViewState().checkPassword();
         }
+
     }
 
     @Override
@@ -49,18 +56,30 @@ public class LoginPresenter extends MvpPresenter<LoginView> implements CallBackL
 
                     @Override
                     public void onError(final Throwable e) {
-                        Timber.e("onError");
                         getViewState().error(e);
                     }
 
                     @Override
                     public void onNext(final AuthResult authResult) {
-                        Timber.e("onNext");
+
                         if (authResult != null) {
                             Timber.e(authResult.getUser().toString());
                             getViewState().user(authResult.getUser());
                         }
+
                     }
                 });
+    }
+
+    public void goTo(final String screenKey){
+        router.newRootScreen(screenKey);
+    }
+
+    public void replace(final String screenKey){
+        router.newRootScreen(screenKey);
+    }
+
+    public void exit(){
+        router.exit();
     }
 }

@@ -3,9 +3,11 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentati
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
+import com.example.stanislau_bushuk.foodhealth.cicerone.OwnRouter;
 import com.example.stanislau_bushuk.foodhealth.model.FirebaseModel;
 import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
+import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginModel;
 
 import javax.inject.Inject;
 
@@ -24,6 +26,12 @@ public class FavoritePresenter extends MvpPresenter<FavoriteView> implements Cal
 
     @Inject
     FirebaseModel firebaseModel;
+
+    @Inject
+    LoginModel loginModel;
+
+    @Inject
+    OwnRouter router;
 
     FavoritePresenter() {
         App.getAppComponent().inject(this);
@@ -62,7 +70,11 @@ public class FavoritePresenter extends MvpPresenter<FavoriteView> implements Cal
     }
 
     public void deleteFromFavorite(final Recipe recipe) {
-        firebaseModel.deleteRecipeFromDb(recipe.getLabel());
+        firebaseModel.deleteRecipeFromDb(loginModel.getAuth().getUid(), recipe.getLabel());
         realmModel.deleteFromFavorite(recipe);
+    }
+
+    public void goTo(final String screenKey, final String uri) {
+        router.navigateTo(screenKey, uri);
     }
 }

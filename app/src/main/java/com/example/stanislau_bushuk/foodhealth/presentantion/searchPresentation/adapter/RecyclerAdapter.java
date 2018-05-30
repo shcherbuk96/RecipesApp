@@ -20,7 +20,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
@@ -62,18 +61,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     }
 
     public void updateAdapter(final List<Hits> hits) {
+
         if (hits != null && hits.size() != 0) {
             this.hits.clear();
             this.hits.addAll(hits);
             notifyDataSetChanged();
         }
+
     }
 
     public void updateList(final List<Hits> hits) {
+
         if (hits != null) {
             this.hits.addAll(hits);
             notifyDataSetChanged();
         }
+
     }
 
     public interface Listener {
@@ -109,9 +112,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
+
                     if (listener != null) {
                         listener.onItemClick(hits.get(getAdapterPosition()).getRecipe().getUri());
                     }
+
                 }
             });
 
@@ -119,18 +124,22 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 @Override
                 public void onClick(final View v) {
                     final CheckBox checkBox = (CheckBox) v;
-                    if(checkBox.isChecked()){
+
+                    if (checkBox.isChecked()) {
                         listener.addToFb(hits.get(getAdapterPosition()).getRecipe());
-                    }else {
+                    } else {
                         listener.deleteFromFb(hits.get(getAdapterPosition()).getRecipe());
                     }
+
                 }
             });
 
             starButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
+
                     if (listener != null) {
+
                         if (isChecked) {
                             buttonView.setButtonDrawable(R.drawable.ic_star_checked);
                             listener.addToFavorite(hits.get(getAdapterPosition()).getRecipe());
@@ -139,20 +148,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                             buttonView.setButtonDrawable(R.drawable.ic_star);
                         }
                     }
+
                 }
             });
-            /*starButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(final View view, final boolean checked) {
-                    if (listener != null) {
-                        if (checked) {
-                            listener.addToFavorite(hits.get(getAdapterPosition()).getRecipe());
-                        } else {
-                            listener.deleteFromFavorite(hits.get(getAdapterPosition()).getRecipe());
-                        }
-                    }
-                }
-            });*/
         }
     }
 }

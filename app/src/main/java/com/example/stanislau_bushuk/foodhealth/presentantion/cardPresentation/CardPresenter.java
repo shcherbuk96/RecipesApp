@@ -3,6 +3,8 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
+import com.example.stanislau_bushuk.foodhealth.Constants;
+import com.example.stanislau_bushuk.foodhealth.cicerone.OwnRouter;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackCardPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.CardNetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
@@ -32,7 +34,7 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
     RealmModel realmModel;
 
     @Inject
-    Router router;
+    OwnRouter router;
 
     CardPresenter() {
         App.getAppComponent().inject(this);
@@ -99,6 +101,7 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
                 });
     }
 
+
     @Override
     public void callList(final Observable<List<Recipe>> observable) {
         observable.subscribeOn(Schedulers.io())
@@ -149,4 +152,5 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
     public void back() {
         router.exit();
     }
+
 }

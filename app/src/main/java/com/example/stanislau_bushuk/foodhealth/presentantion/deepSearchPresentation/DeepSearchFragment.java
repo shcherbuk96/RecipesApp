@@ -13,7 +13,6 @@ import android.widget.EditText;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.PresenterType;
-import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
@@ -66,7 +65,7 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
     public void onClick(final View v) {
 
         if (v == findButton) {
-            ActivityManager.startDeepSearchActivity(getActivity());
+            presenter.goTo(Constants.DEEP_SEARCH_ACTIVITY);
             presenter.getRecipeFilter(fromEditText.getText().toString(), toEditText.getText().toString(), upToEditText.getText().toString());
         }
 

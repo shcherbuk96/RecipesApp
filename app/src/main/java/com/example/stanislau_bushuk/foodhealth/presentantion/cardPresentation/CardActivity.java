@@ -1,6 +1,7 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation;
 
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
@@ -11,6 +12,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
+import com.example.stanislau_bushuk.foodhealth.NavigationUtil;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 import com.jakewharton.rxbinding2.widget.RxTextView;
@@ -24,11 +26,7 @@ import butterknife.ButterKnife;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
-import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.NavigatorHolder;
-import ru.terrakok.cicerone.commands.Back;
-import ru.terrakok.cicerone.commands.Command;
-import timber.log.Timber;
 
 public class CardActivity extends MvpAppCompatActivity implements CardView {
 
@@ -66,18 +64,9 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
 
     private Data data;
 
-    private Navigator navigator = new Navigator() {
-        @Override
-        public void applyCommands(final Command[] commands) {
-            for (final Command command : commands) applyCommand(command);
-        }
-    };
-
-    void applyCommand(final Command command) {
-        if (command instanceof Back) {
-            Timber.e("FINISH");
-            finish();
-        }
+    @Inject
+    NavigationUtil navigationUtil() {
+        return new NavigationUtil(this);
     }
 
 
@@ -95,6 +84,9 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         cardAdapter = new CardAdapter(new ArrayList<String>());
+        final DividerItemDecoration itemDecorator = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(getResources().getDrawable(R.drawable.devider));
+        recyclerView.addItemDecoration(itemDecorator);
         recyclerView.setAdapter(cardAdapter);
 
         if (savedInstanceState == null) {
@@ -179,7 +171,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
     protected void onResume() {
         super.onResume();
 
-        navigatorHolder.setNavigator(navigator);
+        navigatorHolder.setNavigator(navigationUtil());
     }
 
     @Override

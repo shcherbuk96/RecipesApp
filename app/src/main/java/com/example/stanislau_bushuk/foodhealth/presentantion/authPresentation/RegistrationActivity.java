@@ -7,13 +7,18 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.example.stanislau_bushuk.foodhealth.ActivityManager;
+import com.example.stanislau_bushuk.foodhealth.App;
+import com.example.stanislau_bushuk.foodhealth.Constants;
+import com.example.stanislau_bushuk.foodhealth.NavigationUtil;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.google.firebase.auth.FirebaseUser;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ru.terrakok.cicerone.NavigatorHolder;
 
 public class RegistrationActivity extends MvpAppCompatActivity implements LoginView {
 
@@ -32,8 +37,17 @@ public class RegistrationActivity extends MvpAppCompatActivity implements LoginV
     @InjectPresenter
     LoginPresenter loginPresenter;
 
+    @Inject
+    NavigatorHolder navigatorHolder;
+
+    @Inject
+    NavigationUtil navigationUtil() {
+        return new NavigationUtil(this);
+    }
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        App.getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registation);
 
@@ -49,8 +63,7 @@ public class RegistrationActivity extends MvpAppCompatActivity implements LoginV
 
     @Override
     public void user(final FirebaseUser firebaseUser) {
-        ActivityManager.startMainActivity(this);
-        finish();
+        loginPresenter.replace(Constants.MAIN_ACTIVITY);
     }
 
     @Override
@@ -65,9 +78,20 @@ public class RegistrationActivity extends MvpAppCompatActivity implements LoginV
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        loginPresenter.exit();
+    }
 
-        ActivityManager.startLoginActivity(this);
-        finish();
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        navigatorHolder.setNavigator(navigationUtil());
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        navigatorHolder.removeNavigator();
     }
 }

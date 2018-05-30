@@ -20,7 +20,7 @@ public class Constants {
 
     public static final int TEXT_DEBOUNCE = 1000;
 
-    public static final int RABDON = 90;
+    public static final int RANDOM = 90;
 
     public static final String HYPHEN = "-";
 
@@ -40,4 +40,13 @@ public class Constants {
 
     public static final String CARD_ACTIVITY = "CARD_ACTIVITY";
 
+    public static final String DEEP_SEARCH_ACTIVITY = "DEEP_SEARCH_ACTIVITY";
+
+    public static final String MAIN_ACTIVITY = "MAIN_ACTIVITY";
+
+    public static final String LOGIN_ACTIVITY = "LOGIN_ACTIVITY";
+
+    public static final String REGISTRATION_ACTIVITY = "REGISTRATION_ACTIVITY";
+
+    public static final String USER = "USER";
 }
