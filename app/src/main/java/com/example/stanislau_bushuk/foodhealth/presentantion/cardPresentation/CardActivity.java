@@ -12,6 +12,7 @@ import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
+import com.example.stanislau_bushuk.foodhealth.NavigationUtil;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Comment;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
@@ -29,37 +30,35 @@ import butterknife.OnClick;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
-import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.NavigatorHolder;
-import ru.terrakok.cicerone.commands.Back;
-import ru.terrakok.cicerone.commands.Command;
-import timber.log.Timber;
 
 public class CardActivity extends MvpAppCompatActivity implements CardView {
 
-    private final Navigator navigator = new Navigator() {
-        @Override
-        public void applyCommands(final Command[] commands) {
-            for (final Command command : commands) applyCommand(command);
-        }
-    };
     FirebaseAuth firebaseAuth;
-    @BindView(R.id.card_recycler_view)
-    RecyclerView recyclerView;
     @BindView(R.id.card_comments_recycler_view)
     RecyclerView commentsRecyclerView;
+
+    @BindView(R.id.card_recycler_view)
+    RecyclerView recyclerView;
+
     @BindView(R.id.card_servings_edit_text)
     EditText servingsEditText;
+
     @BindView(R.id.card_photo_image_view)
     ImageView photoView;
+
     @BindView(R.id.card_calories_text_view)
     TextView caloriesView;
+
     @BindView(R.id.card_dayly_text_view)
     TextView daylyView;
+
     @BindView(R.id.card_fat_text_view)
     TextView fatView;
+
     @BindView(R.id.card_carbs_text_view)
     TextView carbsView;
+
     @BindView(R.id.card_protein_text_view)
     TextView proteinView;
     @BindView(R.id.card_comments_number)
@@ -76,11 +75,9 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
     private CardCommentsAdapter cardCommentsAdapter;
     private Data data;
 
-    void applyCommand(final Command command) {
-        if (command instanceof Back) {
-            Timber.e("FINISH");
-            finish();
-        }
+    @Inject
+    NavigationUtil navigationUtil() {
+        return new NavigationUtil(this);
     }
 
     @Override
@@ -205,7 +202,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
     protected void onResume() {
         super.onResume();
 
-        navigatorHolder.setNavigator(navigator);
+        navigatorHolder.setNavigator(navigationUtil());
     }
 
     @Override

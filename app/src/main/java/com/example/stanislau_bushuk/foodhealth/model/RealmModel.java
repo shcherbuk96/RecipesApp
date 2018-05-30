@@ -56,7 +56,7 @@ public class RealmModel {
     public boolean getIsChecked(final Recipe recipe) {
         final Recipe r = realm.where(Recipe.class).equalTo("uri", recipe.getUri()).findFirst();
 
-        return r != null ? r.isChecked() : false;
+        return r != null && r.isChecked();
     }
 
 }
