@@ -7,14 +7,20 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.stanislau_bushuk.foodhealth.ActivityManager;
+import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
+import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
 import com.google.firebase.auth.FirebaseAuth;
+
+import javax.inject.Inject;
 
 
 public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
+        App.getAppComponent().inject(this);
+
         super.onCreate(savedInstanceState);
 
         final Context context = this;
@@ -36,6 +42,10 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    private void checkRealmInfo(){
+
     }
 
 }

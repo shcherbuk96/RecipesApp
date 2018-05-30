@@ -4,6 +4,8 @@ import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.CallBackRealmData;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoritePresenter;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.realm.Realm;
@@ -11,7 +13,7 @@ import io.realm.RealmResults;
 
 public class RealmModel {
 
-    private Realm realm;
+    private final Realm realm;
     private CallBackRealmData callBackRealmData;
 
     public RealmModel() {
@@ -52,10 +54,9 @@ public class RealmModel {
         }
     }
 
-    public Observable<RealmResults<Recipe>> getFavourite(){
-        final RealmResults<Recipe> recipes = realm.where(Recipe.class).equalTo("isChecked", true).findAll();
-        final Observable<RealmResults<Recipe>> observable = recipes.asFlowable().toObservable();
-        return observable;
+    public List<Recipe> getRecipesRealm(){
+        final List<Recipe> recipes = realm.where(Recipe.class).equalTo("isChecked",true).findAll();
+        return recipes;
     }
 
 

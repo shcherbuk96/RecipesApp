@@ -27,6 +27,7 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentatio
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.splashPresentatiom.SplashActivity;
 
 import javax.inject.Singleton;
 
@@ -70,4 +71,6 @@ public interface AppComponent {
     void inject(LoginPresenter loginPresenter);
 
     void inject(FirebaseModel firebaseModel);
+
+    void inject (SplashActivity splashActivity);
 }

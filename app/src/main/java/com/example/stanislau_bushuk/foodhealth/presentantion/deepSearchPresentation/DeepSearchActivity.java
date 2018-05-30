@@ -15,6 +15,7 @@ import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.R;
+import com.example.stanislau_bushuk.foodhealth.model.FirebaseModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters.DeepSearchPresenter;
@@ -49,9 +50,12 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     @Inject
     NavigatorHolder navigatorHolder;
 
+    @Inject
+    FirebaseModel firebaseModel;
+
     private RecyclerAdapter adapter;
 
-    private Navigator navigator = new Navigator() {
+    private final Navigator navigator = new Navigator() {
         @Override
         public void applyCommands(final Command[] commands) {
             for (final Command command : commands) applyCommand(command);
@@ -159,13 +163,13 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     }
 
     @Override
-    public void addToFb(Recipe recipe) {
-
+    public void addToFb(final Recipe recipe) {
+        firebaseModel.addRecipeToFbDb(recipe.getLabel(),recipe.getUri(),recipe.getImage());
     }
 
     @Override
-    public void deleteFromFb(Recipe recipe) {
-
+    public void deleteFromFb(final Recipe recipe) {
+        firebaseModel.deleteRecipeFromDb(recipe.getLabel());
     }
 
     @Override

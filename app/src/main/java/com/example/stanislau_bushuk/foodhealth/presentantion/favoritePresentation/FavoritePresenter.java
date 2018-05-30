@@ -3,6 +3,7 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentati
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
+import com.example.stanislau_bushuk.foodhealth.model.FirebaseModel;
 import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 
@@ -17,8 +18,12 @@ import timber.log.Timber;
 
 @InjectViewState
 public class FavoritePresenter extends MvpPresenter<FavoriteView> implements CallBackRealmData {
+
     @Inject
     RealmModel realmModel;
+
+    @Inject
+    FirebaseModel firebaseModel;
 
     FavoritePresenter() {
         App.getAppComponent().inject(this);
@@ -57,6 +62,7 @@ public class FavoritePresenter extends MvpPresenter<FavoriteView> implements Cal
     }
 
     public void deleteFromFavorite(final Recipe recipe) {
+        firebaseModel.deleteRecipeFromDb(recipe.getLabel());
         realmModel.deleteFromFavorite(recipe);
     }
 }

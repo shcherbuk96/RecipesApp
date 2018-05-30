@@ -117,8 +117,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
             starButton.setOnClickListener(new CheckBox.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    CheckBox checkBox = (CheckBox) v;
+                public void onClick(final View v) {
+                    final CheckBox checkBox = (CheckBox) v;
                     if(checkBox.isChecked()){
                         listener.addToFb(hits.get(getAdapterPosition()).getRecipe());
                     }else {

@@ -1,14 +1,14 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation;
 
-import android.support.v4.app.FragmentManager;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
-import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackCardPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.CardNetWorkModel;
+import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -18,10 +18,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.Router;
-import ru.terrakok.cicerone.commands.Back;
-import ru.terrakok.cicerone.commands.Command;
 import timber.log.Timber;
 
 
@@ -32,14 +29,15 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
     CardNetWorkModel netWorkModel;
 
     @Inject
+    RealmModel realmModel;
+
+    @Inject
     Router router;
 
     CardPresenter() {
         App.getAppComponent().inject(this);
         netWorkModel.setCallBackCard(this);
     }
-
-
 
 
     public void getRecipeFromRealmUri(final String uri) {
@@ -101,7 +99,54 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
                 });
     }
 
-    public void back(){
+    @Override
+    public void callList(final Observable<List<Recipe>> observable) {
+        observable.subscribeOn(Schedulers.io())
+
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(new Function<List<Recipe>, Data>() {
+                    @Override
+                    public Data apply(final List<Recipe> recipes) {
+                        final Recipe recipe = recipes.get(0);
+                        realmModel.addToRealm(recipes.get(0));
+                        return Data.newBuilder()
+                                .setFat(recipe.getTotalNutrients())
+                                .setProt(recipe.getTotalNutrients())
+                                .setChocdf(recipe.getTotalNutrients())
+                                .setCalories(recipe)
+                                .setYield(recipe)
+                                .setENERC_KCAL(recipe.getTotalDaily())
+                                .setLabel(recipe)
+                                .setImage(recipe)
+                                .setIngridients(recipe)
+                                .build();
+                    }
+                })
+                .subscribe(new Observer<Data>() {
+                    @Override
+                    public void onSubscribe(final Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(final Data data) {
+                        Timber.e("onNext");
+
+                        getViewState().showList(data);
+                    }
+
+                    @Override
+                    public void onError(final Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
+    }
+
+
+    public void back() {
         router.exit();
     }
 }

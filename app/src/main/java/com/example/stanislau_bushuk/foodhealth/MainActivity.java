@@ -179,7 +179,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         initContainers();
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        presenter.checkDeferencesFBandRealm();
         if (savedInstanceState == null) {
             navigator.applyCommands(new Command[]{new Replace(Constants.SEARCH_SCREEN, 0)});
         }
