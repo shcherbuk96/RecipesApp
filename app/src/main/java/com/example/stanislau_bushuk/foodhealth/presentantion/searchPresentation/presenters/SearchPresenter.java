@@ -92,7 +92,6 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                     @Override
                     public void onNext(final Recipes recipes) {
 
-
                         if (recipes.getCount() != 0) {
 
                             if (!update) {
@@ -107,8 +106,6 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                         e.printStackTrace();
                         getViewState().setSnackBar();
                         getViewState().progressBarVisible(View.GONE);
-
-                        Timber.e("Error");
                     }
 
                     @Override
@@ -138,19 +135,24 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
                     @Override
                     public void onNext(final String s) {
+
                         if (!stateUpdate) {
                             Timber.e("next response");
+
                             if (!s.isEmpty()) {
                                 netWorkModel.getResponse(s, 0, false);
                                 getViewState().setSearchText(s);
                             } else {
+
                                 if (!netWorkModel.checkRealmIsEmpty()) {
                                     netWorkModel.getRandomData(false);
                                 } else {
                                     netWorkModel.getRandomRecipe(false);
                                 }
                                 getViewState().setSearchText(resourceManager.getString(R.string.search_random));
+
                             }
+
                         } else {
                             SearchPresenter.this.stateUpdate = false;
                         }

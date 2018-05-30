@@ -105,7 +105,6 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
     @Override
     public void callList(final Observable<List<Recipe>> observable) {
         observable.subscribeOn(Schedulers.io())
-
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Function<List<Recipe>, Data>() {
                     @Override
