@@ -30,6 +30,7 @@ def library = ext.library
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support:support-v4:27.1.1'
     compile project(':uimodul')
 
     ///Realm////

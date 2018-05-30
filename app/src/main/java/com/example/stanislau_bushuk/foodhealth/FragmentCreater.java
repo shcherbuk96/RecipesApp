@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteFragment;
+import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.ProfileFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
 
 public class FragmentCreater {
@@ -12,6 +13,7 @@ public class FragmentCreater {
     private SearchFragment searchFragment;
     private DeepSearchFragment deepSearchFragment;
     private FavoriteFragment favoriteFragment;
+    private ProfileFragment profileFragment;
 
     public Fragment getNewInstanceFragment(final String screenKey, final int data) {
         final Bundle bundle = new Bundle();
@@ -45,6 +47,16 @@ public class FragmentCreater {
 
                 favoriteFragment.setArguments(bundle);
                 return favoriteFragment;
+            }
+
+            case Constants.PROFILE_SCREEN:{
+
+                if(this.profileFragment==null){
+                    profileFragment=new ProfileFragment();
+                }
+
+                profileFragment.setArguments(bundle);
+                return profileFragment;
             }
 
             default: {

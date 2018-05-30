@@ -48,4 +48,6 @@ public class Constants {
 
     public static final String REGISTRATION_ACTIVITY = "REGISTRATION_ACTIVITY";
 
+    public static final String PROFILE_SCREEN = "PROFILE_SCREEN";
+
 }
