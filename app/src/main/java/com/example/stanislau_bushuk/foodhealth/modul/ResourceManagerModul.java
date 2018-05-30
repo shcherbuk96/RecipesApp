@@ -5,6 +5,7 @@ import android.content.Context;
 import com.example.stanislau_bushuk.foodhealth.ResourceManager;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -18,7 +19,7 @@ public class ResourceManagerModul {
     }
 
     @Provides
-    @Inject
+    @Singleton
     public ResourceManager resourceManager(){
         return new ResourceManager(context);
     }

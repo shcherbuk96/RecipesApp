@@ -8,13 +8,19 @@ import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.example.stanislau_bushuk.foodhealth.ActivityManager;
+import com.example.stanislau_bushuk.foodhealth.App;
+import com.example.stanislau_bushuk.foodhealth.Constants;
+import com.example.stanislau_bushuk.foodhealth.NavigationUtil;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.google.firebase.auth.FirebaseUser;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ru.terrakok.cicerone.NavigatorHolder;
+import timber.log.Timber;
 
 public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
@@ -33,8 +39,20 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     @InjectPresenter
     LoginPresenter loginPresenter;
 
+    @Inject
+    NavigatorHolder navigatorHolder;
+
+    @Inject
+    NavigationUtil navigationUtil() {
+        return new NavigationUtil(this);
+    }
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+
+        App.getAppComponent().inject(this);
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -48,8 +66,7 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
     @OnClick(R.id.login_sign_up_button)
     public void clickSignUp(final View view) {
-        ActivityManager.startRegistrationActivity(this);
-        finish();
+        loginPresenter.goTo(Constants.REGISTRATION_ACTIVITY);
     }
 
     @OnClick(R.id.login_anonymous_button)
@@ -59,8 +76,7 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
     @Override
     public void user(final FirebaseUser firebaseUser) {
-        ActivityManager.startMainActivity(this);
-        finish();
+        loginPresenter.goTo(Constants.MAIN_ACTIVITY);
     }
 
     @Override
@@ -73,5 +89,19 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
         Toast.makeText(this, R.string.registration_check_password, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Timber.e("RESUME LOGIN");
+        navigatorHolder.setNavigator(navigationUtil());
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Timber.e("STOP LOGIN");
+        navigatorHolder.removeNavigator();
+    }
 
 }

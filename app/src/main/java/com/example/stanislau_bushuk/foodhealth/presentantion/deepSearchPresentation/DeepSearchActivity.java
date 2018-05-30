@@ -11,9 +11,9 @@ import android.widget.Toast;
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.PresenterType;
-import com.example.stanislau_bushuk.foodhealth.ActivityManager;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
+import com.example.stanislau_bushuk.foodhealth.NavigationUtil;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
@@ -28,11 +28,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.NavigatorHolder;
-import ru.terrakok.cicerone.commands.Back;
-import ru.terrakok.cicerone.commands.Command;
-import ru.terrakok.cicerone.commands.Forward;
 import timber.log.Timber;
 
 public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSearchView, RecyclerAdapter.Listener {
@@ -48,31 +44,11 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
 
     @Inject
     NavigatorHolder navigatorHolder;
-
     private RecyclerAdapter adapter;
 
-    private Navigator navigator = new Navigator() {
-        @Override
-        public void applyCommands(final Command[] commands) {
-            for (final Command command : commands) applyCommand(command);
-        }
-    };
-
-    void applyCommand(final Command command) {
-
-        if (command instanceof Back) {
-            Timber.e("FINISH");
-            finish();
-        } else if (command instanceof Forward) {
-
-            switch (((Forward) command).getScreenKey()) {
-                case Constants.CARD_ACTIVITY: {
-                    ActivityManager.startCardActivity(DeepSearchActivity.this, ((Forward) command)
-                            .getTransitionData().toString());
-                }
-            }
-        }
-
+    @Inject
+    NavigationUtil navigationUtil() {
+        return new NavigationUtil(this);
     }
 
     @Override
@@ -162,13 +138,13 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     protected void onResume() {
         super.onResume();
 
-        navigatorHolder.setNavigator(navigator);
+        navigatorHolder.setNavigator(navigationUtil());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
+        Timber.e("PAUSE DEEPACTIVITY");
         navigatorHolder.removeNavigator();
     }
 }

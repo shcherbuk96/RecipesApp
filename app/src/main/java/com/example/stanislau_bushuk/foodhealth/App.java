@@ -43,4 +43,5 @@ public class App extends Application {
                 .resourceManagerModul(new ResourceManagerModul(getApplicationContext()))
                 .build();
     }
+
 }

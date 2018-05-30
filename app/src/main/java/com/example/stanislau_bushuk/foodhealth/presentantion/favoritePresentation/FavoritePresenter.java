@@ -3,6 +3,7 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentati
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
+import com.example.stanislau_bushuk.foodhealth.cicerone.OwnRouter;
 import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 
@@ -13,12 +14,17 @@ import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.realm.RealmResults;
+import ru.terrakok.cicerone.NavigatorHolder;
 import timber.log.Timber;
 
 @InjectViewState
 public class FavoritePresenter extends MvpPresenter<FavoriteView> implements CallBackRealmData {
+
     @Inject
     RealmModel realmModel;
+
+    @Inject
+    OwnRouter router;
 
     FavoritePresenter() {
         App.getAppComponent().inject(this);
@@ -58,5 +64,9 @@ public class FavoritePresenter extends MvpPresenter<FavoriteView> implements Cal
 
     public void deleteFromFavorite(final Recipe recipe) {
         realmModel.deleteFromFavorite(recipe);
+    }
+
+    public void goTo(final String screenKey,final String uri){
+        router.navigateTo(screenKey, uri);
     }
 }
