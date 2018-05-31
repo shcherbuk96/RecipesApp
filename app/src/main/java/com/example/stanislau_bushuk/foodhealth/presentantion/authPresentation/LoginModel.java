@@ -35,4 +35,8 @@ public class LoginModel {
                 .asObservable();
         callBackLoginPresenter.call(observable);
     }
+
+    public FirebaseAuth getAuth() {
+        return mAuth;
+    }
 }

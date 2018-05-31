@@ -5,14 +5,20 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.arellomobile.mvp.MvpView;
 import com.example.stanislau_bushuk.foodhealth.cicerone.OwnRouter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginModel;
 
 import javax.inject.Inject;
+
+
 
 @InjectViewState
 public class MainActivityPresenter extends MvpPresenter<MvpView> {
 
     @Inject
     OwnRouter router;
+
+    @Inject
+    LoginModel loginModel;
 
     public MainActivityPresenter() {
         App.getAppComponent().inject(this);
@@ -25,4 +31,5 @@ public class MainActivityPresenter extends MvpPresenter<MvpView> {
     public void goTo(final String screenKey) {
         router.navigateTo(screenKey,1);
     }
+
 }

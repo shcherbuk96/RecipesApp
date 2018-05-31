@@ -1,5 +1,7 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation;
 
+import android.view.View;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
@@ -61,23 +63,44 @@ public class LoginPresenter extends MvpPresenter<LoginView> implements CallBackL
                     @Override
                     public void onNext(final AuthResult authResult) {
                         Timber.e("onNext");
+
                         if (authResult != null) {
                             Timber.e(authResult.getUser().toString());
                             getViewState().user(authResult.getUser());
                         }
+
                     }
                 });
     }
 
-    public void goTo(final String screenKey){
-        router.newRootScreen(screenKey);
+    public void goTo(final String screenKey) {
+        Timber.e(screenKey);
+        if (screenKey.equals(Constants.MAIN_ACTIVITY)) {
+            router.newRootScreen(screenKey);
+        } else {
+            //router.exit();
+        }
+
     }
 
-    public void replace(final String screenKey){
-        router.newRootScreen(screenKey);
+    public void replace(final String screenKey) {
+        if (screenKey.equals(Constants.MAIN_ACTIVITY)) {
+            router.newRootScreen(screenKey);
+        } else {
+            router.exit();
+
+        }
     }
 
-    public void exit(){
+
+    public void exit() {
         router.exit();
+    }
+
+    public void setViewVisibility(final String keyScreen) {
+
+        if (keyScreen != null) {
+            getViewState().setViewVisibility(View.INVISIBLE);
+        }
     }
 }

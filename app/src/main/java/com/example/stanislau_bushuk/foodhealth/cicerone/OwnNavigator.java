@@ -36,7 +36,7 @@ public abstract class OwnNavigator extends SupportAppNavigator implements Naviga
     @Override
     protected void applyCommand(final Command command) {
 
-        fragmentManager.executePendingTransactions();
+        //fragmentManager.executePendingTransactions();
         if (command instanceof OwnBackToCommand) {
             backToOwnCommand((OwnBackToCommand) command);
         } else if (command != null) {

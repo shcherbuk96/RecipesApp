@@ -1,6 +1,7 @@
 package com.example.stanislau_bushuk.foodhealth;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
@@ -21,6 +22,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.terrakok.cicerone.NavigatorHolder;
+import timber.log.Timber;
 
 public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
@@ -53,10 +55,10 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         App.getAppComponent().inject(this);
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-
 
         if (savedInstanceState == null) {
             router.replaceScreen(Constants.SEARCH_SCREEN, 0);
@@ -91,7 +93,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
                     }
 
                     case R.id.profile: {
-                        presenter.goTo(Constants.PROFILE_SCREEN);
+                        presenter.goTo(Constants.PROFILE_ANONIM_SCREEN);
                         item.setChecked(true);
 
                         break;
@@ -103,17 +105,16 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         });
     }
 
-
     @Override
     protected void onResume() {
         super.onResume();
-        navigatorHolder.setNavigator(navigationUtil());
 
+        navigatorHolder.setNavigator(navigationUtil());
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onPause() {
+        super.onPause();
 
         navigatorHolder.removeNavigator();
     }
@@ -132,11 +133,13 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
             shiftingMode.setAccessible(true);
             shiftingMode.setBoolean(menuView, false);
             shiftingMode.setAccessible(false);
+
             for (int i = 0; i < menuView.getChildCount(); i++) {
                 final BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);
                 item.setShiftingMode(false);
                 item.setChecked(item.getItemData().isChecked());
             }
+
         } catch (final NoSuchFieldException e) {
             Log.e("BottomNav", "Unable to get shift mode field", e);
         } catch (final IllegalAccessException e) {

@@ -27,6 +27,7 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentat
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters.DeepSearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoritePresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.presenters.ProfilePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
@@ -83,4 +84,6 @@ public interface AppComponent {
     void inject(LoginActivity loginActivity);
 
     void inject(RegistrationActivity registrationActivity);
+
+    void inject (ProfilePresenter profilePresenter);
 }

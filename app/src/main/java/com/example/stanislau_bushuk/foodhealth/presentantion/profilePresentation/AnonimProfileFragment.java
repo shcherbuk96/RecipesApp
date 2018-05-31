@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -15,36 +16,53 @@ import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.presenters.ProfilePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.view.ProfileView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProfileFragment extends MvpAppCompatFragment implements ProfileView {
+public class AnonimProfileFragment extends MvpAppCompatFragment implements ProfileView {
 
+    @BindView(R.id.profile_sign_in_button)
+    Button signInButton;
+
+    @BindView(R.id.profile_registration)
+    Button registrButton;
 
     @InjectPresenter
     ProfilePresenter profilePresenter;
 
-    public ProfileFragment() {
-        // Required empty public constructor
-    }
-
-
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+    public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        final View view = inflater.inflate(R.layout.fragment_no_registr_profile, container, false);
 
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        ButterKnife.bind(this, view);
+    }
+
+    @OnClick(R.id.profile_sign_in_button)
+    public void signIn() {
+        profilePresenter.signIn();
+    }
+
+    @OnClick(R.id.profile_registration)
+    public void registr() {
+        profilePresenter.register();
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
+        profilePresenter.checkAuth();
     }
 }

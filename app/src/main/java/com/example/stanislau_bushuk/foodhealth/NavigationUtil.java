@@ -14,7 +14,6 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentat
 import javax.inject.Inject;
 
 import ru.terrakok.cicerone.commands.Command;
-import timber.log.Timber;
 
 
 public class NavigationUtil extends OwnNavigator {
@@ -45,8 +44,6 @@ public class NavigationUtil extends OwnNavigator {
     protected Intent createActivityIntent(final Context context, final String screenKey, final Object data) {
         final Intent intent;
 
-        Timber.e(screenKey);
-
         switch (screenKey) {
             case Constants.MAIN_ACTIVITY: {
                 intent = new Intent(context, MainActivity.class);
@@ -63,10 +60,12 @@ public class NavigationUtil extends OwnNavigator {
             }
             case Constants.LOGIN_ACTIVITY: {
                 intent = new Intent(context, LoginActivity.class);
+                intent.putExtra(Constants.KEY_FRAGMENT, (String) data);
                 return intent;
             }
             case Constants.REGISTRATION_ACTIVITY: {
                 intent = new Intent(context, RegistrationActivity.class);
+                intent.putExtra(Constants.KEY_FRAGMENT, (String) data);
                 return intent;
             }
 

@@ -20,7 +20,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.terrakok.cicerone.NavigatorHolder;
-import timber.log.Timber;
 
 public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
@@ -29,6 +28,9 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
     @BindView(R.id.login_anonymous_button)
     Button anonymous;
+
+    @BindView(R.id.login_sign_up_button)
+    Button signUp;
 
     @BindView(R.id.login_email_editText)
     EditText email;
@@ -42,6 +44,8 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     @Inject
     NavigatorHolder navigatorHolder;
 
+    private String keyScreen;
+
     @Inject
     NavigationUtil navigationUtil() {
         return new NavigationUtil(this);
@@ -49,14 +53,13 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-
-        App.getAppComponent().inject(this);
-
-
         super.onCreate(savedInstanceState);
+        App.getAppComponent().inject(this);
         setContentView(R.layout.activity_login);
 
+        keyScreen = getIntent().getStringExtra(Constants.KEY_FRAGMENT);
         ButterKnife.bind(this);
+        loginPresenter.setViewVisibility(keyScreen);
     }
 
     @OnClick(R.id.login_sign_in_button)
@@ -76,7 +79,12 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
     @Override
     public void user(final FirebaseUser firebaseUser) {
-        loginPresenter.goTo(Constants.MAIN_ACTIVITY);
+
+        if (keyScreen != null) {
+            loginPresenter.goTo(keyScreen);
+        } else {
+            loginPresenter.goTo(Constants.MAIN_ACTIVITY);
+        }
     }
 
     @Override
@@ -90,17 +98,22 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     }
 
     @Override
+    public void setViewVisibility(final int visibility) {
+        anonymous.setVisibility(visibility);
+        signUp.setVisibility(visibility);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
-        Timber.e("RESUME LOGIN");
-        navigatorHolder.setNavigator(navigationUtil());
 
+        navigatorHolder.setNavigator(navigationUtil());
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Timber.e("STOP LOGIN");
+
         navigatorHolder.removeNavigator();
     }
 

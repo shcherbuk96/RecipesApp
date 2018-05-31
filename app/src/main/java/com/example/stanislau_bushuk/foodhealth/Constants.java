@@ -50,4 +50,6 @@ public class Constants {
 
     public static final String PROFILE_SCREEN = "PROFILE_SCREEN";
 
+    public static final String PROFILE_ANONIM_SCREEN = "PROFILE_SCREEN_ANONIM";
+
 }
