@@ -54,8 +54,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
     @InjectPresenter
     SearchPresenter presenter;
 
-    @Inject
-    FirebaseModel firebaseModel;
 
     private RecyclerAdapter recyclerAdapter;
     private Bundle instanceState;

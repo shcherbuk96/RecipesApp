@@ -43,11 +43,11 @@ public class CardNetWorkModel {
                 Timber.e("OBSERVABLE ");
                 callBackCardPresenter.callList(r.subscribeOn(Schedulers.io()));
             } else {
-                final Observable<Recipe> r = realm.where(Recipe.class).equalTo("uri", uri).findFirst()
+                final Observable<Recipe> observable = realm.where(Recipe.class).equalTo("uri", uri).findFirst()
                         .asFlowable().cast(Recipe.class).toObservable();
 
-                if (r != null) {
-                    callBackCardPresenter.call(r.subscribeOn(AndroidSchedulers.mainThread()));
+                if (observable != null) {
+                    callBackCardPresenter.call(observable.subscribeOn(AndroidSchedulers.mainThread()));
                 }
             }
 

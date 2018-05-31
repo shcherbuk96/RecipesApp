@@ -26,10 +26,9 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
     @Inject
     NavigatorHolder navigatorHolder;
-
+    
     @InjectPresenter
     MainActivityPresenter presenter;
-
 
     @Inject
     NavigationUtil navigationUtil() {

@@ -108,7 +108,7 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
     private boolean isGooglePlayServicesAvailable() {
         final GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
-        final Integer resultCode = googleApiAvailability.isGooglePlayServicesAvailable(this);
+        final int resultCode = googleApiAvailability.isGooglePlayServicesAvailable(this);
 
         if (resultCode != ConnectionResult.SUCCESS) {
             final Dialog dialog = googleApiAvailability.getErrorDialog(this, resultCode, 0);
