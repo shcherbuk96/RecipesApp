@@ -1,7 +1,6 @@
 package com.example.stanislau_bushuk.foodhealth;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.internal.BottomNavigationItemView;
@@ -22,7 +21,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.terrakok.cicerone.NavigatorHolder;
-import timber.log.Timber;
 
 public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
@@ -38,12 +36,32 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
     @InjectPresenter
     MainActivityPresenter presenter;
 
+    @SuppressLint("RestrictedApi")
+    public static void removeShiftMode(final BottomNavigationView view) {
+        final BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
+        try {
+            final Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");
+            shiftingMode.setAccessible(true);
+            shiftingMode.setBoolean(menuView, false);
+            shiftingMode.setAccessible(false);
+
+            for (int i = 0; i < menuView.getChildCount(); i++) {
+                final BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);
+                item.setShiftingMode(false);
+                item.setChecked(item.getItemData().isChecked());
+            }
+
+        } catch (final NoSuchFieldException e) {
+            Log.e("BottomNav", "Unable to get shift mode field", e);
+        } catch (final IllegalAccessException e) {
+            Log.e("BottomNav", "Unable to change value of shift mode", e);
+        }
+    }
 
     @Inject
     NavigationUtil navigationUtil() {
         return new NavigationUtil(this);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -122,28 +140,5 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
     @Override
     protected void onSaveInstanceState(final Bundle outState) {
         super.onSaveInstanceState(outState);
-    }
-
-
-    @SuppressLint("RestrictedApi")
-    public static void removeShiftMode(final BottomNavigationView view) {
-        final BottomNavigationMenuView menuView = (BottomNavigationMenuView) view.getChildAt(0);
-        try {
-            final Field shiftingMode = menuView.getClass().getDeclaredField("mShiftingMode");
-            shiftingMode.setAccessible(true);
-            shiftingMode.setBoolean(menuView, false);
-            shiftingMode.setAccessible(false);
-
-            for (int i = 0; i < menuView.getChildCount(); i++) {
-                final BottomNavigationItemView item = (BottomNavigationItemView) menuView.getChildAt(i);
-                item.setShiftingMode(false);
-                item.setChecked(item.getItemData().isChecked());
-            }
-
-        } catch (final NoSuchFieldException e) {
-            Log.e("BottomNav", "Unable to get shift mode field", e);
-        } catch (final IllegalAccessException e) {
-            Log.e("BottomNav", "Unable to change value of shift mode", e);
-        }
     }
 }
