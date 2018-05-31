@@ -6,11 +6,11 @@ import com.example.stanislau_bushuk.foodhealth.MainActivityPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.RecipeFb;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.kelvinapps.rxfirebase.RxFirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-import rx.Observer;
 import timber.log.Timber;
 
 public class FirebaseModel {
@@ -34,27 +34,19 @@ public class FirebaseModel {
     }
 
     public void putRecipesFromFBtoRealm(final String uid) {
+        db.child(Constants.USER).child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(final DataSnapshot dataSnapshot) {
+                for (final DataSnapshot ds : dataSnapshot.getChildren()) {
+                    callBack.addToRealm(new Recipe(ds));
+                }
+            }
 
-        RxFirebaseDatabase.observeSingleValueEvent(db.child(Constants.USER).child(uid))
-                .subscribe(new Observer<DataSnapshot>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(final Throwable e) {
-                        Timber.e(e);
-                    }
-
-                    @Override
-                    public void onNext(final DataSnapshot dataSnapshot) {
-                        for (final DataSnapshot ds : dataSnapshot.getChildren()) {
-                            callBack.addToRealm(new Recipe(ds));
-                        }
-
-                    }
-                });
+            @Override
+            public void onCancelled(final DatabaseError databaseError) {
+                Timber.e(databaseError.getMessage());
+            }
+        });
     }
 
 

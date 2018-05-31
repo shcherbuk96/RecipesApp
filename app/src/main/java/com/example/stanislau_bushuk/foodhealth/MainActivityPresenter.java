@@ -19,12 +19,16 @@ import javax.inject.Inject;
 public class MainActivityPresenter extends MvpPresenter<MvpView> implements CallBackMainActivityPresenter {
 
     private final DatabaseReference db;
+
     @Inject
     OwnRouter router;
+
     @Inject
     FirebaseModel firebaseModel;
+
     @Inject
     LoginModel loginModel;
+
     @Inject
     RealmModel realmModel;
 

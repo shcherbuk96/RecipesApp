@@ -3,7 +3,6 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
-import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.cicerone.OwnRouter;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackCardPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.CardNetWorkModel;
@@ -20,7 +19,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import ru.terrakok.cicerone.Router;
 import timber.log.Timber;
 
 
@@ -131,8 +129,6 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
 
                     @Override
                     public void onNext(final Data data) {
-                        Timber.e("onNext");
-
                         getViewState().showList(data);
                     }
 
