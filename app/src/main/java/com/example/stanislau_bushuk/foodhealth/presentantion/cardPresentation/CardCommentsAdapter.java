@@ -39,22 +39,12 @@ public class CardCommentsAdapter extends RecyclerView.Adapter<CardCommentsAdapte
         holder.commentUser.setText(comment.getText());
         holder.emailUser.setText(comment.getEmail());
 
-        if (comment.getPhotoUri().equals("null")) {
-            GlideApp
-                    .with(holder.photoUser.getContext())
-                    .load(R.drawable.ic_person_black_24dp)
-                    .centerCrop()
-                    .error(R.drawable.ic_person_black_24dp)
-                    .into(holder.photoUser);
-        } else {
-            GlideApp
-                    .with(holder.photoUser.getContext())
-                    .load(comment.getPhotoUri())
-                    .centerCrop()
-                    .error(R.drawable.ic_person_black_24dp)
-                    .into(holder.photoUser);
-        }
-
+        GlideApp
+                .with(holder.photoUser.getContext())
+                .load(comment.getPhotoUri())
+                .centerCrop()
+                .error(R.drawable.ic_person_black_24dp)
+                .into(holder.photoUser);
     }
 
     @Override

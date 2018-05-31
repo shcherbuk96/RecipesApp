@@ -1,13 +1,11 @@
 package com.example.stanislau_bushuk.foodhealth.model.pojo;
 
-import android.net.Uri;
-
 import com.google.firebase.database.DataSnapshot;
 
 public class Comment {
-    String email;
-    String photoUri;
-    String text;
+    private String email;
+    private String photoUri;
+    private String text;
 
 
     public Comment(final String email, final String text, final String photoUri) {
@@ -17,7 +15,7 @@ public class Comment {
     }
 
     public Comment(final DataSnapshot ds) {
-        this.email= (String) ds.child("email").getValue();
+        this.email = (String) ds.child("email").getValue();
         this.photoUri = (String) ds.child("photoUri").getValue();
         this.text = (String) ds.child("text").getValue();
     }

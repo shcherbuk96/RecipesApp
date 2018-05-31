@@ -18,7 +18,7 @@ import timber.log.Timber;
 public class FirebaseModel {
 
     private final FirebaseDatabase database;
-    CallBackCardPresenter callBackCardPresenter;
+    private CallBackCardPresenter callBackCardPresenter;
 
     public FirebaseModel() {
         database = FirebaseDatabase.getInstance();;
@@ -37,9 +37,7 @@ public class FirebaseModel {
     }
 
     public void addComment(final String email, final String text, final String nameRecipe, final String photoUri) {
-
         final DatabaseReference myRef = database.getReference(Constants.FIREBASE_COMMENTS_BRANCH).child(nameRecipe).push();
         myRef.setValue(new Comment(email, text, photoUri));
-       // getComments(nameRecipe);
     }
 }

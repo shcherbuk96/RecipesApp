@@ -113,10 +113,13 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
             @Override
             public List<Comment> call(final DataSnapshot dataSnapshot) {
                 final List<Comment> listComments = new ArrayList<>();
+
                 for (final DataSnapshot ds : dataSnapshot.getChildren()) {
                     listComments.add(new Comment(ds));
                 }
+
                 Collections.reverse(listComments);
+
                 return listComments;
             }
         }).subscribe(new rx.Observer<List<Comment>>() {
@@ -137,37 +140,6 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
                 getViewState().showComments(comments);
             }
         });
-      /*  observable.map(new Function<DataSnapshot, List<Comment>>() {
-            @Override
-            public List<Comment> apply(final DataSnapshot dataSnapshot) throws Exception {
-                final List<Comment> listComments = new ArrayList<>();
-                for (final DataSnapshot ds : dataSnapshot.getChildren()) {
-                    listComments.add(ds.getValue(Comment.class));
-                }
-                return listComments;
-            }
-        }).subscribe(new Observer<List<Comment>>() {
-            @Override
-            public void onSubscribe(final Disposable d) {
-                Timber.e("onSubscribe2");
-            }
-
-            @Override
-            public void onNext(final List<Comment> listComments) {
-                Timber.e("onNext2");
-                getViewState().showComments(listComments);
-            }
-
-            @Override
-            public void onError(final Throwable e) {
-                Timber.e("onError2");
-            }
-
-            @Override
-            public void onComplete() {
-                Timber.e("onComplete2");
-            }
-        });*/
     }
 
     public void addComment(final String email, final String text, final String nameRecipe, final Uri photoUri) {
