@@ -64,15 +64,11 @@ public interface AppComponent {
 
     void inject(FavoritePresenter favoritePresenter);
 
-    void inject(RecyclerAdapter recyclerAdapter);
-
     void inject(DeepSearchPresenter deepSearchPresenter);
 
     void inject(NetWorkModelDeepSearch netWorkModelDeepSearch);
 
     void inject(DeepSearchActivity deepSearchActivity);
-
-    void inject(FavoriteAdapter favoriteAdapter);
 
     void inject(MainActivity mainActivity);
 
