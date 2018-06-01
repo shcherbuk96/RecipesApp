@@ -23,8 +23,8 @@ public class NavigationUtil extends OwnNavigator {
     FragmentCreater fragmentCreater;
 
 
-    public NavigationUtil(final Context context) {
-        super((FragmentActivity) context, R.id.main_contener_frame_layout);
+    public NavigationUtil(final Context context, final int containerId) {
+        super((FragmentActivity) context, containerId);
         App.getAppComponent().inject(this);
     }
 

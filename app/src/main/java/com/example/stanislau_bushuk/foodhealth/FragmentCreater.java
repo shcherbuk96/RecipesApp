@@ -47,7 +47,7 @@ public class FragmentCreater {
                     favoriteFragment = new FavoriteFragment();
                 }
 
-                favoriteFragment.setArguments(bundle);
+                //favoriteFragment.setArguments(bundle);
                 return favoriteFragment;
             }
 
@@ -81,4 +81,5 @@ public class FragmentCreater {
     public SearchFragment getSearchFragment() {
         return searchFragment;
     }
+
 }
