@@ -71,9 +71,6 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
         favoriteAdapter.updateAdapter(recipes);
     }
 
-
-
-
     @Override
     public void onItemClick(final String uri) {
         favoritePresenter.goTo(Constants.CARD_ACTIVITY,uri);

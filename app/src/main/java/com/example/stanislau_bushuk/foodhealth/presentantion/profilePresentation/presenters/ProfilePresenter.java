@@ -34,13 +34,13 @@ public class ProfilePresenter extends MvpPresenter<ProfileView> {
         App.getAppComponent().inject(this);
     }
 
-    public Fragment getFragment() {
-        return fragmentCreater.getNewInstanceFragment(Constants.FAVOURITE_SCREEN, 1);
+    public Fragment getFavouriteFragment() {
+        return fragmentCreater.getFavoriteFragment();
     }
 
     public void checkAuth() {
         if (!loginModel.getAuth().getCurrentUser().isAnonymous()) {
-            ownRouter.navigateTo(Constants.PROFILE_SCREEN, 1);
+            ownRouter.replaceScreen(Constants.PROFILE_SCREEN, 1);
         }
     }
 
@@ -50,6 +50,10 @@ public class ProfilePresenter extends MvpPresenter<ProfileView> {
 
     public void signIn() {
         ownRouter.navigateTo(Constants.LOGIN_ACTIVITY, Constants.LOGIN_ACTIVITY);
+    }
+
+    public void goTo(){
+        ownRouter.navigateTo(Constants.FAVOURITE_SCREEN,1);
     }
 
     public Uri getUserPhoto() {
@@ -62,10 +66,6 @@ public class ProfilePresenter extends MvpPresenter<ProfileView> {
 
     public String getUserName() {
         return loginModel.getAuth().getCurrentUser().getDisplayName();
-    }
-
-    public int getFavourites() {
-        return realmModel.getNumbeFavourites();
     }
 
 }

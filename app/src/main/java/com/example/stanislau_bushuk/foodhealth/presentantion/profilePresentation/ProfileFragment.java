@@ -23,9 +23,13 @@ import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.presenters.ProfilePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.view.ProfileView;
+import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,6 +39,9 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileView
 
     @InjectPresenter
     ProfilePresenter profilePresenter;
+
+    @Inject
+    FragmentCreater fragmentCreater;
 
     @BindView(R.id.profile_blur)
     RelativeLayout relativeLayout;
@@ -54,9 +61,12 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileView
     @BindView(R.id.profile_pager)
     ViewPager pager;
 
+    private FavoriteFragment favoriteFragment = new FavoriteFragment();
+    private SearchFragment searchFragment = new SearchFragment();
+
 
     @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+    public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_profile, container, false);
@@ -64,10 +74,11 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileView
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
-
+        App.getAppComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
 
         ButterKnife.bind(this, view);
+
 
         GlideApp.with(this)
                 .load(profilePresenter.getUserPhoto())
@@ -82,10 +93,23 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileView
                 getResources().getColor(R.color.white),
                 getResources().getColor(R.color.white)
         );
-        final ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getActivity().getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new FavoriteFragment(),"FAVOURITES");
-        pager.setAdapter(viewPagerAdapter);
-        tabLayout.setupWithViewPager(pager);
+
+        if(savedInstanceState==null) {
+            final ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+            viewPagerAdapter.addFragment(favoriteFragment, "FAVOURITES");
+            viewPagerAdapter.addFragment(searchFragment, "SEARHFRAGMENTS");
+            pager.setAdapter(viewPagerAdapter);
+            tabLayout.setupWithViewPager(pager);
+        }
     }
 
+    @Override
+    public void onSaveInstanceState(final Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+    }
 }
