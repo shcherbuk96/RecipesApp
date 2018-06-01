@@ -11,4 +11,8 @@ public interface CardView extends MvpView {
     void showEditData(EditData data);
 
     void showComments(List<Comment> listComments);
+
+    void showAnonymous();
+
+    void showError();
 }

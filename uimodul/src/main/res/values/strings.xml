@@ -22,6 +22,8 @@
     <string name="card_comments">Comments: %d</string>
     <string name="card_comments_default">Comments: </string>
     <string name="card_comments_hint">Add your comment</string>
+    <string name="card_comments_anonymous">Please log in</string>
+    <string name="card_error">Error!!!</string>
 
     <!-- DeepSearch strings-->
     <string name="deep_search_title_text">Calories, Diet, Ingredients</string>

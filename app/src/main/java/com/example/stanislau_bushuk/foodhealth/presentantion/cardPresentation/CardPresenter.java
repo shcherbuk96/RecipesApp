@@ -19,12 +19,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
-import rx.functions.Func1;
 import timber.log.Timber;
 
 
@@ -64,7 +64,7 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
     }
 
     @Override
-    public void call(final io.reactivex.Observable<Recipe> observable) {
+    public void call(final Observable<Recipe> observable) {
         observable.subscribeOn(Schedulers.io())
                 .map(new Function<Recipe, Data>() {
                     @Override
@@ -99,6 +99,7 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
                     @Override
                     public void onError(final Throwable e) {
                         e.printStackTrace();
+                        getViewState().showError();
                     }
 
                     @Override
@@ -108,47 +109,35 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
     }
 
     @Override
-    public void callFirebase(final rx.Observable<DataSnapshot> observable) {
-        observable.map(new Func1<DataSnapshot, List<Comment>>() {
-            @Override
-            public List<Comment> call(final DataSnapshot dataSnapshot) {
-                final List<Comment> listComments = new ArrayList<>();
+    public void callFirebase(final DataSnapshot dataSnapshot) {
+        if (dataSnapshot != null) {
+            final List<Comment> listComments = new ArrayList<>();
 
-                for (final DataSnapshot ds : dataSnapshot.getChildren()) {
-                    listComments.add(new Comment(ds));
-                }
-
-                Collections.reverse(listComments);
-
-                return listComments;
-            }
-        }).subscribe(new rx.Observer<List<Comment>>() {
-            @Override
-            public void onCompleted() {
-                Timber.e("onComplete2");
+            for (final DataSnapshot ds : dataSnapshot.getChildren()) {
+                listComments.add(new Comment(ds));
             }
 
-            @Override
-            public void onError(final Throwable e) {
-                Timber.e("onError2");
-                Timber.e(e);
-            }
+            Collections.reverse(listComments);
 
-            @Override
-            public void onNext(final List<Comment> comments) {
-                Timber.e("onNext2");
-                getViewState().showComments(comments);
+            if (listComments.size() != 0) {
+                getViewState().showComments(listComments);
             }
-        });
+        } else {
+            getViewState().showError();
+        }
     }
 
     public void addComment(final String email, final String text, final String nameRecipe, final Uri photoUri) {
-        if (photoUri == null) {
-            firebaseModel.addComment(email, text, nameRecipe, "null");
+        if (email.isEmpty()) {
+            getViewState().showAnonymous();
         } else {
-            firebaseModel.addComment(email, text, nameRecipe, photoUri.toString());
-        }
 
+            if (photoUri == null) {
+                firebaseModel.addComment(email, text, nameRecipe, "null");
+            } else {
+                firebaseModel.addComment(email, text, nameRecipe, photoUri.toString());
+            }
+        }
     }
 
     public void back() {

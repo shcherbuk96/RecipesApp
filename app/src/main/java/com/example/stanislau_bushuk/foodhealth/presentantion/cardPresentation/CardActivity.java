@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -61,16 +62,22 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
 
     @BindView(R.id.card_protein_text_view)
     TextView proteinView;
+
     @BindView(R.id.card_comments_number)
     TextView countCommentsView;
+
     @BindView(R.id.card_user_comment_edit_text)
     EditText commentUserView;
+
     @BindView(R.id.card_comment_send_image_view)
     ImageView sendView;
+
     @InjectPresenter
     CardPresenter presenter;
+
     @Inject
     NavigatorHolder navigatorHolder;
+
     private CardAdapter cardAdapter;
     private CardCommentsAdapter cardCommentsAdapter;
     private Data data;
@@ -185,6 +192,16 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
     public void showComments(final List<Comment> listComments) {
         countCommentsView.setText(getString(R.string.card_comments, listComments.size()));
         cardCommentsAdapter.updateData(listComments);
+    }
+
+    @Override
+    public void showAnonymous() {
+        Toast.makeText(this, getString(R.string.card_comments_anonymous), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showError() {
+        Toast.makeText(this, getString(R.string.card_error), Toast.LENGTH_SHORT).show();
     }
 
     @Override

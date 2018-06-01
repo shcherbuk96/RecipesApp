@@ -3,14 +3,11 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
-import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.cicerone.OwnRouter;
 import com.google.firebase.auth.AuthResult;
 
 import javax.inject.Inject;
 
-import rx.Observable;
-import rx.Observer;
 import timber.log.Timber;
 
 @InjectViewState
@@ -69,15 +66,15 @@ public class LoginPresenter extends MvpPresenter<LoginView> implements CallBackL
                 });
     }
 
-    public void goTo(final String screenKey){
+    public void goTo(final String screenKey) {
         router.newRootScreen(screenKey);
     }
 
-    public void replace(final String screenKey){
+    public void replace(final String screenKey) {
         router.newRootScreen(screenKey);
     }
 
-    public void exit(){
+    public void exit() {
         router.exit();
     }
 }

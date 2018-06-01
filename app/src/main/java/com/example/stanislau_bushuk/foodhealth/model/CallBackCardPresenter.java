@@ -3,8 +3,10 @@ package com.example.stanislau_bushuk.foodhealth.model;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.google.firebase.database.DataSnapshot;
 
-public interface CallBackCardPresenter {
-    void call(io.reactivex.Observable<Recipe> observable);
+import io.reactivex.Observable;
 
-    void callFirebase(rx.Observable<DataSnapshot> observable);
+public interface CallBackCardPresenter {
+    void call(Observable<Recipe> observable);
+
+    void callFirebase(DataSnapshot dataSnapshot);
 }
