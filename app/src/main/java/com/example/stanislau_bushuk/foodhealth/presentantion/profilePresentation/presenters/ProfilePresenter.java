@@ -1,17 +1,17 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.presenters;
 
+import android.net.Uri;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.cicerone.OwnRouter;
+import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
 import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginModel;
 import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.view.ProfileView;
 
 import javax.inject.Inject;
-
-import ru.terrakok.cicerone.result.ResultListener;
-import timber.log.Timber;
 
 @InjectViewState
 public class ProfilePresenter extends MvpPresenter<ProfileView> {
@@ -21,6 +21,9 @@ public class ProfilePresenter extends MvpPresenter<ProfileView> {
 
     @Inject
     LoginModel loginModel;
+
+    @Inject
+    RealmModel realmModel;
 
     public ProfilePresenter() {
         App.getAppComponent().inject(this);
@@ -38,6 +41,22 @@ public class ProfilePresenter extends MvpPresenter<ProfileView> {
 
     public void signIn(){
         ownRouter.navigateTo(Constants.LOGIN_ACTIVITY,Constants.LOGIN_ACTIVITY);
+    }
+
+    public Uri getUserPhoto(){
+        return loginModel.getAuth().getCurrentUser().getPhotoUrl();
+    }
+
+    public String getUserEmail(){
+        return loginModel.getAuth().getCurrentUser().getEmail();
+    }
+
+    public String getUserName(){
+        return loginModel.getAuth().getCurrentUser().getDisplayName();
+    }
+
+    public int getFavourites(){
+        return realmModel.getNumbeFavourites();
     }
 
 }

@@ -52,7 +52,9 @@ public class RealmModel {
         }
     }
 
-
+    public int getNumbeFavourites(){
+        return realm.where(Recipe.class).equalTo("isChecked",true).findAll().size();
+    }
     public boolean getIsChecked(final Recipe recipe) {
         final Recipe r = realm.where(Recipe.class).equalTo("uri", recipe.getUri()).findFirst();
 
