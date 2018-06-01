@@ -1,5 +1,6 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,8 @@ import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.NavigationUtil;
 import com.example.stanislau_bushuk.foodhealth.R;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.auth.FirebaseUser;
 
 import javax.inject.Inject;
@@ -49,13 +52,12 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-
         App.getAppComponent().inject(this);
 
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
 
+        setContentView(R.layout.activity_login);
+        isGooglePlayServicesAvailable();
         ButterKnife.bind(this);
     }
 
@@ -92,7 +94,7 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     @Override
     protected void onResume() {
         super.onResume();
-        Timber.e("RESUME LOGIN");
+
         navigatorHolder.setNavigator(navigationUtil());
 
     }
@@ -100,8 +102,24 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     @Override
     protected void onPause() {
         super.onPause();
-        Timber.e("STOP LOGIN");
+
         navigatorHolder.removeNavigator();
     }
 
+    private boolean isGooglePlayServicesAvailable() {
+        final GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
+        final int resultCode = googleApiAvailability.isGooglePlayServicesAvailable(this);
+
+        if (resultCode != ConnectionResult.SUCCESS) {
+            final Dialog dialog = googleApiAvailability.getErrorDialog(this, resultCode, 0);
+
+            if (dialog != null) {
+                dialog.show();
+            }
+
+            return false;
+        }
+
+        return true;
+    }
 }

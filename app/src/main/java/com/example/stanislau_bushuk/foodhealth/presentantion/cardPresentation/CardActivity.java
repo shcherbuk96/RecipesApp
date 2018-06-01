@@ -208,6 +208,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
     public boolean onSupportNavigateUp() {
         presenter.back();
         return true;
+
     }
 
     @Override

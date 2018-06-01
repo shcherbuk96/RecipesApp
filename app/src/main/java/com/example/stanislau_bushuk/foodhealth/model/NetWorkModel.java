@@ -22,10 +22,10 @@ import io.realm.RealmResults;
 
 public class NetWorkModel {
 
+    private final Realm realm;
+
     @Inject
     IAPI iapi;
-
-    private Realm realm;
 
     private CallBackSearchPresenter callBackSearchPresenter;
 
@@ -44,13 +44,14 @@ public class NetWorkModel {
     }
 
     public void getRandomRecipe(final boolean update) {
-        final int random = (int) (Math.random() * Constants.RABDON);
+        final int random = (int) (Math.random() * Constants.RANDOM);
         final Observable<Recipes> observable = iapi.getRandomRecipe(Constants.RANDOM_RECIPE, Constants.APP_ID, Constants.APP_KEY, String.valueOf(random), String.valueOf(random + Constants.ITEMS_IN_PAGE), Constants.CALLORIES);
         callBackSearchPresenter.call(observable, update, false);
     }
 
     public boolean checkRealmIsEmpty() {
         final RealmResults<Recipe> recipes = realm.where(Recipe.class).findAll();
+
         return recipes.isEmpty();
     }
 

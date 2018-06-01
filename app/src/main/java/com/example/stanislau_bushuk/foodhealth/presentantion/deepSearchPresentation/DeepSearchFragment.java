@@ -45,7 +45,6 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
 
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
-
         return inflater.inflate(R.layout.fragment_deep_search, container, false);
     }
 

@@ -3,8 +3,8 @@ package com.example.stanislau_bushuk.foodhealth.cicerone;
 import ru.terrakok.cicerone.commands.Command;
 
 public class OwnBackToCommand implements Command {
-    private String screenKey;
-    private Object transitionData;
+    private final String screenKey;
+    private final Object transitionData;
 
     /**
      * Creates a {@link OwnBackToCommand} navigation command.

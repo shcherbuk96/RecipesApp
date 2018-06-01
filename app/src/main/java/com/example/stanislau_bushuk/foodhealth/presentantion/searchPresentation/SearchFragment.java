@@ -51,6 +51,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
     @InjectPresenter
     SearchPresenter presenter;
 
+
     private RecyclerAdapter recyclerAdapter;
     private Bundle instanceState;
     private SearchView searchView;
@@ -104,7 +105,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
     @Override
     public void progressBarVisible(final int visible) {
-
         if (visible == View.VISIBLE) {
             swipeRefreshLayout.setRefreshing(true);
         } else {
@@ -156,8 +156,19 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         presenter.addToFavorite(recipe);
     }
 
+
     @Override
     public void deleteFromFavorite(final Recipe recipe) {
+        presenter.deleteRecipeFromDb(recipe.getLabel());
+    }
+
+    @Override
+    public void addToFb(final Recipe recipe) {
+        presenter.addRecipeToDB(recipe);
+    }
+
+    @Override
+    public void deleteFromFb(final Recipe recipe) {
         presenter.deleteFromFavorite(recipe);
     }
 

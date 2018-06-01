@@ -8,15 +8,17 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
-import com.example.stanislau_bushuk.foodhealth.cicerone.OwnRouter;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.ResourceManager;
+import com.example.stanislau_bushuk.foodhealth.cicerone.OwnRouter;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackSearchPresenter;
+import com.example.stanislau_bushuk.foodhealth.model.FirebaseModel;
 import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipes;
+import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginModel;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.view.ViewSearch;
 import com.jakewharton.rxbinding2.widget.RxSearchView;
 
@@ -46,6 +48,12 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
     @Inject
     ResourceManager resourceManager;
+
+    @Inject
+    FirebaseModel firebaseModel;
+
+    @Inject
+    LoginModel loginModel;
 
     private boolean stateUpdate;
 
@@ -84,7 +92,6 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                     @Override
                     public void onNext(final Recipes recipes) {
 
-
                         if (recipes.getCount() != 0) {
 
                             if (!update) {
@@ -99,8 +106,6 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
                         e.printStackTrace();
                         getViewState().setSnackBar();
                         getViewState().progressBarVisible(View.GONE);
-
-                        Timber.e("Error");
                     }
 
                     @Override
@@ -130,20 +135,25 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
                     @Override
                     public void onNext(final String s) {
+
                         if (!stateUpdate) {
                             Timber.e("next response");
+
                             if (!s.isEmpty()) {
                                 netWorkModel.getResponse(s, 0, false);
                                 getViewState().setSearchText(s);
                             } else {
+
                                 if (!netWorkModel.checkRealmIsEmpty()) {
                                     netWorkModel.getRandomData(false);
                                 } else {
                                     netWorkModel.getRandomRecipe(false);
                                 }
                                 getViewState().setSearchText(resourceManager.getString(R.string.search_random));
+
                             }
-                        }else {
+
+                        } else {
                             SearchPresenter.this.stateUpdate = false;
                         }
                     }
@@ -168,7 +178,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
         }
     }
 
-    public void refreshData(final String searchText){
+    public void refreshData(final String searchText) {
         if (searchText.isEmpty()) {
             netWorkModel.getRandomRecipe(false);
         } else {
@@ -180,12 +190,21 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
         realmModel.addToFavorite(recipe);
     }
 
+    public void addRecipeToDB(final Recipe recipe) {
+        firebaseModel.addRecipeToFbDb(loginModel.getAuth().getUid(),
+                recipe.getLabel(), recipe.getUri(), recipe.getImage());
+    }
+
     public void deleteFromFavorite(final Recipe recipe) {
         realmModel.deleteFromFavorite(recipe);
     }
 
-    public void navigateTo(final String screenKey, final String data){
-        router.navigateTo(screenKey,data);
+    public void deleteRecipeFromDb(final String name) {
+        firebaseModel.deleteRecipeFromDb(loginModel.getAuth().getUid(), name);
+    }
+
+    public void navigateTo(final String screenKey, final String data) {
+        router.navigateTo(screenKey, data);
     }
 
 }
