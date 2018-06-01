@@ -26,16 +26,14 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
     @Inject
     NavigatorHolder navigatorHolder;
-
+    
     @InjectPresenter
     MainActivityPresenter presenter;
-
 
     @Inject
     NavigationUtil navigationUtil() {
         return new NavigationUtil(this);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -47,9 +45,12 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         App.getAppComponent().inject(this);
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        presenter.checkDeferencesFBandRealm();
 
 
         if (savedInstanceState == null) {
@@ -89,13 +90,13 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
     @Override
     protected void onResume() {
         super.onResume();
-        navigatorHolder.setNavigator(navigationUtil());
 
+        navigatorHolder.setNavigator(navigationUtil());
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onPause() {
+        super.onPause();
 
         navigatorHolder.removeNavigator();
     }

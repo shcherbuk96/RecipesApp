@@ -15,7 +15,7 @@ public class FragmentCreater {
 
     public Fragment getNewInstanceFragment(final String screenKey, final int data) {
         final Bundle bundle = new Bundle();
-        bundle.putInt(Constants.KEY_FRAGMENT,data);
+        bundle.putInt(Constants.KEY_FRAGMENT, data);
 
         switch (screenKey) {
             case Constants.SEARCH_SCREEN: {

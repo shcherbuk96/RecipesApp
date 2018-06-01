@@ -13,6 +13,7 @@ public interface ViewSearch extends MvpView {
 
     void updateList(List<Hits> hitsList);
 
+    @StateStrategyType(SkipStrategy.class)
     void progressBarVisible(final int visible);
 
     void setSearchText(String text);

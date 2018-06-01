@@ -77,8 +77,6 @@ dependencies {
     ///MultiDex//
     compile "${library.multidex}"
 
-    ///Rx2Firebase///
-    compile "${library.rxfirebase}"
     //
     compile "${library.cicerone}"
     ///////Moxy/////
