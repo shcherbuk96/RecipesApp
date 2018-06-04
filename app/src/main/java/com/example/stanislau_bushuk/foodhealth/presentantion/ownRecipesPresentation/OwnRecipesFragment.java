@@ -4,7 +4,8 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.ownRecipesPresenta
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +13,24 @@ import android.view.ViewGroup;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.stanislau_bushuk.foodhealth.R;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.OwnRecipeModel;
+import com.example.stanislau_bushuk.foodhealth.presentantion.ownRecipesPresentation.presenters.OwnRecipesPresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.ownRecipesPresentation.view.OwnRecipesView;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class OwnRecipesFragment extends MvpAppCompatFragment {
+import java.util.ArrayList;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class OwnRecipesFragment extends MvpAppCompatFragment implements OwnRecipesView, RecyclerViewOwnRecipesAdapter.Listener {
 
     @InjectPresenter
     OwnRecipesPresenter presenter;
+
+    @BindView(R.id.recycler_view_own_recipes)
+    RecyclerView recyclerView;
+
+    RecyclerViewOwnRecipesAdapter recyclerAdapter;
 
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
@@ -30,5 +41,17 @@ public class OwnRecipesFragment extends MvpAppCompatFragment {
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        ButterKnife.bind(this,view);
+        recyclerAdapter = new RecyclerViewOwnRecipesAdapter(this, new ArrayList<OwnRecipeModel>());
+        final DividerItemDecoration itemDecorator = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
+        itemDecorator.setDrawable(getResources().getDrawable(R.drawable.devider));
+        recyclerView.addItemDecoration(itemDecorator);
+        recyclerView.setAdapter(recyclerAdapter);
+    }
+
+    @Override
+    public void onItemClick(final String uri) {
+
     }
 }

@@ -124,18 +124,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                     }
                 }
             });
-            /*starButton.setOnCheckStateChangeListener(new ShineButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(final View view, final boolean checked) {
-                    if (listener != null) {
-                        if (checked) {
-                            listener.addToFavorite(hits.get(getAdapterPosition()).getRecipe());
-                        } else {
-                            listener.deleteFromFavorite(hits.get(getAdapterPosition()).getRecipe());
-                        }
-                    }
-                }
-            });*/
         }
     }
 }

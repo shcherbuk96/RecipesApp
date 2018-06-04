@@ -21,6 +21,7 @@ import com.example.stanislau_bushuk.foodhealth.FragmentCreater;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteFragment;
+import com.example.stanislau_bushuk.foodhealth.presentantion.ownRecipesPresentation.OwnRecipesFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.presenters.ProfilePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.view.ProfileView;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
@@ -29,7 +30,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import timber.log.Timber;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,7 +62,7 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileView
     ViewPager pager;
 
     private FavoriteFragment favoriteFragment = new FavoriteFragment();
-    private SearchFragment searchFragment = new SearchFragment();
+    private OwnRecipesFragment ownRecipesFragment = new OwnRecipesFragment();
 
 
     @Override
@@ -94,10 +94,10 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileView
                 getResources().getColor(R.color.white)
         );
 
-        if(savedInstanceState==null) {
+        if (savedInstanceState == null) {
             final ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
             viewPagerAdapter.addFragment(favoriteFragment, "FAVOURITES");
-            viewPagerAdapter.addFragment(searchFragment, "SEARHFRAGMENTS");
+            viewPagerAdapter.addFragment(ownRecipesFragment, "OWN RECIPES");
             pager.setAdapter(viewPagerAdapter);
             tabLayout.setupWithViewPager(pager);
         }

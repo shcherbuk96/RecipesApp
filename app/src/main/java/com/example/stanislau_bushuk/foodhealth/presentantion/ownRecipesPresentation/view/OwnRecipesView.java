@@ -1,4 +1,4 @@
-package com.example.stanislau_bushuk.foodhealth.presentantion.ownRecipesPresentation;
+package com.example.stanislau_bushuk.foodhealth.presentantion.ownRecipesPresentation.view;
 
 import com.arellomobile.mvp.MvpView;
 
