@@ -1,5 +1,7 @@
 package com.example.stanislau_bushuk.foodhealth.model.pojo;
 
+import com.google.firebase.database.DataSnapshot;
+
 import java.util.List;
 
 import io.realm.RealmList;
@@ -31,6 +33,13 @@ public class Recipe extends RealmObject {
     private boolean bought;
 
     private boolean isChecked;
+
+    public Recipe(final DataSnapshot ds) {
+        this.uri = String.valueOf(ds.child("uri").getValue());
+        this.label = String.valueOf(ds.child("name").getValue());
+        this.image = String.valueOf(ds.child("photoUrl").getValue());
+        this.isChecked = true;
+    }
 
     public String getUri() {
         return uri;
@@ -92,6 +101,9 @@ public class Recipe extends RealmObject {
         return totalTime;
     }
 
+    public Recipe() {
+        this.calories=0;
+    }
 
     public boolean isBookmarked() {
         return bookmarked;

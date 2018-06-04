@@ -6,11 +6,13 @@ import com.example.stanislau_bushuk.foodhealth.MainActivityPresenter;
 import com.example.stanislau_bushuk.foodhealth.NavigationUtil;
 import com.example.stanislau_bushuk.foodhealth.cicerone.OwnNavigator;
 import com.example.stanislau_bushuk.foodhealth.model.CardNetWorkModel;
+import com.example.stanislau_bushuk.foodhealth.model.FirebaseModel;
 import com.example.stanislau_bushuk.foodhealth.model.NetWorkModel;
 import com.example.stanislau_bushuk.foodhealth.modul.Api;
 import com.example.stanislau_bushuk.foodhealth.modul.CardNetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.CiceroneModul;
 import com.example.stanislau_bushuk.foodhealth.modul.DeepSearchModul;
+import com.example.stanislau_bushuk.foodhealth.modul.FirebaseModul;
 import com.example.stanislau_bushuk.foodhealth.modul.FragmentCreaterModul;
 import com.example.stanislau_bushuk.foodhealth.modul.LoginModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
@@ -25,6 +27,7 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.Ca
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.model.NetWorkModelDeepSearch;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters.DeepSearchPresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoritePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.ownRecipesPresentation.presenters.OwnRecipesPresenter;
@@ -44,7 +47,7 @@ import dagger.Component;
 @Singleton
 @Component(modules = {Api.class, NetWorkModul.class, CardNetWorkModul.class,
         ResourceManagerModul.class, DeepSearchModul.class, NetworkDeepSearchModul.class,
-        RealmModul.class, CiceroneModul.class, FragmentCreaterModul.class,LoginModul.class})
+        RealmModul.class, CiceroneModul.class, FragmentCreaterModul.class, LoginModul.class, FirebaseModul.class})
 public interface AppComponent {
 
     void inject(SearchPresenter searchPresenter);
@@ -80,6 +83,8 @@ public interface AppComponent {
     void inject(FavoriteFragment favoriteFragment);
 
     void inject(LoginPresenter loginPresenter);
+
+    void inject(FirebaseModel firebaseModel);
 
     void inject(SplashActivityPresenter splashActivityPresenter);
 

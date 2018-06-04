@@ -3,7 +3,6 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.splashPresentatiom
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.MvpView;
@@ -36,6 +35,8 @@ public class SplashActivity extends MvpAppCompatActivity implements MvpView {
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         App.getAppComponent().inject(this);
+
+
         super.onCreate(savedInstanceState);
 
 

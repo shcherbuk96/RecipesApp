@@ -20,7 +20,7 @@ public class Constants {
 
     public static final int TEXT_DEBOUNCE = 1000;
 
-    public static final int RABDON = 90;
+    public static final int RANDOM = 90;
 
     public static final String HYPHEN = "-";
 
@@ -52,4 +52,5 @@ public class Constants {
 
     public static final String PROFILE_ANONIM_SCREEN = "PROFILE_SCREEN_ANONIM";
 
+    public static final String USER = "USER";
 }

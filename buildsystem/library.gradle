@@ -47,9 +47,6 @@ ext.version = [
         firebaseDatabase       : "15.0.0",
         firebaseAuth           : "15.0.0",
 
-        //Rx2Firebase//
-        rxfirebase             : "0.0.15",
-
         //Multidex//
         multidex               : "1.0.1"
 ]
@@ -117,7 +114,5 @@ ext.library = [
         firebaseAuth           : "com.google.firebase:firebase-auth:" + "$version.firebaseAuth",
 
         //MultiDex///
-        multidex               : "com.android.support:multidex:" + "$version.multidex",
-        /////Rx2Firebase/////
-        rxfirebase             : "com.kelvinapps:rxfirebase:" + "$version.rxfirebase"
+        multidex               : "com.android.support:multidex:" + "$version.multidex"
 ]

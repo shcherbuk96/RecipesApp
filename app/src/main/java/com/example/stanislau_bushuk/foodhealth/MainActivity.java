@@ -60,7 +60,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
     @Inject
     NavigationUtil navigationUtil() {
-        return new NavigationUtil(this,R.id.main_contener_frame_layout);
+        return new NavigationUtil(this, R.id.main_contener_frame_layout);
     }
 
     @Override
@@ -77,6 +77,8 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        presenter.checkDeferencesFBandRealm();
 
         if (savedInstanceState == null) {
             router.replaceScreen(Constants.SEARCH_SCREEN, 0);

@@ -1,10 +1,9 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.kelvinapps.rxfirebase.RxFirebaseAuth;
-
-import rx.Observable;
 
 public class LoginModel {
 
@@ -20,23 +19,39 @@ public class LoginModel {
     }
 
     public void signIn(final String email, final String password) {
-        final Observable<AuthResult> observable = RxFirebaseAuth.signInWithEmailAndPassword(mAuth, email, password)
-                .asObservable();
-        callBackLoginPresenter.call(observable);
+        final Task<AuthResult> authResult = mAuth.signInWithEmailAndPassword(email, password);
+        authResult.addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(final AuthResult authResult) {
+                callBackLoginPresenter.call(authResult);
+            }
+        });
+
     }
 
     public void signInAnonymous() {
-        final Observable<AuthResult> observable = RxFirebaseAuth.signInAnonymously(mAuth).asObservable();
-        callBackLoginPresenter.call(observable);
+        final Task<AuthResult> authResult = mAuth.signInAnonymously().addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+            @Override
+            public void onSuccess(final AuthResult authResult) {
+                callBackLoginPresenter.call(authResult);
+            }
+        });
+
     }
 
     public void registrationUser(final String email, final String password) {
-        final Observable<AuthResult> observable = RxFirebaseAuth.createUserWithEmailAndPassword(mAuth, email, password)
-                .asObservable();
-        callBackLoginPresenter.call(observable);
+        final Task<AuthResult> authResult = mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                    @Override
+                    public void onSuccess(final AuthResult authResult) {
+                        callBackLoginPresenter.call(authResult);
+                    }
+                });
+
     }
 
     public FirebaseAuth getAuth() {
         return mAuth;
     }
+
 }

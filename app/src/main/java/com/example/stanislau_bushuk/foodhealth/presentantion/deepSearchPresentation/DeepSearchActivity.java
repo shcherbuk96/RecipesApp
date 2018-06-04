@@ -15,8 +15,10 @@ import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.NavigationUtil;
 import com.example.stanislau_bushuk.foodhealth.R;
+import com.example.stanislau_bushuk.foodhealth.model.FirebaseModel;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
+import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginModel;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters.DeepSearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.view.DeepSearchView;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.RecyclerViewMoreListener;
@@ -28,7 +30,11 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.NavigatorHolder;
+import ru.terrakok.cicerone.commands.Back;
+import ru.terrakok.cicerone.commands.Command;
+import ru.terrakok.cicerone.commands.Forward;
 import timber.log.Timber;
 
 public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSearchView, RecyclerAdapter.Listener {
@@ -44,6 +50,13 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
 
     @Inject
     NavigatorHolder navigatorHolder;
+
+    @Inject
+    FirebaseModel firebaseModel;
+
+    @Inject
+    LoginModel loginModel;
+
     private RecyclerAdapter adapter;
 
     @Inject
@@ -135,6 +148,18 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     }
 
     @Override
+    public void addToFb(final Recipe recipe) {
+        firebaseModel.addRecipeToFbDb(loginModel.getAuth().getUid(),
+                recipe.getLabel(),recipe.getUri(),recipe.getImage());
+    }
+
+    @Override
+    public void deleteFromFb(final Recipe recipe) {
+        firebaseModel.deleteRecipeFromDb(loginModel.getAuth().getUid(),
+                recipe.getLabel());
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 
@@ -144,7 +169,7 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
     @Override
     protected void onPause() {
         super.onPause();
-        Timber.e("PAUSE DEEPACTIVITY");
+
         navigatorHolder.removeNavigator();
     }
 }

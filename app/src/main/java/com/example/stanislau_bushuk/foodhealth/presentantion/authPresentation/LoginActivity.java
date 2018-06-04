@@ -1,5 +1,6 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,8 @@ import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.NavigationUtil;
 import com.example.stanislau_bushuk.foodhealth.R;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.auth.FirebaseUser;
 
 import javax.inject.Inject;
@@ -48,15 +51,16 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
     @Inject
     NavigationUtil navigationUtil() {
-        return new NavigationUtil(this,R.id.main_contener_frame_layout);
+        return new NavigationUtil(this, R.id.main_contener_frame_layout);
     }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         App.getAppComponent().inject(this);
-        setContentView(R.layout.activity_login);
 
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+        isGooglePlayServicesAvailable();
         keyScreen = getIntent().getStringExtra(Constants.KEY_FRAGMENT);
         ButterKnife.bind(this);
         loginPresenter.setViewVisibility(keyScreen);
@@ -117,4 +121,20 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
         navigatorHolder.removeNavigator();
     }
 
+    private boolean isGooglePlayServicesAvailable() {
+        final GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
+        final int resultCode = googleApiAvailability.isGooglePlayServicesAvailable(this);
+
+        if (resultCode != ConnectionResult.SUCCESS) {
+            final Dialog dialog = googleApiAvailability.getErrorDialog(this, resultCode, 0);
+
+            if (dialog != null) {
+                dialog.show();
+            }
+
+            return false;
+        }
+
+        return true;
+    }
 }

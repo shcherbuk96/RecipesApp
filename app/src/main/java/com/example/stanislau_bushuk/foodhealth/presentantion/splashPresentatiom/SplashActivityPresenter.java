@@ -14,13 +14,11 @@ public class SplashActivityPresenter extends MvpPresenter<MvpView> {
     @Inject
     OwnRouter ownRouter;
 
-    public SplashActivityPresenter(){
+    public SplashActivityPresenter() {
         App.getAppComponent().inject(this);
     }
 
-    public void goTo(final String screenKey){
-       // ownRouter.exit();
+    public void goTo(final String screenKey) {
         ownRouter.newRootScreen(screenKey);
-
     }
 }
