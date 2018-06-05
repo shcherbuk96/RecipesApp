@@ -1,14 +1,21 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation;
 
+import android.net.Uri;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.cicerone.OwnRouter;
 import com.example.stanislau_bushuk.foodhealth.model.CallBackCardPresenter;
 import com.example.stanislau_bushuk.foodhealth.model.CardNetWorkModel;
+import com.example.stanislau_bushuk.foodhealth.model.FirebaseModel;
 import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Comment;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
+import com.google.firebase.database.DataSnapshot;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -29,6 +36,9 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
     CardNetWorkModel netWorkModel;
 
     @Inject
+    FirebaseModel firebaseModel;
+
+    @Inject
     RealmModel realmModel;
 
     @Inject
@@ -37,6 +47,7 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
     CardPresenter() {
         App.getAppComponent().inject(this);
         netWorkModel.setCallBackCard(this);
+        firebaseModel.setCardPresenterCallBack(this);
     }
 
 
@@ -85,12 +96,14 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
                     @Override
                     public void onNext(final Data data) {
                         Timber.e("onNext");
+                        firebaseModel.getComments(data.getLabel());
                         getViewState().showList(data);
                     }
 
                     @Override
                     public void onError(final Throwable e) {
                         e.printStackTrace();
+                        getViewState().showError();
                     }
 
                     @Override
@@ -143,6 +156,37 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
                 });
     }
 
+    @Override
+    public void callFirebase(final DataSnapshot dataSnapshot) {
+        if (dataSnapshot != null) {
+            final List<Comment> listComments = new ArrayList<>();
+
+            for (final DataSnapshot ds : dataSnapshot.getChildren()) {
+                listComments.add(new Comment(ds));
+            }
+
+            Collections.reverse(listComments);
+
+            if (listComments.size() != 0) {
+                getViewState().showComments(listComments);
+            }
+        } else {
+            getViewState().showError();
+        }
+    }
+
+    public void addComment(final String email, final String text, final String nameRecipe, final Uri photoUri) {
+        if (email.isEmpty()) {
+            getViewState().showAnonymous();
+        } else {
+
+            if (photoUri == null) {
+                firebaseModel.addComment(email, text, nameRecipe, "null");
+            } else {
+                firebaseModel.addComment(email, text, nameRecipe, photoUri.toString());
+            }
+        }
+    }
 
     public void back() {
         router.exit();

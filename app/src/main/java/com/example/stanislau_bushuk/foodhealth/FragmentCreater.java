@@ -19,31 +19,31 @@ public class FragmentCreater {
 
         switch (screenKey) {
             case Constants.SEARCH_SCREEN: {
-
                 if (this.searchFragment == null) {
                     searchFragment = new SearchFragment();
                 }
                 searchFragment.setArguments(bundle);
+
                 return searchFragment;
 
             }
 
             case Constants.DEEP_SEARCH_SCREEN: {
-
                 if (this.deepSearchFragment == null) {
                     deepSearchFragment = new DeepSearchFragment();
                 }
                 deepSearchFragment.setArguments(bundle);
+
                 return deepSearchFragment;
             }
 
             case Constants.FAVOURITE_SCREEN: {
-
                 if (this.favoriteFragment == null) {
                     favoriteFragment = new FavoriteFragment();
                 }
 
                 favoriteFragment.setArguments(bundle);
+
                 return favoriteFragment;
             }
 

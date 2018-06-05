@@ -22,10 +22,10 @@ import io.realm.RealmResults;
 
 public class NetWorkModel {
 
+    private final Realm realm;
+
     @Inject
     IAPI iapi;
-
-    private Realm realm;
 
     private CallBackSearchPresenter callBackSearchPresenter;
 
@@ -51,6 +51,7 @@ public class NetWorkModel {
 
     public boolean checkRealmIsEmpty() {
         final RealmResults<Recipe> recipes = realm.where(Recipe.class).findAll();
+
         return recipes.isEmpty();
     }
 

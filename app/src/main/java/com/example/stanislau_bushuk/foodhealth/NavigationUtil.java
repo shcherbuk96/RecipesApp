@@ -41,30 +41,34 @@ public class NavigationUtil extends OwnNavigator {
         final Intent intent;
 
         switch (screenKey) {
-
             case Constants.MAIN_ACTIVITY: {
                 intent = new Intent(context, MainActivity.class);
+
                 return intent;
             }
 
             case Constants.DEEP_SEARCH_ACTIVITY: {
                 intent = new Intent(context, DeepSearchActivity.class);
+
                 return intent;
             }
 
             case Constants.CARD_ACTIVITY: {
                 intent = new Intent(context, CardActivity.class);
                 intent.putExtra(Constants.RECIPE_INTENT_KEY, (String) data);
+
                 return intent;
             }
 
             case Constants.LOGIN_ACTIVITY: {
                 intent = new Intent(context, LoginActivity.class);
+
                 return intent;
             }
 
             case Constants.REGISTRATION_ACTIVITY: {
                 intent = new Intent(context, RegistrationActivity.class);
+
                 return intent;
             }
 

@@ -26,7 +26,7 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
 
     @Inject
     NavigatorHolder navigatorHolder;
-    
+
     @InjectPresenter
     MainActivityPresenter presenter;
 
@@ -52,7 +52,6 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         ButterKnife.bind(this);
         presenter.checkDeferencesFBandRealm();
 
-
         if (savedInstanceState == null) {
             router.replaceScreen(Constants.SEARCH_SCREEN, 0);
         }
@@ -62,7 +61,6 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull final MenuItem item) {
-
                 switch (item.getItemId()) {
                     case R.id.search:
                         presenter.goBack(Constants.SEARCH_SCREEN, 1);

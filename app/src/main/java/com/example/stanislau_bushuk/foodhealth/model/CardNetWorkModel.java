@@ -17,11 +17,9 @@ import timber.log.Timber;
 
 public class CardNetWorkModel {
 
+    private final Realm realm;
     @Inject
     IAPI iapi;
-
-    private final Realm realm;
-
     private CallBackCardPresenter callBackCardPresenter;
 
     public CardNetWorkModel() {

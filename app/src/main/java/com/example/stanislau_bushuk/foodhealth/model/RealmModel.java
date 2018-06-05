@@ -10,7 +10,6 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.realm.Realm;
 import io.realm.RealmResults;
-import timber.log.Timber;
 
 public class RealmModel {
 
@@ -35,7 +34,7 @@ public class RealmModel {
     public void addToRealm(final Recipe recipe) {
         realm.beginTransaction();
 
-        if(realm.where(Recipe.class).equalTo("uri",recipe.getUri()).findFirst()==null) {
+        if (realm.where(Recipe.class).equalTo("uri", recipe.getUri()).findFirst() == null) {
             realm.insertOrUpdate(recipe);
         }
 
@@ -59,8 +58,9 @@ public class RealmModel {
         }
     }
 
-    public List<Recipe> getRecipesRealm(){
-        final List<Recipe> recipes = realm.where(Recipe.class).equalTo("isChecked",true).findAll();
+    public List<Recipe> getRecipesRealm() {
+        final List<Recipe> recipes = realm.where(Recipe.class).equalTo("isChecked", true).findAll();
+
         return recipes;
     }
 

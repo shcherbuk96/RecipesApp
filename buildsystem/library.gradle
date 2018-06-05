@@ -114,5 +114,5 @@ ext.library = [
         firebaseAuth           : "com.google.firebase:firebase-auth:" + "$version.firebaseAuth",
 
         //MultiDex///
-        multidex               : "com.android.support:multidex:" + "$version.multidex"
+        multidex               : "com.android.support:multidex:" + "$version.multidex",
 ]

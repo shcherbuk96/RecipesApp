@@ -9,10 +9,9 @@ import dagger.Provides;
 
 @Module
 public class FirebaseModul {
-
     @Provides
     @Singleton
-    FirebaseModel firebaseModel(){
+    public FirebaseModel firebaseModel() {
         return new FirebaseModel();
     }
 }
