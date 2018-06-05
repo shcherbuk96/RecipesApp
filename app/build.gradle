@@ -73,19 +73,21 @@ dependencies {
     ///Firebase///
     implementation "${library.firebaseDatabase}"
     implementation "${library.firebaseAuth}"
+    implementation "${library.firebaseStorage}"
     ///
 
     ///MultiDex//
-    compile "${library.multidex}"
+    implementation "${library.multidex}"
 
     //
-    compile "${library.cicerone}"
+    implementation "${library.cicerone}" +
+            ""
     ///////Moxy/////
-    compile "${library.moxy}"
+    implementation "${library.moxy}"
     annotationProcessor "${library.moxyCompiler}"
     //
     ////Cicerone////
-    compile "${library.moxyAppCompat}"
+    implementation "${library.moxyAppCompat}"
     //
     testImplementation "${library.junit}"
     androidTestImplementation "${library.testRunner}"

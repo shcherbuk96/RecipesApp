@@ -53,4 +53,12 @@ public class Constants {
     public static final String PROFILE_ANONIM_SCREEN = "PROFILE_SCREEN_ANONIM";
 
     public static final String USER = "USER";
+
+    public static final String OWN_RECIPES = "OWN_RECIPES";
+
+    public static final String ADD_OWN_RECIPE = "ADD_OWN_RECIPE";
+
+    public static final String GALLERY = "GALLERY";
+
+    public static final int RESULT_LOAD_IMAGE = 1;
 }

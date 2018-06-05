@@ -63,4 +63,9 @@
     <!--Profile strings -->
     <string name="profile_menu_item">Profile</string>
     <string name="profile_anonim">You don`t sign in. Please register or sign in</string>
+
+    <!--ADD OWN RECIPES -->
+    <string name="add_own_recipes_instruction">Instruction for cooking</string>
+    <string name="add_own_recipes_send">Send</string>
+    <string name="add_own_recipes_ingredient">Enter ingredient</string>
 </resources>

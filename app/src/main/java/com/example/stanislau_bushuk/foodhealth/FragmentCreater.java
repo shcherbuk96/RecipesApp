@@ -3,6 +3,7 @@ package com.example.stanislau_bushuk.foodhealth;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import com.example.stanislau_bushuk.foodhealth.presentantion.addOwnRecipe.AddOwnRecipeActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.AnonimProfileFragment;
@@ -28,6 +29,7 @@ public class FragmentCreater {
                     searchFragment = new SearchFragment();
                 }
                 searchFragment.setArguments(bundle);
+
                 return searchFragment;
 
             }
@@ -38,6 +40,7 @@ public class FragmentCreater {
                     deepSearchFragment = new DeepSearchFragment();
                 }
                 deepSearchFragment.setArguments(bundle);
+
                 return deepSearchFragment;
             }
 
@@ -48,28 +51,32 @@ public class FragmentCreater {
                 }
 
                 favoriteFragment.setArguments(bundle);
+
                 return favoriteFragment;
             }
 
-            case Constants.PROFILE_ANONIM_SCREEN:{
+            case Constants.PROFILE_ANONIM_SCREEN: {
 
-                if(this.anonimProfileFragment ==null){
-                    anonimProfileFragment =new AnonimProfileFragment();
+                if (this.anonimProfileFragment == null) {
+                    anonimProfileFragment = new AnonimProfileFragment();
                 }
 
                 anonimProfileFragment.setArguments(bundle);
+
                 return anonimProfileFragment;
             }
 
-            case Constants.PROFILE_SCREEN:{
+            case Constants.PROFILE_SCREEN: {
 
-                if(this.profileFragment ==null){
-                    profileFragment =new ProfileFragment();
+                if (this.profileFragment == null) {
+                    profileFragment = new ProfileFragment();
                 }
 
                 profileFragment.setArguments(bundle);
+
                 return profileFragment;
             }
+
 
             default: {
                 return null;
@@ -84,8 +91,8 @@ public class FragmentCreater {
 
     public FavoriteFragment getFavoriteFragment() {
 
-        if(favoriteFragment==null){
-            favoriteFragment=new FavoriteFragment();
+        if (favoriteFragment == null) {
+            favoriteFragment = new FavoriteFragment();
         }
 
         return favoriteFragment;

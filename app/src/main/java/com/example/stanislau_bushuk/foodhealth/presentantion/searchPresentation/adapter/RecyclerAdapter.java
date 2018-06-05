@@ -20,6 +20,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
@@ -113,6 +114,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                 @Override
                 public void onClick(final View v) {
 
+                    Timber.e(hits.get(getAdapterPosition()).getRecipe().getUri());
                     if (listener != null) {
                         listener.onItemClick(hits.get(getAdapterPosition()).getRecipe().getUri());
                     }

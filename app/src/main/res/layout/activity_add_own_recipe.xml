@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".presentantion.addOwnRecipe.AddOwnRecipeActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/margin_padding_size_medium">
+
+
+        <ImageView
+            android:id="@+id/add_own_recipe_recipe_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/image_card_height"
+            android:src="@drawable/insert_own_recipe_photo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/add_own_recipe_name_editText"
+            style="@style/Body_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_padding_size_medium"
+            android:layout_marginStart="@dimen/margin_padding_size_medium"
+            android:layout_marginTop="@dimen/margin_padding_size_small"
+            android:ems="10"
+            android:hint="Add name of recipe"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_own_recipe_recipe_image" />
+
+        <TextView
+            android:id="@+id/add_own_recipe_ingredients_textView"
+            style="@style/Subheading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_size_small"
+            android:text="@string/deep_search_ingredients_text"
+            app:layout_constraintStart_toStartOf="@+id/add_own_recipe_name_editText"
+            app:layout_constraintTop_toBottomOf="@+id/add_own_recipe_name_editText" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ingredients_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_size_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_own_recipe_ingredients_textView" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/add_own_recipe_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_size_small"
+            android:background="@color/colorAccent"
+
+            android:src="@drawable/floating_add_24dp"
+            app:layout_constraintStart_toStartOf="@+id/add_own_recipe_name_editText"
+            app:layout_constraintTop_toBottomOf="@+id/ingredients_recycler_view" />
+
+        <TextView
+            android:id="@+id/add_own_recipe_instruction_textView"
+            style="@style/Subheading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/add_own_recipes_instruction"
+            app:layout_constraintStart_toStartOf="@+id/add_own_recipe_ingredients_textView"
+            app:layout_constraintTop_toBottomOf="@+id/add_own_recipe_button" />
+
+
+        <EditText
+            android:id="@+id/add_own_recipe_instruction_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_padding_size_medium"
+            android:layout_marginStart="@dimen/margin_padding_size_medium"
+            android:layout_marginTop="@dimen/margin_padding_size_small"
+            android:background="@drawable/item"
+            android:gravity="top|left"
+            android:inputType="textMultiLine"
+            android:lines="6"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_own_recipe_instruction_textView" />
+
+        <Button
+            android:id="@+id/add_own_recipe_send_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_size_small"
+            android:text="@string/add_own_recipes_send"
+            style="@style/Button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_own_recipe_instruction_editText" />
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

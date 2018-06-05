@@ -35,6 +35,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 
 public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, RecyclerAdapter.Listener, SwipeRefreshLayout.OnRefreshListener {
@@ -126,6 +127,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
     @Override
     public void onItemClick(final String uri) {
+        Timber.e(uri);
         presenter.navigateTo(Constants.CARD_ACTIVITY, uri);
     }
 

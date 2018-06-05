@@ -19,6 +19,8 @@ import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetworkDeepSearchModul;
 import com.example.stanislau_bushuk.foodhealth.modul.RealmModul;
 import com.example.stanislau_bushuk.foodhealth.modul.ResourceManagerModul;
+import com.example.stanislau_bushuk.foodhealth.presentantion.addOwnRecipe.AddOwnRecipeActivity;
+import com.example.stanislau_bushuk.foodhealth.presentantion.addOwnRecipe.presenters.AddOwnRecipePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.RegistrationActivity;
@@ -27,7 +29,6 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.Ca
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.model.NetWorkModelDeepSearch;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters.DeepSearchPresenter;
-import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoritePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.ownRecipesPresentation.presenters.OwnRecipesPresenter;
@@ -47,7 +48,8 @@ import dagger.Component;
 @Singleton
 @Component(modules = {Api.class, NetWorkModul.class, CardNetWorkModul.class,
         ResourceManagerModul.class, DeepSearchModul.class, NetworkDeepSearchModul.class,
-        RealmModul.class, CiceroneModul.class, FragmentCreaterModul.class, LoginModul.class, FirebaseModul.class})
+        RealmModul.class, CiceroneModul.class, FragmentCreaterModul.class, LoginModul.class,
+        FirebaseModul.class})
 public interface AppComponent {
 
     void inject(SearchPresenter searchPresenter);
@@ -92,9 +94,15 @@ public interface AppComponent {
 
     void inject(RegistrationActivity registrationActivity);
 
-    void inject (ProfilePresenter profilePresenter);
+    void inject(ProfilePresenter profilePresenter);
 
-    void inject (ProfileFragment profileFragment);
+    void inject(ProfileFragment profileFragment);
 
-    void inject (OwnRecipesPresenter ownRecipesPresenter);
+    void inject(OwnRecipesPresenter ownRecipesPresenter);
+
+    void inject(CardNetWorkModel cardNetWorkModel);
+
+    void inject(AddOwnRecipeActivity addOwnRecipeActivity);
+
+    void inject(AddOwnRecipePresenter addOwnRecipePresenter);
 }

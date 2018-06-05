@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.stanislau_bushuk.foodhealth.R;
-import com.example.stanislau_bushuk.foodhealth.model.pojo.OwnRecipeModel;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.OwnRecipe;
 
 import java.util.List;
 
@@ -19,10 +19,10 @@ import butterknife.ButterKnife;
 
 public class RecyclerViewOwnRecipesAdapter extends RecyclerView.Adapter<RecyclerViewOwnRecipesAdapter.MyViewHolder> {
 
-    private List<OwnRecipeModel> hits;
+    private List<OwnRecipe> hits;
     private Listener listener;
 
-    public RecyclerViewOwnRecipesAdapter(final Listener listener, final List<OwnRecipeModel> hits) {
+    public RecyclerViewOwnRecipesAdapter(final Listener listener, final List<OwnRecipe> hits) {
         this.hits = hits;
         this.listener = listener;
     }
@@ -84,7 +84,6 @@ public class RecyclerViewOwnRecipesAdapter extends RecyclerView.Adapter<Recycler
             super(view);
 
             ButterKnife.bind(this, view);
-
         }
     }
 }

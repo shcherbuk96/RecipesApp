@@ -36,7 +36,7 @@ public class MainActivityPresenter extends MvpPresenter<MvpView> implements Call
     public MainActivityPresenter() {
         App.getAppComponent().inject(this);
         db = FirebaseDatabase.getInstance().getReference();
-        firebaseModel.setCallBack(this);
+        firebaseModel.setCallBackMainActivityPresenter(this);
     }
 
     public void goBack(final String screenKey, final int data) {
