@@ -16,7 +16,7 @@ public interface ViewSearch extends MvpView {
     @StateStrategyType(SkipStrategy.class)
     void progressBarVisible(final int visible);
 
-    void setSearchText(String text);
+    void setSearchView(String text);
 
     @StateStrategyType(SkipStrategy.class)
     void setSnackBar();
