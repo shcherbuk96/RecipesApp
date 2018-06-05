@@ -97,14 +97,46 @@
 
         <Button
             android:id="@+id/add_own_recipe_send_button"
+            style="@style/Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_padding_size_small"
             android:text="@string/add_own_recipes_send"
-            style="@style/Button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/add_own_recipe_instruction_editText" />
+
+        <TextView
+            android:id="@+id/add_own_recipe_fail_name"
+            style="@style/Body_1.RedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_padding_size_small"
+            android:text="@string/add_own_recipes_clear_field"
+            android:visibility="gone"
+            app:layout_constraintBaseline_toBaselineOf="@id/add_own_recipe_name_editText"
+            app:layout_constraintEnd_toEndOf="@+id/add_own_recipe_name_editText" />
+
+        <TextView
+            android:id="@+id/add_own_recipe_fail_ingredients"
+            style="@style/Body_1.RedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_own_recipes_clear_field"
+            android:visibility="gone"
+            app:layout_constraintBaseline_toBaselineOf="@+id/add_own_recipe_ingredients_textView"
+            app:layout_constraintEnd_toEndOf="@+id/add_own_recipe_fail_name"
+            app:layout_constraintTop_toTopOf="@+id/add_own_recipe_ingredients_textView" />
+
+        <TextView
+            android:id="@+id/add_own_recipe_fail_instructions"
+            style="@style/Body_1.RedText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_own_recipes_clear_field"
+            android:visibility="gone"
+            app:layout_constraintBaseline_toBaselineOf="@+id/add_own_recipe_instruction_textView"
+            app:layout_constraintEnd_toEndOf="@+id/add_own_recipe_fail_name" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

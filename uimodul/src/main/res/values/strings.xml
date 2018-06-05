@@ -68,4 +68,5 @@
     <string name="add_own_recipes_instruction">Instruction for cooking</string>
     <string name="add_own_recipes_send">Send</string>
     <string name="add_own_recipes_ingredient">Enter ingredient</string>
+    <string name="add_own_recipes_clear_field">*Please enter this field</string>
 </resources>

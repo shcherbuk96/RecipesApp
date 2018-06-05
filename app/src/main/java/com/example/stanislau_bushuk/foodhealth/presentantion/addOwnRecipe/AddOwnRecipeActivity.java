@@ -9,9 +9,11 @@ import android.provider.MediaStore;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -42,11 +44,23 @@ public class AddOwnRecipeActivity extends MvpAppCompatActivity implements AddOwn
     @BindView(R.id.add_own_recipe_name_editText)
     EditText nameEditText;
 
+    @BindView(R.id.add_own_recipe_instruction_editText)
+    EditText instructionsEditText;
+
     @BindView(R.id.ingredients_recycler_view)
     RecyclerView recyclerView;
 
     @BindView(R.id.add_own_recipe_recipe_image)
     ImageView recipeImage;
+
+    @BindView(R.id.add_own_recipe_fail_name)
+    TextView nameFail;
+
+    @BindView(R.id.add_own_recipe_fail_ingredients)
+    TextView ingredientsFail;
+
+    @BindView(R.id.add_own_recipe_fail_instructions)
+    TextView instructionsFail;
 
     @InjectPresenter
     AddOwnRecipePresenter presenter;
@@ -91,6 +105,77 @@ public class AddOwnRecipeActivity extends MvpAppCompatActivity implements AddOwn
         startActivityForResult(intent, Constants.RESULT_LOAD_IMAGE);
     }
 
+    @OnClick(R.id.add_own_recipe_send_button)
+    public void sendRecipe() {
+        final ArrayList<String> recipeIngredients = new ArrayList<>();
+
+        for (int i = 0; i < recyclerAdapter.getItemCount(); i++) {
+            recipeIngredients.add(((RecyclerViewAddOwnRecipesAdapter.MyViewHolder) recyclerView
+                    .findViewHolderForAdapterPosition(i)).editText.getText().toString());
+        }
+
+        final String recipeName = nameEditText.getText().toString();
+        final String recipeInstruction = instructionsEditText.getText().toString();
+        presenter.validateData(recipeName, recipeIngredients, recipeInstruction);
+    }
+
+    @Override
+    public void onDeleteButtonClick(final int pos) {
+        ownRecipes.remove(pos);
+        recyclerView.getChildAt(pos);
+        recyclerAdapter.notifyItemRemoved(pos);
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == Constants.RESULT_LOAD_IMAGE) {
+            final Uri uri = data.getData();
+            try {
+                final Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                presenter.loadImageToStorage(bitmap);
+            } catch (final IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void showImage(final String imageUrl) {
+        GlideApp.with(this)
+                .load(imageUrl)
+                .into(recipeImage);
+    }
+
+    @Override
+    public void fixView(final int viewFail) {
+        switch (viewFail) {
+
+            case R.id.add_own_recipe_instruction_editText: {
+                instructionsFail.setVisibility(View.VISIBLE);
+                break;
+            }
+
+            case R.id.add_own_recipe_name_editText: {
+                nameFail.setVisibility(View.VISIBLE);
+                break;
+            }
+
+            case R.id.add_own_recipe_ingredients_editText:{
+                ingredientsFail.setVisibility(View.VISIBLE);
+            }
+
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        presenter.exit();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -103,40 +188,5 @@ public class AddOwnRecipeActivity extends MvpAppCompatActivity implements AddOwn
         super.onPause();
 
         navigatorHolder.removeNavigator();
-    }
-
-    @Override
-    public void onBackPressed() {
-        presenter.exit();
-    }
-
-
-    @Override
-    public void onDeleteButtonClick(final int pos) {
-        ownRecipes.remove(pos);
-        recyclerView.getChildAt(pos);
-        recyclerAdapter.notifyItemRemoved(pos);
-    }
-
-    @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == Constants.RESULT_LOAD_IMAGE) {
-            final Uri uri = data.getData();
-            try {
-                final Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                presenter.loadImageToStorage(bitmap);
-            } catch (final IOException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-
-    @Override
-    public void showImage(final String imageUrl) {
-        GlideApp.with(this)
-                .load(imageUrl)
-                .into(recipeImage);
     }
 }
