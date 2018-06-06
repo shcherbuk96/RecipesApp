@@ -42,6 +42,7 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
     NavigatorHolder navigatorHolder;
 
 
+
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
@@ -52,7 +53,6 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
 
         App.getAppComponent().inject(this);
         ButterKnife.bind(this, view);

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,18 +23,13 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentatio
 import com.example.stanislau_bushuk.foodhealth.presentantion.ownRecipesPresentation.OwnRecipesFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.presenters.ProfilePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.view.ProfileView;
-import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ProfileFragment extends MvpAppCompatFragment implements ProfileView {
-
 
     @InjectPresenter
     ProfilePresenter profilePresenter;
@@ -94,13 +88,12 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileView
                 getResources().getColor(R.color.white)
         );
 
-        if (savedInstanceState == null) {
-            final ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
-            viewPagerAdapter.addFragment(favoriteFragment, "FAVOURITES");
-            viewPagerAdapter.addFragment(ownRecipesFragment, "OWN RECIPES");
-            pager.setAdapter(viewPagerAdapter);
-            tabLayout.setupWithViewPager(pager);
-        }
+        final ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+        viewPagerAdapter.addFragment(favoriteFragment, getString(R.string.profile_favourites_tab));
+        viewPagerAdapter.addFragment(ownRecipesFragment, getString(R.string.profile_own_tab));
+        pager.setAdapter(viewPagerAdapter);
+        tabLayout.setupWithViewPager(pager);
+
     }
 
     @Override

@@ -72,6 +72,5 @@ public class RecyclerViewAddOwnRecipesAdapter extends RecyclerView.Adapter<Recyc
             listener.onDeleteButtonClick(getAdapterPosition());
         }
 
-
     }
 }

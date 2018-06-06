@@ -76,12 +76,13 @@ public class FirebaseModel {
 
     public void getOwnRecipes(final String uid) {
         final ArrayList<OwnRecipe> ownRecipes = new ArrayList<>();
-        db.child(Constants.OWN_RECIPES).child(uid).addValueEventListener(new ValueEventListener() {
+        db.child(Constants.OWN_RECIPES).child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 for (final DataSnapshot ds : dataSnapshot.getChildren()) {
                     ownRecipes.add(new OwnRecipe(ds));
                 }
+                Timber.e(String.valueOf(ownRecipes.size()));
                 callBackOwnRecipesPresenter.callBack(ownRecipes);
             }
 
@@ -101,6 +102,15 @@ public class FirebaseModel {
             @Override
             public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
                 callBackAddToOwnRecipesPresenter.getImageUrl(String.valueOf(taskSnapshot.getDownloadUrl()));
+            }
+        });
+    }
+
+    public void sendOwnRecipeToDb(final OwnRecipe recipe,final String uid){
+        db.child(Constants.OWN_RECIPES).child(uid).push().setValue(recipe).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(final Void aVoid) {
+                callBackAddToOwnRecipesPresenter.sendedRecipe();
             }
         });
     }

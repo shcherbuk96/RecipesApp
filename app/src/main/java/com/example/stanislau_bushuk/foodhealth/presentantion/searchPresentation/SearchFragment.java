@@ -54,7 +54,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
 
     private RecyclerAdapter recyclerAdapter;
-    private Bundle instanceState;
     private SearchView searchView;
 
 
@@ -63,7 +62,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container,
                              @Nullable final Bundle savedInstanceState) {
 
-        instanceState = savedInstanceState;
+
         setHasOptionsMenu(true);
 
         return inflater.inflate(R.layout.fragment_search, container, false);
@@ -143,7 +142,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
             searchView.setQuery(searchText.getText(), false);
         }
 
-        if (getArguments() != null && instanceState == null && getArguments().getInt(Constants.KEY_FRAGMENT) == 0) {
+        if (getArguments() != null  && getArguments().getInt(Constants.KEY_FRAGMENT) == 0) {
             presenter.searchObservable(searchView, false);
         } else {
             presenter.searchObservable(searchView, true);

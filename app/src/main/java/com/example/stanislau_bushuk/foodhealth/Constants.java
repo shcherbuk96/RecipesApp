@@ -61,4 +61,6 @@ public class Constants {
     public static final String GALLERY = "GALLERY";
 
     public static final int RESULT_LOAD_IMAGE = 1;
+
+    public static final int RESULT_ADDING_RECIPE = 2;
 }

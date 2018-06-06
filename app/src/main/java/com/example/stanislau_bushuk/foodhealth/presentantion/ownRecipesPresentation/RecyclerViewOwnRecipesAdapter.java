@@ -11,19 +11,21 @@ import android.widget.TextView;
 
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.OwnRecipe;
+import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 public class RecyclerViewOwnRecipesAdapter extends RecyclerView.Adapter<RecyclerViewOwnRecipesAdapter.MyViewHolder> {
 
-    private List<OwnRecipe> hits;
+    private List<OwnRecipe> ownRecipes;
     private Listener listener;
 
-    public RecyclerViewOwnRecipesAdapter(final Listener listener, final List<OwnRecipe> hits) {
-        this.hits = hits;
+    public RecyclerViewOwnRecipesAdapter(final Listener listener, final List<OwnRecipe> ownRecipes) {
+        this.ownRecipes = ownRecipes;
         this.listener = listener;
     }
 
@@ -37,34 +39,33 @@ public class RecyclerViewOwnRecipesAdapter extends RecyclerView.Adapter<Recycler
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-//        final Recipe recipe = hits.get(position).getRecipe();
-//        holder.titleTextView.setText(recipe.getLabel());
-//        GlideApp
-//                .with(holder.photoImageView.getContext())
-//                .load(recipe.getImage())
-//                .centerCrop()
-//                .into(holder.photoImageView);
+        final OwnRecipe recipe = ownRecipes.get(position);
+        holder.titleTextView.setText(recipe.getRecipeName());
+        GlideApp
+                .with(holder.photoImageView.getContext())
+                .load(recipe.getRecipePhoto())
+                .error(R.drawable.insert_own_recipe_photo)
+                .centerCrop()
+                .into(holder.photoImageView);
     }
 
     @Override
     public int getItemCount() {
-        return hits.size();
+        return ownRecipes.size();
     }
 
-//    public void updateAdapter(final List<Hits> hits) {
-//        if (hits != null && hits.size() != 0) {
-//            this.hits.clear();
-//            this.hits.addAll(hits);
-//            notifyDataSetChanged();
-//        }
-//    }
-//
-//    public void updateList(final List<Hits> hits) {
-//        if (hits != null) {
-//            this.hits.addAll(hits);
-//            notifyDataSetChanged();
-//        }
-//    }
+    public void updateAdapter(final List<OwnRecipe> hits) {
+        this.ownRecipes.clear();
+        Timber.e(String.valueOf(hits.size()));
+        this.ownRecipes.addAll(hits);
+        notifyDataSetChanged();
+    }
+
+    public void addRecipe(final OwnRecipe recipe){
+        this.ownRecipes.add(recipe);
+        notifyItemInserted(getItemCount());
+    }
+
 
     public interface Listener {
         void onItemClick(String uri);

@@ -3,7 +3,6 @@ package com.example.stanislau_bushuk.foodhealth;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.example.stanislau_bushuk.foodhealth.presentantion.addOwnRecipe.AddOwnRecipeActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.AnonimProfileFragment;
@@ -21,7 +20,6 @@ public class FragmentCreater {
     public Fragment getNewInstanceFragment(final String screenKey, final int data) {
         final Bundle bundle = new Bundle();
         bundle.putInt(Constants.KEY_FRAGMENT, data);
-
         switch (screenKey) {
             case Constants.SEARCH_SCREEN: {
 

@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -62,12 +63,17 @@ public class AddOwnRecipeActivity extends MvpAppCompatActivity implements AddOwn
     @BindView(R.id.add_own_recipe_fail_instructions)
     TextView instructionsFail;
 
+    @BindView(R.id.add_own_recipe_nested_scroll_view)
+    NestedScrollView nestedScrollView;
+
     @InjectPresenter
     AddOwnRecipePresenter presenter;
 
     private ArrayList<OwnRecipe> ownRecipes = new ArrayList<>();
 
     private RecyclerViewAddOwnRecipesAdapter recyclerAdapter;
+
+    private String imageUrl;
 
     @Inject
     NavigationUtil navigationUtil() {
@@ -116,7 +122,7 @@ public class AddOwnRecipeActivity extends MvpAppCompatActivity implements AddOwn
 
         final String recipeName = nameEditText.getText().toString();
         final String recipeInstruction = instructionsEditText.getText().toString();
-        presenter.validateData(recipeName, recipeIngredients, recipeInstruction);
+        presenter.validateData(recipeName, recipeIngredients, recipeInstruction,imageUrl);
     }
 
     @Override
@@ -143,6 +149,8 @@ public class AddOwnRecipeActivity extends MvpAppCompatActivity implements AddOwn
 
     @Override
     public void showImage(final String imageUrl) {
+        this.imageUrl=imageUrl;
+
         GlideApp.with(this)
                 .load(imageUrl)
                 .into(recipeImage);
@@ -162,7 +170,7 @@ public class AddOwnRecipeActivity extends MvpAppCompatActivity implements AddOwn
                 break;
             }
 
-            case R.id.add_own_recipe_ingredients_editText:{
+            case R.id.add_own_recipe_ingredients_editText: {
                 ingredientsFail.setVisibility(View.VISIBLE);
             }
 
@@ -170,6 +178,7 @@ public class AddOwnRecipeActivity extends MvpAppCompatActivity implements AddOwn
                 break;
         }
     }
+
 
     @Override
     public void onBackPressed() {
