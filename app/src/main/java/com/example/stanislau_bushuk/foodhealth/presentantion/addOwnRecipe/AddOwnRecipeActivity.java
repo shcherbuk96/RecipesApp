@@ -145,12 +145,7 @@ public class AddOwnRecipeActivity extends MvpAppCompatActivity implements AddOwn
 
         if (resultCode == RESULT_OK && requestCode == Constants.RESULT_LOAD_IMAGE) {
             final Uri uri = data.getData();
-            try {
-                final Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                presenter.loadImageToStorage(bitmap);
-            } catch (final IOException e) {
-                e.printStackTrace();
-            }
+            presenter.loadImageToStorage(uri);
         }
     }
 

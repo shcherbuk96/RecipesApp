@@ -18,8 +18,10 @@ import io.realm.Realm;
 public class CardNetWorkModel {
 
     private final Realm realm;
+
     @Inject
     IAPI iapi;
+
     private CallBackCardPresenter callBackCardPresenter;
 
     public CardNetWorkModel() {

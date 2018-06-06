@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.FragmentCreater;
@@ -22,14 +23,13 @@ import com.example.stanislau_bushuk.foodhealth.modul.GlideApp;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.ownRecipesPresentation.OwnRecipesFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.presenters.ProfilePresenter;
-import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.view.ProfileView;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ProfileFragment extends MvpAppCompatFragment implements ProfileView {
+public class ProfileFragment extends MvpAppCompatFragment implements MvpView {
 
     @InjectPresenter
     ProfilePresenter profilePresenter;
@@ -75,14 +75,14 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileView
 
 
         GlideApp.with(this)
-                .load(profilePresenter.getUserPhoto())
+                .load(profilePresenter.getUser().getPhotoUrl())
                 .error(R.drawable.ic_person_white)
                 .centerCrop()
                 .into(userPhoto);
 
         relativeLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-        userEmail.setText(profilePresenter.getUserEmail());
-        userName.setText(profilePresenter.getUserName());
+        userEmail.setText(profilePresenter.getUser().getEmail());
+        userName.setText(profilePresenter.getUser().getDisplayName());
         tabLayout.setTabTextColors(
                 getResources().getColor(R.color.white),
                 getResources().getColor(R.color.white)
@@ -93,16 +93,5 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileView
         viewPagerAdapter.addFragment(ownRecipesFragment, getString(R.string.profile_own_tab));
         pager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(pager);
-
-    }
-
-    @Override
-    public void onSaveInstanceState(final Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
     }
 }

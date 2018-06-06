@@ -1,6 +1,7 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.addOwnRecipe.presenters;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -41,8 +42,8 @@ public class AddOwnRecipePresenter extends MvpPresenter<AddOwnRecipeView> implem
         router.exit();
     }
 
-    public void loadImageToStorage(final Bitmap bitmap) {
-        model.loadImageToStorage(bitmap);
+    public void loadImageToStorage(final Uri uri) {
+        model.loadImageToStorage(uri);
     }
 
 

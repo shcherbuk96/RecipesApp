@@ -1,6 +1,7 @@
 package com.example.stanislau_bushuk.foodhealth.model;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
@@ -49,8 +50,7 @@ public class FirebaseModel {
         this.callBack = mainActivityPresenter;
     }
 
-    public void setCallBackAddToOwnRecipesPresenter(
-            final AddOwnRecipePresenter addOwnRecipePresenter) {
+    public void setCallBackAddToOwnRecipesPresenter(final AddOwnRecipePresenter addOwnRecipePresenter) {
         this.callBackAddToOwnRecipesPresenter = addOwnRecipePresenter;
     }
 
@@ -126,11 +126,8 @@ public class FirebaseModel {
         myRef.setValue(new Comment(email, text, photoUri));
     }
 
-    public void loadImageToStorage(final Bitmap bitmap) {
-        final ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        final byte[] byteArray = stream.toByteArray();
-        final UploadTask uploadTask = storageReference.child(UUID.randomUUID().toString()).putBytes(byteArray);
+    public void loadImageToStorage(final Uri uri) {
+        final UploadTask uploadTask = storageReference.child(UUID.randomUUID().toString()+"/img.jpg").putFile(uri);
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {

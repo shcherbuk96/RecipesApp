@@ -80,8 +80,7 @@ dependencies {
     implementation "${library.multidex}"
 
     //
-    implementation "${library.cicerone}" +
-            ""
+    implementation "${library.cicerone}"
     ///////Moxy/////
     implementation "${library.moxy}"
     annotationProcessor "${library.moxyCompiler}"

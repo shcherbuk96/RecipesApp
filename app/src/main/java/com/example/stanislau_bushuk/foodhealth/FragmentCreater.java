@@ -84,12 +84,5 @@ public class FragmentCreater {
         return searchFragment;
     }
 
-    public FavoriteFragment getFavoriteFragment() {
 
-        if (favoriteFragment == null) {
-            favoriteFragment = new FavoriteFragment();
-        }
-
-        return favoriteFragment;
-    }
 }

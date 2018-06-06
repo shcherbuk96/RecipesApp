@@ -11,19 +11,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.presenters.ProfilePresenter;
-import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.view.ProfileView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class AnonimProfileFragment extends MvpAppCompatFragment implements ProfileView {
+public class AnonimProfileFragment extends MvpAppCompatFragment implements MvpView {
 
     @BindView(R.id.profile_sign_in_button)
     Button signInButton;
@@ -37,9 +34,7 @@ public class AnonimProfileFragment extends MvpAppCompatFragment implements Profi
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_no_registr_profile, container, false);
-
-        return view;
+        return inflater.inflate(R.layout.fragment_no_registr_profile, container, false);
     }
 
     @Override

@@ -60,6 +60,7 @@ public class RealmModel {
 
     public List<Recipe> getRecipesRealm() {
         final List<Recipe> recipes = realm.where(Recipe.class).equalTo("isChecked", true).findAll();
+
         return recipes;
     }
 

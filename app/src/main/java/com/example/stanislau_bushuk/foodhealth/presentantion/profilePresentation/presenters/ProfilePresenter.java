@@ -1,22 +1,20 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.presenters;
 
-import android.net.Uri;
-import android.support.v4.app.Fragment;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.arellomobile.mvp.MvpView;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.FragmentCreater;
 import com.example.stanislau_bushuk.foodhealth.cicerone.OwnRouter;
 import com.example.stanislau_bushuk.foodhealth.model.RealmModel;
 import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginModel;
-import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.view.ProfileView;
+import com.google.firebase.auth.FirebaseUser;
 
 import javax.inject.Inject;
 
 @InjectViewState
-public class ProfilePresenter extends MvpPresenter<ProfileView> {
+public class ProfilePresenter extends MvpPresenter<MvpView> {
 
     @Inject
     OwnRouter ownRouter;
@@ -48,16 +46,8 @@ public class ProfilePresenter extends MvpPresenter<ProfileView> {
         ownRouter.navigateTo(Constants.LOGIN_ACTIVITY, Constants.PROFILE_SCREEN);
     }
 
-    public Uri getUserPhoto() {
-        return loginModel.getAuth().getCurrentUser().getPhotoUrl();
-    }
-
-    public String getUserEmail() {
-        return loginModel.getAuth().getCurrentUser().getEmail();
-    }
-
-    public String getUserName() {
-        return loginModel.getAuth().getCurrentUser().getDisplayName();
+    public FirebaseUser getUser() {
+        return loginModel.getAuth().getCurrentUser();
     }
 
 }
