@@ -15,7 +15,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
@@ -35,15 +34,13 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import timber.log.Timber;
 
 
 public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, RecyclerAdapter.Listener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.search_list_recycler_view)
     RecyclerView listRecyclerView;
-
-    @BindView(R.id.search_random_text_view)
-    TextView searchText;
 
     @BindView(R.id.swipe_layout)
     SwipeRefreshLayout swipeRefreshLayout;
@@ -73,6 +70,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         App.getAppComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
 
+        instanceState = savedInstanceState;
         ButterKnife.bind(this, view);
         final Toolbar mActionBarToolbar = view.findViewById(R.id.toolbar_actionbar);
         ((MainActivity) getActivity()).setSupportActionBar(mActionBarToolbar);
@@ -87,7 +85,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         listRecyclerView.addOnScrollListener(new RecyclerViewMoreListener(listRecyclerView.getLayoutManager()) {
             @Override
             public void onScroll(final int totalItemCount) {
-                presenter.callRandomUpdate(totalItemCount, String.valueOf(searchText.getText()));
+                presenter.callRandomUpdate(totalItemCount, searchView.getQuery().toString());
             }
         });
     }
@@ -112,10 +110,9 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         }
     }
 
-
     @Override
-    public void setSearchText(final String text) {
-        searchText.setText(text);
+    public void setSearchView(final String text) {
+        searchView.setQuery(text, false);
     }
 
     @Override
@@ -136,9 +133,19 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         final MenuItem menuItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) menuItem.getActionView();
 
-        if (!searchText.getText().toString().equals(getResources().getString(R.string.search_random))) {
+        if (instanceState != null) {
+            Timber.e("!null");
+            searchView.setQuery(instanceState.getString(Constants.SEARCH_SCREEN), true);
+        }else{
+            Timber.e("null");
+        }
+/*        if (!searchText.getText().toString().equals(getResources().getString(R.string.search_random))) {
             searchView.setIconified(false);
             searchView.setQuery(searchText.getText(), false);
+        }*/
+
+        if (searchView.getQuery().toString().isEmpty()) {
+            searchView.setIconified(true);
         }
 
         if (getArguments() != null && instanceState == null && getArguments().getInt(Constants.KEY_FRAGMENT) == 0) {
@@ -175,5 +182,11 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
     @Override
     public void onRefresh() {
         presenter.refreshData(searchView.getQuery().toString());
+    }
+
+    @Override
+    public void onSaveInstanceState(final Bundle outState) {
+        outState.putString(Constants.SEARCH_SCREEN, searchView.getQuery().toString());
+        super.onSaveInstanceState(outState);
     }
 }
