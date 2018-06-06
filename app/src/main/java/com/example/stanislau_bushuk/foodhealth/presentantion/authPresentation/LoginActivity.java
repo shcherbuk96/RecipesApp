@@ -2,10 +2,10 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -92,13 +92,18 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     }
 
     @Override
-    public void error(final Throwable e) {
-        Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
+    public void error(final Exception e) {
+        Snackbar.make(findViewById(R.id.login_email_editText), e.getMessage(), Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void checkPassword() {
-        Toast.makeText(this, R.string.registration_check_password, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void checkEmptyLine() {
+        Snackbar.make(findViewById(R.id.registration_email_editText), R.string.registration_check_empty_line, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -121,7 +126,7 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
         navigatorHolder.removeNavigator();
     }
 
-    private boolean isGooglePlayServicesAvailable() {
+    private void isGooglePlayServicesAvailable() {
         final GoogleApiAvailability googleApiAvailability = GoogleApiAvailability.getInstance();
         final int resultCode = googleApiAvailability.isGooglePlayServicesAvailable(this);
 
@@ -132,9 +137,7 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
                 dialog.show();
             }
 
-            return false;
         }
 
-        return true;
     }
 }

@@ -39,7 +39,11 @@ public class LoginPresenter extends MvpPresenter<LoginView> implements CallBackL
     }
 
     public void signInUser(final String email, final String password) {
-        loginModel.signIn(email, password);
+        if (!email.isEmpty() && !password.isEmpty()) {
+            loginModel.signIn(email, password);
+        } else {
+            getViewState().checkEmptyLine();
+        }
     }
 
     public void signInAnonymous() {
@@ -47,10 +51,14 @@ public class LoginPresenter extends MvpPresenter<LoginView> implements CallBackL
     }
 
     public void registrationUser(final String email, final String password, final String confirm_password) {
-        if (password.equals(confirm_password)) {
-            loginModel.registrationUser(email, password);
+        if (email.isEmpty() || password.isEmpty() || confirm_password.isEmpty()) {
+            getViewState().checkEmptyLine();
         } else {
-            getViewState().checkPassword();
+            if (password.equals(confirm_password)) {
+                loginModel.registrationUser(email, password);
+            } else {
+                getViewState().checkPassword();
+            }
         }
     }
 
@@ -70,6 +78,11 @@ public class LoginPresenter extends MvpPresenter<LoginView> implements CallBackL
             Timber.e(authResult.getUser().toString());
             getViewState().user(authResult.getUser());
         }
+    }
+
+    @Override
+    public void fail(final Exception e) {
+        getViewState().error(e);
     }
 
 

@@ -10,9 +10,11 @@ public interface LoginView extends MvpView {
     @StateStrategyType(SkipStrategy.class)
     void user(FirebaseUser firebaseUser);
 
-    void error(Throwable e);
+    void error(Exception e);
 
     void checkPassword();
 
     void setViewVisibility(int visibility);
+
+    void checkEmptyLine();
 }

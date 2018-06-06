@@ -78,4 +78,7 @@
     <string name="add_own_recipes_clear_field">*Please enter this field</string>
     <string name="add_own_recipes_action_bar_title">Add own recipe</string>
 
+    <string name="registration_check_empty_line">Check lines</string>
+
+    <string name="error">Error</string>
 </resources>

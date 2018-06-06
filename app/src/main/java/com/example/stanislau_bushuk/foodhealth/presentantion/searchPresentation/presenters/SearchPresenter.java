@@ -91,9 +91,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
                     @Override
                     public void onNext(final Recipes recipes) {
-
                         if (recipes.getCount() != 0) {
-
                             if (!update) {
                                 getViewState().showList(recipes.getHits());
                             } else getViewState().updateList(recipes.getHits());
@@ -141,18 +139,13 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
 
                             if (!s.isEmpty()) {
                                 netWorkModel.getResponse(s, 0, false);
-                                getViewState().setSearchText(s);
                             } else {
-
                                 if (!netWorkModel.checkRealmIsEmpty()) {
                                     netWorkModel.getRandomData(false);
                                 } else {
                                     netWorkModel.getRandomRecipe(false);
                                 }
-                                getViewState().setSearchText(resourceManager.getString(R.string.search_random));
-
                             }
-
                         } else {
                             SearchPresenter.this.stateUpdate = false;
                         }
@@ -171,7 +164,7 @@ public class SearchPresenter extends MvpPresenter<ViewSearch> implements CallBac
     }
 
     public void callRandomUpdate(final int from, final String recipeName) {
-        if (recipeName.equals(resourceManager.getString(R.string.search_random))) {
+        if (recipeName.isEmpty()) {
             netWorkModel.getRandomRecipe(true);
         } else {
             netWorkModel.getResponse(recipeName, from, true);
