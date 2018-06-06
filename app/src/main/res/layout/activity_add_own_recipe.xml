@@ -98,8 +98,10 @@
         <Button
             android:id="@+id/add_own_recipe_send_button"
             style="@style/Button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_padding_size_medium"
+            android:layout_marginStart="@dimen/margin_padding_size_medium"
             android:layout_marginTop="@dimen/margin_padding_size_small"
             android:text="@string/add_own_recipes_send"
             app:layout_constraintEnd_toEndOf="parent"

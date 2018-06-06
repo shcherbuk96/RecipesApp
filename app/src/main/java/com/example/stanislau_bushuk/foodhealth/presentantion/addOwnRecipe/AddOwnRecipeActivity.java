@@ -87,6 +87,13 @@ public class AddOwnRecipeActivity extends MvpAppCompatActivity implements AddOwn
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_add_own_recipe);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setTitle(getString(R.string.add_own_recipes_action_bar_title));
+        }
+
         ButterKnife.bind(this);
         ownRecipes.add(new OwnRecipe());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -179,6 +186,12 @@ public class AddOwnRecipeActivity extends MvpAppCompatActivity implements AddOwn
         }
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+
+        return true;
+    }
 
     @Override
     public void onBackPressed() {

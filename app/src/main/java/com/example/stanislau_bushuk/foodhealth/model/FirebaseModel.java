@@ -5,10 +5,12 @@ import android.graphics.Bitmap;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.MainActivityPresenter;
+import com.example.stanislau_bushuk.foodhealth.model.pojo.Comment;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.OwnRecipe;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.RecipeFb;
 import com.example.stanislau_bushuk.foodhealth.presentantion.addOwnRecipe.presenters.AddOwnRecipePresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.ownRecipesPresentation.presenters.OwnRecipesPresenter;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -28,42 +30,50 @@ import timber.log.Timber;
 
 public class FirebaseModel {
 
-    private final DatabaseReference db;
-    private final StorageReference storageReference;
-    private CallBackMainActivityPresenter callBackMainActivityPresenter;
-    private CallBackOwnRecipesPresenter callBackOwnRecipesPresenter;
+    private final FirebaseDatabase database;
+    private final StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+    private DatabaseReference databaseReference;
+    private CallBackMainActivityPresenter callBack;
+    private CallBackCardPresenter callBackCardPresenter;
     private CallBackAddToOwnRecipesPresenter callBackAddToOwnRecipesPresenter;
+    private CallBackOwnRecipesPresenter callBackOwnRecipesPresenter;
 
 
     public FirebaseModel() {
         App.getAppComponent().inject(this);
-        db = FirebaseDatabase.getInstance().getReference();
-        storageReference = FirebaseStorage.getInstance().getReference();
+        database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference();
     }
 
-    public void setCallBackOwnRecipesPresenter(final OwnRecipesPresenter presenter) {
-        this.callBackOwnRecipesPresenter = presenter;
+    public void setMainActivityCallBack(final MainActivityPresenter mainActivityPresenter) {
+        this.callBack = mainActivityPresenter;
     }
 
-    public void setCallBackMainActivityPresenter(final MainActivityPresenter mainActivityPresenter) {
-        this.callBackMainActivityPresenter = mainActivityPresenter;
+    public void setCallBackAddToOwnRecipesPresenter(
+            final AddOwnRecipePresenter addOwnRecipePresenter) {
+        this.callBackAddToOwnRecipesPresenter = addOwnRecipePresenter;
     }
 
-    public void setCallBackAddToOwnRecipesPresenter(final AddOwnRecipePresenter addOwnRecipePresenter){
-        this.callBackAddToOwnRecipesPresenter=addOwnRecipePresenter;
+    public void setCardPresenterCallBack(final CardPresenter cardPresenter) {
+        callBackCardPresenter = cardPresenter;
     }
 
-    public void addRecipeToFbDb(final String uid, final String name, final String uri, final String photoUrl) {
-        final DatabaseReference ref = db.child(Constants.USER).child(uid);
+    public void setCallBackOwnRecipesPresenter(final OwnRecipesPresenter ownRecipesPresenter) {
+        this.callBackOwnRecipesPresenter = ownRecipesPresenter;
+    }
+
+    public void addRecipeToFbDb(final String uid, final String name, final String uri,
+                                final String photoUrl) {
+        final DatabaseReference ref = databaseReference.child(Constants.USER).child(uid);
         ref.child(name).setValue(new RecipeFb(uri, photoUrl, name));
     }
 
     public void putRecipesFromFBtoRealm(final String uid) {
-        db.child(Constants.USER).child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+        database.getReference().child(Constants.USER).child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 for (final DataSnapshot ds : dataSnapshot.getChildren()) {
-                    callBackMainActivityPresenter.addToRealm(new Recipe(ds));
+                    callBack.addToRealm(new Recipe(ds));
                 }
             }
 
@@ -76,7 +86,7 @@ public class FirebaseModel {
 
     public void getOwnRecipes(final String uid) {
         final ArrayList<OwnRecipe> ownRecipes = new ArrayList<>();
-        db.child(Constants.OWN_RECIPES).child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child(Constants.OWN_RECIPES).child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 for (final DataSnapshot ds : dataSnapshot.getChildren()) {
@@ -93,6 +103,29 @@ public class FirebaseModel {
         });
     }
 
+    public void getComments(final String nameRecipe) {
+        final DatabaseReference databaseReference = database.getReference(Constants.FIREBASE_COMMENTS_BRANCH).child(nameRecipe);
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(final DataSnapshot dataSnapshot) {
+                callBackCardPresenter.callFirebase(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(final DatabaseError databaseError) {
+                callBackCardPresenter.callFirebase(null);
+            }
+        });
+
+    }
+
+    public void addComment(final String email, final String text, final String nameRecipe,
+                           final String photoUri) {
+        final DatabaseReference myRef = database.getReference(Constants.FIREBASE_COMMENTS_BRANCH).child(nameRecipe).push();
+        myRef.setValue(new Comment(email, text, photoUri));
+    }
+
     public void loadImageToStorage(final Bitmap bitmap) {
         final ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
@@ -106,8 +139,8 @@ public class FirebaseModel {
         });
     }
 
-    public void sendOwnRecipeToDb(final OwnRecipe recipe,final String uid){
-        db.child(Constants.OWN_RECIPES).child(uid).push().setValue(recipe).addOnSuccessListener(new OnSuccessListener<Void>() {
+    public void sendOwnRecipeToDb(final OwnRecipe recipe, final String uid) {
+        databaseReference.child(Constants.OWN_RECIPES).child(uid).push().setValue(recipe).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(final Void aVoid) {
                 callBackAddToOwnRecipesPresenter.sendedRecipe();
@@ -117,7 +150,8 @@ public class FirebaseModel {
 
 
     public void deleteRecipeFromDb(final String uid, final String name) {
-        final DatabaseReference ref = db.child(Constants.USER);
+        final DatabaseReference ref = database.getReference().child(Constants.USER);
         ref.child(uid).child(name).removeValue();
     }
 }
+

@@ -16,6 +16,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import ru.terrakok.cicerone.result.ResultListener;
+import timber.log.Timber;
 
 @InjectViewState
 public class OwnRecipesPresenter extends MvpPresenter<OwnRecipesView> implements CallBackOwnRecipesPresenter {
@@ -41,6 +42,7 @@ public class OwnRecipesPresenter extends MvpPresenter<OwnRecipesView> implements
     }
 
     public void getOwnRecipes() {
+        Timber.e(loginModel.getAuth().getUid()+"SKA");
         firebaseModel.getOwnRecipes(loginModel.getAuth().getUid());
     }
 

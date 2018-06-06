@@ -43,7 +43,6 @@ public class NavigationUtil extends OwnNavigator {
         final Intent intent;
 
         switch (screenKey) {
-
             case Constants.MAIN_ACTIVITY: {
                 intent = new Intent(context, MainActivity.class);
 

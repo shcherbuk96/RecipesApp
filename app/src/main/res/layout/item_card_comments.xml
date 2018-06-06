@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/view_item_start_end_spacing"
+    android:layout_marginStart="@dimen/view_item_start_end_spacing"
+    android:layout_marginTop="@dimen/view_item_top_bot_spacing"
+    android:orientation="horizontal">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/card_item_user_photo_image_view"
+        android:layout_width="@dimen/image_card_item_photo_user_size"
+        android:layout_height="@dimen/image_card_item_photo_user_size" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_padding_size_small"
+        android:layout_marginStart="@dimen/margin_padding_size_small">
+
+        <TextView
+            android:id="@+id/card_item_user_email_text_view"
+            style="@style/Body_1.GrayText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/text_card_item_comment_top_bottom_spacing" />
+
+        <TextView
+            android:id="@+id/card_item_user_comment_text_view"
+            style="@style/Subheading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/card_item_user_email_text_view"
+            android:layout_marginTop="@dimen/text_card_item_comment_top_bottom_spacing" />
+    </RelativeLayout>
+
+
+</LinearLayout>

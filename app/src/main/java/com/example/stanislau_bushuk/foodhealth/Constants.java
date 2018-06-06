@@ -48,6 +48,8 @@ public class Constants {
 
     public static final String REGISTRATION_ACTIVITY = "REGISTRATION_ACTIVITY";
 
+    public static final String FIREBASE_COMMENTS_BRANCH = "comments";
+
     public static final String PROFILE_SCREEN = "PROFILE_SCREEN";
 
     public static final String PROFILE_ANONIM_SCREEN = "PROFILE_SCREEN_ANONIM";

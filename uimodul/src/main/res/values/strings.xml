@@ -19,6 +19,11 @@
     <string name="card_number_fat">FAT - %.1fg</string>
     <string name="card_number_protein">Protein - %.1fg</string>
     <string name="card_number_carbs">Carbs - %.1fg</string>
+    <string name="card_comments">Comments: %d</string>
+    <string name="card_comments_default">Comments: </string>
+    <string name="card_comments_hint">Add your comment</string>
+    <string name="card_comments_anonymous">Please log in</string>
+    <string name="card_error">Error!!!</string>
 
     <!-- DeepSearch strings-->
     <string name="deep_search_title_text">Calories, Diet, Ingredients</string>
@@ -71,5 +76,6 @@
     <string name="add_own_recipes_send">Send</string>
     <string name="add_own_recipes_ingredient">Enter ingredient</string>
     <string name="add_own_recipes_clear_field">*Please enter this field</string>
+    <string name="add_own_recipes_action_bar_title">Add own recipe</string>
 
 </resources>

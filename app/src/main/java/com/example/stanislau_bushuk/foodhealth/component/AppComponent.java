@@ -35,7 +35,6 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.ownRecipesPresentat
 import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.ProfileFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.presenters.ProfilePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
-import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.splashPresentatiom.SplashActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.splashPresentatiom.SplashActivityPresenter;
@@ -48,8 +47,10 @@ import dagger.Component;
 @Singleton
 @Component(modules = {Api.class, NetWorkModul.class, CardNetWorkModul.class,
         ResourceManagerModul.class, DeepSearchModul.class, NetworkDeepSearchModul.class,
-        RealmModul.class, CiceroneModul.class, FragmentCreaterModul.class, LoginModul.class,
-        FirebaseModul.class})
+        RealmModul.class, LoginModul.class, CiceroneModul.class,
+        FirebaseModul.class, FragmentCreaterModul.class, FragmentCreaterModul.class})
+
+
 public interface AppComponent {
 
     void inject(SearchPresenter searchPresenter);
@@ -65,8 +66,6 @@ public interface AppComponent {
     void inject(NetWorkModel netWorkModel);
 
     void inject(FavoritePresenter favoritePresenter);
-
-    void inject(RecyclerAdapter recyclerAdapter);
 
     void inject(DeepSearchPresenter deepSearchPresenter);
 

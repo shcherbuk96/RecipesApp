@@ -98,7 +98,51 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/card_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/margin_padding_size_small" />
 
+        <TextView
+            android:id="@+id/card_comments_number"
+            style="@style/Body_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/margin_padding_size_medium"
+            android:paddingStart="@dimen/margin_padding_size_medium"
+            android:paddingTop="@dimen/margin_padding_size_medium"
+            android:text="@string/card_comments_default" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingEnd="@dimen/margin_padding_size_medium"
+            android:paddingStart="@dimen/margin_padding_size_medium">
+
+            <EditText
+                android:id="@+id/card_user_comment_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/text_card_comment_start_end_spacing"
+                android:layout_marginTop="@dimen/text_card_comment_top_bottom_spacing"
+                android:layout_weight="1"
+                android:hint="@string/card_comments_hint"
+                android:inputType="text" />
+
+            <ImageView
+                android:id="@+id/card_comment_send_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_send_black_24dp" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/card_comments_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/margin_padding_size_small" />
     </LinearLayout>
+
 </android.support.v4.widget.NestedScrollView>

@@ -22,7 +22,6 @@ public class FragmentCreater {
         bundle.putInt(Constants.KEY_FRAGMENT, data);
         switch (screenKey) {
             case Constants.SEARCH_SCREEN: {
-
                 if (this.searchFragment == null) {
                     searchFragment = new SearchFragment();
                 }
@@ -33,7 +32,6 @@ public class FragmentCreater {
             }
 
             case Constants.DEEP_SEARCH_SCREEN: {
-
                 if (this.deepSearchFragment == null) {
                     deepSearchFragment = new DeepSearchFragment();
                 }
@@ -43,7 +41,6 @@ public class FragmentCreater {
             }
 
             case Constants.FAVOURITE_SCREEN: {
-
                 if (this.favoriteFragment == null) {
                     favoriteFragment = new FavoriteFragment();
                 }

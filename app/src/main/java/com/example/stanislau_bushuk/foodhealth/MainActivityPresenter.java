@@ -15,7 +15,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import javax.inject.Inject;
 
-
 @InjectViewState
 public class MainActivityPresenter extends MvpPresenter<MvpView> implements CallBackMainActivityPresenter {
 
@@ -36,7 +35,7 @@ public class MainActivityPresenter extends MvpPresenter<MvpView> implements Call
     public MainActivityPresenter() {
         App.getAppComponent().inject(this);
         db = FirebaseDatabase.getInstance().getReference();
-        firebaseModel.setCallBackMainActivityPresenter(this);
+        firebaseModel.setMainActivityCallBack(this);
     }
 
     public void goBack(final String screenKey, final int data) {

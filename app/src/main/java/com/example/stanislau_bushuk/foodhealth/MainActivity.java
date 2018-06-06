@@ -89,7 +89,6 @@ public class MainActivity extends MvpAppCompatActivity implements MvpView {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull final MenuItem item) {
-
                 switch (item.getItemId()) {
                     case R.id.search: {
                         presenter.goBack(Constants.SEARCH_SCREEN, 1);

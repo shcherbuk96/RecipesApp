@@ -58,10 +58,6 @@ public class RealmModel {
         }
     }
 
-    public int getNumbeFavourites() {
-        return realm.where(Recipe.class).equalTo("isChecked", true).findAll().size();
-    }
-
     public List<Recipe> getRecipesRealm() {
         final List<Recipe> recipes = realm.where(Recipe.class).equalTo("isChecked", true).findAll();
         return recipes;

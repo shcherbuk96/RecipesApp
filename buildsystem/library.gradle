@@ -116,5 +116,5 @@ ext.library = [
         firebaseStorage        : "com.google.firebase:firebase-storage:"+ "$version.firebaseStorage",
 
         //MultiDex///
-        multidex               : "com.android.support:multidex:" + "$version.multidex"
+        multidex               : "com.android.support:multidex:" + "$version.multidex",
 ]
