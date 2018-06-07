@@ -93,18 +93,22 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.MyView
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
+
                     if (listener != null) {
                         listener.onItemClick(recipeList.get(getAdapterPosition()).getUri());
                     }
+
                 }
             });
 
             starButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
+
                     if (listener != null) {
                         listener.deleteFromFavorite(recipeList.get(getAdapterPosition()));
                     }
+
                 }
             });
         }

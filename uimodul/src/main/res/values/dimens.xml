@@ -56,4 +56,7 @@
 
     <dimen name="item_card_height">48dp</dimen>
     <dimen name="item_card_top_bottom_spacing">8dp</dimen>
+
+    <!--Profile-->
+    <dimen name="profile_avatar_size">86dp</dimen>
 </resources>

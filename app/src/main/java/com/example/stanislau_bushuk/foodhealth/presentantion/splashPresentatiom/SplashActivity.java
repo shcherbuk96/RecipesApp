@@ -10,6 +10,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.NavigationUtil;
+import com.example.stanislau_bushuk.foodhealth.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 import javax.inject.Inject;
@@ -28,7 +29,7 @@ public class SplashActivity extends MvpAppCompatActivity implements MvpView {
 
     @Inject
     NavigationUtil navigationUtil() {
-        return new NavigationUtil(this);
+        return new NavigationUtil(this, R.id.main_contener_frame_layout);
     }
 
     @Override

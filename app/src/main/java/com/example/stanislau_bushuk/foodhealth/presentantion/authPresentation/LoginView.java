@@ -13,5 +13,7 @@ public interface LoginView extends MvpView {
 
     void checkPassword();
 
+    void setViewVisibility(int visibility);
+
     void checkEmptyLine();
 }

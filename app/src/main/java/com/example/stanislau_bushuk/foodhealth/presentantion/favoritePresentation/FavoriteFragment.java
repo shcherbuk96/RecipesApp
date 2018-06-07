@@ -16,8 +16,6 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
-import com.example.stanislau_bushuk.foodhealth.MainActivity;
-import com.example.stanislau_bushuk.foodhealth.NavigationUtil;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 
@@ -59,8 +57,12 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
 
         ButterKnife.bind(this, view);
 
-        final Toolbar toolbar=view.findViewById(R.id.favorite_toolbar);
+        final Toolbar toolbar = view.findViewById(R.id.favorite_toolbar);
         toolbar.setTitle(R.string.favorite_toolbar);
+
+        if (getArguments() == null) {
+            toolbar.setVisibility(View.INVISIBLE);
+        }
 
         listRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         favoriteAdapter = new FavoriteAdapter(new ArrayList<Recipe>(), this);
@@ -79,7 +81,7 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
 
     @Override
     public void onItemClick(final String uri) {
-        favoritePresenter.goTo(Constants.CARD_ACTIVITY,uri);
+        favoritePresenter.goTo(Constants.CARD_ACTIVITY, uri);
     }
 
     @Override

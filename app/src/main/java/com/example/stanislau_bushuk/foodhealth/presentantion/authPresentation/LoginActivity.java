@@ -34,6 +34,9 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     @BindView(R.id.login_anonymous_button)
     Button anonymous;
 
+    @BindView(R.id.login_sign_up_button)
+    Button signUp;
+
     @BindView(R.id.login_email_editText)
     EditText email;
 
@@ -48,9 +51,11 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
     ProgressDialog progressDialog;
 
+    private String keyScreen;
+
     @Inject
     NavigationUtil navigationUtil() {
-        return new NavigationUtil(this);
+        return new NavigationUtil(this, R.id.main_contener_frame_layout);
     }
 
     @Override
@@ -58,21 +63,19 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
         App.getAppComponent().inject(this);
 
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
         isGooglePlayServicesAvailable();
+        keyScreen = getIntent().getStringExtra(Constants.KEY_FRAGMENT);
         ButterKnife.bind(this);
-
+        loginPresenter.setViewVisibility(keyScreen);
         progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Loading");
-
     }
 
     @OnClick(R.id.login_sign_in_button)
     public void clickSignIn(final View view) {
         progressDialog.show();
         loginPresenter.signInUser(email.getText().toString(), password.getText().toString());
-
     }
 
     @OnClick(R.id.login_sign_up_button)
@@ -89,11 +92,17 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     @Override
     public void user(final FirebaseUser firebaseUser) {
         progressDialog.hide();
-        loginPresenter.goTo(Constants.MAIN_ACTIVITY);
+
+        if (keyScreen != null) {
+            loginPresenter.goTo(keyScreen);
+        } else {
+            loginPresenter.goTo(Constants.MAIN_ACTIVITY);
+        }
     }
 
     @Override
     public void error(final Exception e) {
+        progressDialog.hide();
         Snackbar.make(findViewById(R.id.login_email_editText), e.getMessage(), Snackbar.LENGTH_LONG).show();
     }
 
@@ -104,7 +113,14 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
     @Override
     public void checkEmptyLine() {
-        Snackbar.make(findViewById(R.id.registration_email_editText), R.string.registration_check_empty_line, Snackbar.LENGTH_LONG).show();
+        progressDialog.hide();
+        Snackbar.make(findViewById(R.id.login_email_editText), R.string.registration_check_empty_line, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void setViewVisibility(final int visibility) {
+        anonymous.setVisibility(visibility);
+        signUp.setVisibility(visibility);
     }
 
     @Override
@@ -112,7 +128,6 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
         super.onResume();
 
         navigatorHolder.setNavigator(navigationUtil());
-
     }
 
     @Override

@@ -24,7 +24,7 @@
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustPan|stateHidden"/>
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".presentantion.cardPresentation.CardActivity"
             android:theme="@style/ThemeActionBar"
@@ -33,7 +33,14 @@
             android:name=".presentantion.deepSearchPresentation.DeepSearchActivity"
             android:theme="@style/ThemeActionBar" />
         <activity android:name=".presentantion.authPresentation.LoginActivity" />
-        <activity android:name=".presentantion.authPresentation.RegistrationActivity"/>
+        <activity android:name=".presentantion.authPresentation.RegistrationActivity" />
+        <activity
+            android:name=".presentantion.addOwnRecipe.AddOwnRecipeActivity"
+            android:theme="@style/ThemeActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".presentantion.cardOwnRecipePresentation.CardOwnRecipeActivity"
+            android:theme="@style/ThemeActionBar"/>
     </application>
 
 </manifest>

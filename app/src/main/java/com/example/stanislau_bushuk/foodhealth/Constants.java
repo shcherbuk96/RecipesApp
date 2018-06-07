@@ -50,5 +50,23 @@ public class Constants {
 
     public static final String FIREBASE_COMMENTS_BRANCH = "comments";
 
+    public static final String PROFILE_SCREEN = "PROFILE_SCREEN";
+
+    public static final String PROFILE_ANONIM_SCREEN = "PROFILE_SCREEN_ANONIM";
+
     public static final String USER = "USER";
+
+    public static final String OWN_RECIPES = "OWN_RECIPES";
+
+    public static final String CARD_OWN_RECIPE_NAME = "CARD_OWN_RECIPE_NAME";
+
+    public static final String CARD_OWN_RECIPE = "CARD_OWN_RECIPE";
+
+    public static final String ADD_OWN_RECIPE = "ADD_OWN_RECIPE";
+
+    public static final String GALLERY = "GALLERY";
+
+    public static final int RESULT_LOAD_IMAGE = 1;
+
+    public static final int RESULT_ADDING_RECIPE = 2;
 }

@@ -36,6 +36,7 @@ import ru.terrakok.cicerone.NavigatorHolder;
 public class CardActivity extends MvpAppCompatActivity implements CardView {
 
     FirebaseAuth firebaseAuth;
+
     @BindView(R.id.card_comments_recycler_view)
     RecyclerView commentsRecyclerView;
 
@@ -84,18 +85,21 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
 
     @Inject
     NavigationUtil navigationUtil() {
-        return new NavigationUtil(this);
+        return new NavigationUtil(this, R.id.main_contener_frame_layout);
     }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         App.getAppComponent().inject(this);
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_card);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+        }
 
         ButterKnife.bind(this);
 
@@ -152,11 +156,13 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
 
     @OnClick(R.id.card_comment_send_image_view)
     public void sendComment() {
-        presenter.addComment(firebaseAuth.getCurrentUser().getEmail(),
-                commentUserView.getText().toString(),
-                data.getLabel(),
-                firebaseAuth.getCurrentUser().getPhotoUrl());
-        commentUserView.setText(null);
+        if (firebaseAuth.getCurrentUser() != null) {
+            presenter.addComment(firebaseAuth.getCurrentUser().getEmail(),
+                    commentUserView.getText().toString(),
+                    data.getLabel(),
+                    firebaseAuth.getCurrentUser().getPhotoUrl());
+            commentUserView.setText(null);
+        }
     }
 
     @Override

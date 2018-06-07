@@ -1,5 +1,6 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.terrakok.cicerone.NavigatorHolder;
+import timber.log.Timber;
 
 public class RegistrationActivity extends MvpAppCompatActivity implements LoginView {
 
@@ -44,9 +46,13 @@ public class RegistrationActivity extends MvpAppCompatActivity implements LoginV
     @Inject
     NavigatorHolder navigatorHolder;
 
+    ProgressDialog progressDialog;
+
+    private String instance;
+
     @Inject
     NavigationUtil navigationUtil() {
-        return new NavigationUtil(this);
+        return new NavigationUtil(this,R.id.main_contener_frame_layout);
     }
 
 
@@ -55,8 +61,9 @@ public class RegistrationActivity extends MvpAppCompatActivity implements LoginV
         App.getAppComponent().inject(this);
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registation);
 
+        instance= getIntent().getStringExtra(Constants.KEY_FRAGMENT);
+        setContentView(R.layout.activity_registation);
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
@@ -67,10 +74,13 @@ public class RegistrationActivity extends MvpAppCompatActivity implements LoginV
             toolbar.setTitle(R.string.registration_toolbar);
         }
 
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Loading");
     }
 
     @OnClick(R.id.registration_sign_in_button)
     public void clickRegistration() {
+        progressDialog.show();
         loginPresenter.registrationUser(email.getText().toString(),
                 password.getText().toString(),
                 confirm_password.getText().toString());
@@ -78,24 +88,39 @@ public class RegistrationActivity extends MvpAppCompatActivity implements LoginV
 
     @Override
     public void user(final FirebaseUser firebaseUser) {
-        loginPresenter.replace(Constants.MAIN_ACTIVITY);
+        Timber.e(instance);
+        progressDialog.hide();
+
+        if (instance != null) {
+            loginPresenter.exit();
+        } else {
+            loginPresenter.replace(Constants.MAIN_ACTIVITY);
+        }
+
     }
 
     @Override
     public void error(final Exception e) {
+        progressDialog.hide();
         Snackbar.make(findViewById(R.id.registration_email_editText), e.getMessage(), Snackbar.LENGTH_LONG).show();
 //        Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void checkPassword() {
-//        Toast.makeText(this, R.string.registration_check_password, Toast.LENGTH_SHORT).show();
+        progressDialog.hide();
         Snackbar.make(findViewById(R.id.registration_email_editText), R.string.registration_check_password, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void checkEmptyLine() {
+        progressDialog.hide();
         Snackbar.make(findViewById(R.id.registration_email_editText), R.string.registration_check_empty_line, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void setViewVisibility(final int visibility) {
+
     }
 
     @Override
@@ -106,6 +131,7 @@ public class RegistrationActivity extends MvpAppCompatActivity implements LoginV
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
+
         return true;
     }
 

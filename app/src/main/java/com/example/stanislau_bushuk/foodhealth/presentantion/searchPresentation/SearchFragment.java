@@ -50,7 +50,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
 
     private RecyclerAdapter recyclerAdapter;
-    private Bundle instanceState;
     private SearchView searchView;
 
 
@@ -59,7 +58,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container,
                              @Nullable final Bundle savedInstanceState) {
 
-        instanceState = savedInstanceState;
+
         setHasOptionsMenu(true);
 
         return inflater.inflate(R.layout.fragment_search, container, false);
@@ -70,7 +69,6 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         App.getAppComponent().inject(this);
         super.onViewCreated(view, savedInstanceState);
 
-        instanceState = savedInstanceState;
         ButterKnife.bind(this, view);
         final Toolbar mActionBarToolbar = view.findViewById(R.id.toolbar_actionbar);
         ((MainActivity) getActivity()).setSupportActionBar(mActionBarToolbar);
@@ -123,6 +121,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
 
     @Override
     public void onItemClick(final String uri) {
+        Timber.e(uri);
         presenter.navigateTo(Constants.CARD_ACTIVITY, uri);
     }
 
@@ -133,12 +132,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
         final MenuItem menuItem = menu.findItem(R.id.action_search);
         searchView = (SearchView) menuItem.getActionView();
 
-        if (instanceState != null) {
-            Timber.e("!null");
-            searchView.setQuery(instanceState.getString(Constants.SEARCH_SCREEN), true);
-        }else{
-            Timber.e("null");
-        }
+
 /*        if (!searchText.getText().toString().equals(getResources().getString(R.string.search_random))) {
             searchView.setIconified(false);
             searchView.setQuery(searchText.getText(), false);
@@ -148,7 +142,7 @@ public class SearchFragment extends MvpAppCompatFragment implements ViewSearch, 
             searchView.setIconified(true);
         }
 
-        if (getArguments() != null && instanceState == null && getArguments().getInt(Constants.KEY_FRAGMENT) == 0) {
+        if (getArguments() != null  && getArguments().getInt(Constants.KEY_FRAGMENT) == 0) {
             presenter.searchObservable(searchView, false);
         } else {
             presenter.searchObservable(searchView, true);
