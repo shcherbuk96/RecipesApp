@@ -5,8 +5,8 @@ import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 import com.google.firebase.auth.FirebaseUser;
 
+@StateStrategyType(SkipStrategy.class)
 public interface LoginView extends MvpView {
-    @StateStrategyType(SkipStrategy.class)
     void user(FirebaseUser firebaseUser);
 
     void error(Exception e);

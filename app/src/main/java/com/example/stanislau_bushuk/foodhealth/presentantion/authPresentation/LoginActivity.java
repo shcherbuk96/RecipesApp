@@ -1,11 +1,13 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -44,6 +46,8 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     @Inject
     NavigatorHolder navigatorHolder;
 
+    ProgressDialog progressDialog;
+
     @Inject
     NavigationUtil navigationUtil() {
         return new NavigationUtil(this);
@@ -58,11 +62,17 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
         setContentView(R.layout.activity_login);
         isGooglePlayServicesAvailable();
         ButterKnife.bind(this);
+
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Loading");
+
     }
 
     @OnClick(R.id.login_sign_in_button)
     public void clickSignIn(final View view) {
+        progressDialog.show();
         loginPresenter.signInUser(email.getText().toString(), password.getText().toString());
+
     }
 
     @OnClick(R.id.login_sign_up_button)
@@ -72,11 +82,13 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
     @OnClick(R.id.login_anonymous_button)
     public void clickAnonymous(final View view) {
+        progressDialog.show();
         loginPresenter.signInAnonymous();
     }
 
     @Override
     public void user(final FirebaseUser firebaseUser) {
+        progressDialog.hide();
         loginPresenter.goTo(Constants.MAIN_ACTIVITY);
     }
 

@@ -3,6 +3,7 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresenta
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,12 @@ public class DeepSearchFragment extends MvpAppCompatFragment implements DeepSear
 
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable final Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_deep_search, container, false);
+        final View view = inflater.inflate(R.layout.fragment_deep_search, container, false);
+
+        final Toolbar toolbar = view.findViewById(R.id.deep_search_toolbar);
+        toolbar.setTitle(R.string.deep_search_toolbar);
+
+        return view;
     }
 
     @Override

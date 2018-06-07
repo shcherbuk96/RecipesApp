@@ -66,4 +66,10 @@
     <string name="registration_check_empty_line">Check lines</string>
 
     <string name="error">Error</string>
+
+    <!-- Toolbar names-->
+    <string name="registration_toolbar">Registration</string>
+    <string name="favorite_toolbar">Favorite</string>
+    <string name="deep_search_toolbar">Deep Search</string>
+    <string name="deep_search_activity_toolbar">Recipes List</string>
 </resources>
