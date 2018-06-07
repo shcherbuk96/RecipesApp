@@ -42,8 +42,10 @@ public class CardOwnRecipeActivity extends MvpAppCompatActivity implements CardO
 
     @InjectPresenter
     CardOwnRecipePresenter cardOwnRecipePresenter;
+
     @Inject
     NavigatorHolder navigatorHolder;
+
     private CardAdapter cardAdapter;
 
     @Inject
@@ -80,10 +82,7 @@ public class CardOwnRecipeActivity extends MvpAppCompatActivity implements CardO
 
     @Override
     public void infoOwnRecipe(final OwnRecipe ownRecipe) {
-        Timber.e(ownRecipe.getRecipeName());
-
         setTitle(ownRecipe.getRecipeName());
-        Timber.e(ownRecipe.getRecipeInstruction());
         instruction.setText(ownRecipe.getRecipeInstruction());
 
         GlideApp
