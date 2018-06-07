@@ -83,7 +83,7 @@ public class AddOwnRecipeActivity extends MvpAppCompatActivity implements AddOwn
     @InjectPresenter
     AddOwnRecipePresenter presenter;
 
-    private ArrayList<OwnRecipe> ownRecipes = new ArrayList<>();
+    private final ArrayList<OwnRecipe> ownRecipes = new ArrayList<>();
 
     private RecyclerViewAddOwnRecipesAdapter recyclerAdapter;
 

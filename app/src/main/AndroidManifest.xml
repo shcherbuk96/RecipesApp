@@ -38,6 +38,9 @@
             android:name=".presentantion.addOwnRecipe.AddOwnRecipeActivity"
             android:theme="@style/ThemeActionBar"
             android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".presentantion.cardOwnRecipePresentation.CardOwnRecipeActivity"
+            android:theme="@style/ThemeActionBar"/>
     </application>
 
 </manifest>

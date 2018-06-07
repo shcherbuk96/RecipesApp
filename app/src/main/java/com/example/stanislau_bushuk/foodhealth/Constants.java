@@ -58,6 +58,10 @@ public class Constants {
 
     public static final String OWN_RECIPES = "OWN_RECIPES";
 
+    public static final String CARD_OWN_RECIPE_NAME = "CARD_OWN_RECIPE_NAME";
+
+    public static final String CARD_OWN_RECIPE = "CARD_OWN_RECIPE";
+
     public static final String ADD_OWN_RECIPE = "ADD_OWN_RECIPE";
 
     public static final String GALLERY = "GALLERY";

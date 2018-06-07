@@ -10,15 +10,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginEnd="@dimen/login_start_end_spacing"
-        android:layout_marginStart="@dimen/login_start_end_spacing"
         tools:context=".presentantion.authPresentation.RegistrationActivity">
+
+        <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/registration_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:background="@color/colorPrimary"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
         <ImageView
             android:id="@+id/registration_imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/login_top_bot_spacing"
+            android:layout_marginEnd="@dimen/login_start_end_spacing"
+            android:layout_marginStart="@dimen/login_start_end_spacing"
             app:srcCompat="@drawable/foodhealth" />
 
         <EditText
@@ -26,6 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/login_top_bot_spacing"
+            android:layout_marginEnd="@dimen/login_start_end_spacing"
+            android:layout_marginStart="@dimen/login_start_end_spacing"
             android:ems="10"
             android:hint="@string/registration_email_hint"
             android:inputType="textEmailAddress" />
@@ -35,6 +45,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/login_top_bot_spacing"
+            android:layout_marginEnd="@dimen/login_start_end_spacing"
+            android:layout_marginStart="@dimen/login_start_end_spacing"
             android:ems="10"
             android:hint="@string/registration_password_hint"
             android:inputType="textPassword" />
@@ -44,6 +56,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/login_top_bot_spacing"
+            android:layout_marginEnd="@dimen/login_start_end_spacing"
+            android:layout_marginStart="@dimen/login_start_end_spacing"
             android:ems="10"
             android:hint="@string/registration_confirm_password_hint"
             android:inputType="textPassword" />
@@ -53,6 +67,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/login_top_bot_spacing"
+            android:layout_marginEnd="@dimen/login_start_end_spacing"
+            android:layout_marginStart="@dimen/login_start_end_spacing"
             android:text="@string/registration_sign_in" />
 
 

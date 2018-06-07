@@ -87,7 +87,6 @@ public class LoginPresenter extends MvpPresenter<LoginView> implements CallBackL
 
 
     public void goTo(final String screenKey) {
-
         if (screenKey.equals(Constants.MAIN_ACTIVITY)) {
             router.newRootScreen(screenKey);
         } else if (screenKey.equals(Constants.PROFILE_SCREEN)) {

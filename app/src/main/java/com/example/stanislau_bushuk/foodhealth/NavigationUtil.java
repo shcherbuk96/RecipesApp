@@ -9,6 +9,7 @@ import com.example.stanislau_bushuk.foodhealth.cicerone.OwnNavigator;
 import com.example.stanislau_bushuk.foodhealth.presentantion.addOwnRecipe.AddOwnRecipeActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.RegistrationActivity;
+import com.example.stanislau_bushuk.foodhealth.presentantion.cardOwnRecipePresentation.CardOwnRecipeActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchActivity;
 
@@ -84,6 +85,12 @@ public class NavigationUtil extends OwnNavigator {
                 return intent;
             }
 
+            case Constants.CARD_OWN_RECIPE: {
+                intent = new Intent(context, CardOwnRecipeActivity.class);
+                intent.putExtra(Constants.CARD_OWN_RECIPE_NAME, (String) data);
+
+                return intent;
+            }
 
             default: {
                 return null;

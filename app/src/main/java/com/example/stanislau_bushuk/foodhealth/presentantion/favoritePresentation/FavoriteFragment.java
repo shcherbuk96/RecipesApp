@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,6 @@ import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
-import com.example.stanislau_bushuk.foodhealth.NavigationUtil;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 
@@ -42,7 +42,6 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
     NavigatorHolder navigatorHolder;
 
 
-
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
@@ -55,7 +54,16 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
         super.onViewCreated(view, savedInstanceState);
 
         App.getAppComponent().inject(this);
+
         ButterKnife.bind(this, view);
+
+        final Toolbar toolbar = view.findViewById(R.id.favorite_toolbar);
+        toolbar.setTitle(R.string.favorite_toolbar);
+
+        if (getArguments() == null) {
+            toolbar.setVisibility(View.INVISIBLE);
+        }
+
         listRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         favoriteAdapter = new FavoriteAdapter(new ArrayList<Recipe>(), this);
         final DividerItemDecoration itemDecorator = new DividerItemDecoration(listRecyclerView.getContext(),
@@ -73,11 +81,12 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
 
     @Override
     public void onItemClick(final String uri) {
-        favoritePresenter.goTo(Constants.CARD_ACTIVITY,uri);
+        favoritePresenter.goTo(Constants.CARD_ACTIVITY, uri);
     }
 
     @Override
     public void deleteFromFavorite(final Recipe recipe) {
         favoritePresenter.deleteFromFavorite(recipe);
     }
+
 }

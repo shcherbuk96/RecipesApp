@@ -56,4 +56,8 @@ public class OwnRecipesPresenter extends MvpPresenter<OwnRecipesView> implements
         router.navigateTo(Constants.ADD_OWN_RECIPE, Constants.ADD_OWN_RECIPE);
     }
 
+    public void navigateTo(final String screenKey, final String data){
+        router.navigateTo(screenKey, data);
+    }
+
 }

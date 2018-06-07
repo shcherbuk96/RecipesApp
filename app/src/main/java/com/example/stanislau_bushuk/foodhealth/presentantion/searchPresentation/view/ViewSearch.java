@@ -8,7 +8,6 @@ import com.example.stanislau_bushuk.foodhealth.model.pojo.Hits;
 import java.util.List;
 
 public interface ViewSearch extends MvpView {
-
     void showList(List<Hits> hitsList);
 
     void updateList(List<Hits> hitsList);
@@ -20,5 +19,4 @@ public interface ViewSearch extends MvpView {
 
     @StateStrategyType(SkipStrategy.class)
     void setSnackBar();
-
 }

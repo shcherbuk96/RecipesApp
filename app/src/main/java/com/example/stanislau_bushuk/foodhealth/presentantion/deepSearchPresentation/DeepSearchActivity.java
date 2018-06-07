@@ -72,6 +72,7 @@ public class DeepSearchActivity extends MvpAppCompatActivity implements DeepSear
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+            setTitle(R.string.deep_search_activity_toolbar);
         }
 
         App.getAppComponent().inject(this);

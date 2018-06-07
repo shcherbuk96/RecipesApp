@@ -21,7 +21,7 @@ import timber.log.Timber;
 
 public class RecyclerViewOwnRecipesAdapter extends RecyclerView.Adapter<RecyclerViewOwnRecipesAdapter.MyViewHolder> {
 
-    private List<OwnRecipe> ownRecipes;
+    private final List<OwnRecipe> ownRecipes;
     private Listener listener;
 
     public RecyclerViewOwnRecipesAdapter(final Listener listener, final List<OwnRecipe> ownRecipes) {
@@ -32,7 +32,7 @@ public class RecyclerViewOwnRecipesAdapter extends RecyclerView.Adapter<Recycler
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
-        final View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler, parent, false);
+        final View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recycler_own_recipes, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -41,6 +41,7 @@ public class RecyclerViewOwnRecipesAdapter extends RecyclerView.Adapter<Recycler
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
         final OwnRecipe recipe = ownRecipes.get(position);
         holder.titleTextView.setText(recipe.getRecipeName());
+
         GlideApp
                 .with(holder.photoImageView.getContext())
                 .load(recipe.getRecipePhoto())
@@ -67,7 +68,7 @@ public class RecyclerViewOwnRecipesAdapter extends RecyclerView.Adapter<Recycler
 
 
     public interface Listener {
-        void onItemClick(String uri);
+        void onItemClick(String name);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
@@ -84,6 +85,15 @@ public class RecyclerViewOwnRecipesAdapter extends RecyclerView.Adapter<Recycler
             super(view);
 
             ButterKnife.bind(this, view);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(final View v) {
+                    if(listener!=null){
+                        listener.onItemClick(ownRecipes.get(getAdapterPosition()).getRecipeName());
+                    }
+                }
+            });
         }
 
     }

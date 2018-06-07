@@ -1,6 +1,5 @@
 package com.example.stanislau_bushuk.foodhealth.model;
 
-import android.graphics.Bitmap;
 import android.net.Uri;
 
 import com.example.stanislau_bushuk.foodhealth.App;
@@ -11,6 +10,8 @@ import com.example.stanislau_bushuk.foodhealth.model.pojo.OwnRecipe;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.Recipe;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.RecipeFb;
 import com.example.stanislau_bushuk.foodhealth.presentantion.addOwnRecipe.presenters.AddOwnRecipePresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.cardOwnRecipePresentation.CallBackCardOwnRecipePresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.cardOwnRecipePresentation.CardOwnRecipePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.ownRecipesPresentation.presenters.OwnRecipesPresenter;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -18,12 +19,12 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -38,6 +39,7 @@ public class FirebaseModel {
     private CallBackCardPresenter callBackCardPresenter;
     private CallBackAddToOwnRecipesPresenter callBackAddToOwnRecipesPresenter;
     private CallBackOwnRecipesPresenter callBackOwnRecipesPresenter;
+    private CallBackCardOwnRecipePresenter callBackCardOwnRecipePresenter;
 
 
     public FirebaseModel() {
@@ -60,6 +62,10 @@ public class FirebaseModel {
 
     public void setCallBackOwnRecipesPresenter(final OwnRecipesPresenter ownRecipesPresenter) {
         this.callBackOwnRecipesPresenter = ownRecipesPresenter;
+    }
+
+    public void setCallBackCardOwnRecipePresenter(final CardOwnRecipePresenter callBackCardOwnRecipePresenter) {
+        this.callBackCardOwnRecipePresenter = callBackCardOwnRecipePresenter;
     }
 
     public void addRecipeToFbDb(final String uid, final String name, final String uri,
@@ -90,15 +96,39 @@ public class FirebaseModel {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 for (final DataSnapshot ds : dataSnapshot.getChildren()) {
-                    ownRecipes.add(new OwnRecipe(ds));
+                    final GenericTypeIndicator<OwnRecipe> t = new GenericTypeIndicator<OwnRecipe>() {};
+                    ownRecipes.add(ds.getValue(t));
                 }
-                Timber.e(String.valueOf(ownRecipes.size()));
+
                 callBackOwnRecipesPresenter.callBack(ownRecipes);
             }
 
             @Override
             public void onCancelled(final DatabaseError databaseError) {
                 Timber.e(databaseError.getMessage());
+            }
+        });
+    }
+
+    public void getInfoOwnRecipe(final String name, final String uid) {
+        databaseReference.child(Constants.OWN_RECIPES).child(uid).child(name).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(final DataSnapshot dataSnapshot) {
+                if (dataSnapshot != null) {
+                    Timber.e("dataSnapshot != null");
+                    Timber.e(dataSnapshot.child("recipeInstruction").getValue(String.class));
+                    final GenericTypeIndicator<OwnRecipe> t = new GenericTypeIndicator<OwnRecipe>() {};
+                    callBackCardOwnRecipePresenter.call(dataSnapshot.getValue(t));
+                } else {
+                    Timber.e("dataSnapshot == null");
+                    callBackCardOwnRecipePresenter.callError("error");
+                }
+            }
+
+            @Override
+            public void onCancelled(final DatabaseError databaseError) {
+                Timber.e(databaseError.getMessage());
+                callBackCardOwnRecipePresenter.callError(databaseError.getMessage());
             }
         });
     }
@@ -127,7 +157,7 @@ public class FirebaseModel {
     }
 
     public void loadImageToStorage(final Uri uri) {
-        final UploadTask uploadTask = storageReference.child(UUID.randomUUID().toString()+"/img.jpg").putFile(uri);
+        final UploadTask uploadTask = storageReference.child(UUID.randomUUID().toString() + "/img.jpg").putFile(uri);
         uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
@@ -137,7 +167,7 @@ public class FirebaseModel {
     }
 
     public void sendOwnRecipeToDb(final OwnRecipe recipe, final String uid) {
-        databaseReference.child(Constants.OWN_RECIPES).child(uid).push().setValue(recipe).addOnSuccessListener(new OnSuccessListener<Void>() {
+        databaseReference.child(Constants.OWN_RECIPES).child(uid).child(recipe.getRecipeName()).setValue(recipe).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(final Void aVoid) {
                 callBackAddToOwnRecipesPresenter.sendedRecipe();

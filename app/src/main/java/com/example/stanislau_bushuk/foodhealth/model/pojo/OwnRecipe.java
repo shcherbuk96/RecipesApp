@@ -1,6 +1,7 @@
 package com.example.stanislau_bushuk.foodhealth.model.pojo;
 
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.GenericTypeIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 public class OwnRecipe {
 
     private String recipeName;
-    private String recipeInsruction;
+    private String recipeInstruction;
     private String recipePhoto;
     private ArrayList<String> recipeIngridients;
 
@@ -20,12 +21,12 @@ public class OwnRecipe {
         this.recipeName = recipeName;
     }
 
-    public String getRecipeInsruction() {
-        return recipeInsruction;
+    public String getRecipeInstruction() {
+        return recipeInstruction;
     }
 
-    public void setRecipeInsruction(final String recipeInsruction) {
-        this.recipeInsruction = recipeInsruction;
+    public void setRecipeInstruction(final String recipeInstruction) {
+        this.recipeInstruction = recipeInstruction;
     }
 
     public String getRecipePhoto() {
@@ -47,17 +48,26 @@ public class OwnRecipe {
     public OwnRecipe(final DataSnapshot ds) {
         this.recipeName = ds.child("recipeName").getValue(String.class);
         this.recipePhoto = ds.child("recipePhoto").getValue(String.class);
-        this.recipeIngridients = ds.child("recipeIngredients").getValue(ArrayList.class);
-        this.recipeInsruction = ds.child("recipeInstruction").getValue(String.class);
+
+        this.recipeIngridients = new ArrayList<>();
+
+
+        recipeIngridients.addAll(ds.child("recipeIngridients").getValue(ArrayList.class));
+        this.recipeInstruction = ds.child("recipeInstruction").getValue(String.class);
     }
 
-    public OwnRecipe(final String recipeName, final String recipeInsruction, final String recipePhoto, final ArrayList<String> recipeIngridients) {
+    public OwnRecipe(final String recipeName, final String recipeInstruction, final String recipePhoto, final ArrayList<String> recipeIngridients) {
         this.recipeName = recipeName;
-        this.recipeInsruction = recipeInsruction;
+        this.recipeInstruction = recipeInstruction;
         this.recipePhoto = recipePhoto;
         this.recipeIngridients = recipeIngridients;
     }
 
     public OwnRecipe() {
     }
+
+    GenericTypeIndicator<ArrayList<OwnRecipe>> t = new GenericTypeIndicator<ArrayList<OwnRecipe>>() {};
+
 }
+
+

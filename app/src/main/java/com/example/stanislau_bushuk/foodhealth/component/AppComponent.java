@@ -24,6 +24,8 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.addOwnRecipe.presen
 import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.RegistrationActivity;
+import com.example.stanislau_bushuk.foodhealth.presentantion.cardOwnRecipePresentation.CardOwnRecipeActivity;
+import com.example.stanislau_bushuk.foodhealth.presentantion.cardOwnRecipePresentation.CardOwnRecipePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchActivity;
@@ -104,4 +106,8 @@ public interface AppComponent {
     void inject(AddOwnRecipeActivity addOwnRecipeActivity);
 
     void inject(AddOwnRecipePresenter addOwnRecipePresenter);
+
+    void inject(CardOwnRecipePresenter cardOwnRecipePresenter);
+
+    void inject(CardOwnRecipeActivity cardOwnRecipeActivity);
 }

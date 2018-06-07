@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.model.pojo.OwnRecipe;
 import com.example.stanislau_bushuk.foodhealth.presentantion.ownRecipesPresentation.presenters.OwnRecipesPresenter;
@@ -39,7 +40,7 @@ public class OwnRecipesFragment extends MvpAppCompatFragment implements OwnRecip
 
     RecyclerViewOwnRecipesAdapter recyclerAdapter;
 
-    private List<OwnRecipe> ownRecipes = new ArrayList<>();
+    private final List<OwnRecipe> ownRecipes = new ArrayList<>();
 
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
@@ -74,8 +75,8 @@ public class OwnRecipesFragment extends MvpAppCompatFragment implements OwnRecip
     }
 
     @Override
-    public void onItemClick(final String uri) {
-
+    public void onItemClick(final String name) {
+        presenter.navigateTo(Constants.CARD_OWN_RECIPE,name);
     }
 
     @OnClick(R.id.profile_add_recipe_floating_button)
