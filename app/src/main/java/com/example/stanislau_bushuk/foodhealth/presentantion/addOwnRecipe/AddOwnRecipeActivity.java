@@ -3,9 +3,12 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.addOwnRecipe;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,10 +17,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.BaseTarget;
+import com.bumptech.glide.request.target.SizeReadyCallback;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
 import com.example.stanislau_bushuk.foodhealth.NavigationUtil;
@@ -62,6 +73,9 @@ public class AddOwnRecipeActivity extends MvpAppCompatActivity implements AddOwn
 
     @BindView(R.id.add_own_recipe_fail_instructions)
     TextView instructionsFail;
+
+    @BindView(R.id.add_own_recipe_progress_loading_image)
+    ProgressBar progressBar;
 
     @BindView(R.id.add_own_recipe_nested_scroll_view)
     NestedScrollView nestedScrollView;
@@ -143,7 +157,10 @@ public class AddOwnRecipeActivity extends MvpAppCompatActivity implements AddOwn
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+
         if (resultCode == RESULT_OK && requestCode == Constants.RESULT_LOAD_IMAGE) {
+            recipeImage.setVisibility(View.INVISIBLE);
+            progressBar.setVisibility(View.VISIBLE);
             final Uri uri = data.getData();
             presenter.loadImageToStorage(uri);
         }
@@ -154,7 +171,22 @@ public class AddOwnRecipeActivity extends MvpAppCompatActivity implements AddOwn
         this.imageUrl=imageUrl;
 
         GlideApp.with(this)
+                .asBitmap()
+                .listener(new RequestListener<Bitmap>() {
+                    @Override
+                    public boolean onLoadFailed(@Nullable final GlideException e, final Object model, final Target<Bitmap> target, final boolean isFirstResource) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(final Bitmap resource, final Object model, final Target<Bitmap> target, final DataSource dataSource, final boolean isFirstResource) {
+                        AddOwnRecipeActivity.this.progressBar.setVisibility(View.INVISIBLE);
+                        AddOwnRecipeActivity.this.recipeImage.setVisibility(View.VISIBLE);
+                        return false;
+                    }
+                })
                 .load(imageUrl)
+                .centerCrop()
                 .into(recipeImage);
     }
 

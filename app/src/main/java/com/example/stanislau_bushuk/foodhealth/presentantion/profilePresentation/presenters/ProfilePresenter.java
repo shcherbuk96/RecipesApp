@@ -34,7 +34,7 @@ public class ProfilePresenter extends MvpPresenter<MvpView> {
 
     public void checkAuth() {
         if (!loginModel.getAuth().getCurrentUser().isAnonymous()) {
-            ownRouter.replaceScreen(Constants.PROFILE_SCREEN, 1);
+            ownRouter.navigateTo(Constants.PROFILE_SCREEN, 1);
         }
     }
 
