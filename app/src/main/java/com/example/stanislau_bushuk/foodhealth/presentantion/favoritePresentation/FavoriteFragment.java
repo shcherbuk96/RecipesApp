@@ -61,7 +61,7 @@ public class FavoriteFragment extends MvpAppCompatFragment implements FavoriteVi
         toolbar.setTitle(R.string.favorite_toolbar);
 
         if (getArguments() == null) {
-            toolbar.setVisibility(View.INVISIBLE);
+            toolbar.setVisibility(View.GONE);
         }
 
         listRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
