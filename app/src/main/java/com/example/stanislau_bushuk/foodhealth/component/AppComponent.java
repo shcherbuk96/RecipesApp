@@ -19,6 +19,8 @@ import com.example.stanislau_bushuk.foodhealth.modul.NetWorkModul;
 import com.example.stanislau_bushuk.foodhealth.modul.NetworkDeepSearchModul;
 import com.example.stanislau_bushuk.foodhealth.modul.RealmModul;
 import com.example.stanislau_bushuk.foodhealth.modul.ResourceManagerModul;
+import com.example.stanislau_bushuk.foodhealth.presentantion.addOwnRecipe.AddOwnRecipeActivity;
+import com.example.stanislau_bushuk.foodhealth.presentantion.addOwnRecipe.presenters.AddOwnRecipePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.RegistrationActivity;
@@ -27,11 +29,12 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.Ca
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.DeepSearchActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.model.NetWorkModelDeepSearch;
 import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentation.presenters.DeepSearchPresenter;
-import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoriteFragment;
 import com.example.stanislau_bushuk.foodhealth.presentantion.favoritePresentation.FavoritePresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.ownRecipesPresentation.presenters.OwnRecipesPresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.ProfileFragment;
+import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.presenters.ProfilePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.SearchFragment;
-import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.adapter.RecyclerAdapter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.searchPresentation.presenters.SearchPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.splashPresentatiom.SplashActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.splashPresentatiom.SplashActivityPresenter;
@@ -89,4 +92,16 @@ public interface AppComponent {
     void inject(LoginActivity loginActivity);
 
     void inject(RegistrationActivity registrationActivity);
+
+    void inject(ProfilePresenter profilePresenter);
+
+    void inject(ProfileFragment profileFragment);
+
+    void inject(OwnRecipesPresenter ownRecipesPresenter);
+
+    void inject(CardNetWorkModel cardNetWorkModel);
+
+    void inject(AddOwnRecipeActivity addOwnRecipeActivity);
+
+    void inject(AddOwnRecipePresenter addOwnRecipePresenter);
 }

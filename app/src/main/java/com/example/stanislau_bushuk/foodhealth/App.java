@@ -1,6 +1,8 @@
 package com.example.stanislau_bushuk.foodhealth;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.example.stanislau_bushuk.foodhealth.component.AppComponent;
 import com.example.stanislau_bushuk.foodhealth.component.DaggerAppComponent;
@@ -42,6 +44,12 @@ public class App extends Application {
         return DaggerAppComponent.builder()
                 .resourceManagerModul(new ResourceManagerModul(getApplicationContext()))
                 .build();
+    }
+
+    @Override
+    protected void attachBaseContext(final Context context) {
+        super.attachBaseContext(context);
+        MultiDex.install(this);
     }
 
 }

@@ -12,7 +12,7 @@ public class NetworkDeepSearchModul {
 
     @Provides
     @Singleton
-    public NetWorkModelDeepSearch netWorkModelDeepSearch(){
+    public NetWorkModelDeepSearch netWorkModelDeepSearch() {
         return new NetWorkModelDeepSearch();
     }
 }

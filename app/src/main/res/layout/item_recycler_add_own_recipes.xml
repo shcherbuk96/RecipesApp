@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/add_own_recipe_linear_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/view_item_top_bot_spacing"
+    android:layout_marginEnd="@dimen/margin_padding_size_medium"
+    android:layout_marginStart="@dimen/margin_padding_size_medium"
+    android:layout_marginTop="@dimen/view_item_top_bot_spacing"
+    android:orientation="horizontal">
+
+
+    <EditText
+        android:id="@+id/add_own_recipe_ingredients_editText"
+        style="@style/Subheading"
+        android:layout_width="wrap_content"
+        android:hint="@string/add_own_recipes_ingredient"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/padding_text_item_start_end"
+        android:layout_marginTop="@dimen/text_item_start_end_spacing"
+        android:layout_weight="1" />
+
+    <ImageButton
+        android:id="@+id/add_own_recipe_remove_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@null"
+        android:src="@drawable/delete" />
+
+</LinearLayout>

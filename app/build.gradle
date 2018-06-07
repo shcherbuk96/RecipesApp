@@ -30,6 +30,7 @@ def library = ext.library
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support:support-v4:27.1.1'
     compile project(':uimodul')
 
     ///Realm////
@@ -72,19 +73,20 @@ dependencies {
     ///Firebase///
     implementation "${library.firebaseDatabase}"
     implementation "${library.firebaseAuth}"
+    implementation "${library.firebaseStorage}"
     ///
 
     ///MultiDex//
-    compile "${library.multidex}"
+    implementation "${library.multidex}"
 
     //
-    compile "${library.cicerone}"
+    implementation "${library.cicerone}"
     ///////Moxy/////
-    compile "${library.moxy}"
+    implementation "${library.moxy}"
     annotationProcessor "${library.moxyCompiler}"
     //
     ////Cicerone////
-    compile "${library.moxyAppCompat}"
+    implementation "${library.moxyAppCompat}"
     //
     testImplementation "${library.junit}"
     androidTestImplementation "${library.testRunner}"

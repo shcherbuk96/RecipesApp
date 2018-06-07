@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginBottom="@dimen/view_item_top_bot_spacing"
+    android:id="@+id/item_linear_layout"
+    android:layout_marginEnd="@dimen/view_item_start_end_spacing"
+    android:layout_marginStart="@dimen/view_item_start_end_spacing"
+    android:layout_marginTop="@dimen/view_item_top_bot_spacing"
+    android:orientation="horizontal">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/item_photo_image_view"
+        android:layout_width="@dimen/image_item_photo_size"
+        android:layout_height="@dimen/image_item_photo_size"/>
+
+    <TextView
+        android:layout_weight="1"
+        android:id="@+id/item_title_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/padding_text_item_start_end"
+        android:layout_marginTop="@dimen/text_item_start_end_spacing"
+        android:layout_marginStart="@dimen/padding_text_item_start_end"
+        style="@style/Subheading"/>
+
+</LinearLayout>

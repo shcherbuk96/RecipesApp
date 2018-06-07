@@ -20,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.terrakok.cicerone.NavigatorHolder;
+import timber.log.Timber;
 
 public class RegistrationActivity extends MvpAppCompatActivity implements LoginView {
 
@@ -41,17 +42,21 @@ public class RegistrationActivity extends MvpAppCompatActivity implements LoginV
     @Inject
     NavigatorHolder navigatorHolder;
 
+    private String instance;
+
     @Inject
     NavigationUtil navigationUtil() {
-        return new NavigationUtil(this);
+        return new NavigationUtil(this,R.id.main_contener_frame_layout);
     }
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         App.getAppComponent().inject(this);
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registation);
 
+        super.onCreate(savedInstanceState);
+
+        instance= getIntent().getStringExtra(Constants.KEY_FRAGMENT);
+        setContentView(R.layout.activity_registation);
         ButterKnife.bind(this);
     }
 
@@ -64,7 +69,13 @@ public class RegistrationActivity extends MvpAppCompatActivity implements LoginV
 
     @Override
     public void user(final FirebaseUser firebaseUser) {
-        loginPresenter.replace(Constants.MAIN_ACTIVITY);
+        Timber.e(instance);
+        if (instance != null) {
+            loginPresenter.exit();
+        } else {
+            loginPresenter.replace(Constants.MAIN_ACTIVITY);
+        }
+
     }
 
     @Override
@@ -82,6 +93,11 @@ public class RegistrationActivity extends MvpAppCompatActivity implements LoginV
     @Override
     public void checkEmptyLine() {
         Snackbar.make(findViewById(R.id.registration_email_editText),R.string.registration_check_empty_line,Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void setViewVisibility(final int visibility) {
+
     }
 
     @Override

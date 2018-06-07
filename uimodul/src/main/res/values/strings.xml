@@ -63,6 +63,21 @@
     <string name="registration_sign_in">Registration</string>
     <string name="registration_error">Check internet connection or login and password</string>
     <string name="registration_check_password">Password do not match</string>
+
+
+    <!--Profile strings -->
+    <string name="profile_menu_item">Profile</string>
+    <string name="profile_anonim">You don`t sign in. Please register or sign in</string>
+    <string name="profile_favourites_tab">Favourites</string>
+    <string name="profile_own_tab">Own recipes</string>
+
+    <!--ADD OWN RECIPES -->
+    <string name="add_own_recipes_instruction">Instruction for cooking</string>
+    <string name="add_own_recipes_send">Send</string>
+    <string name="add_own_recipes_ingredient">Enter ingredient</string>
+    <string name="add_own_recipes_clear_field">*Please enter this field</string>
+    <string name="add_own_recipes_action_bar_title">Add own recipe</string>
+
     <string name="registration_check_empty_line">Check lines</string>
 
     <string name="error">Error</string>

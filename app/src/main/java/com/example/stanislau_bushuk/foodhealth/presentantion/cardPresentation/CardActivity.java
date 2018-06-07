@@ -84,7 +84,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
 
     @Inject
     NavigationUtil navigationUtil() {
-        return new NavigationUtil(this);
+        return new NavigationUtil(this,R.id.main_contener_frame_layout);
     }
 
     @Override

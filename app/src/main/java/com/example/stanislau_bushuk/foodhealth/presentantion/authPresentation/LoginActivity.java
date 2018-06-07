@@ -32,6 +32,9 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     @BindView(R.id.login_anonymous_button)
     Button anonymous;
 
+    @BindView(R.id.login_sign_up_button)
+    Button signUp;
+
     @BindView(R.id.login_email_editText)
     EditText email;
 
@@ -44,9 +47,11 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     @Inject
     NavigatorHolder navigatorHolder;
 
+    private String keyScreen;
+
     @Inject
     NavigationUtil navigationUtil() {
-        return new NavigationUtil(this);
+        return new NavigationUtil(this, R.id.main_contener_frame_layout);
     }
 
     @Override
@@ -54,10 +59,11 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
         App.getAppComponent().inject(this);
 
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
         isGooglePlayServicesAvailable();
+        keyScreen = getIntent().getStringExtra(Constants.KEY_FRAGMENT);
         ButterKnife.bind(this);
+        loginPresenter.setViewVisibility(keyScreen);
     }
 
     @OnClick(R.id.login_sign_in_button)
@@ -77,7 +83,12 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 
     @Override
     public void user(final FirebaseUser firebaseUser) {
-        loginPresenter.goTo(Constants.MAIN_ACTIVITY);
+
+        if (keyScreen != null) {
+            loginPresenter.goTo(keyScreen);
+        } else {
+            loginPresenter.goTo(Constants.MAIN_ACTIVITY);
+        }
     }
 
     @Override
@@ -96,11 +107,16 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     }
 
     @Override
+    public void setViewVisibility(final int visibility) {
+        anonymous.setVisibility(visibility);
+        signUp.setVisibility(visibility);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 
         navigatorHolder.setNavigator(navigationUtil());
-
     }
 
     @Override

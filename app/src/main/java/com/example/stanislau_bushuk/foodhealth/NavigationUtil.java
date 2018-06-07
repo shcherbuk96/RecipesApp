@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import com.example.stanislau_bushuk.foodhealth.cicerone.OwnNavigator;
+import com.example.stanislau_bushuk.foodhealth.presentantion.addOwnRecipe.AddOwnRecipeActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.LoginActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.authPresentation.RegistrationActivity;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardActivity;
@@ -14,6 +15,7 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.deepSearchPresentat
 import javax.inject.Inject;
 
 import ru.terrakok.cicerone.commands.Command;
+import timber.log.Timber;
 
 
 public class NavigationUtil extends OwnNavigator {
@@ -21,8 +23,8 @@ public class NavigationUtil extends OwnNavigator {
     @Inject
     FragmentCreater fragmentCreater;
 
-    public NavigationUtil(final Context context) {
-        super((FragmentActivity) context, R.id.main_contener_frame_layout);
+    public NavigationUtil(final Context context, final int id) {
+        super((FragmentActivity) context, id);
         App.getAppComponent().inject(this);
     }
 
@@ -55,6 +57,7 @@ public class NavigationUtil extends OwnNavigator {
 
             case Constants.CARD_ACTIVITY: {
                 intent = new Intent(context, CardActivity.class);
+                Timber.e((String) data);
                 intent.putExtra(Constants.RECIPE_INTENT_KEY, (String) data);
 
                 return intent;
@@ -62,15 +65,25 @@ public class NavigationUtil extends OwnNavigator {
 
             case Constants.LOGIN_ACTIVITY: {
                 intent = new Intent(context, LoginActivity.class);
+                intent.putExtra(Constants.KEY_FRAGMENT, (String) data);
 
                 return intent;
             }
 
             case Constants.REGISTRATION_ACTIVITY: {
                 intent = new Intent(context, RegistrationActivity.class);
+                intent.putExtra(Constants.KEY_FRAGMENT, (String) data);
 
                 return intent;
             }
+
+            case Constants.ADD_OWN_RECIPE: {
+                intent = new Intent(context, AddOwnRecipeActivity.class);
+                intent.putExtra(Constants.KEY_FRAGMENT, (String) data);
+
+                return intent;
+            }
+
 
             default: {
                 return null;
