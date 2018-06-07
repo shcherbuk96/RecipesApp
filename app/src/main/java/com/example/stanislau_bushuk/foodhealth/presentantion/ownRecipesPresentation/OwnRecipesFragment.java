@@ -94,10 +94,4 @@ public class OwnRecipesFragment extends MvpAppCompatFragment implements OwnRecip
         recyclerAdapter.addRecipe(ownRecipe);
     }
 
-    @Override
-    public void onSaveInstanceState(final Bundle outState) {
-        super.onSaveInstanceState(outState);
-    }
-
-
 }

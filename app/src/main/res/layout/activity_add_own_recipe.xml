@@ -24,6 +24,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ProgressBar
+            android:id="@+id/add_own_recipe_progress_loading_image"
+            android:layout_width="match_parent"
+            android:visibility="invisible"
+            android:layout_height="@dimen/image_card_height"
+            app:layout_constraintBottom_toTopOf="@+id/add_own_recipe_name_editText"
+            app:layout_constraintTop_toTopOf="@+id/add_own_recipe_recipe_image" />
+
         <EditText
             android:id="@+id/add_own_recipe_name_editText"
             style="@style/Body_1"

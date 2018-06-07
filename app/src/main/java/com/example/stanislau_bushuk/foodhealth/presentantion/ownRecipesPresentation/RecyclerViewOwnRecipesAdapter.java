@@ -56,7 +56,6 @@ public class RecyclerViewOwnRecipesAdapter extends RecyclerView.Adapter<Recycler
 
     public void updateAdapter(final List<OwnRecipe> hits) {
         this.ownRecipes.clear();
-        Timber.e(String.valueOf(hits.size()));
         this.ownRecipes.addAll(hits);
         notifyDataSetChanged();
     }
@@ -86,5 +85,8 @@ public class RecyclerViewOwnRecipesAdapter extends RecyclerView.Adapter<Recycler
 
             ButterKnife.bind(this, view);
         }
+
     }
+
+
 }
