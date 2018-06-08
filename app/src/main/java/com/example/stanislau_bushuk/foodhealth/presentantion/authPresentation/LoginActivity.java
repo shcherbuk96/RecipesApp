@@ -70,6 +70,8 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
         loginPresenter.setViewVisibility(keyScreen);
         progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Loading");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
     }
 
     @OnClick(R.id.login_sign_in_button)

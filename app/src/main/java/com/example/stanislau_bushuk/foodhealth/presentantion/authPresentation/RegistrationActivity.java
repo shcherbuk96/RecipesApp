@@ -52,7 +52,7 @@ public class RegistrationActivity extends MvpAppCompatActivity implements LoginV
 
     @Inject
     NavigationUtil navigationUtil() {
-        return new NavigationUtil(this,R.id.main_contener_frame_layout);
+        return new NavigationUtil(this, R.id.main_contener_frame_layout);
     }
 
 
@@ -62,7 +62,7 @@ public class RegistrationActivity extends MvpAppCompatActivity implements LoginV
 
         super.onCreate(savedInstanceState);
 
-        instance= getIntent().getStringExtra(Constants.KEY_FRAGMENT);
+        instance = getIntent().getStringExtra(Constants.KEY_FRAGMENT);
         setContentView(R.layout.activity_registation);
         ButterKnife.bind(this);
 
@@ -74,8 +74,10 @@ public class RegistrationActivity extends MvpAppCompatActivity implements LoginV
             toolbar.setTitle(R.string.registration_toolbar);
         }
 
-        progressDialog=new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading");
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
     }
 
     @OnClick(R.id.registration_sign_in_button)
