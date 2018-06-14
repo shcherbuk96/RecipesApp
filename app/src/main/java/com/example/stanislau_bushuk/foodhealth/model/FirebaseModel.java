@@ -1,6 +1,8 @@
 package com.example.stanislau_bushuk.foodhealth.model;
 
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
@@ -14,7 +16,14 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.cardOwnRecipePresen
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardOwnRecipePresentation.CardOwnRecipePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.ownRecipesPresentation.presenters.OwnRecipesPresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.CallBackProfilePresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.presenters.ProfilePresenter;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,22 +39,27 @@ import java.util.UUID;
 
 import timber.log.Timber;
 
+import static android.support.constraint.Constraints.TAG;
+
 public class FirebaseModel {
 
     private final FirebaseDatabase database;
     private final StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+    private FirebaseUser user;
     private DatabaseReference databaseReference;
     private CallBackMainActivityPresenter callBack;
     private CallBackCardPresenter callBackCardPresenter;
     private CallBackAddToOwnRecipesPresenter callBackAddToOwnRecipesPresenter;
     private CallBackOwnRecipesPresenter callBackOwnRecipesPresenter;
     private CallBackCardOwnRecipePresenter callBackCardOwnRecipePresenter;
+    private CallBackProfilePresenter callBackProfilePresenter;
 
 
     public FirebaseModel() {
         App.getAppComponent().inject(this);
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
+        user= FirebaseAuth.getInstance().getCurrentUser();
     }
 
     public void setMainActivityCallBack(final MainActivityPresenter mainActivityPresenter) {
@@ -66,6 +80,10 @@ public class FirebaseModel {
 
     public void setCallBackCardOwnRecipePresenter(final CardOwnRecipePresenter callBackCardOwnRecipePresenter) {
         this.callBackCardOwnRecipePresenter = callBackCardOwnRecipePresenter;
+    }
+
+    public void setCallBackProfilePresenter(final ProfilePresenter profilePresenter) {
+        this.callBackProfilePresenter = profilePresenter;
     }
 
     public void addRecipeToFbDb(final String uid, final String name, final String uri,
@@ -164,6 +182,22 @@ public class FirebaseModel {
                 callBackAddToOwnRecipesPresenter.getImageUrl(String.valueOf(taskSnapshot.getDownloadUrl()));
             }
         });
+    }
+
+    public void loadPhotoUserToStorage(final Uri uri) {
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setPhotoUri(uri)
+                .build();
+
+        user.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            callBackProfilePresenter.showPhoto();
+                        }
+                    }
+                });
     }
 
     public void sendOwnRecipeToDb(final OwnRecipe recipe, final String uid) {
