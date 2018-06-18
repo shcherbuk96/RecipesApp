@@ -4,14 +4,12 @@ package com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentatio
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
-import com.arellomobile.mvp.MvpView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.stanislau_bushuk.foodhealth.R;
 import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.presenters.ProfilePresenter;
@@ -20,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AnonimProfileFragment extends MvpAppCompatFragment implements MvpView {
+public class AnonimProfileFragment extends MvpAppCompatFragment implements ProfileView {
 
     @BindView(R.id.profile_sign_in_button)
     Button signInButton;
@@ -59,5 +57,10 @@ public class AnonimProfileFragment extends MvpAppCompatFragment implements MvpVi
         super.onResume();
 
         profilePresenter.checkAuth();
+    }
+
+    @Override
+    public void showPhotoUser(String uri) {
+
     }
 }

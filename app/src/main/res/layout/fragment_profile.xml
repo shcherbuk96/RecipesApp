@@ -22,6 +22,15 @@
             android:layout_marginTop="@dimen/margin_padding_size_medium"
             app:background="@color/white" />
 
+        <ProgressBar
+            android:id="@+id/profile_progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="@dimen/profile_avatar_size"
+            android:layout_height="@dimen/profile_avatar_size"
+            android:layout_alignStart="@+id/profile_user_photo"
+            android:layout_centerVertical="true"
+            android:visibility="invisible" />
+
         <TextView
             android:id="@+id/profile_email"
             style="@style/Subheading.white"

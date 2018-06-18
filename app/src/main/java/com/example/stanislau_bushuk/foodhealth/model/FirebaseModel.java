@@ -1,6 +1,7 @@
 package com.example.stanislau_bushuk.foodhealth.model;
 
 import android.net.Uri;
+import android.support.annotation.NonNull;
 
 import com.example.stanislau_bushuk.foodhealth.App;
 import com.example.stanislau_bushuk.foodhealth.Constants;
@@ -14,7 +15,12 @@ import com.example.stanislau_bushuk.foodhealth.presentantion.cardOwnRecipePresen
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardOwnRecipePresentation.CardOwnRecipePresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation.CardPresenter;
 import com.example.stanislau_bushuk.foodhealth.presentantion.ownRecipesPresentation.presenters.OwnRecipesPresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.CallBackProfilePresenter;
+import com.example.stanislau_bushuk.foodhealth.presentantion.profilePresentation.presenters.ProfilePresenter;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,18 +40,21 @@ public class FirebaseModel {
 
     private final FirebaseDatabase database;
     private final StorageReference storageReference = FirebaseStorage.getInstance().getReference();
+    private FirebaseUser user;
     private DatabaseReference databaseReference;
     private CallBackMainActivityPresenter callBack;
     private CallBackCardPresenter callBackCardPresenter;
     private CallBackAddToOwnRecipesPresenter callBackAddToOwnRecipesPresenter;
     private CallBackOwnRecipesPresenter callBackOwnRecipesPresenter;
     private CallBackCardOwnRecipePresenter callBackCardOwnRecipePresenter;
+    private CallBackProfilePresenter callBackProfilePresenter;
 
 
     public FirebaseModel() {
         App.getAppComponent().inject(this);
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
+        user = FirebaseAuth.getInstance().getCurrentUser();
     }
 
     public void setMainActivityCallBack(final MainActivityPresenter mainActivityPresenter) {
@@ -66,6 +75,10 @@ public class FirebaseModel {
 
     public void setCallBackCardOwnRecipePresenter(final CardOwnRecipePresenter callBackCardOwnRecipePresenter) {
         this.callBackCardOwnRecipePresenter = callBackCardOwnRecipePresenter;
+    }
+
+    public void setCallBackProfilePresenter(final ProfilePresenter profilePresenter) {
+        this.callBackProfilePresenter = profilePresenter;
     }
 
     public void addRecipeToFbDb(final String uid, final String name, final String uri,
@@ -96,7 +109,8 @@ public class FirebaseModel {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
                 for (final DataSnapshot ds : dataSnapshot.getChildren()) {
-                    final GenericTypeIndicator<OwnRecipe> t = new GenericTypeIndicator<OwnRecipe>() {};
+                    final GenericTypeIndicator<OwnRecipe> t = new GenericTypeIndicator<OwnRecipe>() {
+                    };
                     ownRecipes.add(ds.getValue(t));
                 }
 
@@ -117,7 +131,8 @@ public class FirebaseModel {
                 if (dataSnapshot != null) {
                     Timber.e("dataSnapshot != null");
                     Timber.e(dataSnapshot.child("recipeInstruction").getValue(String.class));
-                    final GenericTypeIndicator<OwnRecipe> t = new GenericTypeIndicator<OwnRecipe>() {};
+                    final GenericTypeIndicator<OwnRecipe> t = new GenericTypeIndicator<OwnRecipe>() {
+                    };
                     callBackCardOwnRecipePresenter.call(dataSnapshot.getValue(t));
                 } else {
                     Timber.e("dataSnapshot == null");
@@ -139,11 +154,13 @@ public class FirebaseModel {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
+                Timber.e("good");
                 callBackCardPresenter.callFirebase(dataSnapshot);
             }
 
             @Override
             public void onCancelled(final DatabaseError databaseError) {
+                Timber.e(databaseError.toString());
                 callBackCardPresenter.callFirebase(null);
             }
         });
@@ -151,9 +168,21 @@ public class FirebaseModel {
     }
 
     public void addComment(final String email, final String text, final String nameRecipe,
-                           final String photoUri) {
+                           final String uid) {
         final DatabaseReference myRef = database.getReference(Constants.FIREBASE_COMMENTS_BRANCH).child(nameRecipe).push();
-        myRef.setValue(new Comment(email, text, photoUri));
+
+        storageReference.child("USERS").child(uid + "/img.jpg").getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(final Uri uri) {
+                        myRef.setValue(new Comment(email, text, uri.toString()));
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull final Exception e) {
+                myRef.setValue(new Comment(email, text, null));
+            }
+        });
     }
 
     public void loadImageToStorage(final Uri uri) {
@@ -162,6 +191,32 @@ public class FirebaseModel {
             @Override
             public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
                 callBackAddToOwnRecipesPresenter.getImageUrl(String.valueOf(taskSnapshot.getDownloadUrl()));
+            }
+        });
+    }
+
+    public void getUserPhoto(String uid) {
+        storageReference.child("USERS").child(uid + "/img.jpg").getDownloadUrl()
+                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(final Uri uri) {
+                        Timber.e(uri.toString());
+                        callBackProfilePresenter.showPhoto(uri.toString());
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull final Exception e) {
+                callBackProfilePresenter.showPhoto(null);
+            }
+        });
+    }
+
+    public void loadPhotoUserToStorage(final Uri uri) {
+        final UploadTask uploadTask = storageReference.child("USERS").child(user.getUid() + "/img.jpg").putFile(uri);
+        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
+                callBackProfilePresenter.showPhoto(String.valueOf(taskSnapshot.getDownloadUrl()));
             }
         });
     }
