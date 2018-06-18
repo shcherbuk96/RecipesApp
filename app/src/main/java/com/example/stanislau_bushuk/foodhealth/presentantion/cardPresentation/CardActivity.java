@@ -160,7 +160,7 @@ public class CardActivity extends MvpAppCompatActivity implements CardView {
             presenter.addComment(firebaseAuth.getCurrentUser().getEmail(),
                     commentUserView.getText().toString(),
                     data.getLabel(),
-                    firebaseAuth.getCurrentUser().getPhotoUrl());
+                    firebaseAuth.getUid());
             commentUserView.setText(null);
         }
     }

@@ -50,6 +50,10 @@ public class ProfilePresenter extends MvpPresenter<ProfileView> implements CallB
         firebaseModel.loadPhotoUserToStorage(uri);
     }
 
+    public void getUserPhoto(String uid) {
+        firebaseModel.getUserPhoto(uid);
+    }
+
     public void register() {
         ownRouter.navigateTo(Constants.REGISTRATION_ACTIVITY, Constants.PROFILE_SCREEN);
     }
@@ -63,7 +67,7 @@ public class ProfilePresenter extends MvpPresenter<ProfileView> implements CallB
     }
 
     @Override
-    public void showPhoto() {
-        getViewState().showPhotoUser();
+    public void showPhoto(String url) {
+        getViewState().showPhotoUser(url);
     }
 }

@@ -60,7 +60,7 @@ public class AnonimProfileFragment extends MvpAppCompatFragment implements Profi
     }
 
     @Override
-    public void showPhotoUser() {
+    public void showPhotoUser(String uri) {
 
     }
 }

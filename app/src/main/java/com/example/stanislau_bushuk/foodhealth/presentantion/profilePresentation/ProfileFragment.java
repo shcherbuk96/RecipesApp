@@ -37,7 +37,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
 import static com.example.stanislau_bushuk.foodhealth.Constants.RESULT_LOAD_IMAGE;
@@ -82,12 +81,12 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileView
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        GlideApp.with(this)
-                .load(profilePresenter.getUser().getPhotoUrl())
-                .error(R.drawable.ic_person_white)
-                .centerCrop()
-                .into(userPhoto);
-
+//        GlideApp.with(this)
+//                .load(profilePresenter.getUser().getPhotoUrl())
+//                .error(R.drawable.ic_person_white)
+//                .centerCrop()
+//                .into(userPhoto);
+        profilePresenter.getUserPhoto(firebaseUser.getUid());
         relativeLayout.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         userEmail.setText(profilePresenter.getUser().getEmail());
         userName.setText(profilePresenter.getUser().getDisplayName());
@@ -123,7 +122,7 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileView
 
 
     @Override
-    public void showPhotoUser() {
+    public void showPhotoUser(String url) {
         GlideApp.with(this)
                 .asBitmap()
                 .listener(new RequestListener<Bitmap>() {
@@ -139,7 +138,9 @@ public class ProfileFragment extends MvpAppCompatFragment implements ProfileView
                         return false;
                     }
                 })
-                .load(firebaseUser.getPhotoUrl())
+                .placeholder(R.drawable.ic_person_black_24dp)
+                .error(R.drawable.ic_person_black_24dp)
+                .load(url)
                 .centerCrop()
                 .into(userPhoto);
     }

@@ -1,7 +1,5 @@
 package com.example.stanislau_bushuk.foodhealth.presentantion.cardPresentation;
 
-import android.net.Uri;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.example.stanislau_bushuk.foodhealth.App;
@@ -142,6 +140,7 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
 
                     @Override
                     public void onNext(final Data data) {
+                        firebaseModel.getComments(data.getLabel());
                         getViewState().showList(data);
                     }
 
@@ -175,16 +174,11 @@ public class CardPresenter extends MvpPresenter<CardView> implements CallBackCar
         }
     }
 
-    public void addComment(final String email, final String text, final String nameRecipe, final Uri photoUri) {
+    public void addComment(final String email, final String text, final String nameRecipe, final String uid) {
         if (email.isEmpty()) {
             getViewState().showAnonymous();
         } else {
-
-            if (photoUri == null) {
-                firebaseModel.addComment(email, text, nameRecipe, "null");
-            } else {
-                firebaseModel.addComment(email, text, nameRecipe, photoUri.toString());
-            }
+            firebaseModel.addComment(email, text, nameRecipe, uid);
         }
     }
 

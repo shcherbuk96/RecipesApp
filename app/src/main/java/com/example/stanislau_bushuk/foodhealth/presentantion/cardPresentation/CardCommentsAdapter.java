@@ -43,6 +43,7 @@ public class CardCommentsAdapter extends RecyclerView.Adapter<CardCommentsAdapte
                 .with(holder.photoUser.getContext())
                 .load(comment.getPhotoUri())
                 .centerCrop()
+                .placeholder(R.drawable.ic_person_black_24dp)
                 .error(R.drawable.ic_person_black_24dp)
                 .into(holder.photoUser);
     }
